@@ -227,9 +227,9 @@
 <div class="p-2 rounded-lg bg-error/10 text-error">
 <span class="material-symbols-outlined">analytics</span>
 </div>
-<span class="px-2 py-1 rounded bg-error/10 text-error text-[10px] font-bold">مرتفع التأثير</span>
+<span class="px-2 py-1 rounded bg-error/10 text-error text-[10px] font-bold" id="rs-installment-impact-badge">مرتفع التأثير</span>
 </div>
-<h4 class="font-headline-md text-headline-md text-primary mb-2">نسبة القسط للدخل</h4>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">إجمالي الالتزامات بعد التمويل</h4>
 <p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-installment-desc">قيمة القسط المقترح تمثل 42% من صافي الدخل.</p>
 <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
 <div class="bg-error h-full w-[85%]" id="rs-installment-bar"></div>
@@ -242,9 +242,9 @@
 <div class="p-2 rounded-lg bg-secondary-container text-on-secondary-container">
 <span class="material-symbols-outlined">trending_up</span>
 </div>
-<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">متوسط التأثير</span>
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold" id="rs-stability-impact-badge">متوسط التأثير</span>
 </div>
-<h4 class="font-headline-md text-headline-md text-primary mb-2">استقرار الدخل</h4>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">الهامش الحالي المتبقي</h4>
 <p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-stability-desc">لديك سجل وظيفي مستقر لأكثر من 3 سنوات.</p>
 <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
 <div class="bg-secondary h-full w-[60%]" id="rs-stability-bar"></div>
@@ -255,11 +255,11 @@
 <div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform duration-300">
 <div class="flex justify-between items-start mb-4">
 <div class="p-2 rounded-lg bg-primary/10 text-primary">
-<span class="material-symbols-outlined">history</span>
+<span class="material-symbols-outlined">calendar_month</span>
 </div>
-<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold">منخفض التأثير</span>
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold" id="rs-credit-impact-badge">منخفض التأثير</span>
 </div>
-<h4 class="font-headline-md text-headline-md text-primary mb-2">التاريخ الائتماني</h4>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">التزام قادم خلال 3 شهور</h4>
 <p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-credit-desc">سجل دفعات منتظم بدون أي تعثرات سابقة.</p>
 <div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
 <div class="bg-primary h-full w-[25%]" id="rs-credit-bar"></div>
@@ -347,29 +347,89 @@
                 'القسط الشهري المقدّر (' + result.installment.toLocaleString('ar-SA') + ' ر.س) يمثل ' +
                 result.burdenRatio + '% من دخلك الشهري.';
 
+            const fmtSar = (n) => Math.round(n).toLocaleString('ar-SA');
+            const setBadge = (id, text, colorClasses) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.innerText = text;
+                el.className = 'px-2 py-1 rounded text-[10px] font-bold ' + colorClasses;
+            };
+
+            // Card 1: Total obligations after financing - how close the new
+            // burden ratio sits to the SAMA-style cap used by RashidCalc.
+            const income = result.input.income;
+            const proximity = result.burdenCap > 0 ? result.burdenRatio / result.burdenCap : 1;
+            let proximityPhrase, impact1Text, impact1Classes;
+            if (proximity >= 0.95) {
+                proximityPhrase = 'قريبة جداً من';
+                impact1Text = 'مرتفع التأثير'; impact1Classes = 'bg-error/10 text-error';
+            } else if (proximity >= 0.75) {
+                proximityPhrase = 'قريبة من';
+                impact1Text = 'مرتفع التأثير'; impact1Classes = 'bg-error/10 text-error';
+            } else if (proximity >= 0.45) {
+                proximityPhrase = 'متوسطة مقارنة بـ';
+                impact1Text = 'متوسط التأثير'; impact1Classes = 'bg-secondary-container text-on-secondary-container';
+            } else {
+                proximityPhrase = 'بعيدة عن';
+                impact1Text = 'منخفض التأثير'; impact1Classes = 'bg-primary/10 text-primary';
+            }
             document.getElementById('rs-installment-desc').innerText =
-                'القسط الشهري المقترح يمثل ' + result.burdenRatio + '% من دخلك الشهري (الحد الآمن ' + result.burdenCap + '%).';
+                'بعد إضافة القسط الجديد، ستصل التزاماتك الشهرية إلى ' + result.burdenRatio + '% من دخلك، وهي نسبة ' +
+                proximityPhrase + ' الحد الأعلى المسموح به (' + result.burdenCap + '%) في نموذج رشيد.';
             const installmentPct = Math.min(100, Math.round(result.burdenRatio));
             document.getElementById('rs-installment-bar').style.width = installmentPct + '%';
             document.getElementById('rs-installment-weight').innerText = installmentPct + '% وزن التأثير';
+            setBadge('rs-installment-impact-badge', impact1Text, impact1Classes);
 
-            // Income stability proxy: how much monthly headroom (surplus vs income) remains.
-            const income = result.input.income;
-            const surplusRatio = income > 0 ? (result.surplus / income) * 100 : 0;
-            const stabilityPct = Math.max(10, Math.min(95, Math.round(50 + surplusRatio * 1.5)));
-            document.getElementById('rs-stability-desc').innerText = result.surplus >= 0
-                ? 'الفائض الشهري المتوقع يمثل ' + Math.round(surplusRatio) + '% من دخلك، وهو ما يعكس مرونة مالية ' + (stabilityPct >= 60 ? 'جيدة' : 'محدودة') + '.'
-                : 'مصاريفك والتزاماتك تتجاوز دخلك الشهري بنسبة ' + Math.round(Math.abs(surplusRatio)) + '%، ما يضعف استقرارك المالي حالياً.';
+            // Card 2: Remaining margin at month end - real surplus from RashidCalc.
+            const marginRatio = income > 0 ? result.surplus / income : 0;
+            let marginPhrase, impact2Text, impact2Classes;
+            if (result.surplus < 0) {
+                marginPhrase = 'مرونة منعدمة'; impact2Text = 'مرتفع التأثير'; impact2Classes = 'bg-error/10 text-error';
+            } else if (marginRatio < 0.05) {
+                marginPhrase = 'مرونة محدودة جداً'; impact2Text = 'مرتفع التأثير'; impact2Classes = 'bg-error/10 text-error';
+            } else if (marginRatio < 0.15) {
+                marginPhrase = 'مرونة محدودة'; impact2Text = 'متوسط التأثير'; impact2Classes = 'bg-secondary-container text-on-secondary-container';
+            } else if (marginRatio < 0.3) {
+                marginPhrase = 'مرونة متوسطة'; impact2Text = 'متوسط التأثير'; impact2Classes = 'bg-secondary-container text-on-secondary-container';
+            } else {
+                marginPhrase = 'مرونة عالية'; impact2Text = 'منخفض التأثير'; impact2Classes = 'bg-primary/10 text-primary';
+            }
+            const stabilityPct = Math.max(10, Math.min(95, Math.round(50 + marginRatio * 150)));
+            document.getElementById('rs-stability-desc').innerText =
+                'المتبقي من راتبك نهاية الشهر يبلغ ' + fmtSar(result.surplus) + ' ر.س، مما يترك لك ' + marginPhrase + ' لمواجهة المصاريف الطارئة.';
             document.getElementById('rs-stability-bar').style.width = stabilityPct + '%';
             document.getElementById('rs-stability-weight').innerText = stabilityPct + '% وزن التأثير';
+            setBadge('rs-stability-impact-badge', impact2Text, impact2Classes);
 
-            // Credit-history proxy: how much of income is already committed to existing obligations.
-            const obligationsRatio = income > 0 ? (result.input.obligations / income) * 100 : 0;
-            const creditPct = Math.max(10, Math.min(90, Math.round(90 - obligationsRatio * 1.5)));
-            document.getElementById('rs-credit-desc').innerText =
-                'التزاماتك الحالية (' + result.input.obligations.toLocaleString('ar-SA') + ' ر.س) تمثل ' + Math.round(obligationsRatio) + '% من دخلك الشهري.';
+            // Card 3: Upcoming obligation (within 3 months) - fully reactive to
+            // the "التزامات قادمة" toggle the customer filled on the data page.
+            const hasUpcoming = result.input.hasUpcomingObligation;
+            let creditPct, impact3Text, impact3Classes;
+            if (hasUpcoming) {
+                const upcomingAmount = result.input.upcomingObligationAmount || 0;
+                const reducedBalance = result.surplus - upcomingAmount;
+                const upcomingRatio = income > 0 ? upcomingAmount / income : 0;
+                creditPct = Math.max(15, Math.min(95, Math.round(upcomingRatio * 200)));
+                if (upcomingRatio >= 0.3 || reducedBalance < 0) {
+                    impact3Text = 'مرتفع التأثير'; impact3Classes = 'bg-error/10 text-error';
+                } else if (upcomingRatio >= 0.1) {
+                    impact3Text = 'متوسط التأثير'; impact3Classes = 'bg-secondary-container text-on-secondary-container';
+                } else {
+                    impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';
+                }
+                document.getElementById('rs-credit-desc').innerText =
+                    'يوجد التزام قادم بتاريخ ' + (result.input.upcomingObligationDate || 'غير محدد') + ' بقيمة ' + fmtSar(upcomingAmount) +
+                    ' ر.س، وقد يخفض المتبقي نهاية الشهر إلى ' + fmtSar(reducedBalance) + ' ر.س إذا تم اعتماد الطلب الحالي.';
+            } else {
+                creditPct = 5;
+                impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';
+                document.getElementById('rs-credit-desc').innerText =
+                    'لا توجد التزامات قادمة خلال الثلاثة أشهر القادمة حسب البيانات المدخلة، ما يدعم استقرار وضعك المالي.';
+            }
             document.getElementById('rs-credit-bar').style.width = creditPct + '%';
             document.getElementById('rs-credit-weight').innerText = creditPct + '% وزن التأثير';
+            setBadge('rs-credit-impact-badge', impact3Text, impact3Classes);
         })();
     </script>
 </body></html>

@@ -161,7 +161,6 @@
 <div>
 <span class="font-label-md text-label-md text-secondary block mb-1">العرض المختار</span>
 <h2 class="font-headline-lg text-headline-lg text-primary mb-1" id="df-offer-name">تمويل النمو المستدام</h2>
-<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Decision Fingerprint ID: <span id="df-decision-id">RSH-2026-8842</span></p>
 </div>
 <div class="flex gap-8">
 <div class="text-center">
@@ -216,14 +215,6 @@
 <span class="font-label-md text-label-md text-on-surface-variant block mb-4">التوقيع الرقمي المعتمد</span>
 <div class="h-16 border-b-2 border-primary/20 flex items-center px-2">
 <span class="italic font-serif text-2xl opacity-80 text-primary">Rashid Intelligence System</span>
-</div>
-<span class="text-[10px] text-on-surface-variant/50 mt-2 block">Document secured by blockchain architecture.</span>
-</div>
-<div class="flex items-center gap-4 bg-primary text-on-primary px-6 py-4 rounded-2xl shadow-lg">
-<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
-<div>
-<p class="font-label-md text-label-md font-bold">موثق ومسؤول</p>
-<p class="text-[10px] opacity-70">Rashid Compliance Standard 2.0</p>
 </div>
 </div>
 </div>
@@ -320,9 +311,6 @@
                 badge.classList.remove('bg-secondary-container/50', 'text-on-secondary-container');
                 badge.classList.add('bg-error/10', 'text-error');
             }
-
-            const idSeed = Math.abs(Math.round(selected.amount * 7 + selected.tenure * 13));
-            document.getElementById('df-decision-id').innerText = 'RSH-2026-' + String(idSeed).slice(-4).padStart(4, '0');
 
             // Keep the PDF and the on-screen fingerprint in sync.
             window.__rashidDecisionContext = {
