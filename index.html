@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rashid - التمويل الأرشد قبل الموافقة</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Fonts: Using a standard Arabic font stack -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>.material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }</style>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rashid: {
+              gold: '#C5A059',
+              dark: '#3D332D',
+              light: '#F5F1EA',
+              accent: '#8C7451',
+              charcoal: '#2D2D2D'
+            }
+          },
+          fontFamily: {
+            sans: ['Noto Sans Arabic', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layouts">
+    /* Hero Section Background with the Gate Imagery */
+    .hero-bg {
+      background: radial-gradient(circle at 50% 0%, #fbf7f0 0%, #f5f1ea 55%, #ece3d3 100%);
+      min-height: 80vh;
+    }
+
+    /* Glassmorphism for sub-navigation/status bar */
+    .glass-bar {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .card-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #f9f6f1 100%);
+    }
+
+    .stat-footer {
+      background: #3D332D;
+      color: #F5F1EA;
+    }
+  </style>
+</head>
+<body class="bg-rashid-light font-sans text-rashid-dark overflow-x-hidden">
+<!-- BEGIN: MainHeader -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-rashid-gold/20" data-purpose="main-navigation">
+<div class="container mx-auto px-6 py-4 flex justify-between items-center relative">
+<!-- Logo + Menu Toggle -->
+<div class="flex items-center gap-3">
+<button aria-expanded="false" aria-label="القائمة" class="flex flex-col justify-center gap-1.5 w-10 h-10 items-center hover:bg-rashid-gold/10 rounded-lg transition-colors" id="nav-toggle">
+<span class="block w-6 h-0.5 bg-rashid-dark"></span>
+<span class="block w-6 h-0.5 bg-rashid-dark"></span>
+<span class="block w-6 h-0.5 bg-rashid-dark"></span>
+</button>
+<span class="text-2xl font-bold text-rashid-dark">رَشيد</span>
+</div>
+<!-- Navigation Dropdown -->
+<nav class="hidden flex-col gap-1 text-sm font-semibold absolute top-full right-6 mt-2 bg-white rounded-xl shadow-2xl border border-rashid-gold/20 py-3 w-56 z-50" id="nav-menu">
+<a class="text-rashid-gold px-5 py-2.5 hover:bg-rashid-gold/10 transition-colors" href="index.html">الرئيسية</a>
+<a class="text-rashid-dark px-5 py-2.5 hover:bg-rashid-gold/10 transition-colors" href="#features">الخدمات</a>
+<a class="text-rashid-dark px-5 py-2.5 hover:bg-rashid-gold/10 transition-colors" href="#why-rashid">لماذا رشيد</a>
+<div class="my-2 border-t border-rashid-gold/10"></div>
+<button class="text-rashid-dark px-5 py-2.5 hover:bg-rashid-gold/10 transition-colors flex items-center gap-2 w-full text-right" id="nav-auth-btn">
+<span class="material-symbols-outlined text-[18px]" id="nav-auth-icon">login</span>
+<span id="nav-auth-label">تسجيل الدخول</span>
+</button>
+</nav>
+<!-- Employee Login Modal -->
+<div class="hidden fixed inset-0 z-[999] bg-black/50 backdrop-blur-sm items-center justify-center p-4" id="login-modal">
+<div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8 relative">
+<button class="absolute top-4 left-4 text-rashid-dark/50 hover:text-rashid-dark" id="login-modal-close">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h3 class="text-xl font-bold text-rashid-dark mb-1">تسجيل دخول الموظفين</h3>
+<p class="text-sm text-gray-500 mb-6">خاص بموظفي البنك للوصول إلى بوابة المستشار</p>
+<form id="login-form" class="space-y-4">
+<div>
+<label class="block text-sm font-semibold text-rashid-dark mb-1">اسم المستخدم</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-rashid-gold/30 focus:outline-none focus:ring-2 focus:ring-rashid-gold/40" id="login-username" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-rashid-dark mb-1">كلمة المرور</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-rashid-gold/30 focus:outline-none focus:ring-2 focus:ring-rashid-gold/40" id="login-password" required="" type="password"/>
+</div>
+<button class="w-full bg-rashid-dark text-white py-3 rounded-lg font-bold hover:bg-rashid-accent transition-all mt-2" type="submit">دخول</button>
+</form>
+</div>
+</div>
+<!-- CTA Button -->
+<a class="bg-rashid-dark text-white px-6 py-2 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-rashid-accent transition-all" href="screens/your-data-ar.html">
+<span>ابدأ التجربة</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</a>
+</div>
+</header>
+<script>
+    (function () {
+        const toggle = document.getElementById('nav-toggle');
+        const menu = document.getElementById('nav-menu');
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = menu.classList.toggle('flex');
+            menu.classList.toggle('hidden');
+            toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && !toggle.contains(e.target)) {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        menu.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                menu.classList.remove('flex');
+                toggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    })();
+</script>
+<script src="screens/rashid-auth.js"></script>
+<script>
+    (function () {
+        const authBtn = document.getElementById('nav-auth-btn');
+        const authLabel = document.getElementById('nav-auth-label');
+        const authIcon = document.getElementById('nav-auth-icon');
+        const modal = document.getElementById('login-modal');
+        const modalClose = document.getElementById('login-modal-close');
+        const form = document.getElementById('login-form');
+
+        function refreshAuthUI() {
+            const session = RashidAuth.getSession();
+            if (session) {
+                authLabel.innerText = 'تسجيل خروج (' + session.username + ')';
+                authIcon.innerText = 'logout';
+            } else {
+                authLabel.innerText = 'تسجيل الدخول';
+                authIcon.innerText = 'login';
+            }
+        }
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function closeModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        authBtn.addEventListener('click', () => {
+            if (RashidAuth.isLoggedIn()) {
+                RashidAuth.logout();
+                refreshAuthUI();
+            } else {
+                openModal();
+            }
+        });
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value.trim();
+            const password = document.getElementById('login-password').value;
+            if (!username || !password) return;
+            const result = await RashidAuth.loginRemote(username, password);
+            if (!result.ok) {
+                alert('اسم المستخدم أو كلمة المرور غير صحيحة');
+                return;
+            }
+            refreshAuthUI();
+            closeModal();
+            form.reset();
+            alert('تم تسجيل الدخول بنجاح، مرحباً ' + username);
+        });
+
+        refreshAuthUI();
+    })();
+</script>
+<!-- END: MainHeader -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="hero-bg pt-32 pb-16 relative overflow-hidden flex items-center" data-purpose="hero-banner">
+<div class="container mx-auto px-6 flex flex-col items-center text-center max-w-3xl">
+<!-- Text Content -->
+<div class="z-10 text-center">
+<h1 class="text-6xl md:text-8xl font-bold mb-4 text-rashid-dark tracking-tight">رَشيد</h1>
+<h2 class="text-3xl md:text-4xl font-semibold mb-6 text-rashid-accent">التمويل الأرشد قبل الموافقة</h2>
+<p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl mb-10">
+            يساعدك رشيد على فهم أثر التمويل قبل الالتزام، عبر تحليل الجاهزية المالية وتقديم بدائل أكثر وضوحاً وملاءمة.
+          </p>
+<div class="flex flex-wrap gap-4 justify-center">
+<a class="bg-rashid-dark text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center gap-3 hover:scale-105 transition-transform shadow-xl" href="screens/your-data-ar.html">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              ابدأ الآن
+            </a>
+<a class="border-2 border-rashid-dark/20 bg-white/50 backdrop-blur px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 hover:bg-white transition-all" href="#how-it-works">
+<svg class="h-6 w-6 text-rashid-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              تعرف على رشيد
+            </a>
+</div>
+</div>
+</div>
+<!-- Trust Indicators Bar -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4">
+<div class="glass-bar rounded-2xl flex flex-wrap justify-around items-center p-6 gap-6 shadow-lg border border-white/40">
+<div class="flex items-center gap-3">
+<div class="bg-rashid-gold/20 p-2 rounded-full"><span class="text-xl">👁️</span></div>
+<div class="text-right">
+<h4 class="font-bold text-sm">أكثر وضوحاً</h4>
+<p class="text-xs opacity-70">تفهم قبل الالتزام</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-rashid-gold/20 p-2 rounded-full"><span class="text-xl">🔒</span></div>
+<div class="text-right">
+<h4 class="font-bold text-sm">أكثر أماناً</h4>
+<p class="text-xs opacity-70">حماية بياناتك وخصوصيتك</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-rashid-gold/20 p-2 rounded-full"><span class="text-xl">🎯</span></div>
+<div class="text-right">
+<h4 class="font-bold text-sm">أكثر دقة</h4>
+<p class="text-xs opacity-70">تحليلات متقدمة وموثوقة</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-rashid-gold/20 p-2 rounded-full"><span class="text-xl">🛡️</span></div>
+<div class="text-right">
+<h4 class="font-bold text-sm">أكثر مسؤولية</h4>
+<p class="text-xs opacity-70">قرارات أفضل لمستقبل أفضل</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: FeatureCardsSection -->
+<section class="py-24 container mx-auto px-6" data-purpose="features-grid" id="features">
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-6">
+<!-- Card 1: Smart Alternatives -->
+<div class="card-gradient p-8 rounded-3xl border border-rashid-gold/10 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all h-full">
+<h3 class="text-xl font-bold mb-4">البدائل الذكية</h3>
+<p class="text-sm text-gray-500 mb-8">نقترح لك بدائل تمويل أكثر ملاءمة لظروفك.</p>
+<div class="mb-8 mt-auto">
+<img alt="Smart Alternatives" class="w-32 h-32 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChlip50VHKsZSfi9IJ8aLrnTUrHtAo5o28CzKDg4jMFb7Fc7cIFWe9T62XEb3wWTAC9-G01ensTJscWGKY7llYx4aYItP16xGnkw9wuIMW3bz_Uk0ZXJbKagA-HZR3bB-7beSAhlDOGEK_8SI89PiQPIUPsz_FTyGhBM8fKwYul0hHeOh0tto_nc4k7kYJnlgFNgVzW-JgLbdqmAEh6xn1ToA9GCcfJls9XeJvHDiP4kvMaZFiCOO2jiMdOtWuiUauab_pnE8m7Q"/>
+</div>
+<a class="bg-rashid-dark text-white px-6 py-2 rounded-lg text-sm w-full block text-center" href="screens/smart-alternatives.html">استكشف البدائل</a>
+</div>
+<!-- Card 2: 30-Day Simulation -->
+<div class="card-gradient p-8 rounded-3xl border border-rashid-gold/10 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all h-full">
+<h3 class="text-xl font-bold mb-4">محاكاة 30 يوم</h3>
+<p class="text-sm text-gray-500 mb-8">شاهد تأثير الالتزام على ميزانيتك قبل اتخاذ القرار.</p>
+<div class="mb-8 mt-auto relative">
+<img alt="30 Day Simulation" class="w-32 h-32 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgDobNd-MwhaNfOdTt_2FjMl6CK-gSFYZvmY3VXSSGLjvsrJfjLEzIVybahQGULhHZfHP1W_k3qgPehcu_2k2VQXgTRADO83KC-hCUtaJ9Xji_3gvtOP_aLK72VeDfK4IT_C_cXgJwHTROkGBHgqTQAvet24k7OoMhbPHitChzDuGFHFUMm30K9GSRID8C7bzknKaL7PGPLf4hm6NJPdnv_zQa_7EkzwEW_YXDumuSF8QcZUPF_9NgtAJe8Y-Ysyo6lcTNamoNkQ"/>
+</div>
+<a class="bg-rashid-dark text-white px-6 py-2 rounded-lg text-sm w-full block text-center" href="screens/your-data-ar.html">جرب المحاكاة</a>
+</div>
+<!-- Card 3: Financial Pressure -->
+<div class="card-gradient p-8 rounded-3xl border border-rashid-gold/10 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all h-full">
+<h3 class="text-xl font-bold mb-4">قياس الضغط المالي</h3>
+<p class="text-sm text-gray-500 mb-8">نقيس أثر الالتزامات المالية على دخلك والتزاماتك.</p>
+<div class="mb-8 mt-auto">
+<img alt="Pressure Gauge" class="w-32 h-32 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEd7Vn227ugCz7dBFvKII0kDh4AYvWkXBZF-3ge_Yj8MqI-CLBbmvrERi3wRo3t6edKQCEOwzF4EI0r4-64DeiABhYrBvazwZJHl1JhSKCCfH04Ty1Kq2AxcIukJyTIvmZQrHTNqWd6dFh7WL8lNZpz37dv1CmrpVtrQeC6UWLOj217_R4ZTJvOron_SbSsbW1bdY8tJNlaGFSZrGXdQ23Dk0ABqKkA7Ek_Ui3Jy5qIa5cewpug3Nor-sl4B_U-I-qGWPrgWPSVQ"/>
+</div>
+<a class="bg-rashid-dark text-white px-6 py-2 rounded-lg text-sm w-full block text-center" href="screens/analysis-result-ar.html">اعرف المزيد</a>
+</div>
+<!-- Card 4: Financial Readiness -->
+<div class="card-gradient p-8 rounded-3xl border border-rashid-gold/10 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all h-full">
+<h3 class="text-xl font-bold mb-4">تحليل الجاهزية المالية</h3>
+<p class="text-sm text-gray-500 mb-8">تحليل شامل لوضعك المالي وقدرتك على الالتزام.</p>
+<div class="mb-8 mt-auto">
+<img alt="Readiness Analysis" class="w-32 h-32 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYVlZYrSzUOl1uecTkaRDIjglAk13sM_UdlxZbDqwqxBcfhCajDRXs3onQJI46aDuRjDQ_uCx1R6gUipBe2Y2G0fNxAxwNHy_GcDgWqANTiLaUG8B-1M5R0ojO5cvFZySXzo7PAAPsWggx1oDsjO-JBvstDIfz8pYbKqY8ZHQcvEdUdRSVdLnTZEkmj_INMdxbksuxvEtNY0aXlX6cGriOK9lluJirwiYvm5PBb9fNSOS5-uNTga7URZchTvP34ENoQDevL76beg"/>
+</div>
+<a class="bg-rashid-dark text-white px-6 py-2 rounded-lg text-sm w-full block text-center" href="screens/your-data-ar.html">حلل وضعك</a>
+</div>
+<!-- How it Works Column (Merged Layout) -->
+<div class="bg-white/40 p-8 rounded-3xl border border-dashed border-rashid-gold/30 lg:col-span-1 flex flex-col text-right" id="how-it-works">
+<h3 class="text-2xl font-bold mb-2">كيف يعمل رشيد؟</h3>
+<p class="text-xs text-gray-500 mb-6">رحلة بسيطة تمنحك قراراً مالياً أكثر وعياً.</p>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-rashid-gold/10">
+<span class="text-rashid-gold font-bold">01</span>
+<div>
+<p class="text-xs font-bold">أدخل بياناتك</p>
+<p class="text-[10px] opacity-70">نحتاج بعض المعلومات الأساسية.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-rashid-gold/10">
+<span class="text-rashid-gold font-bold">02</span>
+<div>
+<p class="text-xs font-bold">نحلل وضعك المالي</p>
+<p class="text-[10px] opacity-70">نقيس الجاهزية والالتزام.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-rashid-gold/10">
+<span class="text-rashid-gold font-bold">03</span>
+<div>
+<p class="text-xs font-bold">نوضح الأثر والبدائل</p>
+<p class="text-[10px] opacity-70">تعرف على الخيارات المتاحة.</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-rashid-gold/10">
+<span class="text-rashid-gold font-bold">04</span>
+<div>
+<p class="text-xs font-bold">اتخذ قرارك بثقة</p>
+<p class="text-[10px] opacity-70">اختر الأنسب لك بمعلومة كاملة.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: FeatureCardsSection -->
+<!-- BEGIN: FooterStats -->
+<footer class="stat-footer py-12 px-6" data-purpose="metrics-footer" id="why-rashid">
+<div class="container mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+<!-- Stat 1 -->
+<div class="flex flex-col items-center text-center">
+<span class="text-4xl font-bold text-white">+85K</span>
+<p class="text-sm opacity-70 mt-1">مستخدم نشط</p>
+<p class="text-[10px] opacity-50">يستخدمون رشيد لاتخاذ قرارات مالية أفضل.</p>
+</div>
+<!-- Stat 2 -->
+<div class="flex flex-col items-center text-center">
+<span class="text-4xl font-bold text-white">+320K</span>
+<p class="text-sm opacity-70 mt-1">محاكاة مكتملة</p>
+<p class="text-[10px] opacity-50">تم تنفيذ محاكاة لـ 30 يوم لمعرفة الأثر.</p>
+</div>
+<!-- Stat 3 -->
+<div class="flex flex-col items-center text-center">
+<span class="text-4xl font-bold text-white">+18</span>
+<p class="text-sm opacity-70 mt-1">شريك تمويلي</p>
+<p class="text-[10px] opacity-50">من البنوك وشركات التمويل الموثوقة.</p>
+</div>
+<!-- Stat 4 -->
+<div class="flex flex-col items-center text-center">
+<span class="text-4xl font-bold text-white">98%</span>
+<p class="text-sm opacity-70 mt-1">مستوى رضا المستخدمين</p>
+<p class="text-[10px] opacity-50">تجربة موثوقة ومفهومة تدعمك في كل خطوة.</p>
+</div>
+<!-- Privacy Shield -->
+<div class="bg-rashid-charcoal/50 p-6 rounded-2xl border border-white/10 flex items-center gap-4 text-right">
+<div class="relative w-12 h-12 flex-shrink-0">
+<img alt="Security Shield" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqw6CYAdYCfm3lVbV2dK5E28TOMoaQX8rvIE1QH0kSUBwQNb7o6OCU8-OQZtPO_u3YK2Ew4TPoqkOEuic-TrGnutgXaNFmJf8kXetZrIyob7UG1WP8SxpvFh9wXm-72tJR4QFtL2XfgsaPBG3Vu1SN88yPEcRHe_i7O-DF6c0r0SJHOXkRPjYUUJnVEr71fenX1PWFwPA8K4lciskUYSEaVQ360rBkOQc0ZlJJ_hWv0q7SdVWVbT5xh2f4Yk9tEdNmN98Q2Bgd-w"/>
+</div>
+<div>
+<h4 class="font-bold text-sm">أمانك وخصوصيتك أولويتنا</h4>
+<p class="text-[10px] opacity-70 mt-1">نستخدم أعلى معايير الأمان لحماية بياناتك وضمان سريتها.</p>
+</div>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-xs opacity-50">
+<p>© 2026 رشيد للذكاء المالي. جميع الحقوق محفوظة.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-white" href="#">سياسة الخصوصية</a>
+<a class="hover:text-white" href="#">الشروط والأحكام</a>
+<a class="hover:text-white" href="#">تواصل معنا</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: FooterStats -->
+</main>
+</body></html>

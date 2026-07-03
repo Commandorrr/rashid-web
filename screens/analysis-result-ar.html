@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رَشيد - النتيجة (Result)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=IBM+Plex+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b",
+                        "tertiary": "#171610",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee",
+                        "tertiary-container": "#2b2a24",
+                        "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd",
+                        "inverse-primary": "#cdc5c0",
+                        "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-fixed-dim": "#e6c183",
+                        "surface": "#fdf8f7",
+                        "outline": "#7e756f",
+                        "on-primary-fixed": "#1e1b18",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d2926",
+                        "surface-tint": "#635d5a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8",
+                        "on-secondary-fixed-variant": "#5b4311",
+                        "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7",
+                        "on-tertiary-container": "#949189",
+                        "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff",
+                        "primary": "#181512",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6",
+                        "surface-container": "#f1edec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "base": "8px",
+                        "container-margin": "24px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "display-lg-mobile": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-md": ["36px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-md": ["22px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "headline-lg": ["28px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gauge-ring {
+            transition: stroke-dashoffset 0.8s ease-in-out;
+        }
+        .step-active {
+            background: linear-gradient(135deg, #181512 0%, #4b4642 100%);
+        }
+        body {
+            background: radial-gradient(circle at top left, #fdf8f7, #f1edec);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background selection:bg-secondary-container"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-display-md text-display-md font-bold text-primary">رشيد</span>
+</div>
+<div class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors px-3 py-2 rounded-lg font-label-md text-label-md" href="../index.html">الرئيسية</a>
+<a class="text-primary font-bold border-b-2 border-primary px-3 py-2 font-label-md text-label-md" href="analysis-result-ar.html">تحليل القروض</a>
+<a class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors px-3 py-2 rounded-lg font-label-md text-label-md" href="advisor-dashboard-ar.html">العملاء</a>
+</div>
+<div class="flex items-center gap-base">
+<button class="p-2 rounded-full hover:bg-surface-container-highest/20 transition-colors">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/20 shadow-sm text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-gutter max-w-[1280px] mx-auto">
+<!-- Step Indicator -->
+<div class="flex items-center justify-center mb-12 gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg">1</div>
+<div class="h-1 w-8 bg-primary rounded-full opacity-20"></div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg">2</div>
+<div class="h-1 w-12 bg-primary rounded-full"></div>
+<div class="w-10 h-10 rounded-full flex items-center justify-center step-active text-on-primary font-bold shadow-xl border-4 border-surface ring-2 ring-primary/20">3</div>
+<div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">4</div>
+<div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">5</div>
+</div>
+<span class="mr-4 font-label-md text-label-md text-on-surface-variant">الخطوة 3 من 5</span>
+</div>
+<!-- Hero Header -->
+<div class="text-center mb-section-gap">
+<h1 class="font-display-md text-display-md text-primary mb-4">نتيجة تحليل رَشيد</h1>
+<p class="font-headline-md text-headline-md text-on-surface-variant max-w-2xl mx-auto">لقد قمنا بمعالجة بياناتك المالية باستخدام الذكاء الاصطناعي لتقديم تحليل دقيق لقدرتك الائتمانية.</p>
+</div>
+<!-- Status Banner -->
+<div class="mb-section-gap">
+<div class="bg-white rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 border-r-8 border-r-secondary shadow-lg relative">
+<div class="relative z-10">
+<span class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        التحقق مكتمل
+                    </span>
+<h2 class="font-display-md text-display-md text-primary mb-2" id="rs-decision-title">أنت مؤهل</h2>
+<p class="text-on-surface-variant font-body-md text-body-md" id="rs-decision-desc">بناءً على المعايير الحالية، طلبك لديه فرصة عالية للقبول مع بعض التعديلات المقترحة.</p>
+</div>
+<div class="relative z-10 text-center md:text-left">
+<div class="text-[56px] font-bold text-secondary leading-none" id="rs-confidence">84%</div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">نسبة الثقة بالتحليل</div>
+</div>
+</div>
+</div>
+<!-- Metrics Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-section-gap">
+<!-- Metric 1: Financial Readiness -->
+<div class="md:col-span-6 glass-card rounded-xl p-8 flex flex-col items-center text-center relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary">account_balance_wallet</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-8 relative z-10">الجاهزية المالية</h3>
+<div class="relative w-48 h-48 mb-6">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-secondary gauge-ring" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="221.16" id="rs-readiness-gauge" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-display-md font-bold text-primary" id="rs-readiness-ar">متوسط</span>
+<span class="text-label-md text-on-surface-variant" id="rs-readiness-en">Medium</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-sm" id="rs-readiness-desc">مدخراتك الحالية تغطي التزاماتك لـ 4 أشهر القادمة بشكل مستقر.</p>
+</div>
+<!-- Metric 2: Pressure Score -->
+<div class="md:col-span-6 glass-card rounded-xl p-8 flex flex-col items-center text-center relative overflow-hidden group">
+<div class="absolute top-0 left-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-error">speed</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-8 relative z-10">درجة الضغط المالي</h3>
+<div class="relative w-48 h-48 mb-6">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-surface-container-highest" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-error gauge-ring" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="121.64" id="rs-pressure-gauge" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-display-md font-bold text-error" id="rs-pressure-score">78/100</span>
+<span class="text-label-md text-on-surface-variant" id="rs-pressure-label">ضغط مرتفع</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-sm" id="rs-pressure-desc">نسبة الأقساط الحالية تستهلك جزءاً كبيراً من دخلك الشهري.</p>
+</div>
+</div>
+<!-- Breakdown Section -->
+<section class="mb-section-gap">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-8 border-r-4 border-primary pr-4">أهم أسباب النتيجة</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-error/10 text-error">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="px-2 py-1 rounded bg-error/10 text-error text-[10px] font-bold">مرتفع التأثير</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">نسبة القسط للدخل</h4>
+<p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-installment-desc">قيمة القسط المقترح تمثل 42% من صافي الدخل.</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-error h-full w-[85%]" id="rs-installment-bar"></div>
+</div>
+<div class="mt-2 text-left font-label-md text-label-md text-error" id="rs-installment-weight">85% وزن التأثير</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">متوسط التأثير</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">استقرار الدخل</h4>
+<p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-stability-desc">لديك سجل وظيفي مستقر لأكثر من 3 سنوات.</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[60%]" id="rs-stability-bar"></div>
+</div>
+<div class="mt-2 text-left font-label-md text-label-md text-secondary" id="rs-stability-weight">60% وزن التأثير</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-xl p-6 hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">history</span>
+</div>
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold">منخفض التأثير</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">التاريخ الائتماني</h4>
+<p class="text-on-surface-variant font-body-md text-body-md mb-6" id="rs-credit-desc">سجل دفعات منتظم بدون أي تعثرات سابقة.</p>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[25%]" id="rs-credit-bar"></div>
+</div>
+<div class="mt-2 text-left font-label-md text-label-md text-primary" id="rs-credit-weight">25% وزن التأثير</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<div class="flex flex-col md:flex-row gap-4 justify-center items-center mt-12">
+<a class="w-full md:w-auto px-12 py-4 bg-primary text-on-primary rounded-xl font-headline-md text-headline-md shadow-xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3" href="smart-alternatives.html">
+                عرض البدائل الذكية
+                <span class="material-symbols-outlined">auto_awesome</span>
+</a>
+<button class="w-full md:w-auto px-12 py-4 glass-card text-primary border border-primary/20 rounded-xl font-headline-md text-headline-md hover:bg-surface-container-highest/30 transition-all" onclick="RashidReport.downloadAnalysisPdf()">
+                تحميل تقرير PDF
+            </button>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="mt-12 py-8 border-t border-outline-variant/10 text-center">
+<p class="text-on-surface-variant font-label-md text-label-md">© 2026 رَشيد للذكاء الاصطناعي الائتماني. جميع الحقوق محفوظة.</p>
+</footer>
+<script>
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + "%";
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const confScore = document.getElementById('rs-confidence');
+            if (confScore) {
+                const target = (typeof RashidCalc !== 'undefined') ? RashidCalc.analyze().confidence : 84;
+                animateValue(confScore, 0, target, 1500);
+            }
+
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-calc.js"></script>
+<script>
+        (function () {
+            const result = RashidCalc.analyze();
+            const GAUGE_CIRCUMFERENCE = 552.92;
+            const offsetFor = (pct) => GAUGE_CIRCUMFERENCE * (1 - Math.max(0, Math.min(100, pct)) / 100);
+
+            document.getElementById('rs-decision-title').innerText = result.eligible
+                ? 'أنت مؤهل'
+                : (result.marginal ? 'أنت مؤهل بشروط' : 'غير مؤهل حالياً');
+            document.getElementById('rs-decision-desc').innerText = result.recommendation;
+            document.getElementById('rs-confidence').innerText = result.confidence + '%';
+
+            document.getElementById('rs-readiness-ar').innerText = result.readiness;
+            document.getElementById('rs-readiness-en').innerText =
+                result.readiness === 'مرتفعة' ? 'High' : (result.readiness === 'متوسطة' ? 'Medium' : 'Low');
+            document.getElementById('rs-readiness-gauge').style.strokeDashoffset =
+                offsetFor(100 - result.burdenRatio);
+            document.getElementById('rs-readiness-desc').innerText =
+                'الفائض الشهري المتوقع بعد الأقساط والمصاريف: ' + result.surplus.toLocaleString('ar-SA') + ' ر.س.';
+
+            document.getElementById('rs-pressure-score').innerText = result.pressureScore + '/100';
+            document.getElementById('rs-pressure-label').innerText =
+                result.pressureScore >= 70 ? 'ضغط مرتفع' : (result.pressureScore >= 40 ? 'ضغط متوسط' : 'ضغط منخفض');
+            document.getElementById('rs-pressure-gauge').style.strokeDashoffset = offsetFor(result.pressureScore);
+            document.getElementById('rs-pressure-desc').innerText =
+                'القسط الشهري المقدّر (' + result.installment.toLocaleString('ar-SA') + ' ر.س) يمثل ' +
+                result.burdenRatio + '% من دخلك الشهري.';
+
+            document.getElementById('rs-installment-desc').innerText =
+                'القسط الشهري المقترح يمثل ' + result.burdenRatio + '% من دخلك الشهري (الحد الآمن ' + result.burdenCap + '%).';
+            const installmentPct = Math.min(100, Math.round(result.burdenRatio));
+            document.getElementById('rs-installment-bar').style.width = installmentPct + '%';
+            document.getElementById('rs-installment-weight').innerText = installmentPct + '% وزن التأثير';
+
+            // Income stability proxy: how much monthly headroom (surplus vs income) remains.
+            const income = result.input.income;
+            const surplusRatio = income > 0 ? (result.surplus / income) * 100 : 0;
+            const stabilityPct = Math.max(10, Math.min(95, Math.round(50 + surplusRatio * 1.5)));
+            document.getElementById('rs-stability-desc').innerText = result.surplus >= 0
+                ? 'الفائض الشهري المتوقع يمثل ' + Math.round(surplusRatio) + '% من دخلك، وهو ما يعكس مرونة مالية ' + (stabilityPct >= 60 ? 'جيدة' : 'محدودة') + '.'
+                : 'مصاريفك والتزاماتك تتجاوز دخلك الشهري بنسبة ' + Math.round(Math.abs(surplusRatio)) + '%، ما يضعف استقرارك المالي حالياً.';
+            document.getElementById('rs-stability-bar').style.width = stabilityPct + '%';
+            document.getElementById('rs-stability-weight').innerText = stabilityPct + '% وزن التأثير';
+
+            // Credit-history proxy: how much of income is already committed to existing obligations.
+            const obligationsRatio = income > 0 ? (result.input.obligations / income) * 100 : 0;
+            const creditPct = Math.max(10, Math.min(90, Math.round(90 - obligationsRatio * 1.5)));
+            document.getElementById('rs-credit-desc').innerText =
+                'التزاماتك الحالية (' + result.input.obligations.toLocaleString('ar-SA') + ' ر.س) تمثل ' + Math.round(obligationsRatio) + '% من دخلك الشهري.';
+            document.getElementById('rs-credit-bar').style.width = creditPct + '%';
+            document.getElementById('rs-credit-weight').innerText = creditPct + '% وزن التأثير';
+        })();
+    </script>
+</body></html>

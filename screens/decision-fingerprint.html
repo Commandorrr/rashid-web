@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rashid - Decision (القرار)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=IBM+Plex+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b",
+                        "tertiary": "#171610",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee",
+                        "tertiary-container": "#2b2a24",
+                        "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd",
+                        "inverse-primary": "#cdc5c0",
+                        "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-fixed-dim": "#e6c183",
+                        "surface": "#fdf8f7",
+                        "outline": "#7e756f",
+                        "on-primary-fixed": "#1e1b18",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d2926",
+                        "surface-tint": "#635d5a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8",
+                        "on-secondary-fixed-variant": "#5b4311",
+                        "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7",
+                        "on-tertiary-container": "#949189",
+                        "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff",
+                        "primary": "#181512",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6",
+                        "surface-container": "#f1edec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "base": "8px",
+                        "container-margin": "24px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "display-md": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["IBM Plex Sans"],
+                        "body-md": ["IBM Plex Sans"],
+                        "label-md": ["IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif; background-color: #fdf8f7; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .rashid-seal-bg {
+            background-blend-mode: multiply;
+        }
+        @keyframes pulse-gold {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pulse-gold {
+            animation: pulse-gold 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- TopNavBar (Shared Component Identity) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-display-md text-display-md font-bold text-primary">رشيد</span>
+</div>
+<div class="hidden md:flex items-center gap-base">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors rounded-lg">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center border border-outline-variant/20 text-on-secondary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<main class="flex-1 pt-24 pb-12 px-container-margin md:px-section-gap flex flex-col items-center">
+<!-- Progress Indicator -->
+<div class="max-w-4xl w-full mb-12">
+<div class="flex justify-between items-center mb-4">
+<span class="font-label-md text-label-md text-primary font-bold">الخطوة ٥ من ٥</span>
+<span class="font-label-md text-label-md text-on-surface-variant">اكتمال العملية</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-1000 ease-out" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Success Message -->
+<div class="text-center mb-12">
+<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary text-on-primary mb-6 shadow-xl">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-display-md text-display-md text-primary mb-2">تم اتخاذ القرار بمسؤولية</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">لقد تم توثيق قرارك المالي بذكاء رشيد المتطور.</p>
+</div>
+<!-- The Decision Fingerprint Card (Vault Aesthetic) -->
+<div class="max-w-3xl w-full glass-card rounded-3xl overflow-hidden relative border-t-2 border-l-2 border-white/40 shadow-2xl mb-section-gap">
+<!-- Background Decorative Element -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
+<div class="p-8 md:p-12 relative z-10">
+<!-- Card Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant/10 pb-8 mb-8 gap-6">
+<div>
+<span class="font-label-md text-label-md text-secondary block mb-1">العرض المختار</span>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1" id="df-offer-name">تمويل النمو المستدام</h2>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Decision Fingerprint ID: <span id="df-decision-id">RSH-2026-8842</span></p>
+</div>
+<div class="flex gap-8">
+<div class="text-center">
+<span class="font-label-md text-label-md text-on-surface-variant block">المبلغ</span>
+<span class="font-headline-md text-headline-md text-primary"><span id="df-amount">٥٠٠,٠٠٠</span> ر.س</span>
+</div>
+<div class="text-center">
+<span class="font-label-md text-label-md text-on-surface-variant block">المدة</span>
+<span class="font-headline-md text-headline-md text-primary"><span id="df-tenure">٦٠</span> شهراً</span>
+</div>
+</div>
+</div>
+<!-- Original vs Selected Comparison -->
+<div>
+<div class="rounded-xl border border-outline-variant/10 overflow-hidden">
+<div class="grid grid-cols-3 bg-surface-container/50 text-label-md font-bold">
+<div class="p-3 text-on-surface-variant">البند</div>
+<div class="p-3 text-center text-on-surface-variant">الطلب الأصلي</div>
+<div class="p-3 text-center text-secondary">العرض المختار</div>
+</div>
+<div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
+<div class="p-3 text-label-md text-on-surface-variant">مبلغ التمويل</div>
+<div class="p-3 text-center font-bold" id="df-orig-amount">٠</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-amount">٠</div>
+</div>
+<div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
+<div class="p-3 text-label-md text-on-surface-variant">القسط الشهري</div>
+<div class="p-3 text-center font-bold" id="df-orig-installment">٠</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-installment">٠</div>
+</div>
+<div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
+<div class="p-3 text-label-md text-on-surface-variant">إجمالي الالتزامات الشهرية</div>
+<div class="p-3 text-center font-bold" id="df-orig-total">٠</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-total">٠</div>
+</div>
+<div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
+<div class="p-3 text-label-md text-on-surface-variant">المتبقي من الراتب نهاية الشهر</div>
+<div class="p-3 text-center font-bold" id="df-orig-remaining">٠</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-remaining">٠</div>
+</div>
+</div>
+<div class="mt-6 flex justify-center">
+<div class="px-4 py-1 bg-secondary-container/50 text-on-secondary-container rounded-full text-xs font-bold flex items-center gap-2" id="df-status-badge">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            نطاق آمن ومستدام
+                        </div>
+</div>
+</div>
+<!-- Footer: Signature & Stamp -->
+<div class="mt-12 pt-8 border-t border-outline-variant/10 flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="w-full md:w-auto">
+<span class="font-label-md text-label-md text-on-surface-variant block mb-4">التوقيع الرقمي المعتمد</span>
+<div class="h-16 border-b-2 border-primary/20 flex items-center px-2">
+<span class="italic font-serif text-2xl opacity-80 text-primary">Rashid Intelligence System</span>
+</div>
+<span class="text-[10px] text-on-surface-variant/50 mt-2 block">Document secured by blockchain architecture.</span>
+</div>
+<div class="flex items-center gap-4 bg-primary text-on-primary px-6 py-4 rounded-2xl shadow-lg">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<div>
+<p class="font-label-md text-label-md font-bold">موثق ومسؤول</p>
+<p class="text-[10px] opacity-70">Rashid Compliance Standard 2.0</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col md:flex-row gap-6 w-full max-w-2xl justify-center mb-12">
+<button class="flex-1 py-4 px-8 bg-primary text-on-primary rounded-xl font-headline-md flex items-center justify-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95 transition-all" onclick="alert('تم إرسال طلبك للبنك بنجاح! سيتواصل معك مستشار رشيد قريباً.'); window.location.href='advisor-dashboard-ar.html';">
+<span class="material-symbols-outlined">send</span>
+                إرسال للبنك
+            </button>
+<button class="flex-1 py-4 px-8 border-2 border-secondary text-secondary rounded-xl font-headline-md flex items-center justify-center gap-3 glass-card hover:bg-secondary/5 active:scale-95 transition-all" onclick="RashidReport.downloadDecisionPdf()">
+<span class="material-symbols-outlined">download</span>
+                تحميل ملخص PDF
+            </button>
+</div>
+<!-- Secondary Navigation -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+                العودة للرئيسية
+            </a>
+<div class="w-px h-4 bg-outline-variant/30"></div>
+<a class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-label-md" href="smart-alternatives.html">
+<span class="material-symbols-outlined">explore</span>
+                استكشف المزيد من الخدمات
+            </a>
+</div>
+</main>
+<!-- Bottom Separation (No Border Ban) -->
+<footer class="h-20 bg-surface-container-low/50 mt-auto"></footer>
+<script>
+        // Micro-interaction for the signature area
+        document.querySelector('.h-16').addEventListener('mouseover', function() {
+            this.style.borderColor = 'rgba(117, 90, 38, 0.4)';
+        });
+        document.querySelector('.h-16').addEventListener('mouseout', function() {
+            this.style.borderColor = 'rgba(24, 21, 18, 0.2)';
+        });
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script src="rashid-report.js"></script>
+<script>
+        (function () {
+            const fmt = (n) => Math.round(n).toLocaleString('ar-SA');
+            const result = RashidCalc.analyze();
+
+            let selected = null;
+            try { selected = JSON.parse(localStorage.getItem('rashidSelectedOffer') || 'null'); } catch (e) {}
+            if (!selected) {
+                const offers = RashidCalc.alternativeOffers();
+                selected = { key: 'safe', label: 'العرض الآمن', amount: offers.safe.amount, tenure: offers.safe.tenure, installment: offers.safe.installment };
+            }
+
+            const offerNames = { current: 'طلبك الحالي كما هو', balanced: 'عرض متوازن', safe: 'تمويل النمو المستدام' };
+            document.getElementById('df-offer-name').innerText = offerNames[selected.key] || selected.label;
+            document.getElementById('df-amount').innerText = fmt(selected.amount);
+            document.getElementById('df-tenure').innerText = selected.tenure.toLocaleString('ar-SA');
+
+            const burdenFor = (installment) =>
+                result.input.income > 0 ? ((result.input.obligations + installment) / result.input.income) * 100 : 100;
+            const pressureFor = (installment) => Math.max(0, Math.min(100, Math.round(burdenFor(installment) * 1.15)));
+
+            const originalInstallment = RashidCalc.estimateInstallment(result.input.amount, result.input.tenure);
+            const pressureAfter = pressureFor(selected.installment);
+
+            const originalTotal = result.input.obligations + originalInstallment;
+            const selectedTotal = result.input.obligations + selected.installment;
+            const originalBurdenPct = Math.round(burdenFor(originalInstallment));
+            const selectedBurdenPct = Math.round(burdenFor(selected.installment));
+
+            const originalRemaining = RashidCalc.buildCalendar(originalInstallment).endOfMonthBalance;
+            const selectedRemaining = RashidCalc.buildCalendar(selected.installment).endOfMonthBalance;
+            const fmtRemaining = (v) => v === null ? '—' : (v >= 0 ? '+' : '') + fmt(v) + ' ر.س';
+
+            document.getElementById('df-orig-amount').innerText = fmt(result.input.amount) + ' ر.س';
+            document.getElementById('df-sel-amount').innerText = fmt(selected.amount) + ' ر.س';
+            document.getElementById('df-orig-installment').innerText = fmt(originalInstallment) + ' ر.س';
+            document.getElementById('df-sel-installment').innerText = fmt(selected.installment) + ' ر.س';
+            document.getElementById('df-orig-total').innerText = fmt(originalTotal) + ' ر.س (' + originalBurdenPct.toLocaleString('ar-SA') + '٪)';
+            document.getElementById('df-sel-total').innerText = fmt(selectedTotal) + ' ر.س (' + selectedBurdenPct.toLocaleString('ar-SA') + '٪)';
+            document.getElementById('df-orig-remaining').innerText = fmtRemaining(originalRemaining);
+            document.getElementById('df-sel-remaining').innerText = fmtRemaining(selectedRemaining);
+
+            const badge = document.getElementById('df-status-badge');
+            if (pressureAfter < 50) {
+                badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary"></span> نطاق آمن ومستدام';
+            } else if (pressureAfter < 75) {
+                badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-secondary"></span> نطاق مقبول مع بعض الحذر';
+                badge.classList.add('bg-secondary-container/50');
+            } else {
+                badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span> يتطلب مراجعة إضافية';
+                badge.classList.remove('bg-secondary-container/50', 'text-on-secondary-container');
+                badge.classList.add('bg-error/10', 'text-error');
+            }
+
+            const idSeed = Math.abs(Math.round(selected.amount * 7 + selected.tenure * 13));
+            document.getElementById('df-decision-id').innerText = 'RSH-2026-' + String(idSeed).slice(-4).padStart(4, '0');
+
+            // Keep the PDF and the on-screen fingerprint in sync.
+            window.__rashidDecisionContext = {
+                selected: selected,
+                pressureBefore: pressureFor(originalInstallment),
+                pressureAfter: pressureAfter,
+                originalAmount: result.input.amount,
+                originalInstallment: originalInstallment,
+                originalTotal: originalTotal,
+                selectedTotal: selectedTotal,
+                originalBurdenPct: originalBurdenPct,
+                selectedBurdenPct: selectedBurdenPct,
+                originalRemaining: originalRemaining,
+                selectedRemaining: selectedRemaining
+            };
+        })();
+    </script>
+</body></html>

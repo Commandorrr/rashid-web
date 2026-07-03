@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&amp;family=IBM+Plex+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            --glass-bg: rgba(253, 248, 247, 0.7);
+            --glass-border: rgba(207, 196, 189, 0.3);
+        }
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            border-color: rgba(117, 90, 38, 0.3);
+            transform: translateY(-4px);
+        }
+        .gauge-track {
+            stroke: #e6e1e0;
+            stroke-width: 4;
+            fill: none;
+        }
+        .gauge-fill {
+            stroke-width: 4;
+            fill: none;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease-out;
+        }
+        .sidebar-active {
+            background-color: #181512;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        body {
+            background: radial-gradient(circle at top right, #fdf8f7, #f7f3f1);
+            min-height: 100vh;
+        }
+        .step-active {
+            background: #755a26;
+            color: white;
+            box-shadow: 0 0 0 4px rgba(117, 90, 38, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b",
+                        "tertiary": "#171610",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee",
+                        "tertiary-container": "#2b2a24",
+                        "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd",
+                        "inverse-primary": "#cdc5c0",
+                        "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-fixed-dim": "#e6c183",
+                        "surface": "#fdf8f7",
+                        "outline": "#7e756f",
+                        "on-primary-fixed": "#1e1b18",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d2926",
+                        "surface-tint": "#635d5a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8",
+                        "on-secondary-fixed-variant": "#5b4311",
+                        "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7",
+                        "on-tertiary-container": "#949189",
+                        "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff",
+                        "primary": "#181512",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6",
+                        "surface-container": "#f1edec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "base": "8px",
+                        "container-margin": "24px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[260px] bg-surface-container-low border-l border-outline-variant/20 shadow-md z-40 hidden md:flex flex-col p-6 gap-base">
+<div class="font-display-md text-display-md font-bold text-primary mb-8">رشيد</div>
+<div class="flex items-center gap-4 mb-10 px-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">account_balance</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-bold">بوابة رشيد</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">ذكاء الإقراض الاصطناعي</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg sidebar-active" href="smart-alternatives.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md">العملاء</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md">التحليلات</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md">الدعم الفني</span>
+</a>
+</div>
+</aside>
+<main class="md:mr-[260px] min-h-screen p-gutter flex flex-col gap-base">
+<!-- Top Navigation -->
+<header class="flex justify-between items-center py-4 mb-6">
+<div>
+<h1 class="font-display-md text-display-md text-primary">عروض التمويل البديلة</h1>
+<p class="text-on-surface-variant mt-1">بناءً على ملفك الائتماني وسلوكك المالي</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/30">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<!-- Wizard Steps Indicator -->
+<div class="flex items-center justify-center mb-section-gap">
+<div class="flex items-center w-full max-w-4xl relative">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-highest -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-3/4 h-[2px] bg-secondary -translate-y-1/2 z-0 transition-all duration-700"></div>
+<div class="relative z-10 flex justify-between w-full">
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold">1</div>
+<span class="text-[12px] font-medium">البيانات</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold">2</div>
+<span class="text-[12px] font-medium">التحليل</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-secondary text-white flex items-center justify-center font-bold">3</div>
+<span class="text-[12px] font-medium">الجدارة</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full step-active flex items-center justify-center font-bold">4</div>
+<span class="text-[12px] font-bold text-secondary">البدائل</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold">5</div>
+<span class="text-[12px] font-medium text-on-surface-variant">القرار</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Offer Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-section-gap">
+<!-- Current Request -->
+<div class="glass-card p-6 rounded-xl flex flex-col border-r-4 border-r-error relative overflow-hidden">
+<div class="absolute -top-6 -left-6 w-20 h-20 bg-error/5 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-start mb-6">
+<span class="px-2 py-1 bg-error/10 text-error rounded text-[10px] font-bold uppercase">طلبك الحالي</span>
+<div class="flex flex-col items-center w-20">
+<div class="relative w-12 h-12">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 36 36">
+<path class="gauge-track" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="gauge-fill stroke-error" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" id="sa-current-gauge" stroke-dasharray="85, 100"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold" id="sa-current-pct">85%</div>
+</div>
+<span class="text-[8px] text-on-surface-variant text-center mt-1 leading-tight">نسبة الضغط المالي في هذا العرض</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="text-on-surface-variant text-label-md mb-1">مبلغ التمويل</div>
+<div class="text-headline-lg font-bold"><span id="sa-current-amount">120,000</span> <span class="text-body-md font-normal">ر.س</span></div>
+</div>
+<div class="space-y-3 flex-1 text-label-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الدخل الشهري</span>
+<span class="font-bold" id="sa-current-income">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الالتزامات الشهرية + المصاريف الأساسية</span>
+<span class="font-bold" id="sa-current-costs">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">القسط الجديد</span>
+<span class="font-bold text-error"><span id="sa-current-installment">4,200</span> ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">المدة</span>
+<span class="font-bold"><span id="sa-current-tenure">36</span> شهر</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
+<span class="text-on-surface-variant font-bold">المتبقي نهاية الشهر</span>
+<span class="font-bold" id="sa-current-remaining">0 ر.س</span>
+</div>
+</div>
+<button class="mt-8 w-full py-3 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-highest transition-all font-bold rashid-select-offer" data-offer="current" data-offer-label="طلبك الحالي">بقاء التحديد</button>
+</div>
+<!-- Balanced Offer -->
+<div class="glass-card p-6 rounded-xl flex flex-col border-r-4 border-r-secondary/60 relative">
+<div class="flex justify-between items-start mb-6">
+<span class="px-2 py-1 bg-secondary/10 text-secondary rounded text-[10px] font-bold uppercase">عرض متوازن</span>
+<div class="flex flex-col items-center w-20">
+<div class="relative w-12 h-12">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 36 36">
+<path class="gauge-track" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="gauge-fill stroke-secondary/60" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" id="sa-balanced-gauge" stroke-dasharray="60, 100"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold" id="sa-balanced-pct">60%</div>
+</div>
+<span class="text-[8px] text-on-surface-variant text-center mt-1 leading-tight">نسبة الضغط المالي في هذا العرض</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="text-on-surface-variant text-label-md mb-1">مبلغ التمويل</div>
+<div class="text-headline-lg font-bold"><span id="sa-balanced-amount">100,000</span> <span class="text-body-md font-normal">ر.س</span></div>
+</div>
+<div class="space-y-3 flex-1 text-label-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الدخل الشهري</span>
+<span class="font-bold" id="sa-balanced-income">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الالتزامات الشهرية + المصاريف الأساسية</span>
+<span class="font-bold" id="sa-balanced-costs">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">القسط الجديد</span>
+<span class="font-bold text-secondary"><span id="sa-balanced-installment">3,450</span> ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">المدة</span>
+<span class="font-bold"><span id="sa-balanced-tenure">48</span> شهر</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
+<span class="text-on-surface-variant font-bold">المتبقي نهاية الشهر</span>
+<span class="font-bold" id="sa-balanced-remaining">0 ر.س</span>
+</div>
+</div>
+<button class="mt-8 w-full py-3 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-highest transition-all font-bold rashid-select-offer" data-offer="balanced" data-offer-label="عرض متوازن">اختر هذا العرض</button>
+</div>
+<!-- Safe Offer (Recommended) -->
+<div class="glass-card p-6 rounded-xl flex flex-col border-2 border-secondary relative bg-secondary-fixed/10">
+<div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-secondary text-on-secondary text-[10px] font-bold rounded-full shadow-lg">الأكثر أماناً</div>
+<div class="flex justify-between items-start mt-2 mb-6">
+<span class="px-2 py-1 bg-green-100 text-green-700 rounded text-[10px] font-bold uppercase">عرض آمن</span>
+<div class="flex flex-col items-center w-20">
+<div class="relative w-12 h-12">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 36 36">
+<path class="gauge-track" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
+<path class="gauge-fill stroke-green-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" id="sa-safe-gauge" stroke-dasharray="35, 100"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold" id="sa-safe-pct">35%</div>
+</div>
+<span class="text-[8px] text-on-surface-variant text-center mt-1 leading-tight">نسبة الضغط المالي في هذا العرض</span>
+</div>
+</div>
+<div class="mb-4">
+<div class="text-on-surface-variant text-label-md mb-1">مبلغ التمويل</div>
+<div class="text-headline-lg font-bold"><span id="sa-safe-amount">85,000</span> <span class="text-body-md font-normal">ر.س</span></div>
+</div>
+<div class="space-y-3 flex-1 text-label-md">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الدخل الشهري</span>
+<span class="font-bold" id="sa-safe-income">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">الالتزامات الشهرية + المصاريف الأساسية</span>
+<span class="font-bold" id="sa-safe-costs">0 ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">القسط الجديد</span>
+<span class="font-bold text-green-700"><span id="sa-safe-installment">2,600</span> ر.س</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">المدة</span>
+<span class="font-bold"><span id="sa-safe-tenure">60</span> شهر</span>
+</div>
+<div class="flex justify-between items-center pt-2 border-t border-outline-variant/10">
+<span class="text-on-surface-variant font-bold">المتبقي نهاية الشهر</span>
+<span class="font-bold" id="sa-safe-remaining">0 ر.س</span>
+</div>
+</div>
+<button class="mt-8 w-full py-3 rounded-lg bg-primary text-on-primary hover:opacity-90 transition-all font-bold rashid-select-offer" data-offer="safe" data-offer-label="العرض الآمن">اختر هذا العرض</button>
+</div>
+</div>
+<!-- Simulation Section -->
+<section class="mb-section-gap">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-secondary">analytics</span>
+<h2 class="font-headline-lg">محاكاة التدفق النقدي (30 يوم)</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Comparison Layout -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="glass-card p-8 rounded-2xl relative overflow-hidden">
+<div class="relative z-10">
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-primary mb-1">رشيد لا يريك أثر القسط عليك شهرياً</h3>
+<p class="font-body-md text-on-surface-variant">بل يريك أثر القسط عليك إلى آخر يوم بالشهر الآن</p>
+</div>
+<div class="grid grid-cols-10 gap-1.5 md:gap-2" id="sa-calendar-grid">
+</div>
+<div class="mt-6 flex flex-wrap items-center gap-4 text-[11px] text-on-surface-variant">
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-green-200 border border-green-400 inline-block"></span> يوم الراتب</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-red-200 border border-red-400 inline-block"></span> يوم القسط</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded ring-2 ring-primary bg-surface-container-low inline-block"></span> نهاية الشهر</div>
+</div>
+<div class="mt-6 p-4 bg-surface-container/50 rounded-xl" id="sa-calendar-summary">
+</div>
+</div>
+</div>
+<!-- Comparison Details Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-card p-6 rounded-xl border-t-4 border-t-error">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-error">warning</span>
+<h3 class="font-bold">تحليل العرض الحالي</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">نسبة الاستقطاع</span>
+<span class="font-bold"><span id="sa-current-burden-pct">42</span>% من الراتب</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">المرونة المالية</span>
+<span class="font-bold text-error" id="sa-current-flexibility">منخفضة جداً</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">مخاطر التعثر</span>
+<span class="font-bold text-error" id="sa-current-risk">مرتفعة</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl border-t-4 border-t-green-500">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-green-500">verified</span>
+<h3 class="font-bold">تحليل العرض الآمن</h3>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">نسبة الاستقطاع</span>
+<span class="font-bold"><span id="sa-safe-burden-pct">26</span>% من الراتب</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">المرونة المالية</span>
+<span class="font-bold text-green-600" id="sa-safe-flexibility">عالية</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">مخاطر التعثر</span>
+<span class="font-bold text-green-600" id="sa-safe-risk">منخفضة</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary Side Card -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="glass-card p-6 rounded-2xl h-full flex flex-col">
+<div class="relative h-48 rounded-xl overflow-hidden mb-6 flex items-end p-4" style="background: linear-gradient(135deg, #181512 0%, #3a322b 55%, #5b4311 130%);">
+<span class="text-white font-bold">توصية رشيد الذكية</span>
+</div>
+<h4 class="font-headline-md mb-4">لماذا ننصح بـ "العرض الآمن"؟</h4>
+<div class="space-y-4 flex-1">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary flex-shrink-0">shield_with_heart</span>
+<p class="text-body-md text-on-surface-variant" id="sa-benefit-1">يخفض إجمالي الالتزامات الشهرية من 42% إلى 26% من راتبك.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary flex-shrink-0">savings</span>
+<p class="text-body-md text-on-surface-variant" id="sa-benefit-2">يرفع المتبقي لك نهاية الشهر من 0 ر.س إلى 0 ر.س.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary flex-shrink-0">trending_up</span>
+<p class="text-body-md text-on-surface-variant" id="sa-benefit-3">يرفع من احتمالية الموافقة الفورية بنسبة 40% مقارنة بالعرض الحالي.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-secondary flex-shrink-0">sentiment_satisfied</span>
+<p class="text-body-md text-on-surface-variant">يمنح العميل مرونة أعلى لمواجهة الأمور الطارئة.</p>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-2 mb-4 text-secondary">
+<span class="material-symbols-outlined">lightbulb</span>
+<span class="font-bold text-label-md">نصيحة الخبير:</span>
+</div>
+<p class="text-label-md italic text-on-surface-variant">
+                                "أقساطك الشهرية يجب ألا تتجاوز ثلث دخلك لضمان حياة مالية مستقرة."
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Global Action Bar -->
+<footer class="mt-auto py-8 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-outline-variant/10">
+<div class="flex items-center gap-4">
+<a class="flex items-center gap-2 px-6 py-3 rounded-lg border border-outline text-on-surface font-bold hover:bg-surface-container-highest transition-all" href="analysis-result-ar.html">
+<span class="material-symbols-outlined">arrow_forward</span>
+                    الرجوع للخطوة السابقة
+                </a>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-left hidden md:block">
+<div class="text-[10px] text-on-surface-variant uppercase font-bold tracking-widest">العرض المختار حالياً</div>
+<div class="font-bold text-headline-md" id="sa-footer-selected-label">العرض الآمن (<span id="sa-footer-amount">85,000</span> ر.س)</div>
+</div>
+<a class="bg-primary text-on-primary px-12 py-4 rounded-xl font-bold text-headline-md shadow-xl hover:scale-105 transition-transform active:scale-95 flex items-center" href="decision-fingerprint.html" id="sa-footer-cta">
+                    اختر هذا العرض
+                </a>
+</div>
+</footer>
+</main>
+<script src="rashid-calc.js"></script>
+<script src="rashid-api.js"></script>
+<script>
+        (function () {
+            const fmt = (n) => Math.round(n).toLocaleString('en-US');
+            const offers = RashidCalc.alternativeOffers();
+            const result = RashidCalc.analyze();
+
+            // Full burden ratio (obligations + installment) / income, matching RashidCalc.analyze()
+            const burdenRatioFor = (installment) =>
+                result.input.income > 0 ? ((result.input.obligations + installment) / result.input.income) * 100 : 100;
+
+            const costs = result.input.obligations + result.input.expenses;
+
+            const apply = (prefix, offer) => {
+                const amountEl = document.getElementById(prefix + '-amount');
+                const installmentEl = document.getElementById(prefix + '-installment');
+                const tenureEl = document.getElementById(prefix + '-tenure');
+                const pctEl = document.getElementById(prefix + '-pct');
+                const gaugeEl = document.getElementById(prefix + '-gauge');
+                const incomeEl = document.getElementById(prefix + '-income');
+                const costsEl = document.getElementById(prefix + '-costs');
+                const remainingEl = document.getElementById(prefix + '-remaining');
+
+                const pct = Math.max(1, Math.min(100, Math.round(burdenRatioFor(offer.installment))));
+                if (amountEl) amountEl.innerText = fmt(offer.amount);
+                if (installmentEl) installmentEl.innerText = fmt(offer.installment);
+                if (tenureEl) tenureEl.innerText = offer.tenure;
+                if (pctEl) pctEl.innerText = pct + '%';
+                if (gaugeEl) gaugeEl.setAttribute('stroke-dasharray', pct + ', 100');
+                if (incomeEl) incomeEl.innerText = fmt(result.input.income) + ' ر.س';
+                if (costsEl) costsEl.innerText = fmt(costs) + ' ر.س';
+                if (remainingEl) {
+                    const endBalance = RashidCalc.buildCalendar(offer.installment).endOfMonthBalance;
+                    if (endBalance === null) {
+                        remainingEl.innerText = '—';
+                    } else {
+                        remainingEl.innerText = (endBalance >= 0 ? '+' : '') + fmt(endBalance) + ' ر.س';
+                        remainingEl.className = 'font-bold ' + (endBalance >= 0 ? 'text-green-700' : 'text-error');
+                    }
+                }
+            };
+
+            apply('sa-current', offers.current);
+            apply('sa-balanced', offers.balanced);
+            apply('sa-safe', offers.safe);
+
+            const flexLabel = (burden) => {
+                if (burden >= result.burdenCap + 15) return { text: 'منخفضة جداً', cls: 'text-error' };
+                if (burden >= result.burdenCap) return { text: 'منخفضة', cls: 'text-error' };
+                if (burden >= result.burdenCap * 0.7) return { text: 'متوسطة', cls: 'text-secondary' };
+                return { text: 'عالية', cls: 'text-green-600' };
+            };
+            const riskLabel = (burden) => {
+                if (burden >= result.burdenCap + 15) return { text: 'مرتفعة جداً', cls: 'text-error' };
+                if (burden >= result.burdenCap) return { text: 'مرتفعة', cls: 'text-error' };
+                if (burden >= result.burdenCap * 0.7) return { text: 'متوسطة', cls: 'text-secondary' };
+                return { text: 'منخفضة', cls: 'text-green-600' };
+            };
+
+            const currentBurden = burdenRatioFor(offers.current.installment);
+            const safeBurden = burdenRatioFor(offers.safe.installment);
+
+            const currentBurdenPct = document.getElementById('sa-current-burden-pct');
+            const safeBurdenPct = document.getElementById('sa-safe-burden-pct');
+            if (currentBurdenPct) currentBurdenPct.innerText = Math.round(currentBurden);
+            if (safeBurdenPct) safeBurdenPct.innerText = Math.round(safeBurden);
+
+            const setLabel = (id, info) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.innerText = info.text;
+                el.className = 'font-bold ' + info.cls;
+            };
+            setLabel('sa-current-flexibility', flexLabel(currentBurden));
+            setLabel('sa-current-risk', riskLabel(currentBurden));
+            setLabel('sa-safe-flexibility', flexLabel(safeBurden));
+            setLabel('sa-safe-risk', riskLabel(safeBurden));
+
+            // "Why we recommend the safe offer" - always compares the original
+            // request against the safe offer specifically (this panel doesn't
+            // change with the user's manual selection above).
+            const confidenceFor = (burden) => Math.max(35, Math.min(97, Math.round(100 - Math.max(0, burden - 20) * 0.9)));
+            const currentEndBalance = RashidCalc.buildCalendar(offers.current.installment).endOfMonthBalance;
+            const safeEndBalance = RashidCalc.buildCalendar(offers.safe.installment).endOfMonthBalance;
+
+            const benefit1 = document.getElementById('sa-benefit-1');
+            if (benefit1) benefit1.innerText = 'يخفض إجمالي الالتزامات الشهرية من ' + Math.round(currentBurden) + '% إلى ' + Math.round(safeBurden) + '% من راتبك.';
+
+            const benefit2 = document.getElementById('sa-benefit-2');
+            if (benefit2 && currentEndBalance !== null && safeEndBalance !== null) {
+                benefit2.innerText = 'يرفع المتبقي لك نهاية الشهر من ' + fmt(currentEndBalance) + ' ر.س إلى ' + fmt(safeEndBalance) + ' ر.س.';
+            } else if (benefit2) {
+                benefit2.innerText = 'يرفع المتبقي لك نهاية الشهر مقارنة بطلبك الحالي.';
+            }
+
+            const benefit3 = document.getElementById('sa-benefit-3');
+            if (benefit3) {
+                const confDiff = confidenceFor(safeBurden) - confidenceFor(currentBurden);
+                benefit3.innerText = 'يرفع من احتمالية الموافقة الفورية بنسبة ' + Math.max(0, confDiff) + '% مقارنة بالعرض الحالي.';
+            }
+
+            const footerAmount = document.getElementById('sa-footer-amount');
+            if (footerAmount) footerAmount.innerText = fmt(offers.safe.amount);
+
+            // Real 30-day calendar: the customer's actual salary day and first
+            // installment day, with the running balance carried day to day -
+            // reacting live to whichever offer is currently selected.
+            function renderCalendar(installmentAmount) {
+                const cal = RashidCalc.buildCalendar(installmentAmount);
+                const grid = document.getElementById('sa-calendar-grid');
+                grid.innerHTML = cal.days.map((d) => {
+                    let cellCls = 'rounded-lg py-1.5 px-1 text-center border';
+                    let inner = '<div class="text-[11px] font-bold text-on-surface">' + d.day + '</div>';
+                    if (d.label === 'salary') {
+                        cellCls += ' bg-green-50 border-green-300';
+                        inner += '<div class="text-[8px] leading-tight text-green-700 font-bold">الراتب</div><div class="text-[7px] leading-tight text-green-600">' + fmt(d.amount) + '</div>';
+                    } else if (d.label === 'installment') {
+                        cellCls += ' bg-red-50 border-red-300';
+                        inner += '<div class="text-[8px] leading-tight text-error font-bold">القسط</div><div class="text-[7px] leading-tight text-error">' + fmt(d.amount) + '</div>';
+                    } else {
+                        cellCls += ' bg-surface-container-low border-outline-variant/10';
+                    }
+                    if (d.day === 30) cellCls += ' ring-2 ring-primary';
+                    const tip = d.balance !== null ? ('الرصيد المتوقع نهاية هذا اليوم: ' + fmt(d.balance) + ' ر.س') : 'بانتظار موعد الراتب';
+                    return '<div class="' + cellCls + '" title="' + tip + '">' + inner + '</div>';
+                }).join('');
+
+                const summary = document.getElementById('sa-calendar-summary');
+                if (cal.salaryDay === null || cal.installmentDay === null) {
+                    summary.innerHTML = '<p class="text-body-md text-on-surface-variant">أدخل تاريخ نزول الراتب وتاريخ أول قسط في صفحة بياناتك لعرض محاكاة دقيقة ليوم بيوم.</p>';
+                    return;
+                }
+                const endBalance = cal.endOfMonthBalance;
+                const endCls = endBalance >= 0 ? 'text-green-700' : 'text-error';
+                summary.innerHTML =
+                    '<p class="font-label-md text-label-md text-on-surface-variant mb-1">في يوم ' + cal.salaryDay + ' يدخل راتبك، وبعد خصم المصاريف الأساسية والالتزامات الحالية (' + fmt(cal.recurring) + ' ر.س) يتبقى رصيد متجدد حتى يوم القسط.</p>' +
+                    '<p class="font-label-md text-label-md text-on-surface-variant mb-3">في يوم ' + cal.installmentDay + ' يُخصم القسط (' + fmt(installmentAmount) + ' ر.س) من هذا الرصيد، ويستمر معك حتى نهاية الشهر.</p>' +
+                    '<div class="flex items-center justify-between pt-3 border-t border-outline-variant/10">' +
+                    '<span class="font-headline-md text-headline-md text-primary">المتبقي المتوقع نهاية الشهر</span>' +
+                    '<span class="font-display-md text-display-md ' + endCls + '">' + (endBalance >= 0 ? '+' : '') + fmt(endBalance) + ' ر.س</span>' +
+                    '</div>';
+            }
+
+            // Real offer selection: clicking a card marks it selected, updates the
+            // footer summary, and persists the choice for the final decision step.
+            const offerData = { current: offers.current, balanced: offers.balanced, safe: offers.safe };
+            const footerLabel = document.getElementById('sa-footer-selected-label');
+            const footerCta = document.getElementById('sa-footer-cta');
+
+            function selectOffer(key, label) {
+                document.querySelectorAll('.rashid-select-offer').forEach((btn) => {
+                    const isSelected = btn.dataset.offer === key;
+                    btn.classList.toggle('bg-primary', isSelected);
+                    btn.classList.toggle('text-on-primary', isSelected);
+                    btn.classList.toggle('border-outline-variant', !isSelected);
+                    btn.classList.toggle('text-on-surface-variant', !isSelected);
+                    btn.innerText = isSelected ? 'تم الاختيار ✓' : 'اختر هذا العرض';
+                });
+                const chosen = offerData[key];
+                footerLabel.innerHTML = label + ' (<span id="sa-footer-amount">' + fmt(chosen.amount) + '</span> ر.س)';
+                localStorage.setItem('rashidSelectedOffer', JSON.stringify({ key, label, amount: chosen.amount, tenure: chosen.tenure, installment: chosen.installment }));
+                renderCalendar(chosen.installment);
+                RashidApi.selectOffer({ offerKey: key, label: label, amount: chosen.amount, tenure: chosen.tenure, installment: chosen.installment });
+            }
+
+            document.querySelectorAll('.rashid-select-offer').forEach((btn) => {
+                btn.addEventListener('click', () => selectOffer(btn.dataset.offer, btn.dataset.offerLabel));
+            });
+
+            // Default selection matches the recommended safe offer; the footer
+            // CTA proceeds with whichever offer is currently selected (it does
+            // not override the user's own choice).
+            selectOffer('safe', 'العرض الآمن');
+        })();
+    </script>
+</body></html>

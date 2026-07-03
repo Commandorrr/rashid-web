@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Rashid - AI Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b",
+                        "tertiary": "#171610",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee",
+                        "tertiary-container": "#2b2a24",
+                        "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd",
+                        "inverse-primary": "#cdc5c0",
+                        "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-fixed-dim": "#e6c183",
+                        "surface": "#fdf8f7",
+                        "outline": "#7e756f",
+                        "on-primary-fixed": "#1e1b18",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d2926",
+                        "surface-tint": "#635d5a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8",
+                        "on-secondary-fixed-variant": "#5b4311",
+                        "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7",
+                        "on-tertiary-container": "#949189",
+                        "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff",
+                        "primary": "#181512",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6",
+                        "surface-container": "#f1edec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "base": "8px",
+                        "container-margin": "24px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fdf8f7;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 222, 168, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(205, 197, 192, 0.1) 0px, transparent 50%);
+            min-height: 100vh;
+            font-family: 'IBM Plex Sans Arabic', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(0.98); }
+        }
+
+        .animate-pulse-gold {
+            animation: pulse-gold 3s infinite ease-in-out;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .step-active {
+            color: #755a26;
+            font-weight: 700;
+        }
+
+        .check-item-active {
+            border-right: 4px solid #755a26;
+            background: rgba(117, 90, 38, 0.05);
+        }
+
+        /* Loading Dots Animation */
+        .dot-flashing {
+            position: relative;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #755a26;
+            color: #755a26;
+            animation: dot-flashing 1s infinite linear alternate;
+            animation-delay: .5s;
+        }
+        .dot-flashing::before, .dot-flashing::after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 0;
+        }
+        .dot-flashing::before {
+            left: -12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #755a26;
+            color: #755a26;
+            animation: dot-flashing 1s infinite alternate;
+            animation-delay: 0s;
+        }
+        .dot-flashing::after {
+            left: 12px;
+            width: 6px;
+            height: 6px;
+            border-radius: 5px;
+            background-color: #755a26;
+            color: #755a26;
+            animation: dot-flashing 1s infinite alternate;
+            animation-delay: 1s;
+        }
+        @keyframes dot-flashing {
+            0% { background-color: #755a26; }
+            50%, 100% { background-color: rgba(117, 90, 38, 0.2); }
+        }
+    </style>
+</head>
+<body class="text-on-background overflow-x-hidden"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 dark:bg-surface-container-low/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-display-md text-display-md font-bold text-primary dark:text-primary-fixed">رشيد</span>
+<div class="h-6 w-px bg-outline-variant/30 hidden md:block"></div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-surface-container-highest/20 transition-colors px-3 py-1 rounded-lg font-label-md text-label-md" href="../index.html">الرئيسية</a>
+<a class="text-primary dark:text-secondary-fixed font-bold border-b-2 border-primary px-3 py-1 font-label-md text-label-md" href="ai-loading.html">التحليل الذكي</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant/70 hover:bg-surface-container-highest/20 transition-colors px-3 py-1 rounded-lg font-label-md text-label-md" href="request-details.html">طلباتي</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-highest/20 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-highest/20 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-outline-variant/20 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-12 px-gutter max-w-[1440px] mx-auto min-h-screen">
+<!-- Step Indicator Header -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-display-md text-display-md text-primary mb-2">معالج تحليل القرار</h1>
+<p class="font-body-md text-on-surface-variant max-w-2xl text-lg">نقوم الآن بمعالجة بياناتك المالية باستخدام الذكاء الاصطناعي لتقديم أفضل توصية ائتمانية.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container p-4 rounded-xl">
+<div class="flex -space-x-2 space-x-reverse">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs font-bold border-2 border-surface">1</div>
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs font-bold border-2 border-surface">2</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold border-2 border-surface">3</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold border-2 border-surface">4</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center text-xs font-bold border-2 border-surface">5</div>
+</div>
+<div class="mr-2">
+<span class="block font-label-md text-label-md text-secondary">الخطوة الثانية</span>
+<span class="block font-headline-md text-headline-md">التحليل الذكي</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Center Analysis Visualization -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="glass-card rounded-[2rem] p-12 flex flex-col items-center justify-center relative overflow-hidden min-h-[500px]">
+<!-- Background Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
+<!-- Progress Container -->
+<div class="relative z-10 flex flex-col items-center">
+<!-- Large Circular Progress -->
+<div class="relative w-64 h-64 flex items-center justify-center mb-8">
+<svg class="w-full h-full">
+<circle class="text-outline-variant/10" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary progress-ring-circle" cx="128" cy="128" fill="transparent" id="ai-progress-ring" r="110" stroke="currentColor" stroke-dasharray="691" stroke-dashoffset="691" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-display-lg text-primary" id="ai-progress-pct">0%</span>
+<span class="font-label-md text-label-md text-on-surface-variant tracking-widest uppercase mt-[-8px]">جارٍ المعالجة</span>
+</div>
+</div>
+<div class="text-center">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">جاري تحليل قرارك...</h2>
+<div class="flex items-center justify-center gap-4 text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<span class="font-body-md text-body-md" id="ai-time-remaining">الوقت المتبقي المقدر: 1-2 دقيقة</span>
+</div>
+<div class="w-px h-4 bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="dot-flashing mx-4"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Subtle Footer Message -->
+<p class="mt-12 text-on-surface-variant/60 font-label-md text-label-md text-center max-w-md">
+                        يقوم "راشد" الآن بربط بياناتك المصرفية، السجل الائتماني، وتوقعات السوق لضمان أفضل فرصة نجاح لطلبك.
+                    </p>
+</div>
+<!-- Live Stream of Insights (Micro-interaction) -->
+<div class="glass-card rounded-2xl p-6 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">auto_graph</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant">رؤية حية</span>
+<span class="block font-headline-md text-headline-md text-primary transition-all duration-500" id="insight-text">تحليل نمط الإنفاق الشهري...</span>
+</div>
+</div>
+<div class="h-2 w-32 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/3 animate-[loading-bar_2s_infinite]"></div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Checklist -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="glass-card rounded-[2rem] p-8 h-full">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">fact_check</span>
+<h3 class="font-headline-md text-headline-md text-primary">خطوات التحليل</h3>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Step 1: Done -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-low/50">
+<div class="w-8 h-8 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant line-through opacity-60">التحقق من الأهلية الائتمانية</span>
+</div>
+</div>
+<!-- Step 2: Done -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-low/50">
+<div class="w-8 h-8 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant line-through opacity-60">تحليل الدخل والالتزامات</span>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-center gap-4 p-4 rounded-xl check-item-active" id="ai-step-3">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-secondary font-bold">قياس الضغوط المالية</span>
+<span class="text-[10px] text-on-surface-variant/70 block">قيد التنفيذ حالياً...</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-transparent" id="ai-step-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant/40">محاكاة التأثير لمدة 30 يوماً</span>
+</div>
+</div>
+<!-- Step 5 -->
+<div class="flex items-center gap-4 p-4 rounded-xl border border-transparent" id="ai-step-5">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+</div>
+<div>
+<span class="block font-label-md text-label-md text-on-surface-variant/40">توليد البدائل الذكية</span>
+</div>
+</div>
+</div>
+<!-- Side Card: Security Tip -->
+<div class="mt-12 bg-primary text-on-primary p-6 rounded-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-12 translate-x-12"></div>
+<div class="relative z-10">
+<span class="material-symbols-outlined text-secondary-fixed mb-2">security</span>
+<h4 class="font-label-md text-label-md mb-2">بياناتك في أمان</h4>
+<p class="text-xs text-on-primary/70 leading-relaxed">تتم معالجة كافة العمليات الحسابية محلياً وفق أعلى معايير التشفير البنكي AES-256.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Modal Simulation (Hidden initially) -->
+<div class="fixed inset-0 z-[100] bg-surface/90 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-1000" id="completion-overlay">
+<div class="max-w-md w-full text-center p-8">
+<div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+<span class="material-symbols-outlined text-white text-5xl">verified</span>
+</div>
+<h2 class="font-display-md text-display-md text-primary mb-4">اكتمل التحليل بنجاح!</h2>
+<p class="font-body-md text-on-surface-variant mb-8">لقد قام راشد بوضع استراتيجيتك المالية الجديدة.</p>
+<a class="w-full py-4 bg-primary text-white rounded-xl font-headline-md hover:bg-primary-container transition-all flex items-center justify-center" href="analysis-result-ar.html" id="view-results-link">عرض النتائج</a>
+</div>
+</div>
+<script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var lang = params.get('lang') === 'en' ? 'en' : 'ar';
+            var link = document.getElementById('view-results-link');
+            if (link) link.href = 'analysis-result-' + lang + '.html';
+        })();
+    </script>
+<script>
+        // Micro-interaction for insight stream
+        const insights = [
+            "تحليل نمط الإنفاق الشهري...",
+            "مقارنة الالتزامات بنسبة الدخل...",
+            "حساب معدل الادخار المتوقع...",
+            "تقييم القدرة على السداد...",
+            "محاكاة سيناريوهات الطوارئ...",
+            "البحث عن حلول تمويل بديلة..."
+        ];
+        
+        let currentIndex = 0;
+        const insightElement = document.getElementById('insight-text');
+        
+        setInterval(() => {
+            insightElement.style.opacity = '0';
+            insightElement.style.transform = 'translateY(10px)';
+            
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % insights.length;
+                insightElement.innerText = insights[currentIndex];
+                insightElement.style.opacity = '1';
+                insightElement.style.transform = 'translateY(0)';
+            }, 500);
+        }, 4000);
+
+        // Real animated progress: the ring, the percentage, the step list and
+        // the "time remaining" label all advance together instead of being
+        // frozen at a hardcoded 42%.
+        (function () {
+            const DURATION = 4000;
+            const CIRCUMFERENCE = 691;
+            const ring = document.getElementById('ai-progress-ring');
+            const pctLabel = document.getElementById('ai-progress-pct');
+            const timeLabel = document.getElementById('ai-time-remaining');
+            const step3 = document.getElementById('ai-step-3');
+            const step4 = document.getElementById('ai-step-4');
+            const step5 = document.getElementById('ai-step-5');
+
+            const markDone = (stepEl, label) => {
+                stepEl.className = 'flex items-center gap-4 p-4 rounded-xl bg-surface-container-low/50';
+                stepEl.innerHTML =
+                    '<div class="w-8 h-8 rounded-full bg-green-500/10 text-green-600 flex items-center justify-center">' +
+                    '<span class="material-symbols-outlined text-[20px]">check</span></div>' +
+                    '<div><span class="block font-label-md text-label-md text-on-surface-variant line-through opacity-60">' + label + '</span></div>';
+            };
+            const markActive = (stepEl, icon, label) => {
+                stepEl.className = 'flex items-center gap-4 p-4 rounded-xl check-item-active';
+                stepEl.innerHTML =
+                    '<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center animate-pulse">' +
+                    '<span class="material-symbols-outlined text-[20px]">' + icon + '</span></div>' +
+                    '<div><span class="block font-label-md text-label-md text-secondary font-bold">' + label + '</span>' +
+                    '<span class="text-[10px] text-on-surface-variant/70 block">قيد التنفيذ حالياً...</span></div>';
+            };
+
+            let step4Started = false;
+            let step5Started = false;
+            const start = performance.now();
+
+            function tick(now) {
+                const elapsed = now - start;
+                const pct = Math.min(100, Math.round((elapsed / DURATION) * 100));
+                pctLabel.innerText = pct + '%';
+                ring.setAttribute('stroke-dashoffset', CIRCUMFERENCE * (1 - pct / 100));
+
+                if (pct >= 100) {
+                    timeLabel.innerText = 'اكتمل التحليل';
+                } else if (pct >= 66) {
+                    timeLabel.innerText = 'الوقت المتبقي المقدر: أقل من دقيقة';
+                }
+
+                if (pct >= 33 && !step4Started) {
+                    step4Started = true;
+                    markDone(step3, 'قياس الضغوط المالية');
+                    markActive(step4, 'analytics', 'محاكاة التأثير لمدة 30 يوماً');
+                }
+                if (pct >= 70 && !step5Started) {
+                    step5Started = true;
+                    markDone(step4, 'محاكاة التأثير لمدة 30 يوماً');
+                    markActive(step5, 'lightbulb', 'توليد البدائل الذكية');
+                }
+                if (pct >= 100) {
+                    markDone(step5, 'توليد البدائل الذكية');
+                    const overlay = document.getElementById('completion-overlay');
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    return;
+                }
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        })();
+    </script>
+</body></html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | لوحة تحكم مستشار البنك</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;family=IBM+Plex+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge {
+            border-right: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        .text-glow-gold {
+            text-shadow: 0 0 10px rgba(117, 90, 38, 0.2);
+        }
+        .chart-gradient-primary {
+            background: linear-gradient(180deg, #181512 0%, #4b4642 100%);
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b",
+                        "tertiary": "#171610",
+                        "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee",
+                        "tertiary-container": "#2b2a24",
+                        "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd",
+                        "inverse-primary": "#cdc5c0",
+                        "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8",
+                        "secondary-fixed-dim": "#e6c183",
+                        "surface": "#fdf8f7",
+                        "outline": "#7e756f",
+                        "on-primary-fixed": "#1e1b18",
+                        "error": "#ba1a1a",
+                        "primary-container": "#2d2926",
+                        "surface-tint": "#635d5a",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8",
+                        "on-secondary-fixed-variant": "#5b4311",
+                        "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7",
+                        "on-tertiary-fixed": "#1d1c16",
+                        "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7",
+                        "on-tertiary-container": "#949189",
+                        "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff",
+                        "primary": "#181512",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9",
+                        "inverse-surface": "#313030",
+                        "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6",
+                        "surface-container": "#f1edec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "base": "8px",
+                        "container-margin": "24px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"],
+                        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"],
+                        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"],
+                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- Persistent SideNavBar (Shared Component) -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2">
+<!-- Home (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<!-- Requests -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="request-details.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<!-- Customers -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<!-- Analytics -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">التحليلات</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">الدعم الفني</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center mb-section-gap">
+<div>
+<h1 class="font-display-md text-display-md text-primary tracking-tight">ذكاء المستشار</h1>
+<p class="text-on-surface-variant font-body-md">تحليلات مخاطر الإقراض والضغط في الوقت الفعلي.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pr-10 pl-4 py-2 bg-surface-container-high border-none rounded-full w-64 focus:ring-1 focus:ring-secondary text-label-md" placeholder="بحث عن عملاء..." type="text"/>
+</div>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</div>
+</header>
+<!-- KPI Section: Bento Layout -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- Total Requests -->
+<div class="glass-panel glass-card-edge p-6 rounded-2xl relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<span class="text-green-600 font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                </span>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary">1,248</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي الطلبات</div>
+<div class="absolute -left-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-6xl">account_balance</span>
+</div>
+</div>
+<!-- High-Pressure -->
+<div class="glass-panel glass-card-edge p-6 rounded-2xl border-r-4 border-r-error">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/10 rounded-lg">
+<span class="material-symbols-outlined text-error">priority_high</span>
+</div>
+<span class="text-error font-label-md text-label-md flex items-center gap-1 animate-pulse-soft">
+                    عاجل
+                </span>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary">248</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">ضغط عالٍ</div>
+</div>
+<!-- Pressure Reduction -->
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg">
+<span class="material-symbols-outlined text-secondary">compress</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary">18%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط خفض الضغط</div>
+<div class="w-full bg-surface-container-high h-1 rounded-full mt-4">
+<div class="bg-secondary h-1 rounded-full w-[18%] shadow-[0_0_8px_rgba(117,90,38,0.4)]"></div>
+</div>
+</div>
+<!-- Conversion -->
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary/5 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">conversion_path</span>
+</div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary">42%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">تحويل البدائل</div>
+<div class="flex mt-4 -space-x-2 space-x-reverse">
+<div class="w-6 h-6 rounded-full border border-white bg-surface-container-highest"></div>
+<div class="w-6 h-6 rounded-full border border-white bg-surface-container-low"></div>
+<div class="w-6 h-6 rounded-full border border-white bg-surface-container-highest"></div>
+</div>
+</div>
+</section>
+<!-- Main Dashboard Split -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Left Column: Table & Charts -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Recent Requests Table -->
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest/50">
+<h3 class="font-headline-md text-headline-md text-primary">آخر الطلبات</h3>
+<a class="text-secondary font-label-md hover:underline" href="request-details.html">عرض الكل</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-6 py-4">المعرف</th>
+<th class="px-6 py-4">العميل</th>
+<th class="px-6 py-4">المنتج</th>
+<th class="px-6 py-4">مستوى الضغط</th>
+<th class="px-6 py-4">الحالة</th>
+<th class="px-6 py-4">الإجراء</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5 font-label-md">#RX-902</td>
+<td class="px-6 py-5">
+<div class="font-medium">نايف الدوسري</div>
+<div class="text-xs text-on-surface-variant">ID: 882103</div>
+</td>
+<td class="px-6 py-5 text-sm">قرض شخصي</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-error font-medium">حرج (84)</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-surface-container-highest text-on-surface-variant text-xs rounded-md">قيد الانتظار</span>
+</td>
+<td class="px-6 py-5">
+<a class="p-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 inline-flex" href="request-details.html">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</a>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5 font-label-md">#RX-899</td>
+<td class="px-6 py-5">
+<div class="font-medium">سارة محمد</div>
+<div class="text-xs text-on-surface-variant">ID: 110293</div>
+</td>
+<td class="px-6 py-5 text-sm">تمويل عقاري</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="text-secondary font-medium">متوسط (42)</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-md">قيد المراجعة</span>
+</td>
+<td class="px-6 py-5">
+<a class="p-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 inline-flex" href="request-details.html">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</a>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5 font-label-md">#RX-897</td>
+<td class="px-6 py-5">
+<div class="font-medium">خالد إبراهيم</div>
+<div class="text-xs text-on-surface-variant">ID: 992812</div>
+</td>
+<td class="px-6 py-5 text-sm">تمويل سيارات</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-green-600 font-medium">منخفض (12)</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-md">مقبول</span>
+</td>
+<td class="px-6 py-5">
+<a class="p-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 inline-flex" href="request-details.html">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Secondary Visuals: Chart placeholders -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-6">اتجاهات الضغط</h4>
+<div class="flex-1 flex items-end gap-2 pb-2">
+<div class="flex-1 bg-primary/10 rounded-t-lg h-[40%] transition-all hover:h-[45%]"></div>
+<div class="flex-1 bg-primary/15 rounded-t-lg h-[60%] transition-all hover:h-[65%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[50%] transition-all hover:h-[55%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg h-[80%] transition-all hover:h-[85%]"></div>
+<div class="flex-1 bg-secondary rounded-t-lg h-[95%] transition-all hover:h-[100%] shadow-lg"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[70%] transition-all hover:h-[75%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[40%] transition-all hover:h-[45%]"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-4">
+<span>الاثنين</span><span>الثلاثاء</span><span>الأربعاء</span><span>الخميس</span><span>الجمعة</span><span>السبت</span><span>الأحد</span>
+</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col relative overflow-hidden">
+<h4 class="font-headline-md text-on-surface mb-4">توزيع المنتجات</h4>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="w-40 h-40 rounded-full border-[16px] border-primary-container relative">
+<div class="absolute inset-0 w-full h-full border-[16px] border-secondary border-r-transparent border-b-transparent rounded-full rotate-45"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold">1.2k</span>
+<span class="text-[10px] uppercase">الإجمالي</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4 text-xs font-label-md">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-primary-container"></span> قروض شخصية</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span> عقاري</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Assistant Panel -->
+<div class="space-y-8">
+<!-- AI Panel -->
+<section class="glass-panel glass-card-edge rounded-3xl p-8 relative overflow-hidden bg-primary text-on-primary">
+<div class="absolute top-0 left-0 w-32 h-32 bg-secondary opacity-20 blur-3xl -ml-10 -mt-10"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-2xl bg-on-primary/10 flex items-center justify-center border border-on-primary/20">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-headline-md leading-tight">مساعد رشيد الذكي</h3>
+<span class="text-xs text-on-primary/60 tracking-widest uppercase">تنبيه ذكي</span>
+</div>
+</div>
+<div class="bg-on-primary/5 rounded-2xl p-6 mb-8 border border-on-primary/10">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold">ند</div>
+<div>
+<div class="font-bold">نايف الدوسري</div>
+<div class="text-xs text-on-primary/60">عميل عالي المخاطر</div>
+</div>
+</div>
+<div class="px-2 py-1 bg-error rounded-md text-[10px] font-bold">حرج</div>
+</div>
+<p class="text-on-primary/80 text-sm leading-relaxed mb-6">
+                        يظهر نايف مؤشرات ضغط عالية (84/100). طلبه لقرض شخصي بقيمة 200 ألف يتعارض مع 3 خطوط ائتمانية نشطة مؤخراً.
+                    </p>
+<div class="space-y-3">
+<div class="flex justify-between text-xs">
+<span class="text-on-primary/60">توصية رشيد:</span>
+<span class="text-secondary-fixed font-bold">خطة بديلة ب</span>
+</div>
+<div class="w-full bg-on-primary/10 h-1.5 rounded-full">
+<div class="bg-secondary-fixed h-1.5 rounded-full w-[84%]"></div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<button class="w-full py-4 bg-on-primary text-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+                        نسخ الرسالة للعميل
+                    </button>
+<a class="w-full py-3 bg-transparent border border-on-primary/30 text-on-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-on-primary/10 transition-colors" href="request-details.html">
+<span class="material-symbols-outlined text-lg">psychology</span>
+                        عرض رؤى عميقة
+                    </a>
+</div>
+</section>
+<!-- Visual Asset -->
+<div class="rounded-3xl overflow-hidden shadow-2xl h-64 relative group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8wv4tDgaaXKdmfieFEG7pFIwkTGODxWqyLSqam9oM6Zm-LObjpQojis7_XIVLWZ0Nx7VojtVolaBMpA9LyhDTJFdIJWhK20X-bXk1iK7ML4szTXf5OtVV-E2pAP-y7rvWTTBYnKnNKJ0tLP5BUItvne0N-K79exJGDso9yEpTgIOhVNPAw7uIVCCR7Z2EViatERWn2oqN_m-CCwReBdaWTE71kVgXfozxT_XurODEArzb9u1IsVh8PJf5HHvhTSYZ-4ljKrTqTg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">
+<div class="text-on-primary">
+<div class="font-headline-md text-headline-md">التقرير الشهري</div>
+<div class="text-sm opacity-80">تحليل تأثير الذكاء الاصطناعي - يونيو 2026</div>
+</div>
+</div>
+</div>
+<!-- System Health -->
+<div class="glass-panel glass-card-edge p-6 rounded-3xl space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-label-md">استجابة النموذج</span>
+<span class="text-green-500 font-bold">12ms</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-md">تزامن التكامل</span>
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-xs">مباشر</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Analysis -->
+<section class="mt-section-gap relative rounded-3xl overflow-hidden min-h-[300px] flex flex-col md:flex-row-reverse shadow-2xl">
+<div class="flex-1 bg-primary p-12 flex flex-col justify-center">
+<span class="text-secondary font-bold tracking-widest text-xs uppercase mb-4">رؤية ربع سنوية</span>
+<h2 class="text-on-primary font-display-md text-display-md mb-6 leading-tight">تحسين السيولة عبر <br/>حساسية الذكاء الاصطناعي</h2>
+<p class="text-on-primary/60 max-w-md mb-8">
+                اكتشف كيف قللت خوارزمية اكتشاف الضغط الجديدة في رشيد من مخاطر الائتمان الإجمالية بنسبة 14% في الربع الأخير من خلال تحديد المتقدمين ذوي الإجهاد العالي في وقت مبكر.
+            </p>
+<button class="bg-secondary text-white px-8 py-4 rounded-xl self-start font-bold hover:bg-secondary/90 transition-colors" onclick="RashidReport.downloadDashboardReportPdf()">
+                تحميل التقرير الكامل PDF
+            </button>
+</div>
+<div class="flex-1 h-64 md:h-auto">
+<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj-sfWTQopft28m0vYjpCRire7z5EHDgD1URpXhJmHt7qbC-K_DqFouBa_gCmZJGPRcfP3CSO-BG39H-9nZB9mMDXV5hPG89kvurXVqJMf7BYZd2-iTdqGzyXO-NsRInSnfd8_KHAdFWALLIxAxBsdZxrUuHmGo2OjSQS2-Nx06VaQVaOPDO3AC_KpAa9qKGRItYt3echEQIk64pLYurB7Dpjg3yYragx_UPKkC_Y5b6JcBPOIkVClBA2woafgLWzCOpDQWUmMfg"/>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-primary" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="request-details.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px]">العملاء</span>
+</button>
+<button class="flex flex-col items-center text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px]">الإعدادات</span>
+</button>
+</nav>
+<script>
+    // Micro-interaction for Copy Button
+    const copyBtn = [...document.querySelectorAll('button')].find(b => b.innerText.includes('نسخ الرسالة'));
+    if(copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<span class="material-symbols-outlined">check</span> تم النسخ!';
+            copyBtn.classList.replace('bg-on-primary', 'bg-green-500');
+            copyBtn.classList.add('text-white');
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.classList.replace('bg-green-500', 'bg-on-primary');
+                copyBtn.classList.remove('text-white');
+            }, 2000);
+        });
+    }
+
+    // Search bar focus effect
+    const searchInput = document.querySelector('input[placeholder="بحث عن عملاء..."]');
+    if(searchInput) {
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-secondary/50');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-secondary/50');
+        });
+    }
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) {
+                nameEl.innerText = session.username;
+                avatarEl.innerText = session.username.trim().charAt(0).toUpperCase();
+            } else {
+                nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)';
+                avatarEl.innerText = '?';
+            }
+        })();
+    </script>
+</body></html>
