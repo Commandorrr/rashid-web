@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | التحليلات</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;family=IBM+Plex+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge {
+            border-right: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="request-details.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<span class="font-label-md text-label-md">التحليلات</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">الدعم الفني</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<header class="mb-section-gap">
+<h1 class="font-display-md text-display-md text-primary tracking-tight">التحليلات</h1>
+<p class="text-on-surface-variant font-body-md">مؤشرات على مستوى المحفظة الكاملة - محسوبة من كل الطلبات الحقيقية المسجلة في رشيد.</p>
+</header>
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="an-total-volume">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي حجم التمويل المطلوب (ر.س)</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-amount">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط مبلغ الطلب (ر.س)</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-pressure">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط درجة الضغط (من 100)</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-confidence">0%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط ثقة النموذج</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-6">توزيع نسبة العبء (DBR)</h4>
+<div class="flex-1 flex items-end gap-3 pb-2" id="dbr-buckets-bars"></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-4" id="dbr-buckets-labels"></div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-6">توزيع مدة التمويل المطلوبة</h4>
+<div class="flex-1 flex items-end gap-3 pb-2" id="tenure-buckets-bars"></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-4" id="tenure-buckets-labels"></div>
+</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl mt-8">
+<h4 class="font-headline-md text-on-surface mb-6">توزيع القرارات على مستوى المحفظة</h4>
+<div class="w-full h-4 rounded-full overflow-hidden flex" id="decision-stacked-bar"></div>
+<div class="grid grid-cols-3 gap-2 mt-4 text-sm font-label-md">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> مؤهل <span id="an-count-eligible">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#755a26"></span> مؤهل بشروط <span id="an-count-marginal">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-error"></span> غير مؤهل <span id="an-count-rejected">0</span></div>
+</div>
+</div>
+</main>
+<script src="rashid-calc.js"></script>
+<script src="rashid-api.js"></script>
+<script>
+        (function () {
+            function fmtSar(n) { return Math.round(n).toLocaleString('ar-SA'); }
+
+            function renderBuckets(barsId, labelsId, buckets) {
+                const max = Math.max(1, ...buckets.map(b => b.count));
+                document.getElementById(barsId).innerHTML = buckets.map(b =>
+                    '<div class="flex-1 bg-secondary rounded-t-lg transition-all" style="height:' + Math.max(4, Math.round((b.count / max) * 100)) + '%" title="' + b.label + ': ' + b.count + '"></div>'
+                ).join('');
+                document.getElementById(labelsId).innerHTML = buckets.map(b => '<span>' + b.label + '</span>').join('');
+            }
+
+            async function load() {
+                const apps = await RashidApi.listApplications();
+                if (!apps || !apps.length) {
+                    document.querySelector('main').insertAdjacentHTML('beforeend',
+                        '<div class="glass-card-edge glass-panel p-6 rounded-xl mt-8 text-center text-on-surface-variant">لا توجد طلبات حقيقية بعد لحساب التحليلات - أنشئ طلباً من "تحليل جديد".</div>');
+                    return;
+                }
+
+                const analyzed = apps.map(row => ({ row, a: RashidCalc.analyze(row) }));
+                const total = analyzed.length;
+
+                const totalVolume = analyzed.reduce((s, x) => s + x.row.amount, 0);
+                const avgAmount = totalVolume / total;
+                const avgPressure = Math.round(analyzed.reduce((s, x) => s + x.a.pressureScore, 0) / total);
+                const avgConfidence = Math.round(analyzed.reduce((s, x) => s + x.a.confidence, 0) / total);
+
+                document.getElementById('an-total-volume').innerText = fmtSar(totalVolume);
+                document.getElementById('an-avg-amount').innerText = fmtSar(avgAmount);
+                document.getElementById('an-avg-pressure').innerText = avgPressure;
+                document.getElementById('an-avg-confidence').innerText = avgConfidence + '%';
+
+                // DBR buckets
+                const dbrBuckets = [
+                    { label: '<40%', min: 0, max: 40 },
+                    { label: '40-55%', min: 40, max: 55 },
+                    { label: '55-65%', min: 55, max: 65 },
+                    { label: '65-80%', min: 65, max: 80 },
+                    { label: '80%+', min: 80, max: Infinity }
+                ].map(b => ({ label: b.label, count: analyzed.filter(x => x.a.burdenRatio >= b.min && x.a.burdenRatio < b.max).length }));
+                renderBuckets('dbr-buckets-bars', 'dbr-buckets-labels', dbrBuckets);
+
+                // Tenure buckets (real, from application.tenure)
+                const tenureBuckets = [
+                    { label: '≤24', min: 0, max: 24 },
+                    { label: '25-36', min: 25, max: 36 },
+                    { label: '37-48', min: 37, max: 48 },
+                    { label: '49-60', min: 49, max: 60 },
+                    { label: '60+', min: 61, max: Infinity }
+                ].map(b => ({ label: b.label, count: analyzed.filter(x => x.row.tenure >= b.min && x.row.tenure <= b.max).length }));
+                renderBuckets('tenure-buckets-bars', 'tenure-buckets-labels', tenureBuckets);
+
+                // Decision distribution stacked bar
+                const eligibleCount = analyzed.filter(x => x.a.eligible).length;
+                const marginalCount = analyzed.filter(x => x.a.marginal).length;
+                const rejectedCount = total - eligibleCount - marginalCount;
+                document.getElementById('decision-stacked-bar').innerHTML =
+                    '<div style="width:' + (eligibleCount / total * 100) + '%; background:#22c55e" title="مؤهل"></div>' +
+                    '<div style="width:' + (marginalCount / total * 100) + '%; background:#755a26" title="مؤهل بشروط"></div>' +
+                    '<div style="width:' + (rejectedCount / total * 100) + '%; background:#ba1a1a" title="غير مؤهل"></div>';
+                document.getElementById('an-count-eligible').innerText = eligibleCount;
+                document.getElementById('an-count-marginal').innerText = marginalCount;
+                document.getElementById('an-count-rejected').innerText = rejectedCount;
+            }
+
+            load();
+        })();
+    </script>
+</body></html>

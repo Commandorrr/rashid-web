@@ -51,5 +51,23 @@ window.RashidApi = (function () {
         }
     }
 
-    return { createApplication, getApplicationId, selectOffer, listApplications };
+    async function getApplication(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id);
+            return res.ok ? await res.json() : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async function getCalendar(id, installment) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/calendar?installment=' + installment);
+            return res.ok ? await res.json() : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    return { createApplication, getApplicationId, selectOffer, listApplications, getApplication, getCalendar };
 })();

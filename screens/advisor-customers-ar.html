@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | العملاء</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;family=IBM+Plex+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge {
+            border-right: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="request-details.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">التحليلات</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">الدعم الفني</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<header class="flex justify-between items-center mb-section-gap">
+<div>
+<h1 class="font-display-md text-display-md text-primary tracking-tight">العملاء</h1>
+<p class="text-on-surface-variant font-body-md">سجل مجمّع لكل عميل، مبني من طلباته الحقيقية المسجلة في رشيد.</p>
+</div>
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pr-10 pl-4 py-2 bg-surface-container-high border-none rounded-full w-64 focus:ring-1 focus:ring-secondary text-label-md" id="customer-search-input" placeholder="بحث بالاسم..." type="text"/>
+</div>
+</header>
+<section class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="customers-total">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي العملاء</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="customers-repeat">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">عملاء بأكثر من طلب</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="customers-total-volume">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي المبالغ المطلوبة (ر.س)</div>
+</div>
+</section>
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 bg-surface-container-lowest/50">
+<h3 class="font-headline-md text-headline-md text-primary">قائمة العملاء</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-6 py-4">العميل</th>
+<th class="px-6 py-4">عدد الطلبات</th>
+<th class="px-6 py-4">إجمالي المبالغ المطلوبة</th>
+<th class="px-6 py-4">آخر حالة</th>
+<th class="px-6 py-4">آخر طلب</th>
+<th class="px-6 py-4">إجراء</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="customers-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="6">جارِ تحميل العملاء الحقيقيين...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<script src="rashid-calc.js"></script>
+<script src="rashid-api.js"></script>
+<script>
+        (function () {
+            function fmtSar(n) { return Math.round(n).toLocaleString('ar-SA'); }
+
+            async function load() {
+                const apps = await RashidApi.listApplications();
+                const tbody = document.getElementById('customers-tbody');
+                if (!apps || !apps.length) {
+                    tbody.innerHTML = '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="6">لا يوجد عملاء بعد - أنشئ طلباً من "تحليل جديد" لرؤية البيانات هنا.</td></tr>';
+                    return;
+                }
+
+                // Group real applications by customer name (no separate customer entity in the schema yet)
+                const byName = new Map();
+                apps.forEach(app => {
+                    const key = (app.name || 'عميل رشيد').trim();
+                    if (!byName.has(key)) byName.set(key, []);
+                    byName.get(key).push(app);
+                });
+
+                const customers = [...byName.entries()].map(([name, rows]) => {
+                    rows.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    const latest = rows[0];
+                    const analysis = RashidCalc.analyze(latest);
+                    const totalAmount = rows.reduce((s, r) => s + r.amount, 0);
+                    return { name, count: rows.length, totalAmount, latest, analysis };
+                }).sort((a, b) => new Date(b.latest.createdAt) - new Date(a.latest.createdAt));
+
+                document.getElementById('customers-total').innerText = customers.length.toLocaleString('ar-SA');
+                document.getElementById('customers-repeat').innerText = customers.filter(c => c.count > 1).length.toLocaleString('ar-SA');
+                document.getElementById('customers-total-volume').innerText = fmtSar(customers.reduce((s, c) => s + c.totalAmount, 0));
+
+                const statusMap = {
+                    'مؤهل': { badge: 'bg-green-100 text-green-700', label: 'مؤهل' },
+                    'مؤهل بشروط': { badge: 'bg-secondary-container text-on-secondary-container', label: 'مؤهل بشروط' },
+                    'غير مؤهل حالياً': { badge: 'bg-error-container text-error', label: 'غير مؤهل' }
+                };
+
+                tbody.innerHTML = '';
+                customers.forEach(c => {
+                    const s = statusMap[c.analysis.decision] || statusMap['مؤهل بشروط'];
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-surface-container-low/50 transition-colors';
+                    tr.dataset.name = c.name;
+                    tr.innerHTML =
+                        '<td class="px-6 py-5 font-medium">' + c.name + '</td>' +
+                        '<td class="px-6 py-5">' + c.count + '</td>' +
+                        '<td class="px-6 py-5">' + fmtSar(c.totalAmount) + ' ر.س</td>' +
+                        '<td class="px-6 py-5"><span class="px-2 py-1 ' + s.badge + ' text-xs rounded-md">' + s.label + '</span></td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">' + (c.latest.createdAt ? new Date(c.latest.createdAt).toLocaleDateString('ar-SA') : '-') + '</td>' +
+                        '<td class="px-6 py-5"><a class="p-2 rounded-full hover:bg-primary hover:text-on-primary transition-all duration-300 inline-flex" href="request-details.html?id=' + c.latest.id + '">' +
+                        '<span class="material-symbols-outlined text-sm">visibility</span></a></td>';
+                    tbody.appendChild(tr);
+                });
+
+                const searchInput = document.getElementById('customer-search-input');
+                searchInput.addEventListener('input', () => {
+                    const q = searchInput.value.trim();
+                    [...tbody.querySelectorAll('tr')].forEach(tr => {
+                        tr.style.display = !q || (tr.dataset.name || '').includes(q) ? '' : 'none';
+                    });
+                });
+            }
+
+            load();
+        })();
+    </script>
+</body></html>

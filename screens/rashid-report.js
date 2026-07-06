@@ -140,52 +140,55 @@ window.RashidReport = (function () {
     function downloadRequestSummaryPdf() {
         const doc = baseDoc();
         if (!doc) return;
-        header(doc, 'Loan Request Analysis Summary', 'Request ID: REQ-8829-XPL');
+        const ctx = window.__rashidRequestContext;
+        if (!ctx) {
+            alert('لا توجد بيانات طلب محمّلة بعد لإنشاء الملخص.');
+            return;
+        }
+        const { application, analysis, offers } = ctx;
+        header(doc, 'Loan Request Analysis Summary', 'Request ID: RX-' + application.id);
 
         let y = 130;
         y = sectionTitle(doc, y, 'Customer');
-        row(doc, y, 'Name', 'Omar Al-Farsi'); y += 26;
-        row(doc, y, 'Tier', 'Priority Customer - Platinum Tier'); y += 26;
-        row(doc, y, 'Product', 'Commercial Expansion Loan'); y += 26;
-        row(doc, y, 'Requested Amount', '2,450,000 SAR'); y += 40;
+        row(doc, y, 'Name', application.name || 'Rashid Customer'); y += 26;
+        row(doc, y, 'Status', analysis.decision); y += 26;
+        row(doc, y, 'Requested Amount', application.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Tenure', application.tenure + ' months'); y += 40;
 
-        y = sectionTitle(doc, y, 'AI Intelligence Score');
-        row(doc, y, 'Financial Readiness', '89%'); y += 26;
-        row(doc, y, 'Eligibility Index', '76%'); y += 26;
-        row(doc, y, 'Approval Probability', 'High'); y += 40;
+        y = sectionTitle(doc, y, 'Rashid AI Analysis');
+        row(doc, y, 'Financial Readiness', Math.max(0, 100 - analysis.pressureScore) + '%'); y += 26;
+        row(doc, y, 'Eligibility Confidence', analysis.confidence + '%'); y += 26;
+        row(doc, y, 'Debt Burden Ratio', analysis.burdenRatio + '%'); y += 26;
+        row(doc, y, 'Approval Probability', analysis.eligible ? 'High' : (analysis.marginal ? 'Medium' : 'Low')); y += 40;
 
-        y = sectionTitle(doc, y, 'Recommended Offer');
-        row(doc, y, 'Plan', 'Gold Tier Standard'); y += 26;
-        row(doc, y, 'Rate', '4.25%'); y += 26;
-        row(doc, y, 'Tenor', '60 months'); y += 26;
-        row(doc, y, 'LTV', '75%'); y += 26;
+        y = sectionTitle(doc, y, 'Recommended Offer (Safe)');
+        row(doc, y, 'Amount', offers.safe.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Tenure', offers.safe.tenure + ' months'); y += 26;
+        row(doc, y, 'Monthly Installment', offers.safe.installment.toLocaleString() + ' SAR'); y += 26;
 
         footer(doc);
-        doc.save('rashid-request-REQ-8829-XPL.pdf');
+        doc.save('rashid-request-RX-' + application.id + '.pdf');
     }
 
     function downloadDashboardReportPdf() {
         const doc = baseDoc();
         if (!doc) return;
-        header(doc, 'Quarterly Advisor Intelligence Report', 'Portfolio overview - Q2 2026');
+        const ctx = window.__rashidPortfolioContext;
+        if (!ctx) {
+            alert('لا توجد بيانات محفظة محمّلة بعد لإنشاء التقرير.');
+            return;
+        }
+        header(doc, 'Advisor Portfolio Report', 'Generated ' + new Date().toLocaleDateString('en-GB'));
 
         let y = 130;
-        y = sectionTitle(doc, y, 'Portfolio Metrics');
-        row(doc, y, 'Total Requests', '1,248'); y += 26;
-        row(doc, y, 'High-Pressure Requests', '248 (Urgent)'); y += 26;
-        row(doc, y, 'Avg. Pressure Reduction', '18%'); y += 26;
-        row(doc, y, 'Alternative Offer Conversion', '42%'); y += 40;
-
-        y = sectionTitle(doc, y, 'AI Impact');
-        doc.setFontSize(11);
-        doc.setTextColor(60, 60, 60);
-        doc.text(doc.splitTextToSize(
-            "Rashid's pressure-detection algorithm reduced overall credit risk by 14% in the last quarter by identifying high-stress applicants earlier.",
-            515
-        ), 40, y);
+        y = sectionTitle(doc, y, 'Portfolio Metrics (real, computed from all applications)');
+        row(doc, y, 'Total Requests', ctx.total.toLocaleString()); y += 26;
+        row(doc, y, 'Requests Above Safe Burden Cap', ctx.highPressure.toLocaleString()); y += 26;
+        row(doc, y, 'Average Burden Ratio', ctx.avgBurden + '%'); y += 26;
+        row(doc, y, 'Eligible Rate', ctx.eligiblePct + '%'); y += 40;
 
         footer(doc);
-        doc.save('rashid-advisor-quarterly-report.pdf');
+        doc.save('rashid-advisor-portfolio-report.pdf');
     }
 
     return {

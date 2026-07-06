@@ -134,12 +134,12 @@
 <span class="font-label-md text-label-md">Requests</span>
 </a>
 <!-- Customers -->
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
 <span class="material-symbols-outlined">group</span>
 <span class="font-label-md text-label-md">Customers</span>
 </a>
 <!-- Analytics -->
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-analytics-ar.html">
 <span class="material-symbols-outlined">monitoring</span>
 <span class="font-label-md text-label-md">Analytics</span>
 </a>
@@ -421,28 +421,11 @@
                         </a>
 </div>
 </section>
-<!-- Visual Asset / Editorial Element -->
-<div class="rounded-3xl overflow-hidden shadow-2xl h-64 relative group">
-<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8wv4tDgaaXKdmfieFEG7pFIwkTGODxWqyLSqam9oM6Zm-LObjpQojis7_XIVLWZ0Nx7VojtVolaBMpA9LyhDTJFdIJWhK20X-bXk1iK7ML4szTXf5OtVV-E2pAP-y7rvWTTBYnKnNKJ0tLP5BUItvne0N-K79exJGDso9yEpTgIOhVNPAw7uIVCCR7Z2EViatERWn2oqN_m-CCwReBdaWTE71kVgXfozxT_XurODEArzb9u1IsVh8PJf5HHvhTSYZ-4ljKrTqTg"/>
-<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-6">
+<!-- Portfolio Snapshot (replaces decorative stock photo + fake telemetry) -->
+<div class="rounded-3xl overflow-hidden shadow-2xl h-64 relative flex flex-col justify-end p-6" style="background: linear-gradient(135deg, #181512 0%, #4b4642 100%);">
 <div class="text-on-primary">
 <div class="font-headline-md text-headline-md">Monthly Report</div>
-<div class="text-sm opacity-80">AI Impact Analysis - June 2026</div>
-</div>
-</div>
-</div>
-<!-- System Health / Status -->
-<div class="glass-panel glass-card-edge p-6 rounded-3xl space-y-4">
-<div class="flex items-center justify-between">
-<span class="font-label-md">Model Latency</span>
-<span class="text-green-500 font-bold">12ms</span>
-</div>
-<div class="flex items-center justify-between">
-<span class="font-label-md">Integration Sync</span>
-<span class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-<span class="text-xs">Live</span>
-</span>
+<div class="text-sm opacity-80">See the Arabic dashboard for live portfolio figures</div>
 </div>
 </div>
 </div>
@@ -450,18 +433,16 @@
 <!-- Featured Analysis (Wide Banner) -->
 <section class="mt-section-gap relative rounded-3xl overflow-hidden min-h-[300px] flex flex-col md:flex-row shadow-2xl">
 <div class="flex-1 bg-primary p-12 flex flex-col justify-center">
-<span class="text-secondary font-bold tracking-widest text-xs uppercase mb-4">Quarterly Insight</span>
-<h2 class="text-on-primary font-display-md text-display-md mb-6 leading-tight">Optimizing Liquidity <br/>Through AI Sensitivity</h2>
+<span class="text-secondary font-bold tracking-widest text-xs uppercase mb-4">Portfolio Overview</span>
+<h2 class="text-on-primary font-display-md text-display-md mb-6 leading-tight">Advisor Portfolio Report</h2>
 <p class="text-on-primary/60 max-w-md mb-8">
-                    Discover how Rashid's new pressure-detection algorithm reduced overall credit risk by 14% in the last quarter by identifying high-stress applicants earlier.
+                    Contains the total requests, average burden ratio, and eligible rate computed live from every real application in the database.
                 </p>
 <button class="bg-secondary text-white px-8 py-4 rounded-xl self-start font-bold hover:bg-secondary/90 transition-colors" onclick="RashidReport.downloadDashboardReportPdf()">
                     Download Full PDF
                 </button>
 </div>
-<div class="flex-1 h-64 md:h-auto">
-<img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCj-sfWTQopft28m0vYjpCRire7z5EHDgD1URpXhJmHt7qbC-K_DqFouBa_gCmZJGPRcfP3CSO-BG39H-9nZB9mMDXV5hPG89kvurXVqJMf7BYZd2-iTdqGzyXO-NsRInSnfd8_KHAdFWALLIxAxBsdZxrUuHmGo2OjSQS2-Nx06VaQVaOPDO3AC_KpAa9qKGRItYt3echEQIk64pLYurB7Dpjg3yYragx_UPKkC_Y5b6JcBPOIkVClBA2woafgLWzCOpDQWUmMfg"/>
-</div>
+<div class="flex-1 h-64 md:h-auto" style="background: radial-gradient(circle at 30% 30%, rgba(117,90,38,0.25), transparent 60%), linear-gradient(135deg, #2d2926 0%, #181512 100%);"></div>
 </section>
 </main>
 <!-- Bottom Navigation for Mobile -->
@@ -474,14 +455,14 @@
 <span class="material-symbols-outlined">description</span>
 <span class="text-[10px]">Requests</span>
 </a>
-<button class="flex flex-col items-center text-on-surface-variant">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-customers-ar.html">
 <span class="material-symbols-outlined">group</span>
 <span class="text-[10px]">Customers</span>
-</button>
-<button class="flex flex-col items-center text-on-surface-variant">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-[10px]">Settings</span>
-</button>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px]">Analytics</span>
+</a>
 </nav>
 <script>
         // Micro-interaction for Copy Button

@@ -122,11 +122,11 @@
 <span class="material-symbols-outlined">description</span>
 <span>الطلبات</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="advisor-customers-ar.html">
 <span class="material-symbols-outlined">group</span>
 <span>العملاء</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="advisor-analytics-ar.html">
 <span class="material-symbols-outlined">monitoring</span>
 <span>التحليلات</span>
 </a>
@@ -152,7 +152,7 @@
 </button>
 <div>
 <h1 class="font-headline-lg text-headline-lg text-primary">تحليل طلب التمويل</h1>
-<p class="text-on-surface-variant font-label-md text-label-md">رقم الطلب: REQ-8829-XPL</p>
+<p class="text-on-surface-variant font-label-md text-label-md" id="request-id-label">رقم الطلب: -</p>
 </div>
 </div>
 <div class="flex gap-3">
@@ -160,7 +160,7 @@
 <span class="material-symbols-outlined">download</span>
                     تحميل الملخص الكامل
                 </button>
-<button class="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md shadow-lg hover:shadow-xl transition-all active:scale-95 duration-200" onclick="alert('تمت الموافقة على العرض بنجاح!'); window.location.href='advisor-dashboard-ar.html';">
+<button class="px-6 py-2.5 bg-primary text-on-primary rounded-xl font-label-md text-label-md shadow-lg hover:shadow-xl transition-all active:scale-95 duration-200" id="approve-offer-btn">
                     الموافقة على العرض
                 </button>
 </div>
@@ -177,23 +177,23 @@
 <span class="material-symbols-outlined text-3xl">person</span>
 </div>
 <div>
-<h2 class="font-headline-md text-headline-md text-primary">عمر الفارسي</h2>
-<p class="text-on-surface-variant font-label-md text-label-md">عميل مميز • الفئة البلاتينية</p>
+<h2 class="font-headline-md text-headline-md text-primary" id="customer-name">-</h2>
+<p class="text-on-surface-variant font-label-md text-label-md" id="customer-tier">-</p>
 </div>
 </div>
 <div class="grid grid-cols-2 gap-4">
 <div>
-<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">المنتج</p>
-<p class="font-body-md font-semibold">تمويل توسع تجاري</p>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">مدة التمويل</p>
+<p class="font-body-md font-semibold" id="customer-tenure">-</p>
 </div>
 <div>
 <p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">المبلغ المطلوب</p>
-<p class="font-body-md font-semibold text-secondary">2,450,000 ر.س</p>
+<p class="font-body-md font-semibold text-secondary" id="customer-amount">-</p>
 </div>
 </div>
 <div class="bg-surface-container/50 p-4 rounded-lg">
-<p class="text-on-surface-variant font-label-md text-label-md mb-2">نبذة عن العميل</p>
-<p class="text-body-md italic text-on-surface-variant">"صاحب شركة خدمات لوجستية راسخة يسعى لتحديث أسطوله. سجل ائتماني قوي مع نمو حديث في الإيرادات بنسبة 15%."</p>
+<p class="text-on-surface-variant font-label-md text-label-md mb-2">تقييم رشيد الآلي</p>
+<p class="text-body-md italic text-on-surface-variant" id="customer-summary">-</p>
 </div>
 </section>
 <!-- Detailed Analysis Section -->
@@ -203,7 +203,7 @@
 <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">analytics</span>
                         درجة الذكاء الاصطناعي
                     </h3>
-<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md">احتمال موافقة مرتفع</span>
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-label-md" id="approval-badge">-</span>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
 <!-- Gauge 1 -->
@@ -211,60 +211,63 @@
 <div class="relative w-32 h-32 mb-4">
 <svg class="w-full h-full transform -rotate-90">
 <circle class="text-outline-variant/20" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-secondary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="40" stroke-linecap="round" stroke-width="8"></circle>
+<circle class="text-secondary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="364.4" stroke-linecap="round" stroke-width="8" id="gauge-readiness-circle"></circle>
 </svg>
 <div class="absolute inset-0 flex flex-col items-center justify-center rotate-90">
-<span class="font-display-md text-display-md text-primary">89%</span>
+<span class="font-display-md text-display-md text-primary" id="gauge-readiness-value">-</span>
 </div>
 </div>
-<p class="font-headline-md text-headline-md">الجاهزية المالية</p>
-<p class="text-on-surface-variant text-center font-label-md text-label-md px-4 mt-2">استناداً إلى السيولة الحالية والإيرادات خلال آخر 12 شهراً.</p>
+<p class="font-headline-md text-headline-md">مؤشر الاستعداد المالي</p>
+<p class="text-on-surface-variant text-center font-label-md text-label-md px-4 mt-2" id="gauge-readiness-desc">-</p>
 </div>
 <!-- Gauge 2 -->
 <div class="flex flex-col items-center p-4 bg-surface-container-low/30 rounded-xl">
 <div class="relative w-32 h-32 mb-4">
 <svg class="w-full h-full transform -rotate-90">
 <circle class="text-outline-variant/20" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-primary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="90" stroke-linecap="round" stroke-width="8"></circle>
+<circle class="text-primary" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="364.4" stroke-linecap="round" stroke-width="8" id="gauge-confidence-circle"></circle>
 </svg>
 <div class="absolute inset-0 flex flex-col items-center justify-center rotate-90">
-<span class="font-display-md text-display-md text-primary">76%</span>
+<span class="font-display-md text-display-md text-primary" id="gauge-confidence-value">-</span>
 </div>
 </div>
 <p class="font-headline-md text-headline-md">مؤشر الأهلية</p>
-<p class="text-on-surface-variant text-center font-label-md text-label-md px-4 mt-2">تصنيف الامتثال التنظيمي والمخاطر المعدّلة وفق الحدود المسموحة.</p>
+<p class="text-on-surface-variant text-center font-label-md text-label-md px-4 mt-2">درجة ثقة نموذج رشيد في قرار الأهلية بناءً على نسبة العبء الفعلية.</p>
 </div>
 </div>
-<!-- Pressure Factors -->
+<!-- Pressure Factors (same real engine as the customer-facing "أهم أسباب النتيجة" cards) -->
 <div>
 <h4 class="font-label-md text-label-md uppercase tracking-wider mb-4">تفصيل عوامل الضغط</h4>
 <div class="space-y-4">
 <div class="group">
 <div class="flex justify-between mb-2">
-<span class="font-body-md text-primary font-medium">تقلب السوق</span>
-<span class="text-on-surface-variant text-sm">تأثير 12.5%-</span>
+<span class="font-body-md text-primary font-medium">إجمالي الالتزامات بعد التمويل</span>
+<span class="text-on-surface-variant text-sm" id="pf-installment-pct">-</span>
 </div>
 <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-error w-[12.5%] transition-all duration-1000"></div>
+<div class="h-full bg-error transition-all duration-1000" id="pf-installment-bar" style="width:0%"></div>
 </div>
+<p class="text-xs text-on-surface-variant mt-1" id="pf-installment-desc"></p>
 </div>
 <div class="group">
 <div class="flex justify-between mb-2">
-<span class="font-body-md text-primary font-medium">هامش سعر الفائدة</span>
-<span class="text-on-surface-variant text-sm">تأثير 22.0%+</span>
+<span class="font-body-md text-primary font-medium">الهامش الحالي المتبقي</span>
+<span class="text-on-surface-variant text-sm" id="pf-margin-pct">-</span>
 </div>
 <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-secondary w-[22%] transition-all duration-1000"></div>
+<div class="h-full bg-secondary transition-all duration-1000" id="pf-margin-bar" style="width:0%"></div>
 </div>
+<p class="text-xs text-on-surface-variant mt-1" id="pf-margin-desc"></p>
 </div>
 <div class="group">
 <div class="flex justify-between mb-2">
-<span class="font-body-md text-primary font-medium">مدة السيولة التشغيلية</span>
-<span class="text-on-surface-variant text-sm">تأثير 65.0%+</span>
+<span class="font-body-md text-primary font-medium">التزام قادم خلال 3 شهور</span>
+<span class="text-on-surface-variant text-sm" id="pf-upcoming-pct">-</span>
 </div>
 <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary w-[65%] transition-all duration-1000"></div>
+<div class="h-full bg-primary transition-all duration-1000" id="pf-upcoming-bar" style="width:0%"></div>
 </div>
+<p class="text-xs text-on-surface-variant mt-1" id="pf-upcoming-desc"></p>
 </div>
 </div>
 </div>
@@ -275,68 +278,8 @@
 <span class="material-symbols-outlined text-secondary">compare_arrows</span>
 <h3 class="font-headline-lg text-headline-lg">سيناريوهات العروض والمقارنات</h3>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-<!-- Scenario 1 -->
-<div class="p-6 rounded-xl border border-outline-variant/20 hover:bg-white/40 transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-surface-container rounded-lg group-hover:bg-primary-container group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">verified</span>
-</div>
-<span class="text-xs font-bold text-secondary">موصى به</span>
-</div>
-<h4 class="font-headline-md text-headline-md mb-2">الفئة الذهبية القياسية</h4>
-<div class="space-y-2 mb-6">
-<div class="flex justify-between"><span class="text-on-surface-variant">معدل الفائدة</span><span class="font-bold">4.25%</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">المدة</span><span class="font-bold">60 شهراً</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">نسبة التمويل للقيمة</span><span class="font-bold">75%</span></div>
-</div>
-<button class="w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md" onclick="alert('تم اختيار عرض الفئة الذهبية القياسية لهذا العميل')">اختيار العرض</button>
-</div>
-<!-- Scenario 2 -->
-<div class="p-6 rounded-xl border border-outline-variant/20 hover:bg-white/40 transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-surface-container rounded-lg group-hover:bg-primary-container group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">speed</span>
-</div>
-</div>
-<h4 class="font-headline-md text-headline-md mb-2">نمو تصاعدي</h4>
-<div class="space-y-2 mb-6">
-<div class="flex justify-between"><span class="text-on-surface-variant">معدل الفائدة</span><span class="font-bold">4.90%</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">المدة</span><span class="font-bold">48 شهراً</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">نسبة التمويل للقيمة</span><span class="font-bold">85%</span></div>
-</div>
-<button class="w-full py-2 glass-card border-outline-variant/50 rounded-lg font-label-md text-label-md hover:bg-surface-container" onclick="alert('تم اختيار العرض لهذا العميل')">اختيار العرض</button>
-</div>
-<!-- Scenario 3 -->
-<div class="p-6 rounded-xl border border-outline-variant/20 hover:bg-white/40 transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-surface-container rounded-lg group-hover:bg-primary-container group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">shield</span>
-</div>
-</div>
-<h4 class="font-headline-md text-headline-md mb-2">تحوّط متحفظ</h4>
-<div class="space-y-2 mb-6">
-<div class="flex justify-between"><span class="text-on-surface-variant">معدل الفائدة</span><span class="font-bold">3.85%</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">المدة</span><span class="font-bold">84 شهراً</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">نسبة التمويل للقيمة</span><span class="font-bold">60%</span></div>
-</div>
-<button class="w-full py-2 glass-card border-outline-variant/50 rounded-lg font-label-md text-label-md hover:bg-surface-container" onclick="alert('تم اختيار العرض لهذا العميل')">اختيار العرض</button>
-</div>
-<!-- Scenario 4 -->
-<div class="p-6 rounded-xl border border-outline-variant/20 hover:bg-white/40 transition-colors cursor-pointer group">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-surface-container rounded-lg group-hover:bg-primary-container group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">edit_calendar</span>
-</div>
-</div>
-<h4 class="font-headline-md text-headline-md mb-2">شروط مخصصة</h4>
-<div class="space-y-2 mb-6">
-<div class="flex justify-between"><span class="text-on-surface-variant">معدل الفائدة</span><span class="font-bold">غير محدد</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">المدة</span><span class="font-bold">يدوي</span></div>
-<div class="flex justify-between"><span class="text-on-surface-variant">نسبة التمويل للقيمة</span><span class="font-bold">يدوي</span></div>
-</div>
-<button class="w-full py-2 glass-card border-outline-variant/50 rounded-lg font-label-md text-label-md hover:bg-surface-container" onclick="alert('إعداد الشروط المخصصة قيد التطوير')">إعداد الشروط</button>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="offer-scenarios-grid">
+<div class="col-span-full text-center text-on-surface-variant py-6">جارِ حساب العروض الحقيقية...</div>
 </div>
 </section>
 <!-- 30-Day Cash Flow Simulation (Image Reference Section) -->
@@ -348,22 +291,21 @@
 <span class="text-xs font-label-md">التدفق الداخل المتوقع</span>
 </div>
 </div>
-<div class="flex-grow relative rounded-xl overflow-hidden border border-outline-variant/10 shadow-inner">
-<img class="w-full h-full object-cover" data-alt="A high-density financial analytics dashboard showcasing a sophisticated 30-day cash flow simulation. The visualization uses elegant, flowing line charts in charcoal and gold, overlaying a clean sand-toned grid. Small, crisp data tooltips and trend indicators are scattered with meticulous precision. The overall aesthetic is premium, editorial, and technologically advanced, fitting a luxury banking portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpXv7PxiuSV-__Do52-m2RAYQ98fANPcA2GXPKpluMVFLxy4x4-MGiyVhI3cfPpxZcLUYsfuAS5hev2HAU7IKO91Pn7RlgMGrkO9HTfi36MZEE07ihh2YAFK-Gji5q0lzlJES5vuzLBnve5oS0nlfDUcNnGD16Jg9Ccw0zFsFw9ep-zfckG0U-Usw70al3qd8YOAKN4rvNZ4HzzObOQWW0xoQLudN-O3PVfnhexkeXdMpbwKHaie4Ibtr-Wr_r8UCKctvRlGO3Jg"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none"></div>
+<div class="flex-grow relative rounded-xl overflow-hidden border border-outline-variant/10 shadow-inner bg-surface-container-low/30 p-4 flex items-end gap-[2px]" id="cashflow-calendar-bars">
+<span class="text-on-surface-variant text-sm m-auto" id="cashflow-loading-label">جارِ حساب التدفق النقدي الحقيقي...</span>
 </div>
 <div class="mt-4 grid grid-cols-3 gap-4">
 <div class="p-3 bg-surface-container/30 rounded-lg">
-<p class="text-xs text-on-surface-variant">صافي التغير</p>
-<p class="font-bold text-secondary">+142,000 ر.س</p>
+<p class="text-xs text-on-surface-variant">صافي نهاية الشهر</p>
+<p class="font-bold text-secondary" id="cashflow-net">-</p>
 </div>
 <div class="p-3 bg-surface-container/30 rounded-lg">
-<p class="text-xs text-on-surface-variant">ذروات المخاطرة</p>
-<p class="font-bold text-primary">اليوم 14، 28</p>
+<p class="text-xs text-on-surface-variant">أدنى نقطة سيولة</p>
+<p class="font-bold text-primary" id="cashflow-lowest">-</p>
 </div>
 <div class="p-3 bg-surface-container/30 rounded-lg">
-<p class="text-xs text-on-surface-variant">نسبة الثقة</p>
-<p class="font-bold text-primary">94.2%</p>
+<p class="text-xs text-on-surface-variant">أيام برصيد موجب</p>
+<p class="font-bold text-primary" id="cashflow-positive-days">-</p>
 </div>
 </div>
 </section>
@@ -375,8 +317,8 @@
 <span class="material-symbols-outlined">edit_note</span>
                         ملاحظات المستشار
                     </h3>
-<textarea class="w-full h-32 bg-surface-container-low border border-outline-variant/30 rounded-xl p-4 focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all outline-none resize-none font-body-md" placeholder="اكتب هنا تقييمك الداخلي الخاص أو ملاحظات التحقق..."></textarea>
-<button class="mt-4 w-full py-2 bg-surface-container-highest text-primary font-label-md text-label-md rounded-lg hover:bg-outline-variant/20 transition-colors" onclick="alert('تم حفظ الملاحظة')">حفظ الملاحظة الداخلية</button>
+<textarea class="w-full h-32 bg-surface-container-low border border-outline-variant/30 rounded-xl p-4 focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all outline-none resize-none font-body-md" id="advisor-note-textarea" placeholder="اكتب هنا تقييمك الداخلي الخاص أو ملاحظات التحقق..."></textarea>
+<button class="mt-4 w-full py-2 bg-surface-container-highest text-primary font-label-md text-label-md rounded-lg hover:bg-outline-variant/20 transition-colors" id="save-note-btn">حفظ الملاحظة الداخلية</button>
 </div>
 <!-- Quick Actions Cluster -->
 <div class="glass-card p-6 rounded-xl flex-grow bg-secondary/5">
@@ -392,7 +334,7 @@
 </div>
 <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">chevron_left</span>
 </button>
-<button class="w-full p-4 glass-card hover:bg-white transition-all flex items-center justify-between group" onclick="alert('سجل القرارات قيد التطوير')">
+<button class="w-full p-4 glass-card hover:bg-white transition-all flex items-center justify-between group" id="decision-log-btn">
 <div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-secondary">history</span>
 <div class="text-right">
@@ -430,31 +372,22 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
 <span class="text-[10px] font-label-md font-bold">الطلبات</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="advisor-customers-ar.html">
 <span class="material-symbols-outlined">group</span>
 <span class="text-[10px] font-label-md">العملاء</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="text-[10px] font-label-md">الإعدادات</span>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-[10px] font-label-md">التحليلات</span>
 </a>
 </nav>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script src="rashid-api.js"></script>
 <script src="rashid-report.js"></script>
 <script>
-        // Simple micro-interaction for gauge animations
-        document.addEventListener('DOMContentLoaded', () => {
-            const gauges = document.querySelectorAll('.gauge-ring');
-            gauges.forEach(gauge => {
-                // Trigger reflow for animation
-                const radius = gauge.r.baseVal.value;
-                const circumference = 2 * Math.PI * radius;
-                gauge.style.strokeDasharray = circumference;
-            });
-        });
-
-        // Toggle focus state visuals for textareas
-        const noteArea = document.querySelector('textarea');
+        // Toggle focus state visuals for the notes textarea
+        const noteArea = document.getElementById('advisor-note-textarea');
         noteArea.addEventListener('focus', () => {
             noteArea.parentElement.classList.add('shadow-lg', 'border-secondary/20');
         });
@@ -465,5 +398,181 @@
         document.getElementById('download-summary-btn').addEventListener('click', () => {
             RashidReport.downloadRequestSummaryPdf();
         });
+    </script>
+<script>
+        (function () {
+            const params = new URLSearchParams(window.location.search);
+            const appId = params.get('id') || RashidApi.getApplicationId();
+            const noteKey = id => 'rashidAdvisorNote_' + id;
+
+            function fmtSar(n) { return Math.round(n).toLocaleString('ar-SA'); }
+
+            function showNoApplication() {
+                document.getElementById('request-id-label').innerText = 'لا يوجد طلب محدد';
+                document.querySelector('main').insertAdjacentHTML('afterbegin',
+                    '<div class="glass-card p-6 rounded-xl mb-6 text-center text-on-surface-variant">لا يوجد طلب لعرضه. افتح هذه الصفحة من "آخر الطلبات" في لوحة المستشار، أو أنشئ طلباً جديداً من معالج العميل.</div>');
+            }
+
+            async function load() {
+                if (!appId) { showNoApplication(); return; }
+                const data = await RashidApi.getApplication(appId);
+                if (!data) { showNoApplication(); return; }
+
+                const { application, analysis, offers } = data;
+                document.getElementById('request-id-label').innerText = 'رقم الطلب: #RX-' + application.id;
+                document.getElementById('customer-name').innerText = application.name || 'عميل رشيد';
+                document.getElementById('customer-tier').innerText = analysis.eligible ? 'عميل مؤهل' : (analysis.marginal ? 'عميل مؤهل بشروط' : 'عميل يتجاوز الحد الآمن');
+                document.getElementById('customer-tenure').innerText = application.tenure + ' شهراً';
+                document.getElementById('customer-amount').innerText = fmtSar(application.amount) + ' ر.س';
+                document.getElementById('customer-summary').innerText = analysis.recommendation;
+
+                const approvalMap = analysis.eligible
+                    ? { text: 'احتمال موافقة مرتفع', cls: 'bg-secondary-container text-on-secondary-container' }
+                    : (analysis.marginal
+                        ? { text: 'احتمال موافقة متوسط', cls: 'bg-secondary-container text-on-secondary-container' }
+                        : { text: 'احتمال موافقة منخفض', cls: 'bg-error-container text-error' });
+                const badge = document.getElementById('approval-badge');
+                badge.innerText = approvalMap.text;
+                badge.className = approvalMap.cls + ' px-3 py-1 rounded-full font-label-md text-label-md';
+
+                // Gauge 1: financial readiness = inverse of pressure score (real, monotonic)
+                const readinessPct = Math.max(0, 100 - analysis.pressureScore);
+                const circumference = 364.4;
+                document.getElementById('gauge-readiness-circle').setAttribute('stroke-dashoffset', circumference - (circumference * readinessPct / 100));
+                document.getElementById('gauge-readiness-value').innerText = readinessPct + '%';
+                document.getElementById('gauge-readiness-desc').innerText = 'مبني على درجة الضغط المالي الفعلية (' + analysis.pressureScore + '/100) لهذا الطلب.';
+
+                // Gauge 2: eligibility confidence (real, from RashidCalc)
+                document.getElementById('gauge-confidence-circle').setAttribute('stroke-dashoffset', circumference - (circumference * analysis.confidence / 100));
+                document.getElementById('gauge-confidence-value').innerText = analysis.confidence + '%';
+
+                // Pressure factors - same real logic as the customer-facing analysis page
+                const income = application.income;
+                const proximity = analysis.burdenCap > 0 ? analysis.burdenRatio / analysis.burdenCap : 1;
+                document.getElementById('pf-installment-pct').innerText = 'تأثير ' + Math.round(proximity * 100) + '%';
+                document.getElementById('pf-installment-bar').style.width = Math.min(100, Math.round(analysis.burdenRatio)) + '%';
+                document.getElementById('pf-installment-desc').innerText =
+                    'الالتزامات الشهرية بعد التمويل ' + analysis.burdenRatio + '% من الدخل (الحد الأعلى ' + analysis.burdenCap + '%).';
+
+                const marginRatio = income > 0 ? analysis.surplus / income : 0;
+                const marginPct = Math.max(10, Math.min(95, Math.round(50 + marginRatio * 150)));
+                document.getElementById('pf-margin-pct').innerText = fmtSar(analysis.surplus) + ' ر.س';
+                document.getElementById('pf-margin-bar').style.width = marginPct + '%';
+                document.getElementById('pf-margin-desc').innerText = analysis.surplus >= 0
+                    ? 'فائض شهري متوقع بعد جميع الالتزامات.'
+                    : 'عجز شهري متوقع بعد جميع الالتزامات.';
+
+                if (application.hasUpcomingObligation) {
+                    const upcomingRatio = income > 0 ? application.upcomingObligationAmount / income : 0;
+                    const upcomingPct = Math.max(15, Math.min(95, Math.round(upcomingRatio * 200)));
+                    document.getElementById('pf-upcoming-pct').innerText = 'تأثير ' + upcomingPct + '%';
+                    document.getElementById('pf-upcoming-bar').style.width = upcomingPct + '%';
+                    document.getElementById('pf-upcoming-desc').innerText =
+                        'التزام قادم بتاريخ ' + application.upcomingObligationDate + ' بقيمة ' + fmtSar(application.upcomingObligationAmount) + ' ر.س.';
+                } else {
+                    document.getElementById('pf-upcoming-pct').innerText = 'تأثير 5%';
+                    document.getElementById('pf-upcoming-bar').style.width = '5%';
+                    document.getElementById('pf-upcoming-desc').innerText = 'لا توجد التزامات قادمة حسب بيانات العميل.';
+                }
+
+                // Real offer scenarios (RashidCalc.alternativeOffers, same engine as the customer wizard)
+                const grid = document.getElementById('offer-scenarios-grid');
+                const offerDefs = [
+                    { key: 'safe', label: 'الأكثر أماناً', icon: 'shield' },
+                    { key: 'balanced', label: 'عرض متوازن', icon: 'speed' },
+                    { key: 'smart', label: 'عرض ذكي', icon: 'auto_awesome' },
+                    { key: 'current', label: 'الطلب الحالي', icon: 'verified' }
+                ];
+                grid.innerHTML = offerDefs.map(def => {
+                    const o = offers[def.key];
+                    return '<div class="p-6 rounded-xl border border-outline-variant/20 hover:bg-white/40 transition-colors group">' +
+                        '<div class="flex justify-between items-start mb-4"><div class="p-2 bg-surface-container rounded-lg group-hover:bg-primary-container group-hover:text-white transition-colors">' +
+                        '<span class="material-symbols-outlined">' + def.icon + '</span></div></div>' +
+                        '<h4 class="font-headline-md text-headline-md mb-2">' + def.label + '</h4>' +
+                        '<div class="space-y-2 mb-6">' +
+                        '<div class="flex justify-between"><span class="text-on-surface-variant">مبلغ التمويل</span><span class="font-bold">' + fmtSar(o.amount) + ' ر.س</span></div>' +
+                        '<div class="flex justify-between"><span class="text-on-surface-variant">المدة</span><span class="font-bold">' + o.tenure + ' شهراً</span></div>' +
+                        '<div class="flex justify-between"><span class="text-on-surface-variant">القسط الشهري</span><span class="font-bold">' + fmtSar(o.installment) + ' ر.س</span></div>' +
+                        '<div class="flex justify-between"><span class="text-on-surface-variant">نسبة العبء</span><span class="font-bold">' + o.burdenPct + '%</span></div>' +
+                        '</div><button class="w-full py-2 bg-primary text-on-primary rounded-lg font-label-md text-label-md" data-offer-key="' + def.key + '">اختيار العرض لهذا العميل</button></div>';
+                }).join('');
+
+                grid.querySelectorAll('button[data-offer-key]').forEach(btn => {
+                    btn.addEventListener('click', async () => {
+                        const key = btn.dataset.offerKey;
+                        const o = offers[key];
+                        const def = offerDefs.find(d => d.key === key);
+                        try {
+                            await fetch('http://localhost:4000/api/applications/' + application.id + '/select-offer', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ offerKey: key, label: def.label, amount: o.amount, tenure: o.tenure, installment: o.installment })
+                            });
+                        } catch (e) {}
+                        alert('تم اختيار "' + def.label + '" لهذا العميل.');
+                    });
+                });
+
+                // Real 30-day cash flow calendar (customer's actual salary/installment days)
+                const calendar = await RashidApi.getCalendar(application.id, analysis.installment);
+                const barsWrap = document.getElementById('cashflow-calendar-bars');
+                if (calendar) {
+                    const balances = calendar.days.map(d => d.balance).filter(b => b !== null);
+                    const maxAbs = Math.max(1, ...balances.map(b => Math.abs(b)));
+                    barsWrap.innerHTML = calendar.days.map(d => {
+                        const known = d.balance !== null;
+                        const h = known ? Math.max(6, Math.round((Math.abs(d.balance) / maxAbs) * 100)) : 4;
+                        const color = !known ? 'bg-outline-variant/20' : (d.balance < 0 ? 'bg-error' : 'bg-secondary');
+                        return '<div class="flex-1 rounded-t-sm ' + color + '" style="height:' + h + '%" title="اليوم ' + d.day + (known ? ': ' + fmtSar(d.balance) + ' ر.س' : '') + '"></div>';
+                    }).join('');
+
+                    document.getElementById('cashflow-net').innerText = (calendar.endOfMonthBalance >= 0 ? '+' : '') + fmtSar(calendar.endOfMonthBalance) + ' ر.س';
+                    const lowest = calendar.days.reduce((min, d) => (d.balance !== null && (min === null || d.balance < min.balance)) ? d : min, null);
+                    document.getElementById('cashflow-lowest').innerText = lowest ? 'اليوم ' + lowest.day + ' (' + fmtSar(lowest.balance) + ' ر.س)' : '-';
+                    const positiveDays = calendar.days.filter(d => d.balance !== null && d.balance >= 0).length;
+                    const knownDays = calendar.days.filter(d => d.balance !== null).length;
+                    document.getElementById('cashflow-positive-days').innerText = knownDays ? positiveDays + ' من ' + knownDays : '-';
+                } else {
+                    barsWrap.innerHTML = '<span class="text-on-surface-variant text-sm m-auto">تعذر حساب التدفق النقدي (تأكد من تشغيل الخادم)</span>';
+                }
+
+                // Advisor notes - persisted locally per application
+                const savedNote = localStorage.getItem(noteKey(application.id));
+                if (savedNote) noteArea.value = savedNote;
+                document.getElementById('save-note-btn').addEventListener('click', () => {
+                    localStorage.setItem(noteKey(application.id), noteArea.value);
+                    alert('تم حفظ الملاحظة الداخلية لهذا الطلب.');
+                });
+
+                // Decision log - shows the real latest selected offer, if any
+                document.getElementById('decision-log-btn').addEventListener('click', async () => {
+                    try {
+                        const res = await fetch('http://localhost:4000/api/applications/' + application.id + '/select-offer');
+                        if (res.ok) {
+                            const sel = await res.json();
+                            alert('آخر قرار مسجل: تم اختيار "' + sel.label + '" بمبلغ ' + fmtSar(sel.amount) + ' ر.س بتاريخ ' + new Date(sel.created_at).toLocaleString('ar-SA') + '.');
+                        } else {
+                            alert('لا يوجد قرار مسجل بعد لهذا الطلب.');
+                        }
+                    } catch (e) {
+                        alert('تعذر جلب سجل القرارات (تأكد من تشغيل الخادم).');
+                    }
+                });
+
+                // Approve button: require a real selected offer first
+                document.getElementById('approve-offer-btn').addEventListener('click', async () => {
+                    try {
+                        const res = await fetch('http://localhost:4000/api/applications/' + application.id + '/select-offer');
+                        if (!res.ok) { alert('اختر أحد العروض أعلاه أولاً قبل الموافقة.'); return; }
+                    } catch (e) {}
+                    alert('تمت الموافقة على العرض بنجاح!');
+                    window.location.href = 'advisor-dashboard-ar.html';
+                });
+
+                window.__rashidRequestContext = { application, analysis, offers };
+            }
+
+            load();
+        })();
     </script>
 </body></html>
