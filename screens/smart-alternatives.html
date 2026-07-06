@@ -132,7 +132,48 @@
     </script>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
-<main class="min-h-screen p-gutter flex flex-col gap-base max-w-[1280px] mx-auto w-full">
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[260px] bg-surface-container-low border-l border-outline-variant/20 shadow-md z-40 hidden md:flex flex-col p-6 gap-base">
+<div class="font-display-md text-display-md font-bold text-primary mb-8">رشيد</div>
+<div class="flex items-center gap-4 mb-10 px-2">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">account_balance</span>
+</div>
+<div>
+<div class="font-label-md text-label-md font-bold">بوابة رشيد</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">ذكاء الإقراض الاصطناعي</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg sidebar-active" href="smart-alternatives.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md">العملاء</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md">التحليلات</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/10 flex flex-col gap-2">
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md">الدعم الفني</span>
+</a>
+</div>
+</aside>
+<main class="md:mr-[260px] min-h-screen p-gutter flex flex-col gap-base">
 <!-- Top Navigation -->
 <header class="flex justify-between items-center py-4 mb-6">
 <div>
