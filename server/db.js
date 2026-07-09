@@ -24,6 +24,7 @@ db.exec(`
   );
 
   CREATE TABLE IF NOT EXISTS selected_offers (
+
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     application_id INTEGER NOT NULL REFERENCES applications(id),
     offer_key TEXT NOT NULL,
@@ -41,5 +42,21 @@ db.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
+
+// CREATE TABLE IF NOT EXISTS doesn't add columns to a table that already
+// exists (real data was already seeded during earlier testing), so new
+// columns are migrated in with ALTER TABLE - ignore the error if a column
+// was already added by a previous server start.
+const migrations = [
+    "ALTER TABLE applications ADD COLUMN customer_id TEXT",
+    "ALTER TABLE applications ADD COLUMN employment_status TEXT DEFAULT 'موظف'"
+];
+for (const sql of migrations) {
+    try {
+        db.exec(sql);
+    } catch (e) {
+        if (!/duplicate column/i.test(e.message)) throw e;
+    }
+}
 
 module.exports = db;

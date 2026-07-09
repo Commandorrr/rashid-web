@@ -150,6 +150,10 @@
 <span class="font-label-md">الرئيسية</span>
 </a>
 <a class="flex items-center gap-3 p-3 rounded-lg sidebar-active" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md">طلبك الحالي</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined">description</span>
 <span class="font-label-md">الطلبات</span>
 </a>
@@ -356,7 +360,7 @@
 <section class="mb-section-gap">
 <div class="flex items-center gap-3 mb-6">
 <span class="material-symbols-outlined text-secondary">analytics</span>
-<h2 class="font-headline-lg">محاكاة التدفق النقدي (30 يوم)</h2>
+<h2 class="font-headline-lg" id="sa-calendar-title">محاكاة التدفق النقدي (30 يوم)</h2>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
 <!-- Comparison Layout -->
@@ -367,12 +371,13 @@
 <h3 class="font-headline-md text-headline-md text-primary mb-1">رشيد لا يريك أثر القسط عليك شهرياً</h3>
 <p class="font-body-md text-on-surface-variant">بل يريك أثر القسط عليك إلى آخر يوم بالشهر الآن</p>
 </div>
-<div class="grid grid-cols-10 gap-1.5 md:gap-2" id="sa-calendar-grid">
+<div id="sa-calendar-grid">
 </div>
-<div class="mt-6 flex flex-wrap items-center gap-4 text-[11px] text-on-surface-variant">
+<div class="mt-6 flex flex-wrap items-center gap-4 text-[11px] text-on-surface-variant" id="sa-calendar-legend">
 <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-green-200 border border-green-400 inline-block"></span> يوم الراتب</div>
 <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-red-200 border border-red-400 inline-block"></span> يوم القسط</div>
-<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded ring-2 ring-primary bg-surface-container-low inline-block"></span> نهاية الشهر</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-amber-100 border border-amber-400 inline-block"></span> الالتزام القادم</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded ring-2 ring-primary bg-surface-container-low inline-block"></span> نهاية الفترة</div>
 </div>
 <div class="mt-6 p-4 bg-surface-container/50 rounded-xl" id="sa-calendar-summary">
 </div>
@@ -584,28 +589,53 @@
             const footerAmount = document.getElementById('sa-footer-amount');
             if (footerAmount) footerAmount.innerText = fmt(offers.safe.amount);
 
-            // Real 30-day calendar: the customer's actual salary day and first
-            // installment day, with the running balance carried day to day -
-            // reacting live to whichever offer is currently selected.
+            // Real cash-flow calendar: the customer's actual salary day and
+            // first installment day, with the running balance carried day to
+            // day - reacting live to whichever offer is currently selected.
+            // Runs 30 days normally, or a real 90-day/3-month simulation
+            // (grouped into 3 month blocks) when the customer has an
+            // upcoming obligation within the next 3 months - that obligation
+            // is placed as a real dated event, not just smoothed into a ratio.
+            const MONTH_LABELS = ['الشهر الأول', 'الشهر الثاني', 'الشهر الثالث'];
             function renderCalendar(installmentAmount) {
                 const cal = RashidCalc.buildCalendar(installmentAmount);
                 const grid = document.getElementById('sa-calendar-grid');
-                grid.innerHTML = cal.days.map((d) => {
+                const title = document.getElementById('sa-calendar-title');
+                title.innerText = 'محاكاة التدفق النقدي (' + cal.totalDays + ' يوم' + (cal.totalDays === 90 ? ' - 3 أشهر' : '') + ')';
+                document.getElementById('sa-calendar-legend').querySelector('div:nth-child(3)').style.display =
+                    cal.totalDays === 90 ? '' : 'none';
+
+                const cellHtml = (d) => {
                     let cellCls = 'rounded-lg py-1.5 px-1 text-center border';
-                    let inner = '<div class="text-[11px] font-bold text-on-surface">' + d.day + '</div>';
+                    let inner = '<div class="text-[11px] font-bold text-on-surface">' + (((d.day - 1) % 30) + 1) + '</div>';
                     if (d.label === 'salary') {
                         cellCls += ' bg-green-50 border-green-300';
                         inner += '<div class="text-[8px] leading-tight text-green-700 font-bold">الراتب</div><div class="text-[7px] leading-tight text-green-600">' + fmt(d.amount) + '</div>';
                     } else if (d.label === 'installment') {
                         cellCls += ' bg-red-50 border-red-300';
                         inner += '<div class="text-[8px] leading-tight text-error font-bold">القسط</div><div class="text-[7px] leading-tight text-error">' + fmt(d.amount) + '</div>';
+                    } else if (d.label === 'upcoming') {
+                        cellCls += ' bg-amber-50 border-amber-400';
+                        inner += '<div class="text-[8px] leading-tight text-amber-700 font-bold">التزام</div><div class="text-[7px] leading-tight text-amber-700">' + fmt(d.amount) + '</div>';
                     } else {
                         cellCls += ' bg-surface-container-low border-outline-variant/10';
                     }
-                    if (d.day === 30) cellCls += ' ring-2 ring-primary';
+                    if (d.day === cal.totalDays) cellCls += ' ring-2 ring-primary';
                     const tip = d.balance !== null ? ('الرصيد المتوقع نهاية هذا اليوم: ' + fmt(d.balance) + ' ر.س') : 'بانتظار موعد الراتب';
                     return '<div class="' + cellCls + '" title="' + tip + '">' + inner + '</div>';
-                }).join('');
+                };
+
+                if (cal.totalDays === 30) {
+                    grid.innerHTML = '<div class="grid grid-cols-10 gap-1.5 md:gap-2">' + cal.days.map(cellHtml).join('') + '</div>';
+                } else {
+                    grid.innerHTML = [0, 1, 2].map((monthIdx) => {
+                        const monthDays = cal.days.slice(monthIdx * 30, monthIdx * 30 + 30);
+                        return '<div class="mb-4">' +
+                            '<div class="text-[11px] font-bold text-on-surface-variant mb-2">' + MONTH_LABELS[monthIdx] + '</div>' +
+                            '<div class="grid grid-cols-10 gap-1.5 md:gap-2">' + monthDays.map(cellHtml).join('') + '</div>' +
+                            '</div>';
+                    }).join('');
+                }
 
                 const summary = document.getElementById('sa-calendar-summary');
                 if (cal.salaryDay === null || cal.installmentDay === null) {
@@ -614,13 +644,18 @@
                 }
                 const endBalance = cal.endOfMonthBalance;
                 const endCls = endBalance >= 0 ? 'text-green-700' : 'text-error';
-                summary.innerHTML =
-                    '<p class="font-label-md text-label-md text-on-surface-variant mb-1">في يوم ' + cal.salaryDay + ' يدخل راتبك، وبعد خصم المصاريف الأساسية والالتزامات الحالية (' + fmt(cal.recurring) + ' ر.س) يتبقى رصيد متجدد حتى يوم القسط.</p>' +
-                    '<p class="font-label-md text-label-md text-on-surface-variant mb-3">في يوم ' + cal.installmentDay + ' يُخصم القسط (' + fmt(installmentAmount) + ' ر.س) من هذا الرصيد، ويستمر معك حتى نهاية الشهر.</p>' +
+                let html =
+                    '<p class="font-label-md text-label-md text-on-surface-variant mb-1">في يوم ' + cal.salaryDay + ' من كل شهر يدخل راتبك، وبعد خصم المصاريف الأساسية والالتزامات الحالية (' + fmt(cal.recurring) + ' ر.س) يتبقى رصيد متجدد حتى يوم القسط.</p>' +
+                    '<p class="font-label-md text-label-md text-on-surface-variant mb-3">في يوم ' + cal.installmentDay + ' من كل شهر يُخصم القسط (' + fmt(installmentAmount) + ' ر.س) من هذا الرصيد.</p>';
+                if (cal.totalDays === 90 && cal.upcomingDay !== null) {
+                    html += '<p class="font-label-md text-label-md text-amber-700 mb-3">في ' + MONTH_LABELS[cal.upcomingMonthOffset] + ' (يوم ' + cal.upcomingDay + ') يُخصم التزامك القادم من هذا الرصيد أيضاً.</p>';
+                }
+                html +=
                     '<div class="flex items-center justify-between pt-3 border-t border-outline-variant/10">' +
-                    '<span class="font-headline-md text-headline-md text-primary">المتبقي المتوقع نهاية الشهر</span>' +
+                    '<span class="font-headline-md text-headline-md text-primary">' + (cal.totalDays === 90 ? 'المتبقي المتوقع نهاية الشهر الثالث' : 'المتبقي المتوقع نهاية الشهر') + '</span>' +
                     '<span class="font-display-md text-display-md ' + endCls + '">' + (endBalance >= 0 ? '+' : '') + fmt(endBalance) + ' ر.س</span>' +
                     '</div>';
+                summary.innerHTML = html;
             }
 
             // Real offer selection: clicking a card marks it selected, updates the

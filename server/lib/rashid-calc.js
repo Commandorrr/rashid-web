@@ -7,6 +7,8 @@ const PROFIT_RATE_ANNUAL = 0.0499; // representative annual profit/interest rate
 function withDefaults(data) {
     return {
         name: (data && data.name) || 'عميل رشيد',
+        customerId: (data && data.customerId) || '',
+        employmentStatus: (data && data.employmentStatus) || 'موظف',
         income: (data && data.income) || 12000,
         obligations: (data && data.obligations) || 1500,
         expenses: (data && data.expenses) || 4000,
@@ -31,7 +33,12 @@ function analyze(rawData) {
 
     const totalObligations = data.obligations + installment + upcomingMonthly;
     const burdenRatio = data.income > 0 ? (totalObligations / data.income) * 100 : 100;
-    const burdenCap = data.income < 15000 ? 55 : 65;
+    // Retired customers get a stricter cap: pension income is fixed with no
+    // growth/promotion upside, so Rashid applies a more conservative ceiling
+    // than for salaried employees, in line with standard conservative-lending practice.
+    const isRetired = data.employmentStatus === 'متقاعد';
+    const baseCap = data.income < 15000 ? 55 : 65;
+    const burdenCap = isRetired ? baseCap - 5 : baseCap;
     const surplus = data.income - data.expenses - totalObligations;
 
     const pressureScore = Math.max(0, Math.min(100, Math.round(burdenRatio * 1.15)));
@@ -62,6 +69,7 @@ function analyze(rawData) {
         totalObligations: Math.round(totalObligations),
         burdenRatio: Math.round(burdenRatio * 10) / 10,
         burdenCap,
+        isRetired,
         surplus: Math.round(surplus),
         pressureScore,
         eligible,
@@ -114,33 +122,57 @@ function dayOfMonth(dateStr) {
     return day;
 }
 
+function monthsFromNow(dateStr) {
+    if (!dateStr) return 0;
+    const parts = dateStr.split('/');
+    if (parts.length < 3) return 0;
+    const month = parseInt(parts[0], 10);
+    const year = parseInt(parts[2], 10) + 2000;
+    if (isNaN(month) || isNaN(year)) return 0;
+    const now = new Date();
+    const diff = (year - now.getFullYear()) * 12 + (month - 1 - now.getMonth());
+    return Math.max(0, Math.min(2, diff));
+}
+
 function buildCalendar(installmentAmount, rawData) {
     const data = withDefaults(rawData);
+    const totalDays = data.hasUpcomingObligation ? 90 : 30;
     const salaryDay = dayOfMonth(data.salaryDate);
     const installmentDay = dayOfMonth(data.installmentDate);
     const recurring = data.expenses + data.obligations;
+    const upcomingDay = data.hasUpcomingObligation ? dayOfMonth(data.upcomingObligationDate) : null;
+    const upcomingMonthOffset = data.hasUpcomingObligation ? monthsFromNow(data.upcomingObligationDate) : null;
 
     const days = [];
     let balance = null;
-    for (let d = 1; d <= 30; d++) {
+    for (let d = 1; d <= totalDays; d++) {
+        const dayOfCycle = ((d - 1) % 30) + 1;
+        const monthOffset = Math.floor((d - 1) / 30);
         let label = null, amount = null;
-        if (d === salaryDay) {
-            balance = data.income - recurring;
+        if (dayOfCycle === salaryDay) {
+            balance = (balance === null ? 0 : balance) + data.income - recurring;
             label = 'salary';
             amount = data.income;
-        } else if (d === installmentDay) {
+        } else if (dayOfCycle === installmentDay) {
             balance = (balance === null ? 0 : balance) - installmentAmount;
             label = 'installment';
             amount = installmentAmount;
+        } else if (upcomingDay !== null && dayOfCycle === upcomingDay && monthOffset === upcomingMonthOffset) {
+            balance = (balance === null ? 0 : balance) - data.upcomingObligationAmount;
+            label = 'upcoming';
+            amount = data.upcomingObligationAmount;
         }
         days.push({ day: d, label: label, amount: amount, balance: balance });
     }
     return {
         days: days,
+        totalDays: totalDays,
         salaryDay: salaryDay,
         installmentDay: installmentDay,
+        upcomingDay: upcomingDay,
+        upcomingMonthOffset: upcomingMonthOffset,
         recurring: recurring,
-        endOfMonthBalance: days[29].balance
+        endOfMonthBalance: days[days.length - 1].balance
     };
 }
 

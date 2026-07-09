@@ -70,7 +70,11 @@
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md">الرئيسية</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="request-details.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">طلبك الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined">description</span>
 <span class="font-label-md text-label-md">الطلبات</span>
 </a>
@@ -135,6 +139,8 @@
 <thead>
 <tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
 <th class="px-6 py-4">العميل</th>
+<th class="px-6 py-4">رقم العميل</th>
+<th class="px-6 py-4">حالة العميل</th>
 <th class="px-6 py-4">عدد الطلبات</th>
 <th class="px-6 py-4">إجمالي المبالغ المطلوبة</th>
 <th class="px-6 py-4">آخر حالة</th>
@@ -197,6 +203,8 @@
                     tr.dataset.name = c.name;
                     tr.innerHTML =
                         '<td class="px-6 py-5 font-medium">' + c.name + '</td>' +
+                        '<td class="px-6 py-5 text-sm">' + (c.latest.customerId || '-') + '</td>' +
+                        '<td class="px-6 py-5 text-sm">' + (c.latest.employmentStatus || '-') + '</td>' +
                         '<td class="px-6 py-5">' + c.count + '</td>' +
                         '<td class="px-6 py-5">' + fmtSar(c.totalAmount) + ' ر.س</td>' +
                         '<td class="px-6 py-5"><span class="px-2 py-1 ' + s.badge + ' text-xs rounded-md">' + s.label + '</span></td>' +

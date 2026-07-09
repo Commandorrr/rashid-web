@@ -118,7 +118,11 @@
 <span class="material-symbols-outlined">dashboard</span>
 <span>الرئيسية</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg font-label-md text-label-md" href="request-details.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span>طلبك الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg font-label-md text-label-md" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined">description</span>
 <span>الطلبات</span>
 </a>
@@ -182,6 +186,14 @@
 </div>
 </div>
 <div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">رقم العميل</p>
+<p class="font-body-md font-semibold" id="customer-id">-</p>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">حالة العميل</p>
+<p class="font-body-md font-semibold" id="customer-employment-status">-</p>
+</div>
 <div>
 <p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider mb-1">مدة التمويل</p>
 <p class="font-body-md font-semibold" id="customer-tenure">-</p>
@@ -368,7 +380,11 @@
 <span class="material-symbols-outlined">dashboard</span>
 <span class="text-[10px] font-label-md">الرئيسية</span>
 </a>
-<a class="flex flex-col items-center gap-1 text-primary" href="request-details.html">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px] font-label-md">طلبك الحالي</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
 <span class="text-[10px] font-label-md font-bold">الطلبات</span>
 </a>
@@ -422,6 +438,8 @@
                 document.getElementById('request-id-label').innerText = 'رقم الطلب: #RX-' + application.id;
                 document.getElementById('customer-name').innerText = application.name || 'عميل رشيد';
                 document.getElementById('customer-tier').innerText = analysis.eligible ? 'عميل مؤهل' : (analysis.marginal ? 'عميل مؤهل بشروط' : 'عميل يتجاوز الحد الآمن');
+                document.getElementById('customer-id').innerText = application.customerId || 'غير مسجل';
+                document.getElementById('customer-employment-status').innerText = application.employmentStatus || 'غير محدد';
                 document.getElementById('customer-tenure').innerText = application.tenure + ' شهراً';
                 document.getElementById('customer-amount').innerText = fmtSar(application.amount) + ' ر.س';
                 document.getElementById('customer-summary').innerText = analysis.recommendation;
@@ -566,7 +584,7 @@
                         if (!res.ok) { alert('اختر أحد العروض أعلاه أولاً قبل الموافقة.'); return; }
                     } catch (e) {}
                     alert('تمت الموافقة على العرض بنجاح!');
-                    window.location.href = 'advisor-dashboard-ar.html';
+                    window.location.href = 'advisor-requests-ar.html';
                 });
 
                 window.__rashidRequestContext = { application, analysis, offers };

@@ -8,6 +8,8 @@ function rowToApplication(row) {
     return {
         id: row.id,
         name: row.name,
+        customerId: row.customer_id || '',
+        employmentStatus: row.employment_status || 'موظف',
         income: row.income,
         expenses: row.expenses,
         obligations: row.obligations,
@@ -31,12 +33,14 @@ router.post('/', (req, res) => {
 
     const stmt = db.prepare(`
         INSERT INTO applications
-            (name, income, expenses, obligations, amount, tenure, salary_date, installment_date,
+            (name, customer_id, employment_status, income, expenses, obligations, amount, tenure, salary_date, installment_date,
              has_upcoming_obligation, upcoming_obligation_date, upcoming_obligation_amount)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     const result = stmt.run(
         body.name || 'عميل رشيد',
+        body.customerId || null,
+        body.employmentStatus || 'موظف',
         body.income,
         body.expenses || 0,
         body.obligations || 0,
