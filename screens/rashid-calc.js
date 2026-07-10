@@ -232,5 +232,38 @@ window.RashidCalc = (function () {
         };
     }
 
-    return { save, load, collectFromForm, analyze, estimateInstallment, alternativeOffers, buildCalendar, dayOfMonth, STORAGE_KEY };
+    // Groups a pressureScore (0-100) into the 4 real severity tiers used
+    // across the advisor analytics pages.
+    function pressureTier(score) {
+        if (score >= 75) return 'حرجة';
+        if (score >= 50) return 'مرتفعة';
+        if (score >= 25) return 'متوسطة';
+        return 'منخفضة';
+    }
+
+    // Determines the single biggest real driver of an application's pressure
+    // score by comparing normalized contributions - used to power the
+    // "أبرز أسباب الضغط" charts/rankings on the analytics pages. Every
+    // candidate is derived from real fields (income/obligations/installment/
+    // upcoming obligation), never a fabricated category.
+    function primaryPressureCause(rawData, result) {
+        const data = withDefaults(rawData);
+        const r = result || analyze(data);
+        const income = data.income > 0 ? data.income : 1;
+        const installmentRatio = r.installment / income;
+        const obligationsRatio = data.obligations / income;
+        const marginShortfall = r.surplus / income < 0.1 ? (0.5 - r.surplus / income) : 0;
+        const upcomingRatio = data.hasUpcomingObligation ? (data.upcomingObligationAmount / income) : 0;
+
+        const candidates = [
+            { key: 'نسبة القسط للدخل مرتفعة', value: installmentRatio },
+            { key: 'ارتفاع الالتزامات الحالية', value: obligationsRatio },
+            { key: 'انخفاض الهامش المتبقي', value: marginShortfall },
+            { key: 'التزام قادم خلال 3 أشهر', value: upcomingRatio }
+        ];
+        candidates.sort((a, b) => b.value - a.value);
+        return candidates[0].key;
+    }
+
+    return { save, load, collectFromForm, analyze, estimateInstallment, alternativeOffers, buildCalendar, dayOfMonth, pressureTier, primaryPressureCause, STORAGE_KEY };
 })();

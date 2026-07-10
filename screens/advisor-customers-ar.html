@@ -82,10 +82,17 @@
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
 <span class="font-label-md text-label-md">العملاء</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-analytics-ar.html">
-<span class="material-symbols-outlined">monitoring</span>
-<span class="font-label-md text-label-md">التحليلات</span>
-</a>
+<!-- Analytics (collapsible submenu) -->
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">جميع التحليلات</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">تحليل الضغط المالي</a>
+</div>
+</div>
 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
 <span class="material-symbols-outlined">auto_awesome</span>
 <span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
@@ -228,6 +235,32 @@
             }
 
             load();
+        })();
+    </script>
+<script>
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            const currentPage = location.pathname.split('/').pop();
+            const onAnalyticsPage = currentPage === 'advisor-analytics-ar.html' || currentPage === 'advisor-analytics-pressure-ar.html';
+            if (onAnalyticsPage) {
+                submenu.style.display = 'block';
+                chevron.style.transform = 'rotate(180deg)';
+                toggle.classList.add('bg-surface-container-highest');
+                submenu.querySelectorAll('.analytics-nav-link').forEach(a => {
+                    if (a.getAttribute('href') === currentPage) {
+                        a.classList.add('bg-primary', 'text-on-primary');
+                        a.classList.remove('text-on-surface-variant');
+                    }
+                });
+            }
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
         })();
     </script>
 </body></html>

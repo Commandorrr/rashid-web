@@ -3,7 +3,7 @@
 <html class="light" dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>رشيد | التحليلات</title>
+<title>رشيد | جميع التحليلات</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -62,7 +62,7 @@
     </script>
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
-<!-- Persistent SideNavBar -->
+<!-- Persistent SideNavBar (Shared Component) -->
 <aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
 <div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
 <nav class="flex-1 space-y-2 overflow-y-auto">
@@ -82,10 +82,17 @@
 <span class="material-symbols-outlined">group</span>
 <span class="font-label-md text-label-md">العملاء</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-analytics-ar.html">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
-<span class="font-label-md text-label-md">التحليلات</span>
-</a>
+<!-- Analytics (collapsible submenu, expanded + "All Analytics" highlighted since it's active here) -->
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">جميع التحليلات</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">تحليل الضغط المالي</a>
+</div>
+</div>
 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
 <span class="material-symbols-outlined">auto_awesome</span>
 <span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
@@ -110,119 +117,403 @@
 </aside>
 <!-- Main Content Canvas -->
 <main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
-<header class="mb-section-gap">
-<h1 class="font-display-md text-display-md text-primary tracking-tight">التحليلات</h1>
-<p class="text-on-surface-variant font-body-md">مؤشرات على مستوى المحفظة الكاملة - محسوبة من كل الطلبات الحقيقية المسجلة في رشيد.</p>
+<header class="flex justify-between items-center mb-section-gap flex-wrap gap-4">
+<div>
+<h1 class="font-display-md text-display-md text-primary tracking-tight">جميع التحليلات</h1>
+<p class="text-on-surface-variant font-body-md">مؤشرات على مستوى المحفظة الكاملة - محسوبة فعلياً من كل الطلبات الحقيقية المسجلة في رشيد.</p>
+</div>
+<div class="flex items-center gap-4">
+<select class="px-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-md" id="analytics-range">
+<option value="7">آخر 7 أيام</option>
+<option value="30">آخر 30 يوماً</option>
+<option value="all" selected="">كل الفترة</option>
+</select>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</div>
 </header>
-<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<!-- 6 real KPI cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
 <div class="glass-panel glass-card-edge p-6 rounded-2xl">
-<div class="font-headline-lg text-headline-lg text-primary" id="an-total-volume">0</div>
-<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي حجم التمويل المطلوب (ر.س)</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-safe-conversion">0%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">نسبة التحويل إلى عروض آمنة</div>
 </div>
 <div class="glass-panel glass-card-edge p-6 rounded-2xl">
-<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-amount">0</div>
-<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط مبلغ الطلب (ر.س)</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-alt-selection">0%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">نسبة اختيار البدائل</div>
 </div>
 <div class="glass-panel glass-card-edge p-6 rounded-2xl">
-<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-pressure">0</div>
-<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط درجة الضغط (من 100)</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-surplus-gain">0 ر.س</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط زيادة المتبقي الشهري</div>
 </div>
 <div class="glass-panel glass-card-edge p-6 rounded-2xl">
-<div class="font-headline-lg text-headline-lg text-primary" id="an-avg-confidence">0%</div>
-<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط ثقة النموذج</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-avg-pressure">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط درجة الضغط</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-error" id="kpi-high-pressure">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">الطلبات عالية الضغط</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-total-analyzed">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي الطلبات المحللة</div>
 </div>
 </section>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
-<h4 class="font-headline-md text-on-surface mb-6">توزيع نسبة العبء (DBR)</h4>
-<div class="flex-1 flex items-end gap-3 pb-2" id="dbr-buckets-bars"></div>
-<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-4" id="dbr-buckets-labels"></div>
-</div>
-<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
-<h4 class="font-headline-md text-on-surface mb-6">توزيع مدة التمويل المطلوبة</h4>
-<div class="flex-1 flex items-end gap-3 pb-2" id="tenure-buckets-bars"></div>
-<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-4" id="tenure-buckets-labels"></div>
-</div>
-</div>
-<div class="glass-panel glass-card-edge p-6 rounded-3xl mt-8">
-<h4 class="font-headline-md text-on-surface mb-6">توزيع القرارات على مستوى المحفظة</h4>
-<div class="w-full h-4 rounded-full overflow-hidden flex" id="decision-stacked-bar"></div>
-<div class="grid grid-cols-3 gap-2 mt-4 text-sm font-label-md">
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> مؤهل <span id="an-count-eligible">0</span></div>
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#755a26"></span> مؤهل بشروط <span id="an-count-marginal">0</span></div>
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-error"></span> غير مؤهل <span id="an-count-rejected">0</span></div>
+<!-- Donut + Trend -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl">
+<h4 class="font-headline-md text-on-surface mb-4">توزيع مستويات الضغط</h4>
+<div class="flex items-center gap-8">
+<div class="w-36 h-36 rounded-full relative shrink-0">
+<div class="absolute inset-0 rounded-full" id="tier-donut"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold" id="tier-donut-total">0</span>
+<span class="text-[9px] uppercase text-on-surface-variant">إجمالي الطلبات</span>
 </div>
 </div>
+<div class="flex-1 space-y-2 text-sm font-label-md">
+<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#16a34a"></span>منخفضة</span><span id="tier-count-low">0</span></div>
+<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c9a227"></span>متوسطة</span><span id="tier-count-mid">0</span></div>
+<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#e07a1f"></span>مرتفعة</span><span id="tier-count-high">0</span></div>
+<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#ba1a1a"></span>حرجة</span><span id="tier-count-critical">0</span></div>
+</div>
+</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-full flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-4">اتجاه متوسط درجة الضغط</h4>
+<div class="flex-1 min-h-[160px] relative">
+<svg class="w-full h-full" id="pressure-trend-svg" preserveAspectRatio="none" viewBox="0 0 100 100">
+<defs>
+<lineargradient id="trendFillA" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#755a26" stop-opacity="0.35"></stop>
+<stop offset="100%" stop-color="#755a26" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<polygon fill="url(#trendFillA)" id="trend-area" points=""></polygon>
+<polyline fill="none" id="trend-line" points="" stroke="#755a26" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" vector-effect="non-scaling-stroke"></polyline>
+<g id="trend-dots"></g>
+</svg>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-3" id="trend-labels"></div>
+</div>
+</section>
+<!-- Pressure causes + before/after impact -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl">
+<h4 class="font-headline-md text-on-surface mb-4">أبرز أسباب الضغط</h4>
+<div class="space-y-4" id="cause-bars"></div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl">
+<h4 class="font-headline-md text-on-surface mb-4">تأثير توصية رشيد على تحسين الوضع المالي</h4>
+<div id="impact-content"></div>
+</div>
+</section>
+<!-- AI assistant insight + weekly indicators -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl bg-primary text-on-primary">
+<h3 class="font-headline-md text-headline-md mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-secondary-fixed">auto_awesome</span> مساعد المستشار</h3>
+<p class="text-sm leading-relaxed text-inverse-on-surface" id="ai-insight-text">جارِ تحليل المحفظة...</p>
+</div>
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10">
+<h4 class="font-headline-md text-on-surface">أبرز المؤشرات هذا الأسبوع</h4>
+</div>
+<div class="p-6" id="weekly-content"></div>
+</div>
+</section>
 </main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px]">طلبك الحالي</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px]">العملاء</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px]">المساعد</span>
+</a>
+</nav>
 <script src="rashid-calc.js"></script>
 <script src="rashid-api.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) {
+                nameEl.innerText = session.username;
+                avatarEl.innerText = session.username.trim().charAt(0).toUpperCase();
+            } else {
+                nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)';
+                avatarEl.innerText = '?';
+            }
+        })();
+    </script>
 <script>
         (function () {
             function fmtSar(n) { return Math.round(n).toLocaleString('ar-SA'); }
 
-            function renderBuckets(barsId, labelsId, buckets) {
-                const max = Math.max(1, ...buckets.map(b => b.count));
-                document.getElementById(barsId).innerHTML = buckets.map(b =>
-                    '<div class="flex-1 bg-secondary rounded-t-lg transition-all" style="height:' + Math.max(4, Math.round((b.count / max) * 100)) + '%" title="' + b.label + ': ' + b.count + '"></div>'
-                ).join('');
-                document.getElementById(labelsId).innerHTML = buckets.map(b => '<span>' + b.label + '</span>').join('');
+            function isoWeekKey(dateStr) {
+                const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return null;
+                const target = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+                const dayNum = (target.getUTCDay() + 6) % 7;
+                target.setUTCDate(target.getUTCDate() - dayNum + 3);
+                const firstThursday = new Date(Date.UTC(target.getUTCFullYear(), 0, 4));
+                const week = 1 + Math.round(((target - firstThursday) / 86400000 - 3 + ((firstThursday.getUTCDay() + 6) % 7)) / 7);
+                return target.getUTCFullYear() + '-W' + week;
+            }
+
+            function renderEmpty() {
+                document.querySelector('main').insertAdjacentHTML('beforeend',
+                    '<div class="glass-card-edge glass-panel p-6 rounded-xl mt-8 text-center text-on-surface-variant">لا توجد طلبات حقيقية بعد لحساب التحليلات - أنشئ طلباً من "تحليل جديد".</div>');
             }
 
             async function load() {
-                const apps = await RashidApi.listApplications();
-                if (!apps || !apps.length) {
-                    document.querySelector('main').insertAdjacentHTML('beforeend',
-                        '<div class="glass-card-edge glass-panel p-6 rounded-xl mt-8 text-center text-on-surface-variant">لا توجد طلبات حقيقية بعد لحساب التحليلات - أنشئ طلباً من "تحليل جديد".</div>');
-                    return;
+                let apps = await RashidApi.listApplications();
+                if (!apps || !apps.length) { renderEmpty(); return; }
+
+                document.getElementById('analytics-range').addEventListener('change', () => render(apps));
+                render(apps);
+            }
+
+            function render(allApps) {
+                const range = document.getElementById('analytics-range').value;
+                let apps = allApps;
+                if (range !== 'all') {
+                    const days = parseInt(range, 10);
+                    const cutoff = Date.now() - days * 86400000;
+                    apps = allApps.filter(a => new Date(a.createdAt).getTime() >= cutoff);
+                    if (!apps.length) apps = allApps; // honest fallback: don't show an empty page if the range excludes all real data
                 }
 
-                const analyzed = apps.map(row => ({ row, a: RashidCalc.analyze(row) }));
+                const analyzed = apps.map(row => ({
+                    row,
+                    a: RashidCalc.analyze(row),
+                    offers: RashidCalc.alternativeOffers(row),
+                    cause: RashidCalc.primaryPressureCause(row)
+                }));
                 const total = analyzed.length;
 
-                const totalVolume = analyzed.reduce((s, x) => s + x.row.amount, 0);
-                const avgAmount = totalVolume / total;
+                // KPIs
+                const withSelection = analyzed.filter(x => x.row.selectedOfferKey);
+                const safeCount = analyzed.filter(x => x.row.selectedOfferKey === 'safe').length;
+                document.getElementById('kpi-safe-conversion').innerText = Math.round((safeCount / total) * 100) + '%';
+                document.getElementById('kpi-alt-selection').innerText = Math.round((withSelection.length / total) * 100) + '%';
+
+                let surplusGain = 0;
+                if (withSelection.length) {
+                    const gains = withSelection.map(x => {
+                        const before = x.a.surplus;
+                        const chosen = x.offers[x.row.selectedOfferKey] || x.offers.current;
+                        const afterAnalysis = RashidCalc.analyze(Object.assign({}, x.row, { amount: chosen.amount, tenure: chosen.tenure }));
+                        return afterAnalysis.surplus - before;
+                    });
+                    surplusGain = gains.reduce((s, v) => s + v, 0) / gains.length;
+                }
+                document.getElementById('kpi-surplus-gain').innerText = fmtSar(surplusGain) + ' ر.س';
+
                 const avgPressure = Math.round(analyzed.reduce((s, x) => s + x.a.pressureScore, 0) / total);
-                const avgConfidence = Math.round(analyzed.reduce((s, x) => s + x.a.confidence, 0) / total);
+                document.getElementById('kpi-avg-pressure').innerText = avgPressure;
 
-                document.getElementById('an-total-volume').innerText = fmtSar(totalVolume);
-                document.getElementById('an-avg-amount').innerText = fmtSar(avgAmount);
-                document.getElementById('an-avg-pressure').innerText = avgPressure;
-                document.getElementById('an-avg-confidence').innerText = avgConfidence + '%';
+                const highPressureCount = analyzed.filter(x => RashidCalc.pressureTier(x.a.pressureScore) === 'مرتفعة' || RashidCalc.pressureTier(x.a.pressureScore) === 'حرجة').length;
+                document.getElementById('kpi-high-pressure').innerText = highPressureCount.toLocaleString('ar-SA');
+                document.getElementById('kpi-total-analyzed').innerText = total.toLocaleString('ar-SA');
 
-                // DBR buckets
-                const dbrBuckets = [
-                    { label: '<40%', min: 0, max: 40 },
-                    { label: '40-55%', min: 40, max: 55 },
-                    { label: '55-65%', min: 55, max: 65 },
-                    { label: '65-80%', min: 65, max: 80 },
-                    { label: '80%+', min: 80, max: Infinity }
-                ].map(b => ({ label: b.label, count: analyzed.filter(x => x.a.burdenRatio >= b.min && x.a.burdenRatio < b.max).length }));
-                renderBuckets('dbr-buckets-bars', 'dbr-buckets-labels', dbrBuckets);
+                // Tier donut
+                const tierColors = { 'منخفضة': '#16a34a', 'متوسطة': '#c9a227', 'مرتفعة': '#e07a1f', 'حرجة': '#ba1a1a' };
+                const tierOrder = ['منخفضة', 'متوسطة', 'مرتفعة', 'حرجة'];
+                const tierCounts = { 'منخفضة': 0, 'متوسطة': 0, 'مرتفعة': 0, 'حرجة': 0 };
+                analyzed.forEach(x => tierCounts[RashidCalc.pressureTier(x.a.pressureScore)]++);
+                let deg = 0;
+                const stops = tierOrder.map(t => {
+                    const from = deg;
+                    deg += (tierCounts[t] / total) * 360;
+                    return tierColors[t] + ' ' + from + 'deg ' + deg + 'deg';
+                }).join(', ');
+                const donutEl = document.getElementById('tier-donut');
+                donutEl.style.background = 'conic-gradient(' + stops + ')';
+                donutEl.style.mask = 'radial-gradient(closest-side, transparent 64%, black 65%)';
+                donutEl.style.webkitMask = 'radial-gradient(closest-side, transparent 64%, black 65%)';
+                document.getElementById('tier-donut-total').innerText = total.toLocaleString('ar-SA');
+                document.getElementById('tier-count-low').innerText = tierCounts['منخفضة'];
+                document.getElementById('tier-count-mid').innerText = tierCounts['متوسطة'];
+                document.getElementById('tier-count-high').innerText = tierCounts['مرتفعة'];
+                document.getElementById('tier-count-critical').innerText = tierCounts['حرجة'];
 
-                // Tenure buckets (real, from application.tenure)
-                const tenureBuckets = [
-                    { label: '≤24', min: 0, max: 24 },
-                    { label: '25-36', min: 25, max: 36 },
-                    { label: '37-48', min: 37, max: 48 },
-                    { label: '49-60', min: 49, max: 60 },
-                    { label: '60+', min: 61, max: Infinity }
-                ].map(b => ({ label: b.label, count: analyzed.filter(x => x.row.tenure >= b.min && x.row.tenure <= b.max).length }));
-                renderBuckets('tenure-buckets-bars', 'tenure-buckets-labels', tenureBuckets);
+                // Trend: bucket by real distinct calendar days present in the data (up to last 10)
+                const byDay = new Map();
+                analyzed.forEach(x => {
+                    const day = (x.row.createdAt || '').slice(0, 10);
+                    if (!day) return;
+                    if (!byDay.has(day)) byDay.set(day, []);
+                    byDay.get(day).push(x.a.pressureScore);
+                });
+                const days = [...byDay.keys()].sort().slice(-10);
+                const points = days.map(d => {
+                    const scores = byDay.get(d);
+                    return Math.round(scores.reduce((s, v) => s + v, 0) / scores.length);
+                });
+                if (points.length === 1) { points.unshift(points[0]); days.unshift(days[0]); }
+                const maxP = Math.max(1, ...points);
+                const minP = Math.min(...points);
+                const span = Math.max(1, maxP - minP);
+                const stepX = points.length > 1 ? 100 / (points.length - 1) : 100;
+                const coords = points.map((p, i) => {
+                    const x = i * stepX;
+                    const y = 92 - ((p - minP) / span) * 80;
+                    return [x, y];
+                });
+                document.getElementById('trend-line').setAttribute('points', coords.map(c => c[0] + ',' + c[1]).join(' '));
+                document.getElementById('trend-area').setAttribute('points', '0,100 ' + coords.map(c => c[0] + ',' + c[1]).join(' ') + ' 100,100');
+                document.getElementById('trend-dots').innerHTML = coords.map((c, i) =>
+                    '<circle cx="' + c[0] + '" cy="' + c[1] + '" r="1.6" fill="#755a26"><title>' + days[i] + ': ' + points[i] + '</title></circle>'
+                ).join('');
+                document.getElementById('trend-labels').innerHTML = days.map(d => '<span>' + new Date(d).toLocaleDateString('ar-SA', { day: 'numeric', month: 'short' }) + '</span>').join('');
 
-                // Decision distribution stacked bar
-                const eligibleCount = analyzed.filter(x => x.a.eligible).length;
-                const marginalCount = analyzed.filter(x => x.a.marginal).length;
-                const rejectedCount = total - eligibleCount - marginalCount;
-                document.getElementById('decision-stacked-bar').innerHTML =
-                    '<div style="width:' + (eligibleCount / total * 100) + '%; background:#22c55e" title="مؤهل"></div>' +
-                    '<div style="width:' + (marginalCount / total * 100) + '%; background:#755a26" title="مؤهل بشروط"></div>' +
-                    '<div style="width:' + (rejectedCount / total * 100) + '%; background:#ba1a1a" title="غير مؤهل"></div>';
-                document.getElementById('an-count-eligible').innerText = eligibleCount;
-                document.getElementById('an-count-marginal').innerText = marginalCount;
-                document.getElementById('an-count-rejected').innerText = rejectedCount;
+                // Pressure causes (real, via RashidCalc.primaryPressureCause)
+                const causeCounts = new Map();
+                analyzed.forEach(x => causeCounts.set(x.cause, (causeCounts.get(x.cause) || 0) + 1));
+                const causeList = [...causeCounts.entries()].sort((a, b) => b[1] - a[1]);
+                const maxCause = Math.max(1, ...causeList.map(c => c[1]));
+                document.getElementById('cause-bars').innerHTML = causeList.map(([label, count]) =>
+                    '<div>' +
+                    '<div class="flex justify-between text-sm font-label-md mb-1"><span>' + label + '</span><span class="text-on-surface-variant">' + count + ' (' + Math.round(count / total * 100) + '%)</span></div>' +
+                    '<div class="w-full h-2.5 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-secondary rounded-full" style="width:' + Math.round((count / maxCause) * 100) + '%"></div></div>' +
+                    '</div>'
+                ).join('');
+
+                // Before/after impact of Rashid's recommendation (only over applications where the advisor actually selected an offer)
+                const impactEl = document.getElementById('impact-content');
+                if (!withSelection.length) {
+                    impactEl.innerHTML = '<p class="text-sm text-on-surface-variant">لا توجد بيانات كافية بعد - لم يتم اعتماد أي توصية على طلب حقيقي حتى الآن. سيظهر هنا تحليل حقيقي بمجرد اختيار عرض بديل من صفحة "طلبك الحالي".</p>';
+                } else {
+                    const beforeAfter = withSelection.map(x => {
+                        const chosen = x.offers[x.row.selectedOfferKey] || x.offers.current;
+                        const after = RashidCalc.analyze(Object.assign({}, x.row, { amount: chosen.amount, tenure: chosen.tenure }));
+                        return { before: x.a, after };
+                    });
+                    const avgSurplusBefore = beforeAfter.reduce((s, x) => s + x.before.surplus, 0) / beforeAfter.length;
+                    const avgSurplusAfter = beforeAfter.reduce((s, x) => s + x.after.surplus, 0) / beforeAfter.length;
+                    const avgPressureBefore = beforeAfter.reduce((s, x) => s + x.before.pressureScore, 0) / beforeAfter.length;
+                    const avgPressureAfter = beforeAfter.reduce((s, x) => s + x.after.pressureScore, 0) / beforeAfter.length;
+                    const successCount = beforeAfter.filter(x => x.after.surplus > x.before.surplus || x.after.pressureScore < x.before.pressureScore).length;
+                    const successRate = Math.round((successCount / beforeAfter.length) * 100);
+                    const safeRate = Math.round((safeCount / withSelection.length) * 100);
+                    impactEl.innerHTML =
+                        '<table class="w-full text-sm mb-4">' +
+                        '<thead><tr class="text-on-surface-variant font-label-md text-xs uppercase"><th class="text-right pb-2">المؤشر</th><th class="text-center pb-2">قبل التوصية</th><th class="text-center pb-2">بعد التوصية</th></tr></thead>' +
+                        '<tbody class="divide-y divide-outline-variant/10">' +
+                        '<tr><td class="py-2">متوسط الهامش الشهري المتبقي</td><td class="py-2 text-center">' + fmtSar(avgSurplusBefore) + ' ر.س</td><td class="py-2 text-center font-bold text-green-700">' + fmtSar(avgSurplusAfter) + ' ر.س</td></tr>' +
+                        '<tr><td class="py-2">متوسط درجة الضغط</td><td class="py-2 text-center">' + Math.round(avgPressureBefore) + '</td><td class="py-2 text-center font-bold text-green-700">' + Math.round(avgPressureAfter) + '</td></tr>' +
+                        '</tbody></table>' +
+                        '<div class="grid grid-cols-2 gap-4 text-center">' +
+                        '<div><div class="font-headline-md text-headline-md text-primary">' + successRate + '%</div><div class="text-[11px] text-on-surface-variant">نسبة نجاح التوصية</div></div>' +
+                        '<div><div class="font-headline-md text-headline-md text-primary">' + safeRate + '%</div><div class="text-[11px] text-on-surface-variant">نسبة التحويل إلى العرض الآمن</div></div>' +
+                        '</div>';
+                }
+
+                // AI insight text (computed, not fabricated)
+                const topCause = causeList[0] ? causeList[0][0] : 'غير متوفر';
+                const tierWord = RashidCalc.pressureTier(avgPressure);
+                let insight = 'متوسط درجة الضغط عبر ' + total.toLocaleString('ar-SA') + ' طلباً هو ' + avgPressure + ' نقطة (مستوى ' + tierWord + '). أبرز سبب متكرر للضغط المالي بين العملاء هو "' + topCause + '".';
+                if (withSelection.length) {
+                    insight += ' من الطلبات التي اعتمد فيها المستشار توصية بديلة (' + withSelection.length + ' طلباً)، تحسّن الوضع المالي فعلياً في ' + Math.round((withSelection.filter(x => {
+                        const chosen = x.offers[x.row.selectedOfferKey] || x.offers.current;
+                        const after = RashidCalc.analyze(Object.assign({}, x.row, { amount: chosen.amount, tenure: chosen.tenure }));
+                        return after.surplus > x.a.surplus;
+                    }).length / withSelection.length) * 100) + '% من الحالات.';
+                } else {
+                    insight += ' لا توجد بعد طلبات اعتمد فيها عرض بديل لقياس أثر التوصية فعلياً.';
+                }
+                if (highPressureCount > 0) {
+                    insight += ' يوجد حالياً ' + highPressureCount + ' طلباً ضمن مستوى ضغط مرتفع أو حرج يستحق متابعة عاجلة من المستشار.';
+                }
+                document.getElementById('ai-insight-text').innerText = insight;
+
+                // Weekly indicators (real ISO-week comparison; honest fallback if data doesn't span multiple weeks yet)
+                const weeklyEl = document.getElementById('weekly-content');
+                const weekGroups = new Map();
+                analyzed.forEach(x => {
+                    const wk = isoWeekKey(x.row.createdAt);
+                    if (!wk) return;
+                    if (!weekGroups.has(wk)) weekGroups.set(wk, []);
+                    weekGroups.get(wk).push(x);
+                });
+                const weekKeys = [...weekGroups.keys()].sort();
+                if (weekKeys.length < 2) {
+                    weeklyEl.innerHTML = '<p class="text-sm text-on-surface-variant">كل الطلبات الحالية مسجّلة ضمن نفس الأسبوع، فلا يوجد أساس مقارنة أسبوعي حقيقي بعد. ستظهر هنا مقارنة فعلية بين هذا الأسبوع والأسبوع الماضي بمجرد تجمّع بيانات عبر أسابيع متعددة.</p>';
+                } else {
+                    const thisWeek = weekGroups.get(weekKeys[weekKeys.length - 1]);
+                    const lastWeek = weekGroups.get(weekKeys[weekKeys.length - 2]);
+                    const stat = (arr) => ({
+                        count: arr.length,
+                        avgPressure: Math.round(arr.reduce((s, x) => s + x.a.pressureScore, 0) / arr.length),
+                        eligiblePct: Math.round((arr.filter(x => x.a.eligible).length / arr.length) * 100)
+                    });
+                    const tw = stat(thisWeek), lw = stat(lastWeek);
+                    const rows = [
+                        ['عدد الطلبات', tw.count, lw.count],
+                        ['متوسط درجة الضغط', tw.avgPressure, lw.avgPressure],
+                        ['نسبة التأهيل', tw.eligiblePct + '%', lw.eligiblePct + '%']
+                    ];
+                    weeklyEl.innerHTML = '<table class="w-full text-sm"><thead><tr class="text-on-surface-variant font-label-md text-xs uppercase"><th class="text-right pb-2">المؤشر</th><th class="text-center pb-2">هذا الأسبوع</th><th class="text-center pb-2">الأسبوع الماضي</th></tr></thead><tbody class="divide-y divide-outline-variant/10">' +
+                        rows.map(r => '<tr><td class="py-2">' + r[0] + '</td><td class="py-2 text-center font-bold text-primary">' + r[1] + '</td><td class="py-2 text-center text-on-surface-variant">' + r[2] + '</td></tr>').join('') +
+                        '</tbody></table>';
+                }
             }
 
             load();
+        })();
+    </script>
+<script>
+        // Collapsible "التحليلات" sidebar submenu (shared across every advisor
+        // page) - auto-expands and highlights the current page when already
+        // on one of the two analytics pages.
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            const currentPage = location.pathname.split('/').pop();
+            const onAnalyticsPage = currentPage === 'advisor-analytics-ar.html' || currentPage === 'advisor-analytics-pressure-ar.html';
+            if (onAnalyticsPage) {
+                submenu.style.display = 'block';
+                chevron.style.transform = 'rotate(180deg)';
+                toggle.classList.add('bg-surface-container-highest');
+                submenu.querySelectorAll('.analytics-nav-link').forEach(a => {
+                    if (a.getAttribute('href') === currentPage) {
+                        a.classList.add('bg-primary', 'text-on-primary');
+                        a.classList.remove('text-on-surface-variant');
+                    }
+                });
+            }
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
         })();
     </script>
 </body></html>
