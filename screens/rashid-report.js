@@ -191,10 +191,64 @@ window.RashidReport = (function () {
         doc.save('rashid-advisor-portfolio-report.pdf');
     }
 
+    // Builds the flat row-set shared by the CSV/XLSX portfolio exports, so both
+    // formats always contain exactly the same real fields in the same order.
+    function portfolioRows(apps) {
+        return apps.map(function (row) {
+            const a = RashidCalc.analyze(row);
+            return {
+                'رقم الطلب': 'RX-' + row.id,
+                'اسم العميل': row.name || 'عميل رشيد',
+                'رقم العميل': row.customerId || '',
+                'الحالة الوظيفية': row.employmentStatus || '',
+                'الدخل الشهري (ر.س)': row.income,
+                'مبلغ التمويل المطلوب (ر.س)': row.amount,
+                'مدة التمويل (شهر)': row.tenure,
+                'القسط الشهري المتوقع (ر.س)': a.installment,
+                'نسبة العبء (DBR %)': a.burdenRatio,
+                'درجة الضغط': a.pressureScore,
+                'القرار': a.decision,
+                'تاريخ الإنشاء': row.createdAt ? new Date(row.createdAt).toLocaleDateString('ar-SA') : ''
+            };
+        });
+    }
+
+    function downloadPortfolioCsv(apps) {
+        if (!apps || !apps.length) { alert('لا توجد طلبات لتصديرها.'); return; }
+        const rows = portfolioRows(apps);
+        const headers = Object.keys(rows[0]);
+        const escape = function (v) { return '"' + String(v).replace(/"/g, '""') + '"'; };
+        const lines = [headers.map(escape).join(',')].concat(
+            rows.map(function (r) { return headers.map(function (h) { return escape(r[h]); }).join(','); })
+        );
+        const blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rashid-portfolio-' + new Date().toISOString().slice(0, 10) + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function downloadPortfolioXlsx(apps) {
+        if (!apps || !apps.length) { alert('لا توجد طلبات لتصديرها.'); return; }
+        if (!window.XLSX) {
+            alert('تعذر تحميل مكوّن إنشاء Excel. تحقق من اتصالك بالإنترنت وحاول مرة أخرى.');
+            return;
+        }
+        const rows = portfolioRows(apps);
+        const sheet = XLSX.utils.json_to_sheet(rows);
+        const book = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(book, sheet, 'المحفظة');
+        XLSX.writeFile(book, 'rashid-portfolio-' + new Date().toISOString().slice(0, 10) + '.xlsx');
+    }
+
     return {
         downloadAnalysisPdf,
         downloadDecisionPdf,
         downloadRequestSummaryPdf,
-        downloadDashboardReportPdf
+        downloadDashboardReportPdf,
+        downloadPortfolioCsv,
+        downloadPortfolioXlsx
     };
 })();
