@@ -237,7 +237,8 @@
 <div class="glass-panel glass-card-edge p-6 rounded-3xl flex flex-col relative overflow-hidden">
 <h4 class="font-headline-md text-on-surface mb-4">توزيع الطلبات حسب حالة القرار</h4>
 <div class="flex items-center justify-center relative py-4">
-<div class="w-36 h-36 rounded-full relative" id="decision-donut">
+<div class="w-36 h-36 rounded-full relative">
+<div class="absolute inset-0 rounded-full" id="decision-donut"></div>
 <div class="absolute inset-0 flex flex-col items-center justify-center">
 <span class="text-2xl font-bold" id="decision-donut-total">0</span>
 <span class="text-[10px] uppercase">الإجمالي</span>
@@ -482,17 +483,36 @@
                 });
                 const chartEl = document.getElementById('pressure-trend-chart');
                 if (days.length) {
-                    const w = 280, h = 200, pad = 14;
+                    // viewBox 0-100 on both axes + preserveAspectRatio="none" so the
+                    // chart always fills its container exactly, regardless of the
+                    // card's actual aspect ratio (a fixed-aspect viewBox like 280x200
+                    // let the SVG "letterbox" with empty space above/below).
+                    const padX = 6, padY = 12, topPad = 14;
+                    const usableW = 100 - 2 * padX, usableH = 100 - padY - topPad;
+                    const maxAvg = Math.max(...days.map(d => d.avg), 1);
+                    const minAvg = Math.min(...days.map(d => d.avg), 0);
+                    const range = Math.max(maxAvg - minAvg, 1);
                     const points = days.map((pt, i) => ({
-                        x: pad + (days.length === 1 ? (w - 2 * pad) / 2 : i * (w - 2 * pad) / (days.length - 1)),
-                        y: h - pad - (pt.avg / 100) * (h - 2 * pad),
+                        x: padX + (days.length === 1 ? usableW / 2 : i * usableW / (days.length - 1)),
+                        y: topPad + usableH - ((pt.avg - minAvg) / range) * usableH,
                         avg: pt.avg
                     }));
                     const polyline = points.map(p => p.x + ',' + p.y).join(' ');
-                    const dots = points.map(p => '<circle cx="' + p.x + '" cy="' + p.y + '" r="4.5" fill="#755a26"></circle>' +
-                        '<title>' + p.avg + '/100</title>').join('');
-                    chartEl.innerHTML = '<svg viewBox="0 0 ' + w + ' ' + h + '" class="w-full h-full">' +
-                        (points.length > 1 ? '<polyline points="' + polyline + '" fill="none" stroke="#755a26" stroke-width="2.5"></polyline>' : '') +
+                    const areaPath = 'M' + points[0].x + ',' + (topPad + usableH) + ' L' +
+                        points.map(p => p.x + ',' + p.y).join(' L') + ' L' + points[points.length - 1].x + ',' + (topPad + usableH) + ' Z';
+                    const dots = points.map(p =>
+                        '<circle cx="' + p.x + '" cy="' + p.y + '" r="2.2" fill="#fdf8f7" stroke="#755a26" stroke-width="1.6"></circle>' +
+                        '<text x="' + p.x + '" y="' + (p.y - 5) + '" font-size="6" text-anchor="middle" fill="#4d4540">' + p.avg + '</text>' +
+                        '<title>' + p.avg + '/100</title>'
+                    ).join('');
+                    chartEl.innerHTML =
+                        '<svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full">' +
+                        '<defs><linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">' +
+                        '<stop offset="0%" stop-color="#755a26" stop-opacity="0.25"></stop>' +
+                        '<stop offset="100%" stop-color="#755a26" stop-opacity="0"></stop>' +
+                        '</linearGradient></defs>' +
+                        '<path d="' + areaPath + '" fill="url(#trendFill)"></path>' +
+                        (points.length > 1 ? '<polyline points="' + polyline + '" fill="none" stroke="#755a26" stroke-width="1.6" vector-effect="non-scaling-stroke"></polyline>' : '') +
                         dots + '</svg>';
                     document.getElementById('pressure-trend-labels').innerHTML = days.map(pt => '<span>' + pt.label + '</span>').join('');
                 } else {
@@ -500,11 +520,16 @@
                     document.getElementById('pressure-trend-labels').innerHTML = '';
                 }
 
-                // Decision distribution donut (real) - refined, more legible palette
+                // Decision distribution donut (real) - a true ring (CSS mask punches
+                // a transparent hole in the conic-gradient pie) with a refined palette.
                 const eligDeg = (eligibleCount / total) * 360;
                 const margDeg = (marginalCount / total) * 360;
-                document.getElementById('decision-donut').style.background =
+                const donutEl = document.getElementById('decision-donut');
+                donutEl.style.background =
                     'conic-gradient(#16a34a 0deg ' + eligDeg + 'deg, #c9a227 ' + eligDeg + 'deg ' + (eligDeg + margDeg) + 'deg, #ba1a1a ' + (eligDeg + margDeg) + 'deg 360deg)';
+                donutEl.style.mask = 'radial-gradient(closest-side, transparent 64%, black 65%)';
+                donutEl.style.webkitMask = 'radial-gradient(closest-side, transparent 64%, black 65%)';
+                donutEl.style.filter = 'drop-shadow(0 4px 10px rgba(0,0,0,0.08))';
                 document.getElementById('decision-donut-total').innerText = total.toLocaleString('ar-SA');
                 document.getElementById('decision-count-eligible').innerText = eligibleCount;
                 document.getElementById('decision-count-marginal').innerText = marginalCount;
