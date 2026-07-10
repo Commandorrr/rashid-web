@@ -36,11 +36,6 @@
             stroke-linecap: round;
             transition: stroke-dashoffset 1s ease-out;
         }
-        .sidebar-active {
-            background-color: #181512;
-            color: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
         body {
             background: radial-gradient(circle at top right, #fdf8f7, #f7f3f1);
             min-height: 100vh;
@@ -132,56 +127,53 @@
     </script>
 </head>
 <body class="bg-background text-on-surface font-body-md overflow-x-hidden"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
-<!-- Persistent SideNavBar -->
-<aside class="fixed right-0 top-0 h-full w-[260px] bg-surface-container-low border-l border-outline-variant/20 shadow-md z-40 hidden md:flex flex-col p-6 gap-base">
-<div class="font-display-md text-display-md font-bold text-primary mb-8">رشيد</div>
-<div class="flex items-center gap-4 mb-10 px-2">
-<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-on-secondary-container">account_balance</span>
-</div>
-<div>
-<div class="font-label-md text-label-md font-bold">بوابة رشيد</div>
-<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">ذكاء الإقراض الاصطناعي</div>
-</div>
-</div>
-<nav class="flex-1 flex flex-col gap-2">
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-dashboard-ar.html">
+<!-- Persistent SideNavBar (Shared Component - identical markup to every other advisor page) -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
 <span class="material-symbols-outlined">dashboard</span>
-<span class="font-label-md">الرئيسية</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg sidebar-active" href="smart-alternatives.html">
-<span class="material-symbols-outlined">bolt</span>
-<span class="font-label-md">طلبك الحالي</span>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="smart-alternatives.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-md text-label-md">طلبك الحالي</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-requests-ar.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined">description</span>
-<span class="font-label-md">الطلبات</span>
+<span class="font-label-md text-label-md">الطلبات</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-customers-ar.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
 <span class="material-symbols-outlined">group</span>
-<span class="font-label-md">العملاء</span>
+<span class="font-label-md text-label-md">العملاء</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-analytics-ar.html">
 <span class="material-symbols-outlined">monitoring</span>
-<span class="font-label-md">التحليلات</span>
+<span class="font-label-md text-label-md">التحليلات</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-assistant-ar.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
 <span class="material-symbols-outlined">auto_awesome</span>
-<span class="font-label-md">مساعد المستشار الذكي</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
 </a>
 </nav>
-<div class="mt-auto pt-6 border-t border-outline-variant/10 flex flex-col gap-2">
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
 <span class="material-symbols-outlined">settings</span>
-<span class="font-label-md">الإعدادات</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
 </a>
-<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
 <span class="material-symbols-outlined">contact_support</span>
-<span class="font-label-md">الدعم الفني</span>
+<span class="font-label-md text-label-md">الدعم الفني</span>
 </a>
 </div>
+</div>
 </aside>
-<main class="md:mr-[260px] min-h-screen p-gutter flex flex-col gap-base">
+<main class="md:mr-[240px] min-h-screen p-gutter flex flex-col gap-base">
 <!-- Top Navigation -->
 <header class="flex justify-between items-center py-4 mb-6">
 <div>

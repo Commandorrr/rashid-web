@@ -144,7 +144,7 @@
 </button>
 </div>
 <div class="text-left hidden lg:block">
-<h1 class="font-display-md text-display-md text-primary tracking-tight">لوحة الجهة المالية</h1>
+<h1 class="font-display-md text-display-md text-primary tracking-tight">الرئيسية</h1>
 <p class="text-on-surface-variant font-body-md">نظرة عامة على الطلبات والعملاء</p>
 </div>
 </header>
@@ -193,7 +193,65 @@
 </section>
 <!-- Main Split -->
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-<!-- Left Column -->
+<!-- Right Column (first in DOM so it renders on the right in this RTL layout): Advisor Assistant Recommendation Panel + Charts -->
+<div class="space-y-8">
+<section class="glass-panel glass-card-edge rounded-3xl p-8 relative overflow-hidden bg-primary text-on-primary">
+<div class="absolute top-0 left-0 w-32 h-32 bg-secondary opacity-20 blur-3xl -ml-10 -mt-10"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-2xl bg-on-primary/10 flex items-center justify-center border border-on-primary/20">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-headline-md leading-tight">مساعد المستشار</h3>
+<span class="text-xs text-on-primary/60 tracking-widest uppercase">يوصي المساعد بالتركيز على</span>
+</div>
+</div>
+<div class="bg-on-primary/5 rounded-2xl p-6 mb-8 border border-on-primary/10" id="ai-assistant-card">
+<div class="flex items-center justify-between mb-4">
+<div>
+<div class="text-xs text-on-primary/60">العميل التالي</div>
+<div class="font-bold" id="ai-assistant-name">لا توجد طلبات بعد</div>
+<div class="text-xs text-on-primary/60" id="ai-assistant-reqid">-</div>
+</div>
+<div class="px-2 py-1 bg-error rounded-md text-[10px] font-bold" id="ai-assistant-badge">-</div>
+</div>
+<p class="text-on-primary/80 text-sm leading-relaxed mb-4" id="ai-assistant-desc">
+                        سيظهر هنا أعلى طلب ضغطاً بمجرد وجود طلبات حقيقية من معالج العميل.
+                    </p>
+<a class="w-full py-3 bg-on-primary text-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors" href="request-details.html" id="ai-assistant-link">
+<span class="material-symbols-outlined text-lg">description</span>
+                        عرض تفاصيل الطلب
+                    </a>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-3">ملخص التوصيات</h4>
+<ul class="space-y-2 text-sm text-on-primary/80" id="ai-assistant-summary"></ul>
+</div>
+</section>
+<!-- Charts -->
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[280px] flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-6">اتجاه مستوى الضغط</h4>
+<div class="flex-1 relative" id="pressure-trend-chart"></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-2" id="pressure-trend-labels"></div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl flex flex-col relative overflow-hidden">
+<h4 class="font-headline-md text-on-surface mb-4">توزيع الطلبات حسب حالة القرار</h4>
+<div class="flex items-center justify-center relative py-4">
+<div class="w-36 h-36 rounded-full relative" id="decision-donut">
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold" id="decision-donut-total">0</span>
+<span class="text-[10px] uppercase">الإجمالي</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-2 mt-2 text-xs font-label-md">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#16a34a"></span> مؤهل <span id="decision-count-eligible">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#c9a227"></span> بشروط <span id="decision-count-marginal">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#ba1a1a"></span> غير مؤهل <span id="decision-count-rejected">0</span></div>
+</div>
+</div>
+</div>
+<!-- Left Column: Recent Requests + Customers -->
 <div class="lg:col-span-2 space-y-8">
 <!-- Recent Requests -->
 <div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
@@ -246,66 +304,6 @@
 </table>
 </div>
 </div>
-<!-- Charts -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
-<h4 class="font-headline-md text-on-surface mb-6">اتجاه مستوى الضغط</h4>
-<div class="flex-1 relative" id="pressure-trend-chart"></div>
-<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-2" id="pressure-trend-labels"></div>
-</div>
-<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col relative overflow-hidden">
-<h4 class="font-headline-md text-on-surface mb-4">توزيع الطلبات حسب حالة القرار</h4>
-<div class="flex-1 flex items-center justify-center relative">
-<div class="w-40 h-40 rounded-full relative" id="decision-donut">
-<div class="absolute inset-0 flex flex-col items-center justify-center">
-<span class="text-2xl font-bold" id="decision-donut-total">0</span>
-<span class="text-[10px] uppercase">الإجمالي</span>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-3 gap-2 mt-4 text-xs font-label-md">
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> مؤهل <span id="decision-count-eligible">0</span></div>
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#755a26"></span> بشروط <span id="decision-count-marginal">0</span></div>
-<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-error"></span> غير مؤهل <span id="decision-count-rejected">0</span></div>
-</div>
-</div>
-</div>
-</div>
-<!-- Right Column: Advisor Assistant Recommendation Panel -->
-<div class="space-y-8">
-<section class="glass-panel glass-card-edge rounded-3xl p-8 relative overflow-hidden bg-primary text-on-primary">
-<div class="absolute top-0 left-0 w-32 h-32 bg-secondary opacity-20 blur-3xl -ml-10 -mt-10"></div>
-<div class="flex items-center gap-4 mb-8">
-<div class="w-12 h-12 rounded-2xl bg-on-primary/10 flex items-center justify-center border border-on-primary/20">
-<span class="material-symbols-outlined text-3xl">auto_awesome</span>
-</div>
-<div>
-<h3 class="font-headline-md leading-tight">مساعد المستشار</h3>
-<span class="text-xs text-on-primary/60 tracking-widest uppercase">يوصي المساعد بالتركيز على</span>
-</div>
-</div>
-<div class="bg-on-primary/5 rounded-2xl p-6 mb-8 border border-on-primary/10" id="ai-assistant-card">
-<div class="flex items-center justify-between mb-4">
-<div>
-<div class="text-xs text-on-primary/60">العميل التالي</div>
-<div class="font-bold" id="ai-assistant-name">لا توجد طلبات بعد</div>
-<div class="text-xs text-on-primary/60" id="ai-assistant-reqid">-</div>
-</div>
-<div class="px-2 py-1 bg-error rounded-md text-[10px] font-bold" id="ai-assistant-badge">-</div>
-</div>
-<p class="text-on-primary/80 text-sm leading-relaxed mb-4" id="ai-assistant-desc">
-                        سيظهر هنا أعلى طلب ضغطاً بمجرد وجود طلبات حقيقية من معالج العميل.
-                    </p>
-<a class="w-full py-3 bg-on-primary text-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors" href="request-details.html" id="ai-assistant-link">
-<span class="material-symbols-outlined text-lg">description</span>
-                        عرض تفاصيل الطلب
-                    </a>
-</div>
-<div>
-<h4 class="font-bold text-sm mb-3">ملخص التوصيات</h4>
-<ul class="space-y-2 text-sm text-on-primary/80" id="ai-assistant-summary"></ul>
-</div>
-</section>
 </div>
 </div>
 </main>
@@ -464,41 +462,49 @@
                     custTbody.appendChild(tr);
                 });
 
-                // Pressure trend: real weekly buckets over the last 5 weeks (SVG polyline)
-                const now = Date.now();
-                const weeks = [4, 3, 2, 1, 0].map(w => {
-                    const end = now - w * 7 * 86400000;
-                    const start = end - 7 * 86400000;
-                    const inWeek = analyzed.filter(x => {
-                        const t = new Date(x.row.createdAt).getTime();
-                        return t > start && t <= end;
-                    });
-                    const avg = inWeek.length ? Math.round(inWeek.reduce((s, x) => s + x.a.pressureScore, 0) / inWeek.length) : null;
-                    return { label: new Date(end).toLocaleDateString('ar-SA', { day: 'numeric', month: 'short' }), avg };
+                // Pressure trend: bucket by the real calendar days that actually have
+                // applications (up to the last 10), instead of fixed calendar weeks -
+                // with this demo's data all landing within the last few days, weekly
+                // buckets left the chart almost entirely empty.
+                const byDay = new Map();
+                analyzed.forEach(x => {
+                    const day = (x.row.createdAt || '').slice(0, 10);
+                    if (!day) return;
+                    if (!byDay.has(day)) byDay.set(day, []);
+                    byDay.get(day).push(x.a.pressureScore);
+                });
+                const days = [...byDay.keys()].sort().slice(-10).map(day => {
+                    const scores = byDay.get(day);
+                    return {
+                        label: new Date(day).toLocaleDateString('ar-SA', { day: 'numeric', month: 'short' }),
+                        avg: Math.round(scores.reduce((s, v) => s + v, 0) / scores.length)
+                    };
                 });
                 const chartEl = document.getElementById('pressure-trend-chart');
-                const w = 280, h = 200, pad = 10;
-                const knownWeeks = weeks.filter(pt => pt.avg !== null);
-                const points = weeks.map((pt, i) => {
-                    const x = pad + (i * (w - 2 * pad) / (weeks.length - 1));
-                    const y = pt.avg === null ? null : (h - pad - (pt.avg / 100) * (h - 2 * pad));
-                    return { x, y, avg: pt.avg };
-                });
-                const pathPoints = points.filter(p => p.y !== null);
-                const polyline = pathPoints.map(p => p.x + ',' + p.y).join(' ');
-                const dots = pathPoints.map(p => '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="#755a26"></circle>' +
-                    '<title>' + p.avg + '/100</title>').join('');
-                chartEl.innerHTML = knownWeeks.length
-                    ? '<svg viewBox="0 0 ' + w + ' ' + h + '" class="w-full h-full">' +
-                      '<polyline points="' + polyline + '" fill="none" stroke="#755a26" stroke-width="2.5"></polyline>' + dots + '</svg>'
-                    : '<div class="w-full h-full flex items-center justify-center text-on-surface-variant text-sm">لا توجد بيانات كافية بعد</div>';
-                document.getElementById('pressure-trend-labels').innerHTML = weeks.map(pt => '<span>' + pt.label + '</span>').join('');
+                if (days.length) {
+                    const w = 280, h = 200, pad = 14;
+                    const points = days.map((pt, i) => ({
+                        x: pad + (days.length === 1 ? (w - 2 * pad) / 2 : i * (w - 2 * pad) / (days.length - 1)),
+                        y: h - pad - (pt.avg / 100) * (h - 2 * pad),
+                        avg: pt.avg
+                    }));
+                    const polyline = points.map(p => p.x + ',' + p.y).join(' ');
+                    const dots = points.map(p => '<circle cx="' + p.x + '" cy="' + p.y + '" r="4.5" fill="#755a26"></circle>' +
+                        '<title>' + p.avg + '/100</title>').join('');
+                    chartEl.innerHTML = '<svg viewBox="0 0 ' + w + ' ' + h + '" class="w-full h-full">' +
+                        (points.length > 1 ? '<polyline points="' + polyline + '" fill="none" stroke="#755a26" stroke-width="2.5"></polyline>' : '') +
+                        dots + '</svg>';
+                    document.getElementById('pressure-trend-labels').innerHTML = days.map(pt => '<span>' + pt.label + '</span>').join('');
+                } else {
+                    chartEl.innerHTML = '<div class="w-full h-full flex items-center justify-center text-on-surface-variant text-sm">لا توجد بيانات كافية بعد</div>';
+                    document.getElementById('pressure-trend-labels').innerHTML = '';
+                }
 
-                // Decision distribution donut (real)
+                // Decision distribution donut (real) - refined, more legible palette
                 const eligDeg = (eligibleCount / total) * 360;
                 const margDeg = (marginalCount / total) * 360;
                 document.getElementById('decision-donut').style.background =
-                    'conic-gradient(#22c55e 0deg ' + eligDeg + 'deg, #755a26 ' + eligDeg + 'deg ' + (eligDeg + margDeg) + 'deg, #ba1a1a ' + (eligDeg + margDeg) + 'deg 360deg)';
+                    'conic-gradient(#16a34a 0deg ' + eligDeg + 'deg, #c9a227 ' + eligDeg + 'deg ' + (eligDeg + margDeg) + 'deg, #ba1a1a ' + (eligDeg + margDeg) + 'deg 360deg)';
                 document.getElementById('decision-donut-total').innerText = total.toLocaleString('ar-SA');
                 document.getElementById('decision-count-eligible').innerText = eligibleCount;
                 document.getElementById('decision-count-marginal').innerText = marginalCount;
