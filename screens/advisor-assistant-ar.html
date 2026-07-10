@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | مساعد المستشار الذكي</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&amp;family=IBM+Plex+Sans+Arabic:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge {
+            border-right: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<!-- Persistent SideNavBar (Shared Component) -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="smart-alternatives.html">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">طلبك الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-analytics-ar.html">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md">التحليلات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">الإعدادات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">الدعم الفني</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10 flex flex-col">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center mb-section-gap">
+<div>
+<h1 class="font-display-md text-display-md text-primary tracking-tight">مساعد المستشار الذكي</h1>
+<p class="text-on-surface-variant font-body-md">اسأل عن أي عميل حقيقي أو عن أداء المحفظة كاملة - كل إجابة محسوبة فعلياً من بيانات رشيد.</p>
+</div>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</header>
+<!-- Chat Panel -->
+<section class="glass-panel glass-card-edge rounded-3xl flex-1 flex flex-col overflow-hidden min-h-[500px]">
+<div class="flex-1 overflow-y-auto p-6 space-y-4" id="ai-chat-log"></div>
+<div class="p-4 border-t border-outline-variant/10 bg-surface-container-lowest/50">
+<div class="flex flex-wrap gap-2 mb-3" id="ai-chat-suggestions"></div>
+<form class="flex items-center gap-3" id="ai-chat-form">
+<input class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all outline-none font-body-md" id="ai-chat-input" placeholder="اسأل عن عميل معيّن أو عن أداء المحفظة..." type="text"/>
+<button class="px-6 py-3 bg-primary text-on-primary rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition-transform" type="submit">
+<span class="material-symbols-outlined text-lg">send</span>
+                    إرسال
+                </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<a class="flex flex-col items-center text-primary" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-bold">المساعد</span>
+</a>
+</nav>
+<script src="rashid-calc.js"></script>
+<script src="rashid-api.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) {
+                nameEl.innerText = session.username;
+                avatarEl.innerText = session.username.trim().charAt(0).toUpperCase();
+            } else {
+                nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)';
+                avatarEl.innerText = '?';
+            }
+        })();
+    </script>
+<script>
+        // A real rule-based assistant over real data (no external AI service):
+        // it looks up an actual customer by name/customer-ID in the query, or
+        // matches a known portfolio-wide question, and always answers with
+        // numbers computed live via RashidCalc - never a fabricated answer.
+        (function () {
+            const log = document.getElementById('ai-chat-log');
+            const form = document.getElementById('ai-chat-form');
+            const input = document.getElementById('ai-chat-input');
+            const suggestionsEl = document.getElementById('ai-chat-suggestions');
+            let analyzedCache = null;
+
+            function addMessage(text, from) {
+                const bubble = document.createElement('div');
+                bubble.className = from === 'user'
+                    ? 'flex justify-end'
+                    : 'flex justify-start';
+                bubble.innerHTML = from === 'user'
+                    ? '<div class="max-w-[80%] bg-primary text-on-primary rounded-2xl rounded-tl-sm px-4 py-3 text-sm">' + text + '</div>'
+                    : '<div class="max-w-[80%] bg-surface-container-low border border-outline-variant/20 rounded-2xl rounded-tr-sm px-4 py-3 text-sm flex gap-2 items-start">' +
+                      '<span class="material-symbols-outlined text-secondary text-lg mt-0.5">auto_awesome</span><span>' + text + '</span></div>';
+                log.appendChild(bubble);
+                log.scrollTop = log.scrollHeight;
+            }
+
+            async function getAnalyzed() {
+                if (analyzedCache) return analyzedCache;
+                const apps = await RashidApi.listApplications();
+                analyzedCache = (apps || []).map(row => ({ row, a: RashidCalc.analyze(row) }));
+                return analyzedCache;
+            }
+
+            function fmt(n) { return Math.round(n).toLocaleString('ar-SA'); }
+
+            async function answer(question) {
+                const analyzed = await getAnalyzed();
+                if (!analyzed.length) return 'لا توجد طلبات حقيقية مسجلة في النظام بعد. أنشئ طلباً من "تحليل جديد" ثم اسألني عنه.';
+
+                const q = question.trim();
+
+                // Find a real customer mentioned by name or customer ID
+                const matches = analyzed.filter(x => {
+                    const name = (x.row.name || '').trim();
+                    const cid = (x.row.customerId || '').trim();
+                    return (name && q.includes(name)) || (cid && q.includes(cid));
+                });
+                const customer = matches.length
+                    ? matches.sort((a, b) => new Date(b.row.createdAt) - new Date(a.row.createdAt))[0]
+                    : null;
+
+                // Portfolio-wide questions
+                if (/كم\s*(عدد)?\s*(الطلبات|طلب)|إجمالي الطلبات|اجمالي الطلبات/.test(q)) {
+                    return 'إجمالي الطلبات الحقيقية المسجلة حالياً: ' + analyzed.length + ' طلباً.';
+                }
+                if (/متوسط.*(عبء|ضغط)/.test(q)) {
+                    const avg = Math.round(analyzed.reduce((s, x) => s + x.a.burdenRatio, 0) / analyzed.length);
+                    return 'متوسط نسبة العبء عبر كل الطلبات الحقيقية حالياً: ' + avg + '%.';
+                }
+                if (/أعلى ضغط|الأكثر خطورة|الأخطر|أخطر عميل/.test(q)) {
+                    const top = analyzed.reduce((b, x) => (!b || x.a.pressureScore > b.a.pressureScore) ? x : b, null);
+                    return 'أعلى طلب ضغطاً حالياً هو "' + (top.row.name || 'عميل رشيد') + '" بمؤشر ضغط ' + top.a.pressureScore + '/100 (' + top.a.decision + ').';
+                }
+                if (/نسبة المؤهل|كم مؤهل|عدد المؤهل/.test(q)) {
+                    const eligible = analyzed.filter(x => x.a.eligible).length;
+                    return eligible + ' من أصل ' + analyzed.length + ' طلباً مؤهلون حالياً (' + Math.round((eligible / analyzed.length) * 100) + '%).';
+                }
+                if (/متقاعد.*كم|كم.*متقاعد/.test(q)) {
+                    const retired = analyzed.filter(x => x.row.employmentStatus === 'متقاعد').length;
+                    return 'عدد العملاء المتقاعدين حالياً: ' + retired + ' من أصل ' + analyzed.length + '.';
+                }
+
+                // Customer-specific questions
+                if (customer) {
+                    const { row, a } = customer;
+                    if (/دخل|راتب/.test(q)) return row.name + ': دخله الشهري ' + fmt(row.income) + ' ر.س.';
+                    if (/التزام/.test(q)) return row.name + ': التزاماته الشهرية الحالية ' + fmt(row.obligations) + ' ر.س.';
+                    if (/عبء|ضغط/.test(q)) return row.name + ': نسبة العبء ' + a.burdenRatio + '% (الحد الأعلى المسموح ' + a.burdenCap + '%)، مؤشر الضغط ' + a.pressureScore + '/100.';
+                    if (/مؤهل|حالته|وضعه|قرار/.test(q)) return row.name + ': ' + a.decision + '. ' + a.recommendation;
+                    if (/متقاعد|موظف|توظيف/.test(q)) return row.name + ': حالته الوظيفية "' + (row.employmentStatus || 'غير محدد') + '"' + (a.isRetired ? '، ولذلك يُطبَّق عليه حد عبء أكثر تحفظاً (' + a.burdenCap + '% بدل الحد المعتاد).' : '.');
+                    if (/مبلغ|تمويل/.test(q)) return row.name + ': طلب تمويل بقيمة ' + fmt(row.amount) + ' ر.س لمدة ' + row.tenure + ' شهراً، بقسط شهري مقدّر ' + fmt(a.installment) + ' ر.س.';
+                    return row.name + ' (رقم العميل: ' + (row.customerId || 'غير مسجل') + '، ' + (row.employmentStatus || 'غير محدد') + '): طلب بقيمة ' + fmt(row.amount) +
+                        ' ر.س، دخل شهري ' + fmt(row.income) + ' ر.س، نسبة العبء ' + a.burdenRatio + '%، القرار: ' + a.decision + '.';
+                }
+
+                return 'لم أفهم سؤالك بدقة. جرّب اسم عميل حقيقي مسجل في النظام (مثال: "ما وضع فلان؟")، أو سؤالاً عاماً عن المحفظة مثل "كم عدد الطلبات؟" أو "من الأعلى ضغطاً الآن؟".';
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const q = input.value.trim();
+                if (!q) return;
+                addMessage(q, 'user');
+                input.value = '';
+                const reply = await answer(q);
+                addMessage(reply, 'assistant');
+            });
+
+            async function init() {
+                const analyzed = await getAnalyzed();
+                addMessage(
+                    analyzed.length
+                        ? 'أهلاً بك. لدي حالياً ' + analyzed.length + ' طلباً حقيقياً في النظام. اسألني عن أي عميل بالاسم، أو عن أداء المحفظة بشكل عام.'
+                        : 'أهلاً بك. لا توجد طلبات حقيقية بعد - أنشئ طلباً من "تحليل جديد" وسأكون جاهزاً للإجابة عن أسئلتك حوله.',
+                    'assistant'
+                );
+                const suggestions = ['كم عدد الطلبات الحالية؟', 'من الأعلى ضغطاً الآن؟', 'كم متوسط نسبة العبء؟', 'كم عدد المؤهلين؟'];
+                suggestionsEl.innerHTML = suggestions.map(s =>
+                    '<button type="button" class="px-3 py-1.5 bg-surface-container-low border border-outline-variant/20 rounded-full text-xs text-on-surface-variant hover:bg-surface-container-highest transition-colors" data-q="' + s + '">' + s + '</button>'
+                ).join('');
+                suggestionsEl.querySelectorAll('button').forEach(btn => {
+                    btn.addEventListener('click', () => { input.value = btn.dataset.q; form.dispatchEvent(new Event('submit', { cancelable: true })); });
+                });
+            }
+
+            init();
+        })();
+    </script>
+</body></html>

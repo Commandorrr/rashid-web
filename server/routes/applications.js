@@ -20,7 +20,8 @@ function rowToApplication(row) {
         hasUpcomingObligation: !!row.has_upcoming_obligation,
         upcomingObligationDate: row.upcoming_obligation_date,
         upcomingObligationAmount: row.upcoming_obligation_amount,
-        createdAt: row.created_at
+        createdAt: row.created_at,
+        selectedOfferKey: row.selected_offer_key || null
     };
 }
 
@@ -58,9 +59,19 @@ router.post('/', (req, res) => {
     res.status(201).json({ application, analysis: calc.analyze(application) });
 });
 
-// List all applications (advisor portal).
+// List all applications (advisor portal), including each one's latest
+// selected-offer key (if any) so the advisor overview can compute a real
+// "converted to an alternative offer" rate without an N+1 query per row.
 router.get('/', (req, res) => {
-    const rows = db.prepare('SELECT * FROM applications ORDER BY created_at DESC').all();
+    const rows = db.prepare(`
+        SELECT a.*, (
+            SELECT so.offer_key FROM selected_offers so
+            WHERE so.application_id = a.id
+            ORDER BY so.created_at DESC LIMIT 1
+        ) AS selected_offer_key
+        FROM applications a
+        ORDER BY a.created_at DESC
+    `).all();
     res.json(rows.map(rowToApplication));
 });
 

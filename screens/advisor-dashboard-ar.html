@@ -3,7 +3,7 @@
 <html class="light" dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>رشيد | لوحة تحكم مستشار البنك</title>
+<title>رشيد | لوحة الجهة المالية</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -19,12 +19,6 @@
         .glass-card-edge {
             border-right: 1px solid rgba(255, 255, 255, 0.8);
             border-top: 1px solid rgba(255, 255, 255, 0.8);
-        }
-        .text-glow-gold {
-            text-shadow: 0 0 10px rgba(117, 90, 38, 0.2);
-        }
-        .chart-gradient-primary {
-            background: linear-gradient(180deg, #181512 0%, #4b4642 100%);
         }
         @keyframes pulse-soft {
             0%, 100% { opacity: 1; }
@@ -44,73 +38,29 @@
             theme: {
                 extend: {
                     "colors": {
-                        "surface-container-low": "#f7f3f1",
-                        "on-background": "#1c1b1b",
-                        "on-primary-fixed-variant": "#4b4642",
-                        "on-primary-container": "#96908b",
-                        "tertiary": "#171610",
-                        "tertiary-fixed-dim": "#cac6be",
-                        "secondary": "#755a26",
-                        "surface-container-lowest": "#ffffff",
-                        "on-surface-variant": "#4d4540",
-                        "inverse-on-surface": "#f4f0ee",
-                        "tertiary-container": "#2b2a24",
-                        "surface-container-highest": "#e6e1e0",
-                        "outline-variant": "#cfc4bd",
-                        "inverse-primary": "#cdc5c0",
-                        "primary-fixed-dim": "#cdc5c0",
-                        "on-secondary-fixed": "#271900",
-                        "on-error": "#ffffff",
-                        "on-surface": "#1c1b1b",
-                        "surface-dim": "#ddd9d8",
-                        "secondary-fixed-dim": "#e6c183",
-                        "surface": "#fdf8f7",
-                        "outline": "#7e756f",
-                        "on-primary-fixed": "#1e1b18",
-                        "error": "#ba1a1a",
-                        "primary-container": "#2d2926",
-                        "surface-tint": "#635d5a",
-                        "error-container": "#ffdad6",
-                        "secondary-fixed": "#ffdea8",
-                        "on-secondary-fixed-variant": "#5b4311",
-                        "surface-variant": "#e6e1e0",
-                        "surface-bright": "#fdf8f7",
-                        "on-tertiary-fixed": "#1d1c16",
-                        "on-tertiary": "#ffffff",
-                        "background": "#fdf8f7",
-                        "on-tertiary-container": "#949189",
-                        "secondary-container": "#fdd798",
-                        "on-primary": "#ffffff",
-                        "primary": "#181512",
-                        "on-error-container": "#93000a",
-                        "on-secondary-container": "#785c29",
-                        "on-secondary": "#ffffff",
-                        "primary-fixed": "#e9e1dc",
-                        "tertiary-fixed": "#e7e2d9",
-                        "inverse-surface": "#313030",
-                        "on-tertiary-fixed-variant": "#494740",
-                        "surface-container-high": "#ece7e6",
-                        "surface-container": "#f1edec"
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "20px",
-                        "base": "8px",
-                        "container-margin": "24px",
-                        "section-gap": "48px"
-                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
                     "fontFamily": {
-                        "display-lg": ["IBM Plex Sans Arabic"],
-                        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
-                        "display-md": ["IBM Plex Sans Arabic"],
-                        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
-                        "headline-md": ["IBM Plex Sans Arabic"],
-                        "headline-lg": ["IBM Plex Sans Arabic"],
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
                         "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
                     }
                 }
@@ -148,6 +98,11 @@
 <span class="material-symbols-outlined">monitoring</span>
 <span class="font-label-md text-label-md">التحليلات</span>
 </a>
+<!-- Smart Advisor Assistant -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
 </nav>
 <div class="mt-auto space-y-2">
 <a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
@@ -167,35 +122,192 @@
 </div>
 </aside>
 <!-- Main Content Canvas -->
-<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10 flex flex-col">
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
 <!-- TopAppBar -->
 <header class="flex justify-between items-center mb-section-gap">
+<div class="flex items-center gap-3" id="advisor-account">
+<div class="w-11 h-11 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
 <div>
-<h1 class="font-display-md text-display-md text-primary tracking-tight">المساعد الذكي</h1>
-<p class="text-on-surface-variant font-body-md">اسأل عن أي عميل حقيقي أو عن أداء المحفظة كاملة - كل إجابة محسوبة فعلياً من بيانات رشيد.</p>
-</div>
-<div class="flex items-center gap-2" id="advisor-account">
-<div class="text-left hidden lg:block">
-<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
 <div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+<div class="text-[11px] text-on-surface-variant">مسؤول الجهة المالية</div>
 </div>
-<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="text-left hidden lg:block">
+<h1 class="font-display-md text-display-md text-primary tracking-tight">لوحة الجهة المالية</h1>
+<p class="text-on-surface-variant font-body-md">نظرة عامة على الطلبات والعملاء</p>
 </div>
 </header>
-<!-- Chat Panel -->
-<section class="glass-panel glass-card-edge rounded-3xl flex-1 flex flex-col overflow-hidden min-h-[500px]">
-<div class="flex-1 overflow-y-auto p-6 space-y-4" id="ai-chat-log"></div>
-<div class="p-4 border-t border-outline-variant/10 bg-surface-container-lowest/50">
-<div class="flex flex-wrap gap-2 mb-3" id="ai-chat-suggestions"></div>
-<form class="flex items-center gap-3" id="ai-chat-form">
-<input class="flex-1 px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 focus:ring-2 focus:ring-secondary/50 focus:border-secondary transition-all outline-none font-body-md" id="ai-chat-input" placeholder="اسأل عن عميل معيّن أو عن أداء المحفظة..." type="text"/>
-<button class="px-6 py-3 bg-primary text-on-primary rounded-xl font-bold flex items-center gap-2 hover:scale-105 transition-transform" type="submit">
-<span class="material-symbols-outlined text-lg">send</span>
-                    إرسال
-                </button>
-</form>
+<!-- KPI Section: 5 real cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg"><span class="material-symbols-outlined text-secondary">trending_down</span></div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-pressure-reduction">0%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">متوسط انخفاض الضغط</div>
+<div class="text-[11px] text-on-surface-variant mt-1">عند التحويل للعرض الآمن</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary/5 rounded-lg"><span class="material-symbols-outlined text-tertiary">swap_horiz</span></div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-conversion-rate">0%</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">نسبة التحويل إلى بديل</div>
+<div class="text-[11px] text-on-surface-variant mt-1">من إجمالي الطلبات</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl border-r-4 border-r-error">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error/10 rounded-lg"><span class="material-symbols-outlined text-error">priority_high</span></div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-high-pressure">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">الطلبات عالية الضغط</div>
+<div class="text-[11px] text-on-surface-variant mt-1">من إجمالي الطلبات</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg"><span class="material-symbols-outlined text-primary">description</span></div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-total">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">إجمالي الطلبات</div>
+<div class="text-[11px] text-on-surface-variant mt-1">جميع الطلبات</div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-2xl">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/10 rounded-lg"><span class="material-symbols-outlined text-secondary">group</span></div>
+</div>
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-active-customers">0</div>
+<div class="text-on-surface-variant font-label-md uppercase tracking-wider">عدد العملاء النشطين</div>
+<div class="text-[11px] text-on-surface-variant mt-1">عملاء لديهم طلب حقيقي</div>
 </div>
 </section>
+<!-- Main Split -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Left Column -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Recent Requests -->
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest/50">
+<h3 class="font-headline-md text-headline-md text-primary">آخر الطلبات</h3>
+<a class="text-secondary font-label-md hover:underline" href="advisor-requests-ar.html">عرض الكل</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-6 py-4">رقم الطلب</th>
+<th class="px-6 py-4">العميل</th>
+<th class="px-6 py-4">نوع المنتج</th>
+<th class="px-6 py-4">مبلغ الطلب</th>
+<th class="px-6 py-4">مستوى الضغط</th>
+<th class="px-6 py-4">حالة الطلب</th>
+<th class="px-6 py-4">التاريخ</th>
+<th class="px-6 py-4">الإجراء</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="recent-requests-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="8">جارِ تحميل الطلبات الحقيقية...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Customers -->
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest/50">
+<h3 class="font-headline-md text-headline-md text-primary">العملاء</h3>
+<a class="text-secondary font-label-md hover:underline" href="advisor-customers-ar.html">عرض الكل</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-6 py-4">اسم العميل</th>
+<th class="px-6 py-4">المدينة</th>
+<th class="px-6 py-4">القطاع</th>
+<th class="px-6 py-4">الفئة</th>
+<th class="px-6 py-4">آخر تواصل</th>
+<th class="px-6 py-4">عدد الطلبات</th>
+<th class="px-6 py-4">الإجراء</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="customers-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="7">جارِ تحميل العملاء الحقيقيين...</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col">
+<h4 class="font-headline-md text-on-surface mb-6">اتجاه مستوى الضغط</h4>
+<div class="flex-1 relative" id="pressure-trend-chart"></div>
+<div class="flex justify-between text-[10px] text-on-surface-variant uppercase mt-2" id="pressure-trend-labels"></div>
+</div>
+<div class="glass-panel glass-card-edge p-6 rounded-3xl h-[320px] flex flex-col relative overflow-hidden">
+<h4 class="font-headline-md text-on-surface mb-4">توزيع الطلبات حسب حالة القرار</h4>
+<div class="flex-1 flex items-center justify-center relative">
+<div class="w-40 h-40 rounded-full relative" id="decision-donut">
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-bold" id="decision-donut-total">0</span>
+<span class="text-[10px] uppercase">الإجمالي</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 mt-4 text-xs font-label-md">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> مؤهل <span id="decision-count-eligible">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:#755a26"></span> بشروط <span id="decision-count-marginal">0</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-error"></span> غير مؤهل <span id="decision-count-rejected">0</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Advisor Assistant Recommendation Panel -->
+<div class="space-y-8">
+<section class="glass-panel glass-card-edge rounded-3xl p-8 relative overflow-hidden bg-primary text-on-primary">
+<div class="absolute top-0 left-0 w-32 h-32 bg-secondary opacity-20 blur-3xl -ml-10 -mt-10"></div>
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-2xl bg-on-primary/10 flex items-center justify-center border border-on-primary/20">
+<span class="material-symbols-outlined text-3xl">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-headline-md leading-tight">مساعد المستشار</h3>
+<span class="text-xs text-on-primary/60 tracking-widest uppercase">يوصي المساعد بالتركيز على</span>
+</div>
+</div>
+<div class="bg-on-primary/5 rounded-2xl p-6 mb-8 border border-on-primary/10" id="ai-assistant-card">
+<div class="flex items-center justify-between mb-4">
+<div>
+<div class="text-xs text-on-primary/60">العميل التالي</div>
+<div class="font-bold" id="ai-assistant-name">لا توجد طلبات بعد</div>
+<div class="text-xs text-on-primary/60" id="ai-assistant-reqid">-</div>
+</div>
+<div class="px-2 py-1 bg-error rounded-md text-[10px] font-bold" id="ai-assistant-badge">-</div>
+</div>
+<p class="text-on-primary/80 text-sm leading-relaxed mb-4" id="ai-assistant-desc">
+                        سيظهر هنا أعلى طلب ضغطاً بمجرد وجود طلبات حقيقية من معالج العميل.
+                    </p>
+<a class="w-full py-3 bg-on-primary text-primary rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-secondary-fixed transition-colors" href="request-details.html" id="ai-assistant-link">
+<span class="material-symbols-outlined text-lg">description</span>
+                        عرض تفاصيل الطلب
+                    </a>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-3">ملخص التوصيات</h4>
+<ul class="space-y-2 text-sm text-on-primary/80" id="ai-assistant-summary"></ul>
+</div>
+</section>
+</div>
+</div>
 </main>
 <!-- Bottom Navigation for Mobile -->
 <nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
@@ -215,9 +327,9 @@
 <span class="material-symbols-outlined">group</span>
 <span class="text-[10px]">العملاء</span>
 </a>
-<a class="flex flex-col items-center text-on-surface-variant" href="advisor-analytics-ar.html">
-<span class="material-symbols-outlined">monitoring</span>
-<span class="text-[10px]">التحليلات</span>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px]">المساعد</span>
 </a>
 </nav>
 <script src="rashid-calc.js"></script>
@@ -238,120 +350,185 @@
         })();
     </script>
 <script>
-        // A real rule-based assistant over real data (no external AI service):
-        // it looks up an actual customer by name/customer-ID in the query, or
-        // matches a known portfolio-wide question, and always answers with
-        // numbers computed live via RashidCalc - never a fabricated answer.
         (function () {
-            const log = document.getElementById('ai-chat-log');
-            const form = document.getElementById('ai-chat-form');
-            const input = document.getElementById('ai-chat-input');
-            const suggestionsEl = document.getElementById('ai-chat-suggestions');
-            let analyzedCache = null;
-
-            function addMessage(text, from) {
-                const bubble = document.createElement('div');
-                bubble.className = from === 'user'
-                    ? 'flex justify-end'
-                    : 'flex justify-start';
-                bubble.innerHTML = from === 'user'
-                    ? '<div class="max-w-[80%] bg-primary text-on-primary rounded-2xl rounded-tl-sm px-4 py-3 text-sm">' + text + '</div>'
-                    : '<div class="max-w-[80%] bg-surface-container-low border border-outline-variant/20 rounded-2xl rounded-tr-sm px-4 py-3 text-sm flex gap-2 items-start">' +
-                      '<span class="material-symbols-outlined text-secondary text-lg mt-0.5">auto_awesome</span><span>' + text + '</span></div>';
-                log.appendChild(bubble);
-                log.scrollTop = log.scrollHeight;
-            }
-
-            async function getAnalyzed() {
-                if (analyzedCache) return analyzedCache;
-                const apps = await RashidApi.listApplications();
-                analyzedCache = (apps || []).map(row => ({ row, a: RashidCalc.analyze(row) }));
-                return analyzedCache;
-            }
-
             function fmt(n) { return Math.round(n).toLocaleString('ar-SA'); }
-
-            async function answer(question) {
-                const analyzed = await getAnalyzed();
-                if (!analyzed.length) return 'لا توجد طلبات حقيقية مسجلة في النظام بعد. أنشئ طلباً من "تحليل جديد" ثم اسألني عنه.';
-
-                const q = question.trim();
-
-                // Find a real customer mentioned by name or customer ID
-                const matches = analyzed.filter(x => {
-                    const name = (x.row.name || '').trim();
-                    const cid = (x.row.customerId || '').trim();
-                    return (name && q.includes(name)) || (cid && q.includes(cid));
-                });
-                const customer = matches.length
-                    ? matches.sort((a, b) => new Date(b.row.createdAt) - new Date(a.row.createdAt))[0]
-                    : null;
-
-                // Portfolio-wide questions
-                if (/كم\s*(عدد)?\s*(الطلبات|طلب)|إجمالي الطلبات|اجمالي الطلبات/.test(q)) {
-                    return 'إجمالي الطلبات الحقيقية المسجلة حالياً: ' + analyzed.length + ' طلباً.';
-                }
-                if (/متوسط.*(عبء|ضغط)/.test(q)) {
-                    const avg = Math.round(analyzed.reduce((s, x) => s + x.a.burdenRatio, 0) / analyzed.length);
-                    return 'متوسط نسبة العبء عبر كل الطلبات الحقيقية حالياً: ' + avg + '%.';
-                }
-                if (/أعلى ضغط|الأكثر خطورة|الأخطر|أخطر عميل/.test(q)) {
-                    const top = analyzed.reduce((b, x) => (!b || x.a.pressureScore > b.a.pressureScore) ? x : b, null);
-                    return 'أعلى طلب ضغطاً حالياً هو "' + (top.row.name || 'عميل رشيد') + '" بمؤشر ضغط ' + top.a.pressureScore + '/100 (' + top.a.decision + ').';
-                }
-                if (/نسبة المؤهل|كم مؤهل|عدد المؤهل/.test(q)) {
-                    const eligible = analyzed.filter(x => x.a.eligible).length;
-                    return eligible + ' من أصل ' + analyzed.length + ' طلباً مؤهلون حالياً (' + Math.round((eligible / analyzed.length) * 100) + '%).';
-                }
-                if (/متقاعد.*كم|كم.*متقاعد/.test(q)) {
-                    const retired = analyzed.filter(x => x.row.employmentStatus === 'متقاعد').length;
-                    return 'عدد العملاء المتقاعدين حالياً: ' + retired + ' من أصل ' + analyzed.length + '.';
-                }
-
-                // Customer-specific questions
-                if (customer) {
-                    const { row, a } = customer;
-                    if (/دخل|راتب/.test(q)) return row.name + ': دخله الشهري ' + fmt(row.income) + ' ر.س.';
-                    if (/التزام/.test(q)) return row.name + ': التزاماته الشهرية الحالية ' + fmt(row.obligations) + ' ر.س.';
-                    if (/عبء|ضغط/.test(q)) return row.name + ': نسبة العبء ' + a.burdenRatio + '% (الحد الأعلى المسموح ' + a.burdenCap + '%)، مؤشر الضغط ' + a.pressureScore + '/100.';
-                    if (/مؤهل|حالته|وضعه|قرار/.test(q)) return row.name + ': ' + a.decision + '. ' + a.recommendation;
-                    if (/متقاعد|موظف|توظيف/.test(q)) return row.name + ': حالته الوظيفية "' + (row.employmentStatus || 'غير محدد') + '"' + (a.isRetired ? '، ولذلك يُطبَّق عليه حد عبء أكثر تحفظاً (' + a.burdenCap + '% بدل الحد المعتاد).' : '.');
-                    if (/مبلغ|تمويل/.test(q)) return row.name + ': طلب تمويل بقيمة ' + fmt(row.amount) + ' ر.س لمدة ' + row.tenure + ' شهراً، بقسط شهري مقدّر ' + fmt(a.installment) + ' ر.س.';
-                    return row.name + ' (رقم العميل: ' + (row.customerId || 'غير مسجل') + '، ' + (row.employmentStatus || 'غير محدد') + '): طلب بقيمة ' + fmt(row.amount) +
-                        ' ر.س، دخل شهري ' + fmt(row.income) + ' ر.س، نسبة العبء ' + a.burdenRatio + '%، القرار: ' + a.decision + '.';
-                }
-
-                return 'لم أفهم سؤالك بدقة. جرّب اسم عميل حقيقي مسجل في النظام (مثال: "ما وضع فلان؟")، أو سؤالاً عاماً عن المحفظة مثل "كم عدد الطلبات؟" أو "من الأعلى ضغطاً الآن؟".';
+            function daysAgo(dateStr) {
+                if (!dateStr) return null;
+                const diff = Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+                if (diff <= 0) return 'اليوم';
+                if (diff === 1) return 'منذ يوم';
+                return 'منذ ' + diff + ' أيام';
             }
 
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const q = input.value.trim();
-                if (!q) return;
-                addMessage(q, 'user');
-                input.value = '';
-                const reply = await answer(q);
-                addMessage(reply, 'assistant');
-            });
-
-            async function init() {
-                const analyzed = await getAnalyzed();
-                addMessage(
-                    analyzed.length
-                        ? 'أهلاً بك. لدي حالياً ' + analyzed.length + ' طلباً حقيقياً في النظام. اسألني عن أي عميل بالاسم، أو عن أداء المحفظة بشكل عام.'
-                        : 'أهلاً بك. لا توجد طلبات حقيقية بعد - أنشئ طلباً من "تحليل جديد" وسأكون جاهزاً للإجابة عن أسئلتك حوله.',
-                    'assistant'
-                );
-                const suggestions = ['كم عدد الطلبات الحالية؟', 'من الأعلى ضغطاً الآن؟', 'كم متوسط نسبة العبء؟', 'كم عدد المؤهلين؟'];
-                suggestionsEl.innerHTML = suggestions.map(s =>
-                    '<button type="button" class="px-3 py-1.5 bg-surface-container-low border border-outline-variant/20 rounded-full text-xs text-on-surface-variant hover:bg-surface-container-highest transition-colors" data-q="' + s + '">' + s + '</button>'
-                ).join('');
-                suggestionsEl.querySelectorAll('button').forEach(btn => {
-                    btn.addEventListener('click', () => { input.value = btn.dataset.q; form.dispatchEvent(new Event('submit', { cancelable: true })); });
-                });
+            function renderEmptyState() {
+                document.getElementById('recent-requests-tbody').innerHTML =
+                    '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="8">لا توجد طلبات حقيقية بعد - أنشئ طلباً من "تحليل جديد" لرؤية البيانات هنا.</td></tr>';
+                document.getElementById('customers-tbody').innerHTML =
+                    '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="7">لا يوجد عملاء بعد.</td></tr>';
             }
 
-            init();
+            async function load() {
+                const apps = await RashidApi.listApplications();
+                if (!apps || !apps.length) { renderEmptyState(); return; }
+
+                const analyzed = apps.map(row => ({ row, a: RashidCalc.analyze(row) }));
+                const total = analyzed.length;
+                const highPressure = analyzed.filter(x => !x.a.eligible).length;
+                const eligibleCount = analyzed.filter(x => x.a.eligible).length;
+                const marginalCount = analyzed.filter(x => x.a.marginal).length;
+                const rejectedCount = total - eligibleCount - marginalCount;
+
+                // KPI 1: average real pressure reduction achievable by switching to the safe offer
+                const reductions = analyzed.map(({ row, a }) => {
+                    const offers = RashidCalc.alternativeOffers(row);
+                    const safeRow = Object.assign({}, row, { amount: offers.safe.amount, tenure: offers.safe.tenure });
+                    const safeAnalysis = RashidCalc.analyze(safeRow);
+                    return Math.max(0, a.pressureScore - safeAnalysis.pressureScore);
+                });
+                const avgReduction = Math.round(reductions.reduce((s, r) => s + r, 0) / total);
+                document.getElementById('kpi-pressure-reduction').innerText = avgReduction + '%';
+
+                // KPI 2: real conversion rate to a non-original offer
+                const converted = analyzed.filter(x => x.row.selectedOfferKey && x.row.selectedOfferKey !== 'current').length;
+                document.getElementById('kpi-conversion-rate').innerText = Math.round((converted / total) * 100) + '%';
+
+                document.getElementById('kpi-high-pressure').innerText = highPressure.toLocaleString('ar-SA');
+                document.getElementById('kpi-total').innerText = total.toLocaleString('ar-SA');
+
+                // KPI 5: distinct real customers (grouped by name, same as advisor-customers-ar.html)
+                const byName = new Map();
+                analyzed.forEach(x => {
+                    const key = (x.row.name || 'عميل رشيد').trim();
+                    if (!byName.has(key)) byName.set(key, []);
+                    byName.get(key).push(x);
+                });
+                document.getElementById('kpi-active-customers').innerText = byName.size.toLocaleString('ar-SA');
+
+                // Recent requests table (latest 6)
+                const statusMap = {
+                    'مؤهل': { badge: 'bg-green-100 text-green-700', label: 'مؤهل' },
+                    'مؤهل بشروط': { badge: 'bg-secondary-container text-on-secondary-container', label: 'مؤهل بشروط' },
+                    'غير مؤهل حالياً': { badge: 'bg-error-container text-error', label: 'غير مؤهل' }
+                };
+                const pressureLabel = (score) => score >= 70
+                    ? { text: 'عالي', cls: 'text-error font-medium', dot: 'bg-error' }
+                    : (score >= 40 ? { text: 'متوسط', cls: 'text-secondary font-medium', dot: 'bg-secondary' } : { text: 'منخفض', cls: 'text-green-600 font-medium', dot: 'bg-green-500' });
+                const requestStatus = (row, a) => row.selectedOfferKey
+                    ? { text: 'مكتمل', cls: 'bg-green-100 text-green-700' }
+                    : (a.pressureScore >= 70 ? { text: 'يحتاج تواصل', cls: 'bg-error-container text-error' } : { text: 'بانتظار العميل', cls: 'bg-surface-container-highest text-on-surface-variant' });
+
+                const reqTbody = document.getElementById('recent-requests-tbody');
+                reqTbody.innerHTML = '';
+                analyzed.slice(0, 6).forEach(({ row, a }) => {
+                    const p = pressureLabel(a.pressureScore);
+                    const st = requestStatus(row, a);
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-surface-container-low/50 transition-colors';
+                    tr.innerHTML =
+                        '<td class="px-6 py-5 font-label-md">#RX-' + row.id + '</td>' +
+                        '<td class="px-6 py-5 font-medium">' + (row.name || 'عميل رشيد') + '</td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">غير معرف</td>' +
+                        '<td class="px-6 py-5 text-sm">' + fmt(row.amount) + ' ر.س</td>' +
+                        '<td class="px-6 py-5"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full ' + p.dot + '"></div><span class="' + p.cls + '">' + p.text + '</span></div></td>' +
+                        '<td class="px-6 py-5"><span class="px-2 py-1 ' + st.cls + ' text-xs rounded-md">' + st.text + '</span></td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">' + (row.createdAt ? new Date(row.createdAt).toLocaleDateString('ar-SA') : '-') + '</td>' +
+                        '<td class="px-6 py-5"><a class="text-secondary text-xs font-bold hover:underline" href="request-details.html?id=' + row.id + '">عرض التفاصيل</a></td>';
+                    reqTbody.appendChild(tr);
+                });
+
+                // Customers table (latest 5 distinct customers)
+                const custTbody = document.getElementById('customers-tbody');
+                custTbody.innerHTML = '';
+                const customers = [...byName.entries()].map(([name, items]) => {
+                    items.sort((x, y) => new Date(y.row.createdAt) - new Date(x.row.createdAt));
+                    const latest = items[0];
+                    let tier;
+                    if (latest.a.eligible && latest.a.pressureScore < 40) tier = { text: 'ممتاز', cls: 'bg-green-100 text-green-700' };
+                    else if (latest.a.eligible) tier = { text: 'جيد', cls: 'bg-secondary-container text-on-secondary-container' };
+                    else if (latest.a.marginal) tier = { text: 'متوسط', cls: 'bg-secondary-container text-on-secondary-container' };
+                    else tier = { text: 'يحتاج مراجعة', cls: 'bg-error-container text-error' };
+                    return { name, latest, count: items.length, tier };
+                }).sort((a, b) => new Date(b.latest.row.createdAt) - new Date(a.latest.row.createdAt));
+
+                customers.slice(0, 5).forEach(c => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-surface-container-low/50 transition-colors';
+                    tr.innerHTML =
+                        '<td class="px-6 py-5 font-medium">' + c.name + '</td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">غير معرف</td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">غير معرف</td>' +
+                        '<td class="px-6 py-5"><span class="px-2 py-1 ' + c.tier.cls + ' text-xs rounded-md">' + c.tier.text + '</span></td>' +
+                        '<td class="px-6 py-5 text-sm text-on-surface-variant">' + daysAgo(c.latest.row.createdAt) + '</td>' +
+                        '<td class="px-6 py-5">' + c.count + '</td>' +
+                        '<td class="px-6 py-5"><a class="text-secondary text-xs font-bold hover:underline" href="request-details.html?id=' + c.latest.row.id + '">عرض الملف</a></td>';
+                    custTbody.appendChild(tr);
+                });
+
+                // Pressure trend: real weekly buckets over the last 5 weeks (SVG polyline)
+                const now = Date.now();
+                const weeks = [4, 3, 2, 1, 0].map(w => {
+                    const end = now - w * 7 * 86400000;
+                    const start = end - 7 * 86400000;
+                    const inWeek = analyzed.filter(x => {
+                        const t = new Date(x.row.createdAt).getTime();
+                        return t > start && t <= end;
+                    });
+                    const avg = inWeek.length ? Math.round(inWeek.reduce((s, x) => s + x.a.pressureScore, 0) / inWeek.length) : null;
+                    return { label: new Date(end).toLocaleDateString('ar-SA', { day: 'numeric', month: 'short' }), avg };
+                });
+                const chartEl = document.getElementById('pressure-trend-chart');
+                const w = 280, h = 200, pad = 10;
+                const knownWeeks = weeks.filter(pt => pt.avg !== null);
+                const points = weeks.map((pt, i) => {
+                    const x = pad + (i * (w - 2 * pad) / (weeks.length - 1));
+                    const y = pt.avg === null ? null : (h - pad - (pt.avg / 100) * (h - 2 * pad));
+                    return { x, y, avg: pt.avg };
+                });
+                const pathPoints = points.filter(p => p.y !== null);
+                const polyline = pathPoints.map(p => p.x + ',' + p.y).join(' ');
+                const dots = pathPoints.map(p => '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="#755a26"></circle>' +
+                    '<title>' + p.avg + '/100</title>').join('');
+                chartEl.innerHTML = knownWeeks.length
+                    ? '<svg viewBox="0 0 ' + w + ' ' + h + '" class="w-full h-full">' +
+                      '<polyline points="' + polyline + '" fill="none" stroke="#755a26" stroke-width="2.5"></polyline>' + dots + '</svg>'
+                    : '<div class="w-full h-full flex items-center justify-center text-on-surface-variant text-sm">لا توجد بيانات كافية بعد</div>';
+                document.getElementById('pressure-trend-labels').innerHTML = weeks.map(pt => '<span>' + pt.label + '</span>').join('');
+
+                // Decision distribution donut (real)
+                const eligDeg = (eligibleCount / total) * 360;
+                const margDeg = (marginalCount / total) * 360;
+                document.getElementById('decision-donut').style.background =
+                    'conic-gradient(#22c55e 0deg ' + eligDeg + 'deg, #755a26 ' + eligDeg + 'deg ' + (eligDeg + margDeg) + 'deg, #ba1a1a ' + (eligDeg + margDeg) + 'deg 360deg)';
+                document.getElementById('decision-donut-total').innerText = total.toLocaleString('ar-SA');
+                document.getElementById('decision-count-eligible').innerText = eligibleCount;
+                document.getElementById('decision-count-marginal').innerText = marginalCount;
+                document.getElementById('decision-count-rejected').innerText = rejectedCount;
+
+                // Advisor assistant recommendation panel (real top-pressure applicant)
+                const top = analyzed.reduce((best, x) => (!best || x.a.pressureScore > best.a.pressureScore) ? x : best, null);
+                if (top) {
+                    document.getElementById('ai-assistant-name').innerText = top.row.name || 'عميل رشيد';
+                    document.getElementById('ai-assistant-reqid').innerText = '#RX-' + top.row.id;
+                    document.getElementById('ai-assistant-badge').innerText = top.a.pressureScore >= 70 ? 'ضغط عالٍ' : (top.a.pressureScore >= 40 ? 'ضغط متوسط' : 'ضغط منخفض');
+                    document.getElementById('ai-assistant-desc').innerText =
+                        'ضغط ' + top.a.pressureScore + '/100: فرصة تحسين عبر عرض بديل - تواصل مع العميل اليوم. ' + top.a.recommendation;
+                    document.getElementById('ai-assistant-link').href = 'request-details.html?id=' + top.row.id;
+                }
+
+                const opportunityBase = analyzed.filter(x => !x.a.eligible || x.a.marginal);
+                const opportunityPct = opportunityBase.length
+                    ? Math.round((opportunityBase.filter(x => !x.row.selectedOfferKey).length / opportunityBase.length) * 100)
+                    : 0;
+                const avgBurden = Math.round(analyzed.reduce((s, x) => s + x.a.burdenRatio, 0) / total);
+                document.getElementById('ai-assistant-summary').innerHTML = [
+                    highPressure + ' طلبات ضغط عالي تحتاج متابعة',
+                    'نسبة الموافقة الحالية ' + Math.round((eligibleCount / total) * 100) + '%',
+                    'متوسط نسبة العبء عبر المحفظة ' + avgBurden + '%',
+                    'فرصة تحسين التحويل إلى بديل ' + opportunityPct + '%'
+                ].map(t => '<li class="flex items-center gap-2"><span class="material-symbols-outlined text-xs text-secondary-fixed">check_circle</span>' + t + '</li>').join('');
+            }
+
+            load();
         })();
     </script>
 </body></html>
