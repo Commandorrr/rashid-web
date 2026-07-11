@@ -30,10 +30,35 @@ window.RashidCalc = (function () {
             return el && el.value ? el.value.trim() : '';
         };
         const hasUpcomingEl = document.getElementById('rashid-has-upcoming');
+
+        // The wizard asks "starts after: شهر/شهرين/3 أشهر" (a pill group) and a
+        // plain "due day" number rather than making the customer type/guess a
+        // full future date - both of those are exactly what buildCalendar()
+        // needs anyway (a month offset + a day-of-month), so this synthesizes
+        // a real "MM/DD/YY" string from today's actual date so the existing
+        // dayOfMonth()/monthsFromNow() parsers keep working unchanged. Falls
+        // back to reading a raw #rashid-upcoming-date field if a page still
+        // uses the older single-date-input markup.
+        const startsPill = document.querySelector('#rashid-upcoming-starts-pills .rashid-pill[data-active="true"]');
+        const recurringPill = document.querySelector('#rashid-upcoming-recurring-pills .rashid-pill[data-active="true"]');
+        let upcomingObligationDate = str('rashid-upcoming-date');
+        const upcomingDay = num('rashid-upcoming-day');
+        if (!upcomingObligationDate && startsPill && upcomingDay) {
+            const monthsAhead = parseInt(startsPill.dataset.value, 10) || 1;
+            const target = new Date();
+            target.setDate(1); // avoid month-end overflow before adding months
+            target.setMonth(target.getMonth() + monthsAhead);
+            const mm = String(target.getMonth() + 1).padStart(2, '0');
+            const yy = String(target.getFullYear() % 100).padStart(2, '0');
+            const dd = String(Math.min(31, upcomingDay)).padStart(2, '0');
+            upcomingObligationDate = mm + '/' + dd + '/' + yy;
+        }
+
         return {
             name: str('rashid-name'),
             customerId: str('rashid-customer-id'),
             employmentStatus: str('rashid-employment-status'),
+            contactChannel: str('rashid-contact-channel'),
             income: num('rashid-income'),
             obligations: num('rashid-obligations'),
             expenses: num('rashid-expenses'),
@@ -42,8 +67,10 @@ window.RashidCalc = (function () {
             salaryDate: str('rashid-salary-date'),
             installmentDate: str('rashid-installment-date'),
             hasUpcomingObligation: !!(hasUpcomingEl && hasUpcomingEl.checked),
-            upcomingObligationDate: str('rashid-upcoming-date'),
+            upcomingObligationType: str('rashid-upcoming-type'),
+            upcomingObligationDate: upcomingObligationDate,
             upcomingObligationAmount: num('rashid-upcoming-amount'),
+            upcomingObligationRecurring: recurringPill ? recurringPill.dataset.value === 'شهري' : false,
             savedAt: new Date().toISOString()
         };
     }
@@ -53,6 +80,7 @@ window.RashidCalc = (function () {
             name: (data && data.name) || 'عميل رشيد',
             customerId: (data && data.customerId) || '',
             employmentStatus: (data && data.employmentStatus) || 'موظف',
+            contactChannel: (data && data.contactChannel) || '',
             income: (data && data.income) || 12000,
             obligations: (data && data.obligations) || 1500,
             expenses: (data && data.expenses) || 4000,
@@ -61,8 +89,10 @@ window.RashidCalc = (function () {
             salaryDate: (data && data.salaryDate) || '',
             installmentDate: (data && data.installmentDate) || '',
             hasUpcomingObligation: !!(data && data.hasUpcomingObligation),
+            upcomingObligationType: (data && data.upcomingObligationType) || '',
             upcomingObligationDate: (data && data.upcomingObligationDate) || '',
-            upcomingObligationAmount: (data && data.upcomingObligationAmount) || 0
+            upcomingObligationAmount: (data && data.upcomingObligationAmount) || 0,
+            upcomingObligationRecurring: !!(data && data.upcomingObligationRecurring)
         };
     }
 
@@ -159,12 +189,15 @@ window.RashidCalc = (function () {
         };
     }
 
+    // Accepts either a plain day-of-month string ("27" - the wizard's current
+    // salary/first-installment day inputs, since those recur every month and
+    // never needed a real month/year) or a legacy "MM/DD/YY" string, so old
+    // localStorage/DB data saved before that field simplified still parses.
     function dayOfMonth(dateStr) {
         if (!dateStr) return null;
-        const parts = dateStr.split('/');
-        if (parts.length < 2) return null;
-        const day = parseInt(parts[1], 10);
-        if (isNaN(day) || day < 1 || day > 30) return null;
+        const parts = String(dateStr).split('/');
+        const day = parts.length >= 2 ? parseInt(parts[1], 10) : parseInt(parts[0], 10);
+        if (isNaN(day) || day < 1 || day > 31) return null;
         return day;
     }
 
@@ -213,7 +246,7 @@ window.RashidCalc = (function () {
                 balance = (balance === null ? 0 : balance) - installmentAmount;
                 label = 'installment';
                 amount = installmentAmount;
-            } else if (upcomingDay !== null && dayOfCycle === upcomingDay && monthOffset === upcomingMonthOffset) {
+            } else if (upcomingDay !== null && dayOfCycle === upcomingDay && (data.upcomingObligationRecurring ? monthOffset >= upcomingMonthOffset : monthOffset === upcomingMonthOffset)) {
                 balance = (balance === null ? 0 : balance) - data.upcomingObligationAmount;
                 label = 'upcoming';
                 amount = data.upcomingObligationAmount;

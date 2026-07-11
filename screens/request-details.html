@@ -501,7 +501,7 @@
                     document.getElementById('pf-upcoming-pct').innerText = 'تأثير ' + upcomingPct + '%';
                     document.getElementById('pf-upcoming-bar').style.width = upcomingPct + '%';
                     document.getElementById('pf-upcoming-desc').innerText =
-                        'التزام قادم بتاريخ ' + application.upcomingObligationDate + ' بقيمة ' + fmtSar(application.upcomingObligationAmount) + ' ر.س.';
+                        'التزام قادم (' + (application.upcomingObligationType || 'غير مصنّف') + ') بتاريخ ' + application.upcomingObligationDate + ' بقيمة ' + fmtSar(application.upcomingObligationAmount) + ' ر.س' + (application.upcomingObligationRecurring ? ' (يتكرر شهرياً)' : '') + '.';
                 } else {
                     document.getElementById('pf-upcoming-pct').innerText = 'تأثير 5%';
                     document.getElementById('pf-upcoming-bar').style.width = '5%';

@@ -10,6 +10,7 @@ function rowToApplication(row) {
         name: row.name,
         customerId: row.customer_id || '',
         employmentStatus: row.employment_status || 'موظف',
+        contactChannel: row.contact_channel || '',
         income: row.income,
         expenses: row.expenses,
         obligations: row.obligations,
@@ -18,8 +19,10 @@ function rowToApplication(row) {
         salaryDate: row.salary_date,
         installmentDate: row.installment_date,
         hasUpcomingObligation: !!row.has_upcoming_obligation,
+        upcomingObligationType: row.upcoming_obligation_type || '',
         upcomingObligationDate: row.upcoming_obligation_date,
         upcomingObligationAmount: row.upcoming_obligation_amount,
+        upcomingObligationRecurring: !!row.upcoming_obligation_recurring,
         createdAt: row.created_at,
         selectedOfferKey: row.selected_offer_key || null
     };
@@ -34,14 +37,15 @@ router.post('/', (req, res) => {
 
     const stmt = db.prepare(`
         INSERT INTO applications
-            (name, customer_id, employment_status, income, expenses, obligations, amount, tenure, salary_date, installment_date,
-             has_upcoming_obligation, upcoming_obligation_date, upcoming_obligation_amount)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (name, customer_id, employment_status, contact_channel, income, expenses, obligations, amount, tenure, salary_date, installment_date,
+             has_upcoming_obligation, upcoming_obligation_type, upcoming_obligation_date, upcoming_obligation_amount, upcoming_obligation_recurring)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     const result = stmt.run(
         body.name || 'عميل رشيد',
         body.customerId || null,
         body.employmentStatus || 'موظف',
+        body.contactChannel || null,
         body.income,
         body.expenses || 0,
         body.obligations || 0,
@@ -50,8 +54,10 @@ router.post('/', (req, res) => {
         body.salaryDate || null,
         body.installmentDate || null,
         body.hasUpcomingObligation ? 1 : 0,
+        body.upcomingObligationType || null,
         body.upcomingObligationDate || null,
-        body.upcomingObligationAmount || 0
+        body.upcomingObligationAmount || 0,
+        body.upcomingObligationRecurring ? 1 : 0
     );
 
     const row = db.prepare('SELECT * FROM applications WHERE id = ?').get(result.lastInsertRowid);

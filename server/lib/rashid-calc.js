@@ -9,6 +9,7 @@ function withDefaults(data) {
         name: (data && data.name) || 'عميل رشيد',
         customerId: (data && data.customerId) || '',
         employmentStatus: (data && data.employmentStatus) || 'موظف',
+        contactChannel: (data && data.contactChannel) || '',
         income: (data && data.income) || 12000,
         obligations: (data && data.obligations) || 1500,
         expenses: (data && data.expenses) || 4000,
@@ -17,8 +18,10 @@ function withDefaults(data) {
         salaryDate: (data && data.salaryDate) || '',
         installmentDate: (data && data.installmentDate) || '',
         hasUpcomingObligation: !!(data && data.hasUpcomingObligation),
+        upcomingObligationType: (data && data.upcomingObligationType) || '',
         upcomingObligationDate: (data && data.upcomingObligationDate) || '',
-        upcomingObligationAmount: (data && data.upcomingObligationAmount) || 0
+        upcomingObligationAmount: (data && data.upcomingObligationAmount) || 0,
+        upcomingObligationRecurring: !!(data && data.upcomingObligationRecurring)
     };
 }
 
@@ -113,12 +116,13 @@ function alternativeOffers(rawData) {
     };
 }
 
+// Accepts either a plain day-of-month string ("27") or a legacy "MM/DD/YY"
+// string, so old data saved before that field simplified still parses.
 function dayOfMonth(dateStr) {
     if (!dateStr) return null;
-    const parts = dateStr.split('/');
-    if (parts.length < 2) return null;
-    const day = parseInt(parts[1], 10);
-    if (isNaN(day) || day < 1 || day > 30) return null;
+    const parts = String(dateStr).split('/');
+    const day = parts.length >= 2 ? parseInt(parts[1], 10) : parseInt(parts[0], 10);
+    if (isNaN(day) || day < 1 || day > 31) return null;
     return day;
 }
 
@@ -157,7 +161,7 @@ function buildCalendar(installmentAmount, rawData) {
             balance = (balance === null ? 0 : balance) - installmentAmount;
             label = 'installment';
             amount = installmentAmount;
-        } else if (upcomingDay !== null && dayOfCycle === upcomingDay && monthOffset === upcomingMonthOffset) {
+        } else if (upcomingDay !== null && dayOfCycle === upcomingDay && (data.upcomingObligationRecurring ? monthOffset >= upcomingMonthOffset : monthOffset === upcomingMonthOffset)) {
             balance = (balance === null ? 0 : balance) - data.upcomingObligationAmount;
             label = 'upcoming';
             amount = data.upcomingObligationAmount;

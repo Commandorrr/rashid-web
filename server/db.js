@@ -49,7 +49,10 @@ db.exec(`
 // was already added by a previous server start.
 const migrations = [
     "ALTER TABLE applications ADD COLUMN customer_id TEXT",
-    "ALTER TABLE applications ADD COLUMN employment_status TEXT DEFAULT 'موظف'"
+    "ALTER TABLE applications ADD COLUMN employment_status TEXT DEFAULT 'موظف'",
+    "ALTER TABLE applications ADD COLUMN contact_channel TEXT",
+    "ALTER TABLE applications ADD COLUMN upcoming_obligation_type TEXT",
+    "ALTER TABLE applications ADD COLUMN upcoming_obligation_recurring INTEGER DEFAULT 0"
 ];
 for (const sql of migrations) {
     try {

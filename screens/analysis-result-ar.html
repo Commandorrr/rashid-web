@@ -424,8 +424,8 @@
                     impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';
                 }
                 document.getElementById('rs-credit-desc').innerText =
-                    'يوجد التزام قادم بتاريخ ' + (result.input.upcomingObligationDate || 'غير محدد') + ' بقيمة ' + fmtSar(upcomingAmount) +
-                    ' ر.س، وقد يخفض المتبقي نهاية الشهر إلى ' + fmtSar(reducedBalance) + ' ر.س إذا تم اعتماد الطلب الحالي.';
+                    'يوجد التزام قادم (' + (result.input.upcomingObligationType || 'غير مصنّف') + ') بتاريخ ' + (result.input.upcomingObligationDate || 'غير محدد') + ' بقيمة ' + fmtSar(upcomingAmount) +
+                    ' ر.س' + (result.input.upcomingObligationRecurring ? ' (يتكرر شهرياً)' : '') + '، وقد يخفض المتبقي نهاية الشهر إلى ' + fmtSar(reducedBalance) + ' ر.س إذا تم اعتماد الطلب الحالي.';
             } else {
                 creditPct = 5;
                 impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';
