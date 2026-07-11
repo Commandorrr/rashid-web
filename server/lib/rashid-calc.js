@@ -15,6 +15,7 @@ function withDefaults(data) {
         expenses: (data && data.expenses) || 4000,
         amount: (data && data.amount) || 120000,
         tenure: (data && data.tenure) || 48,
+        profitRateAnnual: (data && data.profitRateAnnual) || PROFIT_RATE_ANNUAL,
         salaryDate: (data && data.salaryDate) || '',
         installmentDate: (data && data.installmentDate) || '',
         hasUpcomingObligation: !!(data && data.hasUpcomingObligation),
@@ -28,7 +29,7 @@ function withDefaults(data) {
 function analyze(rawData) {
     const data = withDefaults(rawData);
     const upcomingMonthly = data.hasUpcomingObligation ? data.upcomingObligationAmount / 3 : 0;
-    const r = PROFIT_RATE_ANNUAL / 12;
+    const r = data.profitRateAnnual / 12;
     const n = data.tenure;
     const installment = n > 0
         ? data.amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1)

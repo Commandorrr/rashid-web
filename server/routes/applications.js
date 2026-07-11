@@ -16,6 +16,7 @@ function rowToApplication(row) {
         obligations: row.obligations,
         amount: row.amount,
         tenure: row.tenure,
+        profitRateAnnual: row.profit_rate_annual || null,
         salaryDate: row.salary_date,
         installmentDate: row.installment_date,
         hasUpcomingObligation: !!row.has_upcoming_obligation,
@@ -37,9 +38,9 @@ router.post('/', (req, res) => {
 
     const stmt = db.prepare(`
         INSERT INTO applications
-            (name, customer_id, employment_status, contact_channel, income, expenses, obligations, amount, tenure, salary_date, installment_date,
+            (name, customer_id, employment_status, contact_channel, income, expenses, obligations, amount, tenure, profit_rate_annual, salary_date, installment_date,
              has_upcoming_obligation, upcoming_obligation_type, upcoming_obligation_date, upcoming_obligation_amount, upcoming_obligation_recurring)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     const result = stmt.run(
         body.name || 'عميل رشيد',
@@ -51,6 +52,7 @@ router.post('/', (req, res) => {
         body.obligations || 0,
         body.amount,
         body.tenure,
+        body.profitRateAnnual || null,
         body.salaryDate || null,
         body.installmentDate || null,
         body.hasUpcomingObligation ? 1 : 0,

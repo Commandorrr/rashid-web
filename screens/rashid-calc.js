@@ -64,6 +64,7 @@ window.RashidCalc = (function () {
             expenses: num('rashid-expenses'),
             amount: num('rashid-amount'),
             tenure: parseInt(str('rashid-tenure'), 10) || 0,
+            profitRateAnnual: document.getElementById('rashid-profit-rate') ? num('rashid-profit-rate') / 100 : null,
             salaryDate: str('rashid-salary-date'),
             installmentDate: str('rashid-installment-date'),
             hasUpcomingObligation: !!(hasUpcomingEl && hasUpcomingEl.checked),
@@ -86,6 +87,7 @@ window.RashidCalc = (function () {
             expenses: (data && data.expenses) || 4000,
             amount: (data && data.amount) || 120000,
             tenure: (data && data.tenure) || 48,
+            profitRateAnnual: (data && data.profitRateAnnual) || PROFIT_RATE_ANNUAL,
             salaryDate: (data && data.salaryDate) || '',
             installmentDate: (data && data.installmentDate) || '',
             hasUpcomingObligation: !!(data && data.hasUpcomingObligation),
@@ -101,7 +103,12 @@ window.RashidCalc = (function () {
         // An upcoming one-off obligation is smoothed over 3 months into the
         // monthly burden calculation, since that's the window the wizard asks about.
         const upcomingMonthly = data.hasUpcomingObligation ? data.upcomingObligationAmount / 3 : 0;
-        const r = PROFIT_RATE_ANNUAL / 12;
+        // An advisor-adjustable estimated profit rate (from the "هامش ربح
+        // تقديري" field) only affects this application's own installment/DBR
+        // figures - it's explicitly advisory, never a final institutional
+        // price, so alternativeOffers()/estimateInstallment() intentionally
+        // keep using the fixed representative rate for the offer comparisons.
+        const r = data.profitRateAnnual / 12;
         const n = data.tenure;
         const installment = n > 0
             ? data.amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1)

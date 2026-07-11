@@ -140,7 +140,7 @@
 </div>
 </div>
 </nav>
-<main class="pt-24 pb-12 px-container-margin max-w-[1440px] mx-auto">
+<main class="pt-24 pb-12 px-container-margin max-w-[1800px] mx-auto">
 <!-- Step Indicator -->
 <div class="mb-12 flex flex-col items-center">
 <div class="flex items-center gap-3 mb-2">
@@ -194,8 +194,8 @@
 <form action="#" class="space-y-8">
 <!-- Section 1: Customer data -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-secondary">person</span> بيانات العميل</h3>
-<div class="grid md:grid-cols-2 gap-8">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">1</span><span class="material-symbols-outlined text-secondary">person</span> بيانات العميل</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">الاسم الكامل</label>
 <input class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/50 input-glow transition-all font-body-md" id="rashid-name" placeholder="مثال: رامي العتيبي" required="" type="text"/>
@@ -233,8 +233,8 @@
 </div>
 <!-- Section 2: Income & obligations -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-secondary">payments</span> دخلك والتزاماتك الحالية</h3>
-<div class="grid md:grid-cols-2 gap-8">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">2</span><span class="material-symbols-outlined text-secondary">payments</span> دخلك والتزاماتك الحالية</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">الدخل الشهري (ر.س)</label>
 <input class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/50 input-glow transition-all font-body-md text-left" dir="ltr" id="rashid-income" min="1" placeholder="8,000" required="" type="number"/>
@@ -254,8 +254,8 @@
 </div>
 <!-- Section 3: Requested financing -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-secondary">account_balance_wallet</span> التمويل المطلوب</h3>
-<div class="grid md:grid-cols-2 gap-8">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">3</span><span class="material-symbols-outlined text-secondary">account_balance_wallet</span> التمويل المطلوب</h3>
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">مبلغ التمويل المطلوب</label>
 <input class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/50 input-glow transition-all font-body-md" id="rashid-amount" min="1" placeholder="مثال: 50,000" required="" type="number"/>
@@ -263,24 +263,29 @@
 </div>
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">مدة السداد</label>
-<div class="relative">
-<select class="w-full px-4 py-3 rounded-lg bg-surface-container-low border border-outline-variant/50 input-glow transition-all font-body-md appearance-none" id="rashid-tenure" required="">
-<option value="">اختر المدة...</option>
-<option value="12">12 شهر</option>
-<option value="24">24 شهر</option>
-<option value="36">36 شهر</option>
-<option value="48">48 شهر</option>
-<option value="60">60 شهر</option>
-</select>
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+<div class="flex flex-wrap gap-1.5" id="rashid-tenure-pills">
+<button class="rashid-pill flex-1 px-2 py-2.5 rounded-lg border border-outline-variant/50 text-xs" data-value="12" type="button">12<br/>شهر</button>
+<button class="rashid-pill flex-1 px-2 py-2.5 rounded-lg border border-outline-variant/50 text-xs" data-value="24" type="button">24<br/>شهر</button>
+<button class="rashid-pill flex-1 px-2 py-2.5 rounded-lg border border-outline-variant/50 text-xs" data-active="true" data-value="36" type="button">36<br/>شهر</button>
+<button class="rashid-pill flex-1 px-2 py-2.5 rounded-lg border border-outline-variant/50 text-xs" data-value="48" type="button">48<br/>شهر</button>
+<button class="rashid-pill flex-1 px-2 py-2.5 rounded-lg border border-outline-variant/50 text-xs" data-value="60" type="button">60<br/>شهر</button>
 </div>
+<input id="rashid-tenure" type="hidden" value="36"/>
 <p class="text-on-surface-variant text-xs">يمكن لرَشيد اقتراح مدة بديلة لتخفيف الضغط المالي.</p>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface-variant block">هامش ربح تقديري</label>
+<div class="relative">
+<input class="w-full px-4 py-3 pl-9 rounded-lg bg-surface-container-low border border-outline-variant/50 input-glow transition-all font-body-md text-left" dir="ltr" id="rashid-profit-rate" max="20" min="0" step="0.1" type="number" value="5"/>
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">%</span>
+</div>
+<p class="text-on-surface-variant text-xs">هامش تقديري لأغراض التحليل، ولا يمثل نهائياً تسعيراً من الجهة المالية.</p>
 </div>
 </div>
 </div>
 <!-- Section 4: Salary/installment timing -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="material-symbols-outlined text-secondary">calendar_month</span> توقيت الراتب وأول قسط</h3>
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">4</span><span class="material-symbols-outlined text-secondary">calendar_month</span> توقيت الراتب وأول قسط</h3>
 <div class="grid md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">يوم نزول الراتب</label>
@@ -302,7 +307,7 @@
 <span class="material-symbols-outlined text-secondary">house</span>
 </div>
 <div>
-<h3 class="font-headline-md text-headline-md text-primary">التزامات قادمة خلال 3 أشهر</h3>
+<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">5</span> التزامات قادمة خلال 3 أشهر</h3>
 <p class="text-on-surface-variant font-body-md">هل لديك إيجار أو التزام مالي كبير قادم خلال الـ 3 أشهر؟</p>
 </div>
 </div>
@@ -311,7 +316,7 @@
 <div class="w-14 h-7 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
 </label>
 </div>
-<div class="hidden grid md:grid-cols-2 gap-6 px-6 pb-6" id="rashid-upcoming-fields">
+<div class="hidden grid md:grid-cols-2 lg:grid-cols-5 gap-6 px-6 pb-6" id="rashid-upcoming-fields">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">نوع الالتزام القادم</label>
 <div class="relative">
@@ -344,7 +349,7 @@
 <button class="rashid-pill flex-1 px-3 py-2 rounded-lg border border-outline-variant/50 text-sm" data-value="شهري" type="button">شهري</button>
 </div>
 </div>
-<div class="space-y-2 md:col-span-2">
+<div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">يوم الاستحقاق</label>
 <input class="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant/50 input-glow transition-all font-body-md text-left" dir="ltr" id="rashid-upcoming-day" max="31" min="1" placeholder="مثال: 5" type="number"/>
 </div>
@@ -394,19 +399,30 @@
             });
         }
 
-        // Exclusive pill-button groups (يبدأ بعد / هل هو متكرر)
-        function wirePillGroup(containerId) {
+        // Exclusive pill-button groups (مدة السداد / يبدأ بعد / هل هو متكرر).
+        // An optional hiddenInputId syncs the chosen value into a real form
+        // field for pages/scripts (RashidCalc.collectFromForm) that just read
+        // an element's .value rather than inspecting the pill DOM directly.
+        function wirePillGroup(containerId, hiddenInputId) {
             const container = document.getElementById(containerId);
+            const hiddenInput = hiddenInputId ? document.getElementById(hiddenInputId) : null;
             container.querySelectorAll('.rashid-pill').forEach(btn => {
                 btn.addEventListener('click', () => {
                     container.querySelectorAll('.rashid-pill').forEach(b => b.dataset.active = 'false');
                     btn.dataset.active = 'true';
+                    if (hiddenInput) hiddenInput.value = btn.dataset.value;
                     updateAccuracy();
                 });
             });
         }
+        wirePillGroup('rashid-tenure-pills', 'rashid-tenure');
         wirePillGroup('rashid-upcoming-starts-pills');
         wirePillGroup('rashid-upcoming-recurring-pills');
+        function setPillActive(containerId, value) {
+            document.querySelectorAll('#' + containerId + ' .rashid-pill').forEach(b => {
+                b.dataset.active = (b.dataset.value === String(value)) ? 'true' : 'false';
+            });
+        }
 
         // Reveal detailed fields when "upcoming obligations" is toggled on
         const upcomingToggle = document.getElementById('rashid-has-upcoming');
@@ -456,6 +472,8 @@
             document.getElementById('rashid-expenses').value = 3300;
             document.getElementById('rashid-amount').value = 50000;
             document.getElementById('rashid-tenure').value = 24;
+            setPillActive('rashid-tenure-pills', 24);
+            document.getElementById('rashid-profit-rate').value = 5;
             document.getElementById('rashid-salary-date').value = 27;
             document.getElementById('rashid-installment-date').value = 15;
             upcomingToggle.checked = true;
@@ -463,8 +481,8 @@
             document.getElementById('rashid-upcoming-type').value = 'إيجار';
             upcomingAmount.value = 700;
             upcomingDay.value = 5;
-            document.querySelectorAll('#rashid-upcoming-starts-pills .rashid-pill').forEach(b => b.dataset.active = (b.dataset.value === '2' ? 'true' : 'false'));
-            document.querySelectorAll('#rashid-upcoming-recurring-pills .rashid-pill').forEach(b => b.dataset.active = (b.dataset.value === 'دفعة واحدة' ? 'true' : 'false'));
+            setPillActive('rashid-upcoming-starts-pills', 2);
+            setPillActive('rashid-upcoming-recurring-pills', 'دفعة واحدة');
             updateAccuracy();
         });
 
