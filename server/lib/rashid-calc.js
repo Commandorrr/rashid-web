@@ -117,25 +117,38 @@ function alternativeOffers(rawData) {
     };
 }
 
-// Accepts either a plain day-of-month string ("27") or a legacy "MM/DD/YY"
-// string, so old data saved before that field simplified still parses.
-function dayOfMonth(dateStr) {
+// Unified date parser for every format these fields have ever stored: a
+// native <input type="date"> ISO string ("2026-09-05"), the legacy
+// manually-typed "MM/DD/YY" string, or a plain day-of-month string ("27").
+function parseDateParts(dateStr) {
     if (!dateStr) return null;
-    const parts = String(dateStr).split('/');
-    const day = parts.length >= 2 ? parseInt(parts[1], 10) : parseInt(parts[0], 10);
-    if (isNaN(day) || day < 1 || day > 31) return null;
-    return day;
+    const s = String(dateStr);
+    if (s.indexOf('-') !== -1) {
+        const bits = s.split('-').map(n => parseInt(n, 10));
+        if (bits.length < 3 || isNaN(bits[2])) return null;
+        return { day: bits[2], month: bits[1], year: bits[0] };
+    }
+    if (s.indexOf('/') !== -1) {
+        const bits = s.split('/').map(n => parseInt(n, 10));
+        if (bits.length < 2 || isNaN(bits[1])) return null;
+        return { day: bits[1], month: bits[0] || null, year: bits.length >= 3 ? 2000 + bits[2] : null };
+    }
+    const day = parseInt(s, 10);
+    if (isNaN(day)) return null;
+    return { day: day, month: null, year: null };
+}
+
+function dayOfMonth(dateStr) {
+    const p = parseDateParts(dateStr);
+    if (!p || isNaN(p.day) || p.day < 1 || p.day > 31) return null;
+    return p.day;
 }
 
 function monthsFromNow(dateStr) {
-    if (!dateStr) return 0;
-    const parts = dateStr.split('/');
-    if (parts.length < 3) return 0;
-    const month = parseInt(parts[0], 10);
-    const year = parseInt(parts[2], 10) + 2000;
-    if (isNaN(month) || isNaN(year)) return 0;
+    const p = parseDateParts(dateStr);
+    if (!p || p.month == null || p.year == null) return 0;
     const now = new Date();
-    const diff = (year - now.getFullYear()) * 12 + (month - 1 - now.getMonth());
+    const diff = (p.year - now.getFullYear()) * 12 + (p.month - 1 - now.getMonth());
     return Math.max(0, Math.min(2, diff));
 }
 

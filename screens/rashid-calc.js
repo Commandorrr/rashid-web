@@ -30,29 +30,13 @@ window.RashidCalc = (function () {
             return el && el.value ? el.value.trim() : '';
         };
         const hasUpcomingEl = document.getElementById('rashid-has-upcoming');
-
-        // The wizard asks "starts after: شهر/شهرين/3 أشهر" (a pill group) and a
-        // plain "due day" number rather than making the customer type/guess a
-        // full future date - both of those are exactly what buildCalendar()
-        // needs anyway (a month offset + a day-of-month), so this synthesizes
-        // a real "MM/DD/YY" string from today's actual date so the existing
-        // dayOfMonth()/monthsFromNow() parsers keep working unchanged. Falls
-        // back to reading a raw #rashid-upcoming-date field if a page still
-        // uses the older single-date-input markup.
-        const startsPill = document.querySelector('#rashid-upcoming-starts-pills .rashid-pill[data-active="true"]');
         const recurringPill = document.querySelector('#rashid-upcoming-recurring-pills .rashid-pill[data-active="true"]');
-        let upcomingObligationDate = str('rashid-upcoming-date');
-        const upcomingDay = num('rashid-upcoming-day');
-        if (!upcomingObligationDate && startsPill && upcomingDay) {
-            const monthsAhead = parseInt(startsPill.dataset.value, 10) || 1;
-            const target = new Date();
-            target.setDate(1); // avoid month-end overflow before adding months
-            target.setMonth(target.getMonth() + monthsAhead);
-            const mm = String(target.getMonth() + 1).padStart(2, '0');
-            const yy = String(target.getFullYear() % 100).padStart(2, '0');
-            const dd = String(Math.min(31, upcomingDay)).padStart(2, '0');
-            upcomingObligationDate = mm + '/' + dd + '/' + yy;
-        }
+        // "يوم الاستحقاق" is a real <input type="date"> (native calendar
+        // picker, ISO "YYYY-MM-DD" value) so it directly carries the real
+        // month/year rashid needs - no more deriving it from a separate
+        // "starts after" choice. dayOfMonth()/monthsFromNow() parse this
+        // format directly (see below).
+        const upcomingObligationDate = str('rashid-upcoming-day') || str('rashid-upcoming-date');
 
         return {
             name: str('rashid-name'),
@@ -196,30 +180,44 @@ window.RashidCalc = (function () {
         };
     }
 
-    // Accepts either a plain day-of-month string ("27" - the wizard's current
-    // salary/first-installment day inputs, since those recur every month and
-    // never needed a real month/year) or a legacy "MM/DD/YY" string, so old
-    // localStorage/DB data saved before that field simplified still parses.
-    function dayOfMonth(dateStr) {
+    // Unified date parser for every format this app has ever stored in these
+    // fields: a native <input type="date"> ISO string ("2026-09-05"), the
+    // legacy manually-typed "MM/DD/YY" string, or a plain day-of-month string
+    // ("27" - salary/installment day are recurring-every-month, so a real
+    // month/year was never meaningful for those two fields). Old
+    // localStorage/DB rows keep parsing correctly under any of the three.
+    function parseDateParts(dateStr) {
         if (!dateStr) return null;
-        const parts = String(dateStr).split('/');
-        const day = parts.length >= 2 ? parseInt(parts[1], 10) : parseInt(parts[0], 10);
-        if (isNaN(day) || day < 1 || day > 31) return null;
-        return day;
+        const s = String(dateStr);
+        if (s.indexOf('-') !== -1) {
+            const bits = s.split('-').map(n => parseInt(n, 10));
+            if (bits.length < 3 || isNaN(bits[2])) return null;
+            return { day: bits[2], month: bits[1], year: bits[0] };
+        }
+        if (s.indexOf('/') !== -1) {
+            const bits = s.split('/').map(n => parseInt(n, 10));
+            if (bits.length < 2 || isNaN(bits[1])) return null;
+            return { day: bits[1], month: bits[0] || null, year: bits.length >= 3 ? 2000 + bits[2] : null };
+        }
+        const day = parseInt(s, 10);
+        if (isNaN(day)) return null;
+        return { day: day, month: null, year: null };
     }
 
-    // How many whole months from today a MM/DD/YY date falls in (clamped to
-    // the 0-2 window this 90-day simulation covers), used to place the
-    // upcoming obligation in the correct simulated month.
+    function dayOfMonth(dateStr) {
+        const p = parseDateParts(dateStr);
+        if (!p || isNaN(p.day) || p.day < 1 || p.day > 31) return null;
+        return p.day;
+    }
+
+    // How many whole months from today a date falls in (clamped to the 0-2
+    // window this 90-day simulation covers), used to place the upcoming
+    // obligation in the correct simulated month.
     function monthsFromNow(dateStr) {
-        if (!dateStr) return 0;
-        const parts = dateStr.split('/');
-        if (parts.length < 3) return 0;
-        const month = parseInt(parts[0], 10);
-        const year = parseInt(parts[2], 10) + 2000;
-        if (isNaN(month) || isNaN(year)) return 0;
+        const p = parseDateParts(dateStr);
+        if (!p || p.month == null || p.year == null) return 0;
         const now = new Date();
-        const diff = (year - now.getFullYear()) * 12 + (month - 1 - now.getMonth());
+        const diff = (p.year - now.getFullYear()) * 12 + (p.month - 1 - now.getMonth());
         return Math.max(0, Math.min(2, diff));
     }
 
