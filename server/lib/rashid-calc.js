@@ -10,6 +10,8 @@ function withDefaults(data) {
         customerId: (data && data.customerId) || '',
         employmentStatus: (data && data.employmentStatus) || 'موظف',
         contactChannel: (data && data.contactChannel) || '',
+        requestSource: (data && data.requestSource) || 'إدخال موظف',
+        financingType: (data && data.financingType) || '',
         income: (data && data.income) || 12000,
         obligations: (data && data.obligations) || 1500,
         expenses: (data && data.expenses) || 4000,
@@ -53,7 +55,8 @@ function analyze(rawData) {
     let readiness;
     if (surplus > data.income * 0.2) readiness = 'مرتفعة';
     else if (surplus >= 0) readiness = 'متوسطة';
-    else readiness = 'منخفضة';
+    else if (surplus >= -data.income * 0.15) readiness = 'منخفضة';
+    else readiness = 'منخفضة جداً';
 
     let decision, recommendation;
     if (eligible) {

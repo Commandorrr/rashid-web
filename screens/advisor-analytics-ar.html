@@ -281,7 +281,7 @@
     </script>
 <script>
         (function () {
-            const TIER_COLORS = { 'منخفضة': '#16a34a', 'متوسطة': '#c9a227', 'مرتفعة': '#e07a1f', 'حرجة': '#ba1a1a' };
+            const TIER_COLORS = { 'منخفضة': '#16a34a', 'متوسطة': '#c9a227', 'مرتفعة': '#e07a1f', 'مرتفعة جداً': '#ba1a1a' };
             const EMP_COLORS = { 'موظف': '#b5860f', 'متقاعد': '#1d6fae' };
             let allApps = [];
 
@@ -418,7 +418,7 @@
                             Object.keys(groups).map(k => '<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full" style="background:' + EMP_COLORS[k] + '"></span>' + k + ': ' + (groups[k].length ? (METRIC_DEFS[metrics[0]].sar ? fmtSar(METRIC_DEFS[metrics[0]].compute(groups[k])) + ' ر.س' : METRIC_DEFS[metrics[0]].compute(groups[k])) : 0) + '</div>').join('') + '</div></div>';
                     } else {
                         captionEl.innerText = 'البُعد المختار (التاريخ) لا يُشكّل فئات لمخطط دائري، فيُعرض بدلاً منه توزيع مستوى الضغط على المحفظة كاملة.';
-                        const tiers = ['منخفضة', 'متوسطة', 'مرتفعة', 'حرجة'];
+                        const tiers = ['منخفضة', 'متوسطة', 'مرتفعة', 'مرتفعة جداً'];
                         const counts = {}; tiers.forEach(t => counts[t] = 0);
                         allApps.forEach(r => counts[RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore)]++);
                         let deg = 0;
@@ -428,7 +428,7 @@
                     }
                 } else if (state.chartType === 'heatmap') {
                     captionEl.innerText = 'الخريطة الحرارية تعرض دائماً مستوى الضغط × الحالة الوظيفية (أدق تقاطع حقيقي متاح لدينا)، بغض النظر عن البُعد المختار أعلاه.';
-                    const tiers = ['حرجة', 'مرتفعة', 'متوسطة', 'منخفضة'];
+                    const tiers = ['مرتفعة جداً', 'مرتفعة', 'متوسطة', 'منخفضة'];
                     const cols = ['موظف', 'متقاعد'];
                     const grid = {}; tiers.forEach(t => grid[t] = { 'موظف': 0, 'متقاعد': 0 });
                     allApps.forEach(r => { const t = RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore); const e = cols.includes(r.employmentStatus) ? r.employmentStatus : 'موظف'; grid[t][e]++; });
@@ -438,7 +438,7 @@
                         html += '<div class="text-xs text-on-surface-variant flex items-center">' + t + '</div>';
                         cols.forEach(c => {
                             const v = grid[t][c]; const alpha = v === 0 ? 0.05 : 0.15 + (v / maxCell) * 0.65;
-                            const base = { 'حرجة': '186,26,26', 'مرتفعة': '224,122,31', 'متوسطة': '201,162,39', 'منخفضة': '22,163,74' }[t];
+                            const base = { 'مرتفعة جداً': '186,26,26', 'مرتفعة': '224,122,31', 'متوسطة': '201,162,39', 'منخفضة': '22,163,74' }[t];
                             html += '<div class="rounded-lg h-11 flex items-center justify-center font-bold text-sm" style="background:rgba(' + base + ',' + alpha + ')">' + v + '</div>';
                         });
                     });

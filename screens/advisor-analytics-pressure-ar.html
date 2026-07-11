@@ -140,7 +140,7 @@
 <option value="منخفضة">منخفضة</option>
 <option value="متوسطة">متوسطة</option>
 <option value="مرتفعة">مرتفعة</option>
-<option value="حرجة">حرجة</option>
+<option value="مرتفعة جداً">مرتفعة جداً</option>
 </select>
 <select class="px-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-md text-sm" id="risk-filter-employment">
 <option value="">الحالة الوظيفية: الكل</option>
@@ -416,7 +416,7 @@
             function renderStatBar(allApps) {
                 const total = allApps.length;
                 const totalObligations = allApps.reduce((s, r) => s + r.amount, 0);
-                const highRisk = allApps.filter(r => { const t = RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore); return t === 'مرتفعة' || t === 'حرجة'; }).length;
+                const highRisk = allApps.filter(r => { const t = RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore); return t === 'مرتفعة' || t === 'مرتفعة جداً'; }).length;
                 const riskPct = Math.round((highRisk / total) * 100 * 10) / 10;
                 const empCounts = { 'موظف': 0, 'متقاعد': 0 };
                 allApps.forEach(r => { if (empCounts[r.employmentStatus] !== undefined) empCounts[r.employmentStatus]++; });

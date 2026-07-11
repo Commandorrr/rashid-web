@@ -4,6 +4,24 @@ const calc = require('../lib/rashid-calc');
 
 const router = express.Router();
 
+// Every single-row fetch must include the real selected_offer_key via this
+// same subquery the list route uses - fetching a bare `SELECT *` here was a
+// real bug (the Requests page's "refresh after a workflow action" call would
+// silently drop a real "مكتمل" status back to whatever the other signals
+// computed, since selectedOfferKey came back null even though the customer
+// really had selected an offer).
+function getRowWithOfferKey(id) {
+    return db.prepare(`
+        SELECT a.*, (
+            SELECT so.offer_key FROM selected_offers so
+            WHERE so.application_id = a.id
+            ORDER BY so.created_at DESC LIMIT 1
+        ) AS selected_offer_key
+        FROM applications a
+        WHERE a.id = ?
+    `).get(id);
+}
+
 function rowToApplication(row) {
     return {
         id: row.id,
@@ -24,6 +42,11 @@ function rowToApplication(row) {
         upcomingObligationDate: row.upcoming_obligation_date,
         upcomingObligationAmount: row.upcoming_obligation_amount,
         upcomingObligationRecurring: !!row.upcoming_obligation_recurring,
+        requestSource: row.request_source || 'إدخال موظف',
+        financingType: row.financing_type || '',
+        lastContactAt: row.last_contact_at || null,
+        recommendationSentAt: row.recommendation_sent_at || null,
+        needsReview: !!row.needs_review,
         createdAt: row.created_at,
         selectedOfferKey: row.selected_offer_key || null
     };
@@ -38,15 +61,17 @@ router.post('/', (req, res) => {
 
     const stmt = db.prepare(`
         INSERT INTO applications
-            (name, customer_id, employment_status, contact_channel, income, expenses, obligations, amount, tenure, profit_rate_annual, salary_date, installment_date,
+            (name, customer_id, employment_status, contact_channel, request_source, financing_type, income, expenses, obligations, amount, tenure, profit_rate_annual, salary_date, installment_date,
              has_upcoming_obligation, upcoming_obligation_type, upcoming_obligation_date, upcoming_obligation_amount, upcoming_obligation_recurring)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     const result = stmt.run(
         body.name || 'عميل رشيد',
         body.customerId || null,
         body.employmentStatus || 'موظف',
         body.contactChannel || null,
+        body.requestSource || 'إدخال موظف',
+        body.financingType || null,
         body.income,
         body.expenses || 0,
         body.obligations || 0,
@@ -85,7 +110,7 @@ router.get('/', (req, res) => {
 
 // Fetch one application plus its computed analysis and alternative offers.
 router.get('/:id', (req, res) => {
-    const row = db.prepare('SELECT * FROM applications WHERE id = ?').get(req.params.id);
+    const row = getRowWithOfferKey(req.params.id);
     if (!row) return res.status(404).json({ error: 'not found' });
     const application = rowToApplication(row);
     res.json({
@@ -97,7 +122,7 @@ router.get('/:id', (req, res) => {
 
 // Real 30-day calendar simulation for an arbitrary installment amount.
 router.get('/:id/calendar', (req, res) => {
-    const row = db.prepare('SELECT * FROM applications WHERE id = ?').get(req.params.id);
+    const row = getRowWithOfferKey(req.params.id);
     if (!row) return res.status(404).json({ error: 'not found' });
     const installment = parseFloat(req.query.installment);
     if (isNaN(installment)) return res.status(400).json({ error: 'installment query param is required' });
@@ -106,7 +131,7 @@ router.get('/:id/calendar', (req, res) => {
 
 // Persist the offer the customer selected on the alternatives screen.
 router.post('/:id/select-offer', (req, res) => {
-    const row = db.prepare('SELECT * FROM applications WHERE id = ?').get(req.params.id);
+    const row = getRowWithOfferKey(req.params.id);
     if (!row) return res.status(404).json({ error: 'not found' });
 
     const { offerKey, label, amount, tenure, installment } = req.body || {};
@@ -130,6 +155,30 @@ router.get('/:id/select-offer', (req, res) => {
     ).get(req.params.id);
     if (!row) return res.status(404).json({ error: 'no offer selected yet' });
     res.json(row);
+});
+
+// Real workflow actions - each just stamps a genuine timestamp/flag an
+// advisor triggered, never a fabricated status string. The Requests page
+// derives the displayed حالة الطلب from these real signals.
+router.post('/:id/log-contact', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    db.prepare('UPDATE applications SET last_contact_at = ? WHERE id = ?').run(new Date().toISOString(), req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
+});
+
+router.post('/:id/send-recommendation', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    db.prepare('UPDATE applications SET recommendation_sent_at = ? WHERE id = ?').run(new Date().toISOString(), req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
+});
+
+router.post('/:id/toggle-review', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    db.prepare('UPDATE applications SET needs_review = ? WHERE id = ?').run(row.needs_review ? 0 : 1, req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
 });
 
 module.exports = router;

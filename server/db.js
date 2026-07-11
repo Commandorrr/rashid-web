@@ -53,7 +53,12 @@ const migrations = [
     "ALTER TABLE applications ADD COLUMN contact_channel TEXT",
     "ALTER TABLE applications ADD COLUMN upcoming_obligation_type TEXT",
     "ALTER TABLE applications ADD COLUMN upcoming_obligation_recurring INTEGER DEFAULT 0",
-    "ALTER TABLE applications ADD COLUMN profit_rate_annual REAL"
+    "ALTER TABLE applications ADD COLUMN profit_rate_annual REAL",
+    "ALTER TABLE applications ADD COLUMN request_source TEXT DEFAULT 'إدخال موظف'",
+    "ALTER TABLE applications ADD COLUMN financing_type TEXT",
+    "ALTER TABLE applications ADD COLUMN last_contact_at TEXT",
+    "ALTER TABLE applications ADD COLUMN recommendation_sent_at TEXT",
+    "ALTER TABLE applications ADD COLUMN needs_review INTEGER DEFAULT 0"
 ];
 for (const sql of migrations) {
     try {

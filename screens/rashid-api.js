@@ -69,5 +69,35 @@ window.RashidApi = (function () {
         }
     }
 
-    return { createApplication, getApplicationId, selectOffer, listApplications, getApplication, getCalendar };
+    // Real workflow actions - each stamps a genuine timestamp/flag on the
+    // application row server-side; the caller re-renders from the returned
+    // application rather than assuming success.
+    async function logContact(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/log-contact', { method: 'POST' });
+            return res.ok ? await res.json() : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async function sendRecommendation(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/send-recommendation', { method: 'POST' });
+            return res.ok ? await res.json() : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    async function toggleReview(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/toggle-review', { method: 'POST' });
+            return res.ok ? await res.json() : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    return { createApplication, getApplicationId, selectOffer, listApplications, getApplication, getCalendar, logContact, sendRecommendation, toggleReview };
 })();

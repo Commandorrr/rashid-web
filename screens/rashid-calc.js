@@ -56,6 +56,8 @@ window.RashidCalc = (function () {
             upcomingObligationDate: upcomingObligationDate,
             upcomingObligationAmount: num('rashid-upcoming-amount'),
             upcomingObligationRecurring: recurringPill ? recurringPill.dataset.value === 'شهري' : false,
+            requestSource: str('rashid-request-source') || 'إدخال موظف',
+            financingType: str('rashid-financing-type'),
             savedAt: new Date().toISOString()
         };
     }
@@ -66,6 +68,8 @@ window.RashidCalc = (function () {
             customerId: (data && data.customerId) || '',
             employmentStatus: (data && data.employmentStatus) || 'موظف',
             contactChannel: (data && data.contactChannel) || '',
+            requestSource: (data && data.requestSource) || 'إدخال موظف',
+            financingType: (data && data.financingType) || '',
             income: (data && data.income) || 12000,
             obligations: (data && data.obligations) || 1500,
             expenses: (data && data.expenses) || 4000,
@@ -116,7 +120,8 @@ window.RashidCalc = (function () {
         let readiness;
         if (surplus > data.income * 0.2) readiness = 'مرتفعة';
         else if (surplus >= 0) readiness = 'متوسطة';
-        else readiness = 'منخفضة';
+        else if (surplus >= -data.income * 0.15) readiness = 'منخفضة';
+        else readiness = 'منخفضة جداً';
 
         let decision, recommendation;
         if (eligible) {
@@ -271,12 +276,14 @@ window.RashidCalc = (function () {
     }
 
     // Groups a pressureScore (0-100) into the 4 real severity tiers used
-    // across the advisor analytics pages.
+    // across every advisor page - the single source of truth for pressure
+    // banding (0-35 منخفضة / 36-60 متوسطة / 61-80 مرتفعة / 81-100 مرتفعة جداً).
+    // Every page must call this rather than defining its own thresholds.
     function pressureTier(score) {
-        if (score >= 75) return 'حرجة';
-        if (score >= 50) return 'مرتفعة';
-        if (score >= 25) return 'متوسطة';
-        return 'منخفضة';
+        if (score <= 35) return 'منخفضة';
+        if (score <= 60) return 'متوسطة';
+        if (score <= 80) return 'مرتفعة';
+        return 'مرتفعة جداً';
     }
 
     // Determines the single biggest real driver of an application's pressure
