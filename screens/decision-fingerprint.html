@@ -2,6 +2,9 @@
 
 <html dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Rashid - Decision (القرار)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -77,9 +80,9 @@
                     "fontFamily": {
                         "display-lg": ["IBM Plex Sans Arabic"],
                         "display-md": ["IBM Plex Sans Arabic"],
-                        "body-lg": ["IBM Plex Sans"],
-                        "body-md": ["IBM Plex Sans"],
-                        "label-md": ["IBM Plex Sans"],
+                        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
                         "headline-md": ["IBM Plex Sans Arabic"],
                         "headline-lg": ["IBM Plex Sans Arabic"]
                     }
@@ -112,9 +115,18 @@
         .animate-pulse-gold {
             animation: pulse-gold 3s infinite ease-in-out;
         }
+        /* Enlarges only the page content (not the fixed top header, a
+           sibling of <main>, never a descendant) - gated to wide screens
+           only (confirmed at 1366px this genuinely overflows/wraps). */
+        @media (min-width: 1600px) {
+            #page-zoom-content {
+                zoom: 1.25;
+            }
+        }
     </style>
+<link href="rashid-theme.css" rel="stylesheet"/>
 </head>
-<body class="bg-background text-on-background min-h-screen flex flex-col"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
 <!-- TopNavBar (Shared Component Identity) -->
 <header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
 <div class="flex items-center gap-4">
@@ -132,11 +144,11 @@
 </div>
 </div>
 </header>
-<main class="flex-1 pt-24 pb-12 px-container-margin md:px-section-gap flex flex-col items-center">
+<main class="flex-1 pt-24 pb-12 px-container-margin md:px-section-gap flex flex-col items-center" id="page-zoom-content">
 <!-- Progress Indicator -->
 <div class="max-w-4xl w-full mb-12">
 <div class="flex justify-between items-center mb-4">
-<span class="font-label-md text-label-md text-primary font-bold">الخطوة ٥ من ٥</span>
+<span class="font-label-md text-label-md text-primary font-bold">الخطوة 5 من 5</span>
 <span class="font-label-md text-label-md text-on-surface-variant">اكتمال العملية</span>
 </div>
 <div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
@@ -156,20 +168,22 @@
 <!-- Background Decorative Element -->
 <div class="absolute -top-24 -right-24 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
 <div class="p-8 md:p-12 relative z-10">
-<!-- Card Header -->
+<!-- Card Header - مبلغ التمويل sits level with المدة (same row, same
+     vertical alignment), not stacked below it, but sized/weighted more
+     prominently since it's the primary figure. -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant/10 pb-8 mb-8 gap-6">
 <div>
 <span class="font-label-md text-label-md text-secondary block mb-1">العرض المختار</span>
 <h2 class="font-headline-lg text-headline-lg text-primary mb-1" id="df-offer-name">تمويل النمو المستدام</h2>
 </div>
-<div class="flex gap-8">
+<div class="flex items-center gap-8">
 <div class="text-center">
-<span class="font-label-md text-label-md text-on-surface-variant block">المبلغ</span>
-<span class="font-headline-md text-headline-md text-primary"><span id="df-amount">٥٠٠,٠٠٠</span> ر.س</span>
+<span class="font-label-md text-label-md text-on-surface-variant block mb-1">مبلغ التمويل</span>
+<span class="font-display-md text-4xl font-extrabold text-primary"><span id="df-amount">500,000</span> ر.س</span>
 </div>
 <div class="text-center">
 <span class="font-label-md text-label-md text-on-surface-variant block">المدة</span>
-<span class="font-headline-md text-headline-md text-primary"><span id="df-tenure">٦٠</span> شهراً</span>
+<span class="font-headline-lg text-headline-lg font-extrabold text-primary"><span id="df-tenure">60</span> شهراً</span>
 </div>
 </div>
 </div>
@@ -183,23 +197,23 @@
 </div>
 <div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
 <div class="p-3 text-label-md text-on-surface-variant">مبلغ التمويل</div>
-<div class="p-3 text-center font-bold" id="df-orig-amount">٠</div>
-<div class="p-3 text-center font-bold text-secondary" id="df-sel-amount">٠</div>
+<div class="p-3 text-center font-bold" id="df-orig-amount">0</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-amount">0</div>
 </div>
 <div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
 <div class="p-3 text-label-md text-on-surface-variant">القسط الشهري</div>
-<div class="p-3 text-center font-bold" id="df-orig-installment">٠</div>
-<div class="p-3 text-center font-bold text-secondary" id="df-sel-installment">٠</div>
+<div class="p-3 text-center font-bold" id="df-orig-installment">0</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-installment">0</div>
 </div>
 <div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
 <div class="p-3 text-label-md text-on-surface-variant">إجمالي الالتزامات الشهرية</div>
-<div class="p-3 text-center font-bold" id="df-orig-total">٠</div>
-<div class="p-3 text-center font-bold text-secondary" id="df-sel-total">٠</div>
+<div class="p-3 text-center font-bold" id="df-orig-total">0</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-total">0</div>
 </div>
 <div class="grid grid-cols-3 border-t border-outline-variant/10 items-center">
 <div class="p-3 text-label-md text-on-surface-variant">المتبقي من الراتب نهاية الشهر</div>
-<div class="p-3 text-center font-bold" id="df-orig-remaining">٠</div>
-<div class="p-3 text-center font-bold text-secondary" id="df-sel-remaining">٠</div>
+<div class="p-3 text-center font-bold" id="df-orig-remaining">0</div>
+<div class="p-3 text-center font-bold text-secondary" id="df-sel-remaining">0</div>
 </div>
 </div>
 <div class="mt-6 flex justify-center">
@@ -222,7 +236,7 @@
 </div>
 <!-- Action Buttons -->
 <div class="flex flex-col md:flex-row gap-6 w-full max-w-2xl justify-center mb-12">
-<button class="flex-1 py-4 px-8 bg-primary text-on-primary rounded-xl font-headline-md flex items-center justify-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95 transition-all" onclick="alert('تم إرسال طلبك للبنك بنجاح! سيتواصل معك مستشار رشيد قريباً.'); window.location.href='advisor-requests-ar.html';">
+<button class="flex-1 py-4 px-8 bg-primary text-on-primary rounded-xl font-headline-md flex items-center justify-center gap-3 shadow-xl hover:scale-[1.02] active:scale-95 transition-all" onclick="closeCurrentRequest()">
 <span class="material-symbols-outlined">send</span>
                 إرسال للبنك
             </button>
@@ -259,8 +273,25 @@
 <script src="rashid-calc.js"></script>
 <script src="rashid-report.js"></script>
 <script>
+        // Reaching this page's final "إرسال للبنك" action is the real,
+        // single closing point for "الطلب الحالي": before this, the advisor
+        // may still go back a step (the "استكشف المزيد من الخدمات" link
+        // below returns to smart-alternatives.html, which still needs this
+        // same draft to render), so closing any earlier - e.g. the moment
+        // this page is merely reached - would break that back-navigation.
+        // Clearing here removes the real in-progress draft
+        // (RashidCalc.load()) so "الطلب الحالي" honestly reports no current
+        // request until the advisor starts a new one.
+        function closeCurrentRequest() {
+            localStorage.removeItem('rashidApplication');
+            localStorage.removeItem('rashidSelectedOffer');
+            alert('تم إرسال طلبك للبنك بنجاح! سيتواصل معك مستشار رشيد قريباً.');
+            window.location.href = 'advisor-requests-ar.html';
+        }
+    </script>
+<script>
         (function () {
-            const fmt = (n) => Math.round(n).toLocaleString('ar-SA');
+            const fmt = (n) => Math.round(n).toLocaleString('en-US');
             const result = RashidCalc.analyze();
 
             let selected = null;
@@ -273,13 +304,13 @@
             const offerNames = { current: 'طلبك الحالي كما هو', balanced: 'عرض متوازن', safe: 'تمويل النمو المستدام' };
             document.getElementById('df-offer-name').innerText = offerNames[selected.key] || selected.label;
             document.getElementById('df-amount').innerText = fmt(selected.amount);
-            document.getElementById('df-tenure').innerText = selected.tenure.toLocaleString('ar-SA');
+            document.getElementById('df-tenure').innerText = selected.tenure.toLocaleString('en-US');
 
             const burdenFor = (installment) =>
                 result.input.income > 0 ? ((result.input.obligations + installment) / result.input.income) * 100 : 100;
             const pressureFor = (installment) => Math.max(0, Math.min(100, Math.round(burdenFor(installment) * 1.15)));
 
-            const originalInstallment = RashidCalc.estimateInstallment(result.input.amount, result.input.tenure);
+            const originalInstallment = RashidCalc.estimateInstallment(result.input.amount, result.input.tenure, result.input.profitRateAnnual);
             const pressureAfter = pressureFor(selected.installment);
 
             const originalTotal = result.input.obligations + originalInstallment;
@@ -295,8 +326,8 @@
             document.getElementById('df-sel-amount').innerText = fmt(selected.amount) + ' ر.س';
             document.getElementById('df-orig-installment').innerText = fmt(originalInstallment) + ' ر.س';
             document.getElementById('df-sel-installment').innerText = fmt(selected.installment) + ' ر.س';
-            document.getElementById('df-orig-total').innerText = fmt(originalTotal) + ' ر.س (' + originalBurdenPct.toLocaleString('ar-SA') + '٪)';
-            document.getElementById('df-sel-total').innerText = fmt(selectedTotal) + ' ر.س (' + selectedBurdenPct.toLocaleString('ar-SA') + '٪)';
+            document.getElementById('df-orig-total').innerText = fmt(originalTotal) + ' ر.س (' + originalBurdenPct.toLocaleString('en-US') + '٪)';
+            document.getElementById('df-sel-total').innerText = fmt(selectedTotal) + ' ر.س (' + selectedBurdenPct.toLocaleString('en-US') + '٪)';
             document.getElementById('df-orig-remaining').innerText = fmtRemaining(originalRemaining);
             document.getElementById('df-sel-remaining').innerText = fmtRemaining(selectedRemaining);
 

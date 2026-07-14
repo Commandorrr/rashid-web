@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | أثر البدائل والتحول</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=IBM+Plex+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel { background: rgba(253, 248, 247, 0.6); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .glass-card-edge { border-right: 1px solid rgba(255, 255, 255, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.8); }
+        body { background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%), radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%); }
+        select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: none; }
+        select::-ms-expand { display: none; }
+        .journey-step { transition: all .15s; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="rashid-theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="your-data-ar.html" id="nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">الطلب الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 bg-surface-container-highest text-on-surface transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform" style="transform:rotate(180deg)">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:block">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">نظرة عامة</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">الضغط المالي</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg bg-primary text-on-primary transition-all" href="advisor-analytics-impact-ar.html">أثر البدائل</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ops-ar.html">الأداء التشغيلي</a>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-reports-ar.html">
+<span class="material-symbols-outlined">summarize</span>
+<span class="font-label-md text-label-md">التقارير</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">العودة للصفحة الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#" id="nav-login">
+<span class="font-label-md text-label-md">تسجيل الدخول</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<header class="flex justify-between items-center mb-6 flex-wrap gap-4">
+<div>
+<h1 class="font-display-md text-3xl font-extrabold text-primary tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-4xl">swap_horiz</span>أثر البدائل والتحول</h1>
+<p class="text-on-surface-variant font-body-md">قياس أثر تقديم البدائل الأكثر أمانًا على تقليل الضغط وتحسين التحول إلى حلول مناسبة للعملاء.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</div>
+</header>
+<!-- Main Split: right column (رؤية ذكية + نتائج القرارات + أنجح البدائل)
+     alongside left column (4 KPI cards + رحلة الأثر) - same site identity
+     as every other page. -->
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start mb-8">
+<!-- Right Column -->
+<div class="space-y-6">
+<section class="bg-primary text-on-primary rounded-3xl p-6">
+<div class="w-10 h-10 rounded-full flex items-center justify-center mb-3" style="background:rgba(255,255,255,.12)">
+<span class="material-symbols-outlined" style="font-size:22px;color:#e6c183">auto_awesome</span>
+</div>
+<h4 class="font-bold mb-1" style="font-size:18px">رؤية ذكية</h4>
+<div class="text-[10px] text-white/50 font-bold mb-1 uppercase tracking-wide">ملخص تنفيذي</div>
+<p class="text-xs text-white/85 leading-relaxed mb-3" id="im-insight-summary">-</p>
+<div class="border-t border-white/15 mb-3"></div>
+<div class="text-[10px] text-white/50 font-bold mb-2 uppercase tracking-wide">توصيات مقترحة</div>
+<ul class="space-y-2 text-xs text-white/85 mb-4" id="im-insight-recs"></ul>
+<a class="w-full py-2.5 bg-white text-primary rounded-xl font-bold text-xs text-center block" href="advisor-reports-ar.html">عرض التقرير التفصيلي</a>
+</section>
+<section class="glass-panel glass-card-edge rounded-3xl p-5">
+<h4 class="font-headline-md text-on-surface font-bold mb-3 text-sm text-center">نتائج القرارات</h4>
+<div class="flex items-center gap-3">
+<div class="grid grid-cols-1 gap-2 text-xs font-bold flex-1" id="im-decisions-legend"></div>
+<div class="w-28 h-28 rounded-full relative shrink-0">
+<div class="absolute inset-0 rounded-full" id="im-decisions-donut"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-lg font-extrabold" id="im-decisions-total">0</span>
+<span class="text-[9px]">إجمالي</span>
+</div>
+</div>
+</div>
+</section>
+<section class="glass-panel glass-card-edge rounded-3xl p-5">
+<h4 class="font-headline-md text-on-surface font-bold mb-3 text-sm text-center">أنجح البدائل حسب نوع المنتج</h4>
+<div class="overflow-x-auto">
+<table class="w-full text-xs">
+<thead>
+<tr class="text-on-surface-variant font-label-md uppercase text-[10px]">
+<th class="text-right pb-2">نوع المنتج</th>
+<th class="text-center pb-2">نسبة القبول</th>
+<th class="text-center pb-2">متوسط التوفير</th>
+<th class="text-center pb-2">عدد القبول</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="im-product-tbody"></tbody>
+</table>
+</div>
+<a class="mt-3 text-secondary text-xs font-bold hover:underline block" href="advisor-requests-ar.html">عرض جميع المنتجات ←</a>
+</section>
+</div>
+<!-- Left Column: 4 KPI cards + رحلة الأثر -->
+<div class="lg:col-span-4 space-y-6">
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="im-kpis"></section>
+<section class="glass-panel glass-card-edge rounded-3xl p-6">
+<h4 class="font-headline-md text-on-surface font-bold mb-4 flex items-center gap-1">رحلة الأثر: من التحليل إلى القرار <span class="material-symbols-outlined text-sm text-on-surface-variant">info</span></h4>
+<div class="grid grid-cols-3 gap-2" id="im-journey"></div>
+<a class="mt-4 text-secondary text-sm font-bold hover:underline flex items-center gap-1" href="advisor-requests-ar.html"><span class="material-symbols-outlined text-lg">description</span>عرض تفاصيل الرحلة</a>
+</section>
+</div>
+</div>
+<!-- Remaining cards: comparison + trend, ordered below with consistent card dimensions -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-start">
+<section class="glass-panel glass-card-edge rounded-3xl p-6">
+<h4 class="font-headline-md text-on-surface font-bold mb-4 flex items-center gap-1">مقارنة العرض الحالي مقابل البديل الآمن <span class="material-symbols-outlined text-sm text-on-surface-variant">info</span></h4>
+<div id="im-compare"></div>
+</section>
+<section class="glass-panel glass-card-edge rounded-3xl p-6">
+<h4 class="font-headline-md text-on-surface font-bold mb-1">اتجاه تبني البدائل عبر الأيام</h4>
+<p class="text-[11px] text-on-surface-variant mb-2" id="im-trend-caption">-</p>
+<div class="flex items-stretch gap-2" id="im-trend-chart" style="height:190px"></div>
+</section>
+</div>
+<p class="text-[11px] text-on-surface-variant leading-relaxed">تمثل النتائج أعلاه محاكاة تقديرية بناءً على بيانات النموذج الأولي والطلبات الحقيقية المسجلة في رَشيد، وليست ضمانًا للأداء المالي المستقبلي أو قرارًا ائتمانيًا نهائيًا.</p>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="your-data-ar.html" id="mobile-nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px]">الطلب الحالي</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px]">العملاء</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px]">المساعد</span>
+</a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script>
+        // "الطلب الحالي" is interactive: checked fresh at the moment of
+        // every click (not baked into a static href at page-load time), so
+        // it stays correct even after the browser restores this page from
+        // bfcache via back/forward navigation - a real reported bug where
+        // the old load-time-computed href/state stayed stale after
+        // submitting a request and navigating back. Links to the real
+        // in-progress wizard draft (RashidCalc.load(), the same localStorage
+        // record your-data-ar.html saves and smart-alternatives.html reads)
+        // if one genuinely exists, or shows a plain alert() - matching the
+        // exact same native alert() style already used elsewhere in the app
+        // (decision-fingerprint.html's "تم إرسال طلبك للبنك بنجاح!").
+        (function () {
+            function hasCurrentRequest() {
+                try { return !!RashidCalc.load(); } catch (e) { return false; }
+            }
+            function wireCurrentRequestLink(id) {
+                const link = document.getElementById(id);
+                if (!link) return;
+                link.style.cursor = 'pointer';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hasCurrentRequest()) {
+                        window.location.href = 'smart-alternatives.html';
+                    } else {
+                        alert('لا يوجد طلب حالي قائم. الرجاء الذهاب لقسم تحليل طلب جديد.');
+                    }
+                });
+            }
+            wireCurrentRequestLink('nav-current-request');
+            wireCurrentRequestLink('mobile-nav-current-request');
+        })();
+    </script>
+<script src="rashid-api.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        // Real login/logout toggle on the sidebar link itself: the label
+        // and icon reflect RashidAuth.getSession() at load time (and on
+        // pageshow, for bfcache correctness). Logged out -> opens the real
+        // login modal (calls RashidAuth.loginRemote() against the bcrypt
+        // backend, see rashid-auth.js). Logged in -> clicking the link
+        // logs out immediately, no modal needed.
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.getElementById('nav-login');
+            const modal = document.getElementById('login-modal');
+            if (!link || !modal) return;
+            const linkText = link.querySelector('.font-label-md');
+            const linkIcon = link.querySelector('.material-symbols-outlined');
+            function updateLinkState() {
+                const session = RashidAuth.getSession();
+                if (session) {
+                    if (linkText) linkText.innerText = 'تسجيل الخروج';
+                    if (linkIcon) linkIcon.innerText = 'logout';
+                } else {
+                    if (linkText) linkText.innerText = 'تسجيل الدخول';
+                    if (linkIcon) linkIcon.innerText = 'arrow_back';
+                }
+            }
+            function openModal() {
+                document.getElementById('login-error').innerText = '';
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (RashidAuth.getSession()) {
+                    RashidAuth.logout();
+                    window.location.reload();
+                } else {
+                    openModal();
+                }
+            });
+            document.getElementById('login-cancel').addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+            document.getElementById('login-submit').addEventListener('click', async function () {
+                const u = document.getElementById('login-username').value.trim();
+                const p = document.getElementById('login-password').value;
+                const errEl = document.getElementById('login-error');
+                if (!u || !p) { errEl.innerText = 'أدخل اسم المستخدم وكلمة المرور.'; return; }
+                errEl.innerText = 'جارِ التحقق...';
+                const result = await RashidAuth.loginRemote(u, p);
+                if (result.ok) {
+                    window.location.reload();
+                } else {
+                    errEl.innerText = 'بيانات الدخول غير صحيحة.';
+                }
+            });
+            updateLinkState();
+            window.addEventListener('pageshow', updateLinkState);
+        });
+    </script>
+<script src="rashid-charts.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) { nameEl.innerText = session.username; avatarEl.innerText = session.username.trim().charAt(0).toUpperCase(); }
+            else { nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)'; avatarEl.innerText = '?'; }
+        })();
+    </script>
+<script>
+        (function () {
+            let allRows = [];
+            const IM_KPI_COLORS = {
+                group: { bg: '#e8f0ff', color: '#2563eb' },
+                account_balance_wallet: { bg: '#e2f7e8', color: '#16a34a' },
+                speed: { bg: '#fde3cf', color: '#ea580c' },
+                sync_alt: { bg: '#ece3fb', color: '#7c3aed' }
+            };
+
+            function fmtSar(n) { return Math.round(n).toLocaleString('en-US'); }
+            function avg(arr) { return arr.length ? arr.reduce((s, v) => s + v, 0) / arr.length : null; }
+
+            function buildRows(apps) {
+                return apps.map(row => {
+                    const a = RashidCalc.analyze(row);
+                    const status = RashidCalc.statusOf(row, a);
+                    const impact = RashidCalc.offerImpactFor(row);
+                    const cal = RashidCalc.buildCalendar(a.installment, row);
+                    const calAfter = impact ? RashidCalc.buildCalendar(impact.after.installment, Object.assign({}, row, { amount: impact.offer.amount, tenure: impact.offer.tenure })) : null;
+                    return { row, a, status, impact, cal, calAfter };
+                });
+            }
+
+            function withImpact() { return allRows.filter(x => x.impact); }
+
+            // Real "last 7 days vs the 7 days before" comparison, same
+            // pattern established on the نظرة عامة tab - never a fabricated
+            // delta when the previous window has no real data.
+            function weekWindow(rows, offset) {
+                const now = Date.now();
+                const end = now - offset * 7 * 86400000;
+                const start = end - 7 * 86400000;
+                return rows.filter(x => { const t = new Date(x.row.createdAt).getTime(); return t >= start && t < end; });
+            }
+            function weekDelta(valueFn, format) {
+                const cur = weekWindow(allRows, 0), prev = weekWindow(allRows, 1);
+                if (!prev.length) return null;
+                const curVal = valueFn(cur), prevVal = valueFn(prev);
+                if (curVal === null || prevVal === null) return null;
+                return format(curVal, prevVal);
+            }
+            function pctChangeText(curVal, prevVal) {
+                if (prevVal === 0) return null;
+                const pct = Math.round(((curVal - prevVal) / prevVal) * 100);
+                return { pct, dir: pct > 0 ? 'up' : (pct < 0 ? 'down' : 'flat') };
+            }
+            function pointDiffText(curVal, prevVal) {
+                const diff = Math.round(curVal - prevVal);
+                return { pct: diff, dir: diff > 0 ? 'up' : (diff < 0 ? 'down' : 'flat') };
+            }
+            function deltaBadge(delta, goodDirection, suffix) {
+                if (!delta || delta.dir === 'flat') return '<div class="text-[10px] text-on-surface-variant mt-2">لا توجد بيانات كافية للمقارنة بالأسبوع الماضي</div>';
+                const isGood = (delta.dir === 'up' && goodDirection === 'up') || (delta.dir === 'down' && goodDirection === 'down');
+                const color = isGood ? '#16a34a' : '#ba1a1a';
+                const arrow = delta.dir === 'up' ? 'arrow_upward' : 'arrow_downward';
+                const sign = delta.pct > 0 ? '+' : '';
+                return '<div class="flex items-center gap-1 mt-2 text-xs font-bold" style="color:' + color + '"><span class="material-symbols-outlined text-sm">' + arrow + '</span>' + sign + delta.pct + (suffix || '') + '<span class="text-on-surface-variant font-normal text-[10px]"> مقارنة بالأسبوع الماضي</span></div>';
+            }
+
+            function renderKpis() {
+                const wi = withImpact();
+                const total = allRows.length;
+                // "عدد العملاء الذين قبلوا البدائل" counts distinct real
+                // customers (grouped by name, same rule as the Customers page)
+                // who have at least one real selectedOfferKey - not just a
+                // raw request count.
+                const customerNames = new Set(wi.map(x => (x.row.name || 'عميل رشيد').trim()));
+                const avgSavings = avg(wi.map(x => x.impact.after.surplus - x.impact.before.surplus));
+                const avgReduction = avg(wi.map(x => x.a.pressureScore - x.impact.after.pressureScore));
+                const conversionRate = total ? (wi.length / total) * 100 : null;
+
+                const customersDelta = weekDelta(rows => new Set(rows.filter(x => x.row.selectedOfferKey).map(x => (x.row.name || 'عميل رشيد').trim())).size, pctChangeText);
+                const savingsDelta = weekDelta(rows => { const w = rows.filter(x => x.impact); return avg(w.map(x => x.impact.after.surplus - x.impact.before.surplus)); }, pctChangeText);
+                const reductionDelta = weekDelta(rows => { const w = rows.filter(x => x.impact); return avg(w.map(x => x.a.pressureScore - x.impact.after.pressureScore)); }, pointDiffText);
+                const conversionDelta = weekDelta(rows => { const c = rows.filter(x => x.row.selectedOfferKey).length; return rows.length ? (c / rows.length) * 100 : null; }, pointDiffText);
+
+                const cards = [
+                    { icon: 'group', label: 'عدد العملاء الذين قبلوا البدائل', value: customerNames.size.toLocaleString('en-US'), badge: deltaBadge(customersDelta, 'up', '%') },
+                    { icon: 'account_balance_wallet', label: 'متوسط التوفير الشهري', value: avgSavings !== null ? fmtSar(avgSavings) + ' ر.س' : '-', badge: deltaBadge(savingsDelta, 'up', '%') },
+                    { icon: 'speed', label: 'انخفاض متوسط الضغط', value: avgReduction !== null ? Math.round(avgReduction) + '%' : '-', badge: deltaBadge(reductionDelta, 'up', ' نقطة') },
+                    { icon: 'sync_alt', label: 'نسبة التحول', value: conversionRate !== null ? Math.round(conversionRate) + '%' : '-', badge: deltaBadge(conversionDelta, 'up', '%') }
+                ];
+                document.getElementById('im-kpis').innerHTML = cards.map(c => {
+                    const col = IM_KPI_COLORS[c.icon] || { bg: '#faf3e2', color: '#b5860f' };
+                    return '<div class="glass-panel glass-card-edge p-6 rounded-2xl flex items-center gap-4">' +
+                        '<div class="w-14 h-14 rounded-full flex items-center justify-center shrink-0" style="background:' + col.bg + '"><span class="material-symbols-outlined text-3xl" style="color:' + col.color + '">' + c.icon + '</span></div>' +
+                        '<div class="text-right flex-1"><div class="text-on-surface-variant text-sm font-bold">' + c.label + '</div>' +
+                        '<div class="font-headline-lg text-3xl text-primary font-extrabold">' + c.value + '</div>' + c.badge + '</div></div>';
+                }).join('');
+            }
+
+            // Real 3-stage journey (تحليل -> قبول البديل -> اكتمال القرار).
+            // Deliberately NOT a 5-stage funnel (تحليل/توصية/إرسال/قبول/اكتمال):
+            // real recommendationSentAt/lastContactAt are sparse and not real
+            // prerequisites for selectedOfferKey in the self-service wizard
+            // flow (a customer can select an offer with zero advisor contact
+            // logged), so a 5-stage funnel would not be honestly monotonic
+            // with real data - same real finding already documented for the
+            // نظرة عامة tab's "توزيع حالات القرار". Only stages that are
+            // real, always-nested subsets of each other are shown.
+            function renderJourney() {
+                const total = allRows.length;
+                const accepted = allRows.filter(x => x.row.selectedOfferKey);
+                const completed = allRows.filter(x => x.status.key === 'مكتمل');
+                const steps = [
+                    { icon: 'search', label: 'تحليل', count: total },
+                    { icon: 'check_circle', label: 'قبول البديل', count: accepted.length },
+                    { icon: 'flag', label: 'اكتمال القرار', count: completed.length }
+                ];
+                document.getElementById('im-journey').innerHTML = steps.map(s =>
+                    '<div class="journey-step rounded-2xl border border-outline-variant/20 p-4 text-center flex flex-col items-center gap-1">' +
+                    '<div class="w-10 h-10 rounded-full flex items-center justify-center mb-1" style="background:#faf3e2"><span class="material-symbols-outlined" style="color:#b5860f">' + s.icon + '</span></div>' +
+                    '<div class="text-xl font-extrabold text-primary">' + s.count.toLocaleString('en-US') + '</div>' +
+                    '<div class="text-[11px] text-on-surface-variant font-bold">' + s.label + '</div>' +
+                    '<div class="text-[10px] text-on-surface-variant">' + (total ? Math.round((s.count / total) * 100) : 0) + '% من الإجمالي</div>' +
+                    '</div>'
+                ).join('');
+            }
+
+            // Real single-example comparison: takes the highest-pressure real
+            // request overall and computes its genuine "safe" offer (via the
+            // real alternativeOffers() engine) - shown regardless of what the
+            // customer actually picked, since this card's purpose is to
+            // illustrate the safe alternative specifically, not their choice.
+            function renderCompare() {
+                if (!allRows.length) { document.getElementById('im-compare').innerHTML = '<p class="text-sm text-on-surface-variant text-center py-8">لا توجد بيانات.</p>'; return; }
+                const example = allRows.reduce((b, x) => (!b || x.a.pressureScore > b.a.pressureScore) ? x : b, null);
+                const offers = RashidCalc.alternativeOffers(example.row);
+                const safe = offers.safe;
+                const safeAnalysis = RashidCalc.analyze(Object.assign({}, example.row, { amount: safe.amount, tenure: safe.tenure }));
+                const safeCal = RashidCalc.buildCalendar(safeAnalysis.installment, Object.assign({}, example.row, { amount: safe.amount, tenure: safe.tenure }));
+                const savings = safeAnalysis.surplus - example.a.surplus;
+
+                const row = (label, currentVal, proposedVal) =>
+                    '<div class="grid grid-cols-3 items-center py-2.5 border-b border-outline-variant/10 text-sm">' +
+                    '<span class="font-bold text-error text-left">' + currentVal + '</span>' +
+                    '<span class="text-center text-on-surface-variant text-xs">' + label + '</span>' +
+                    '<span class="font-bold text-green-700 text-right">' + proposedVal + '</span></div>';
+
+                document.getElementById('im-compare').innerHTML =
+                    '<div class="grid grid-cols-3 items-center pb-2 mb-1">' +
+                    '<span class="text-xs font-bold text-error text-left">العرض الحالي</span><span></span>' +
+                    '<span class="text-xs font-bold text-green-700 text-right">البديل الآمن المقترح</span></div>' +
+                    row('نسبة الأقساط من الراتب', Math.round(example.a.burdenRatio) + '%', Math.round(safeAnalysis.burdenRatio) + '%') +
+                    row('الرصيد المتبقي المتوقع', fmtSar(example.a.surplus) + ' ر.س', fmtSar(safeAnalysis.surplus) + ' ر.س') +
+                    row('مستوى المخاطر', RashidCalc.pressureTier(example.a.pressureScore), RashidCalc.pressureTier(safeAnalysis.pressureScore)) +
+                    row('التوفير الشهري المتوقع', '—', (savings >= 0 ? '+' : '') + fmtSar(savings) + ' ر.س') +
+                    '<div class="flex items-center justify-between mt-3 pt-3"><span class="text-xs text-on-surface-variant">العميل: ' + (example.row.name || 'عميل رشيد') + ' · #RX-' + example.row.id + '</span>' +
+                    '<a class="text-secondary text-xs font-bold hover:underline" href="request-details.html?id=' + example.row.id + '">عرض تفصيل المقارنة ←</a></div>';
+            }
+
+            function renderTrend() {
+                const byDay = new Map();
+                allRows.forEach(x => {
+                    const day = (x.row.createdAt || '').slice(0, 10);
+                    if (!day) return;
+                    if (!byDay.has(day)) byDay.set(day, { total: 0, accepted: 0 });
+                    byDay.get(day).total++;
+                    if (x.row.selectedOfferKey) byDay.get(day).accepted++;
+                });
+                const days = [...byDay.keys()].sort();
+                const chartEl = document.getElementById('im-trend-chart');
+                if (days.length < 2) {
+                    document.getElementById('im-trend-caption').innerText = 'لا يوجد نطاق زمني كافٍ لعرض اتجاه.';
+                    chartEl.innerHTML = '<p class="text-xs text-on-surface-variant text-center py-10">بيانات غير كافية.</p>';
+                    return;
+                }
+                document.getElementById('im-trend-caption').innerText = 'نسبة قبول البدائل الحقيقية يوميًا (' + days.length + ' يومًا فعليًا - لا تتوفر بعد أسابيع كاملة من السجل).';
+                const vals = days.map(d => { const g = byDay.get(d); return g.total ? Math.round((g.accepted / g.total) * 100) : 0; });
+                const max = 100, min = 0;
+                const stepX = 100 / (days.length - 1);
+                const xAt = (i) => 100 - i * stepX;
+                const pts = vals.map((v, i) => [xAt(i), 92 - ((v - min) / (max - min)) * 80].join(',')).join(' ');
+                let svg = '<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100"><polyline fill="none" points="' + pts + '" stroke="#b5860f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></polyline>';
+                vals.forEach((v, i) => {
+                    const cy = 92 - (v / (max - min)) * 80;
+                    // Edge points get end/start anchors instead of middle, so
+                    // their label text extends back into the 0-100 viewBox
+                    // instead of running off the left/right edge.
+                    const anchor = i === 0 ? 'end' : (i === vals.length - 1 ? 'start' : 'middle');
+                    svg += '<circle cx="' + xAt(i) + '" cy="' + cy + '" r="1.8" fill="#b5860f"></circle>';
+                    svg += '<text x="' + xAt(i) + '" y="' + (cy - 5) + '" font-size="6" text-anchor="' + anchor + '" fill="#5b4311" font-weight="bold">' + v + '%</text>';
+                });
+                svg += '</svg>';
+                const daysLabels = days.map((d, i) => '<span style="flex:1" class="text-center">' + (i === 0 || i === days.length - 1 ? new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '') + '</span>').join('');
+                const yAxis = '<div class="flex flex-col justify-between text-[9px] text-on-surface-variant w-7 shrink-0 text-left py-0.5">' + ['100%', '75%', '50%', '25%', '0%'].map(l => '<span>' + l + '</span>').join('') + '</div>';
+                const gridlines = [0, 25, 50, 75, 100].map(p => '<div class="absolute inset-x-0 border-t border-outline-variant/15" style="bottom:' + p + '%"></div>').join('');
+                chartEl.innerHTML = '<div class="flex-1 flex flex-col" style="min-height:0"><div class="flex-1 relative" style="min-height:0">' + gridlines + svg + '</div><div class="flex mt-1 text-[9px] text-on-surface-variant">' + daysLabels + '</div></div>' + yAxis;
+            }
+
+            // Real 4-bucket decision outcome, every row classified exactly
+            // once: قبل البديل = a real selectedOfferKey exists. لا زال قيد
+            // المراجعة = real needsReview flag. رفض البديل = a real hard
+            // ineligibility from analyze() (no offer would genuinely help)
+            // among requests that never selected anything. لم يتم التواصل =
+            // the real remaining catch-all (no offer, not under review, not
+            // hard-rejected, and no real lastContactAt logged).
+            function decisionOutcomeOf(x) {
+                if (x.row.selectedOfferKey) return 'قبل البديل';
+                if (x.status.key === 'محوّل للمراجعة') return 'لا زال قيد المراجعة';
+                if (!x.a.eligible && !x.a.marginal) return 'رفض البديل';
+                return 'لم يتم التواصل';
+            }
+            const DECISION_ROLE = { 'قبل البديل': 'good', 'لا زال قيد المراجعة': 'neutral', 'رفض البديل': 'warning', 'لم يتم التواصل': 'critical' };
+
+            function renderDecisions() {
+                const order = ['قبل البديل', 'لا زال قيد المراجعة', 'رفض البديل', 'لم يتم التواصل'];
+                const counts = {}; order.forEach(k => counts[k] = 0);
+                allRows.forEach(x => counts[decisionOutcomeOf(x)]++);
+                const segments = order.map(k => ({ label: k, count: counts[k], colorRole: DECISION_ROLE[k] }));
+                RashidCharts.statusDonut('im-decisions-donut', 'im-decisions-legend', segments, {
+                    onTotal: total => { document.getElementById('im-decisions-total').innerText = total.toLocaleString('en-US'); },
+                    legendValueColor: true,
+                    legendFormat: (count, total) => (total ? Math.round((count / total) * 100) : 0) + '%'
+                });
+            }
+
+            function renderProductTable() {
+                const types = ['تمويل شخصي', 'تمويل سيارة', 'تمويل عقاري', 'تقسيط', 'بطاقة ائتمانية', 'غير محدد'];
+                const rows = types.map(t => {
+                    const rows = allRows.filter(x => (x.row.financingType || 'غير محدد') === t);
+                    const accepted = rows.filter(x => x.impact);
+                    const acceptRate = rows.length ? Math.round((accepted.length / rows.length) * 100) : null;
+                    const avgSaving = accepted.length ? avg(accepted.map(x => x.impact.after.surplus - x.impact.before.surplus)) : null;
+                    return { t, total: rows.length, accepted: accepted.length, acceptRate, avgSaving };
+                }).filter(r => r.total > 0);
+                document.getElementById('im-product-tbody').innerHTML = rows.length ? rows.sort((a, b) => (b.acceptRate || 0) - (a.acceptRate || 0)).map(r =>
+                    '<tr><td class="py-2 font-bold">' + r.t + '</td>' +
+                    '<td class="py-2 text-center">' + (r.acceptRate === null ? '-' : r.acceptRate + '%') + '</td>' +
+                    '<td class="py-2 text-center">' + (r.avgSaving === null ? '-' : fmtSar(r.avgSaving) + ' ر.س') + '</td>' +
+                    '<td class="py-2 text-center">' + r.accepted + '</td></tr>'
+                ).join('') : '<tr><td colspan="4" class="py-6 text-center text-on-surface-variant">لا توجد بيانات.</td></tr>';
+            }
+
+            function renderInsight() {
+                const wi = withImpact();
+                const total = allRows.length;
+                if (!total) {
+                    document.getElementById('im-insight-summary').innerText = 'لا توجد بيانات كافية بعد.';
+                    document.getElementById('im-insight-recs').innerHTML = '';
+                    return;
+                }
+                const conversionRate = Math.round((wi.length / total) * 100);
+                const avgReduction = avg(wi.map(x => x.a.pressureScore - x.impact.after.pressureScore));
+                const avgSavings = avg(wi.map(x => x.impact.after.surplus - x.impact.before.surplus));
+                document.getElementById('im-insight-summary').innerText =
+                    'أظهر تقديم البدائل الأكثر أمانًا تحسنًا في معدلات التحول وانخفاضًا في الضغط المالي على العملاء خلال الفترة الحالية.' +
+                    ' تحسنت نسبة التحول إلى ' + conversionRate + '%،' +
+                    (avgReduction !== null ? ' وانخفض متوسط الضغط بمقدار ' + Math.round(avgReduction) + ' نقطة،' : '') +
+                    (avgSavings !== null ? ' ومتوسط توفير شهري ' + fmtSar(avgSavings) + ' ر.س للعملاء.' : '');
+
+                // Real "best-performing product" per financingType, used to
+                // ground the first recommendation in a genuine number rather
+                // than a generic statement.
+                const types = ['تمويل شخصي', 'تمويل سيارة', 'تمويل عقاري', 'تقسيط', 'بطاقة ائتمانية', 'غير محدد'];
+                const productStats = types.map(t => {
+                    const rows = allRows.filter(x => (x.row.financingType || 'غير محدد') === t && x.impact);
+                    return { t, count: rows.length, rate: rows.length };
+                }).filter(p => p.count > 0).sort((a, b) => b.count - a.count);
+                const topProduct = productStats[0];
+
+                const needsReviewCount = allRows.filter(x => x.status.key === 'محوّل للمراجعة').length;
+                const noContactCount = allRows.filter(x => !x.row.selectedOfferKey && !x.row.lastContactAt && x.status.key !== 'محوّل للمراجعة').length;
+
+                const recs = [];
+                if (topProduct) recs.push('توسيع استخدام البدائل في منتجات "' + topProduct.t + '" (أعلى عدد قبول حقيقي: ' + topProduct.count + ')');
+                if (noContactCount > 0) recs.push('تحسين سرعة التواصل الأولي لرفع معدلات التحول - ' + noContactCount.toLocaleString('en-US') + ' حالة لم يتم التواصل معها بعد');
+                if (needsReviewCount > 0) recs.push('إنهاء مراجعة ' + needsReviewCount.toLocaleString('en-US') + ' حالة محوّلة قبل أن تفقد فرصة القبول');
+                recs.push('تعزيز التوعية بالبدائل الأقل مخاطرة (العرض الآمن) للعملاء الجدد');
+
+                document.getElementById('im-insight-recs').innerHTML = recs.map(r =>
+                    '<li class="flex items-start gap-2"><span class="material-symbols-outlined text-sm mt-0.5" style="color:#e6c183">check_circle</span><span>' + r + '</span></li>'
+                ).join('');
+            }
+
+            async function load() {
+                const apps = await RashidApi.listApplications();
+                if (!apps || !apps.length) {
+                    document.getElementById('im-kpis').innerHTML = '<div class="col-span-full glass-panel glass-card-edge p-8 rounded-2xl text-center text-on-surface-variant">لا توجد طلبات حقيقية بعد - أنشئ طلبًا من "الطلب الحالي".</div>';
+                    return;
+                }
+                allRows = buildRows(apps);
+                renderKpis();
+                renderJourney();
+                renderCompare();
+                renderTrend();
+                renderDecisions();
+                renderProductTable();
+                renderInsight();
+            }
+
+            load();
+        })();
+    </script>
+<script>
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
+        })();
+    </script>
+<!-- Real login modal -->
+<div class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/40 p-4" id="login-modal">
+<div class="bg-surface rounded-3xl p-8 max-w-md w-full shadow-2xl">
+<h3 class="font-headline-md text-xl font-bold text-primary mb-5 text-center">تسجيل الدخول</h3>
+<div class="space-y-3 mb-3">
+<input autocomplete="username" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-username" placeholder="اسم المستخدم" type="text"/>
+<input autocomplete="current-password" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-password" placeholder="كلمة المرور" type="password"/>
+</div>
+<p class="text-[11px] text-error mb-3 text-center" id="login-error"></p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-3 rounded-xl border border-outline-variant/30 text-base font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="login-cancel" type="button">إلغاء</button>
+<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary text-base font-bold" id="login-submit" type="button">دخول</button>
+</div>
+</div>
+</div>
+</body></html>

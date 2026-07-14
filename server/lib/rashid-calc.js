@@ -64,7 +64,7 @@ function analyze(rawData) {
         recommendation = 'وضعك المالي يسمح بهذا التمويل ضمن الحدود الآمنة المعتمدة من قبل رشيد.';
     } else if (marginal) {
         decision = 'مؤهل بشروط';
-        recommendation = 'يمكنك الحصول على التمويل، لكن يُفضّل تخفيض المبلغ المطلوب أو زيادة مدة السداد لتحسين وضعك المالي.';
+        recommendation = 'يفضل اختيار العرض المناسب لتسهيل وضعك المالي.';
     } else {
         decision = 'غير مؤهل حالياً';
         recommendation = 'نسبة الاستقطاع الشهري المتوقعة تتجاوز الحد الآمن. جرّب تقليل مبلغ التمويل أو زيادة مدة السداد من صفحة "بياناتك".';
@@ -88,8 +88,11 @@ function analyze(rawData) {
     };
 }
 
-function estimateInstallment(amount, tenureMonths) {
-    const r = PROFIT_RATE_ANNUAL / 12;
+// rateAnnual defaults to the fixed representative rate, but callers that
+// know the real per-application "هامش ربح تقديري" (profitRateAnnual)
+// should pass it explicitly - alternativeOffers() does, below.
+function estimateInstallment(amount, tenureMonths, rateAnnual) {
+    const r = (rateAnnual != null ? rateAnnual : PROFIT_RATE_ANNUAL) / 12;
     const n = tenureMonths;
     if (n <= 0) return amount;
     return amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
@@ -100,9 +103,10 @@ function alternativeOffers(rawData) {
     const baseAmount = result.input.amount;
     const baseTenure = result.input.tenure;
     const income = result.input.income;
+    const rateAnnual = result.input.profitRateAnnual;
 
     const build = (amount, tenure) => {
-        const installment = estimateInstallment(amount, tenure);
+        const installment = estimateInstallment(amount, tenure, rateAnnual);
         const burden = income > 0 ? (installment / income) * 100 : 0;
         return {
             amount: Math.round(amount),

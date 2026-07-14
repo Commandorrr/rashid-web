@@ -16,7 +16,11 @@ function getRowWithOfferKey(id) {
             SELECT so.offer_key FROM selected_offers so
             WHERE so.application_id = a.id
             ORDER BY so.created_at DESC LIMIT 1
-        ) AS selected_offer_key
+        ) AS selected_offer_key, (
+            SELECT so.created_at FROM selected_offers so
+            WHERE so.application_id = a.id
+            ORDER BY so.created_at DESC LIMIT 1
+        ) AS selected_offer_at
         FROM applications a
         WHERE a.id = ?
     `).get(id);
@@ -47,8 +51,13 @@ function rowToApplication(row) {
         lastContactAt: row.last_contact_at || null,
         recommendationSentAt: row.recommendation_sent_at || null,
         needsReview: !!row.needs_review,
+        needsReviewAt: row.needs_review_at || null,
         createdAt: row.created_at,
-        selectedOfferKey: row.selected_offer_key || null
+        selectedOfferKey: row.selected_offer_key || null,
+        selectedOfferAt: row.selected_offer_at || null,
+        decisionStampIssuedAt: row.decision_stamp_issued_at || null,
+        awaitingMarkedAt: row.awaiting_marked_at || null,
+        closedAt: row.closed_at || null
     };
 }
 
@@ -101,7 +110,11 @@ router.get('/', (req, res) => {
             SELECT so.offer_key FROM selected_offers so
             WHERE so.application_id = a.id
             ORDER BY so.created_at DESC LIMIT 1
-        ) AS selected_offer_key
+        ) AS selected_offer_key, (
+            SELECT so.created_at FROM selected_offers so
+            WHERE so.application_id = a.id
+            ORDER BY so.created_at DESC LIMIT 1
+        ) AS selected_offer_at
         FROM applications a
         ORDER BY a.created_at DESC
     `).all();
@@ -174,10 +187,64 @@ router.post('/:id/send-recommendation', (req, res) => {
     res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
 });
 
+// Toggling needs_review also real-stamps needs_review_at when turning ON
+// (cleared when turning OFF, since "how long has this been under review" is
+// moot once it no longer is) - this is what lets the advisor assistant card
+// honestly say a review has been pending for N real days instead of guessing.
 router.post('/:id/toggle-review', (req, res) => {
     const row = getRowWithOfferKey(req.params.id);
     if (!row) return res.status(404).json({ error: 'not found' });
-    db.prepare('UPDATE applications SET needs_review = ? WHERE id = ?').run(row.needs_review ? 0 : 1, req.params.id);
+    const turningOn = !row.needs_review;
+    db.prepare('UPDATE applications SET needs_review = ?, needs_review_at = ? WHERE id = ?')
+        .run(turningOn ? 1 : 0, turningOn ? new Date().toISOString() : null, req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
+});
+
+// Advisor manually confirms this request has reached "بانتظار العميل" -
+// the same real state the status would reach on its own 24h after the
+// recommendation was sent, just honestly flagged early (e.g. the advisor
+// already knows the customer saw it on another channel). Requires a
+// recommendation to have genuinely been sent first - there is nothing to
+// be "awaiting" otherwise.
+router.post('/:id/mark-awaiting', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    if (!row.recommendation_sent_at) {
+        return res.status(400).json({ error: 'cannot mark awaiting before a recommendation has been sent' });
+    }
+    db.prepare('UPDATE applications SET awaiting_marked_at = ? WHERE id = ?').run(new Date().toISOString(), req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
+});
+
+// Advisor closes the file now, rather than waiting for the automatic 24h
+// mark-complete threshold after an offer was selected. Requires a real
+// selected offer to exist first - same rule as issue-decision-stamp below.
+router.post('/:id/close-request', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    if (!row.selected_offer_key) {
+        return res.status(400).json({ error: 'cannot close a request before an offer has been selected' });
+    }
+    db.prepare('UPDATE applications SET closed_at = ? WHERE id = ?').run(new Date().toISOString(), req.params.id);
+    res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
+});
+
+// Issues a real "decision stamp" (بصمة قرار) - a formal, immutable record
+// that the advisor has documented the final decision for this request. Real
+// rule: can only be issued once a real offer has genuinely been selected
+// (selected_offer_key set) - there is no decision to stamp before that.
+// Idempotent: re-issuing after the first call is a no-op that returns the
+// original timestamp unchanged, since a real certificate's issue date
+// shouldn't silently move every time someone re-clicks the button.
+router.post('/:id/issue-decision-stamp', (req, res) => {
+    const row = getRowWithOfferKey(req.params.id);
+    if (!row) return res.status(404).json({ error: 'not found' });
+    if (!row.selected_offer_key) {
+        return res.status(400).json({ error: 'cannot issue a decision stamp before an offer has been selected' });
+    }
+    if (!row.decision_stamp_issued_at) {
+        db.prepare('UPDATE applications SET decision_stamp_issued_at = ? WHERE id = ?').run(new Date().toISOString(), req.params.id);
+    }
     res.json(rowToApplication(getRowWithOfferKey(req.params.id)));
 });
 

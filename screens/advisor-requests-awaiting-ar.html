@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | بانتظار رد العميل</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=IBM+Plex+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge { border-right: 1px solid rgba(255, 255, 255, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.8); }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="rashid-theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Persistent SideNavBar (Shared Component) -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="your-data-ar.html" id="nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">الطلب الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">نظرة عامة</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">الضغط المالي</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-impact-ar.html">أثر البدائل</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ops-ar.html">الأداء التشغيلي</a>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-reports-ar.html">
+<span class="material-symbols-outlined">summarize</span>
+<span class="font-label-md text-label-md">التقارير</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">العودة للصفحة الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#" id="nav-login">
+<span class="font-label-md text-label-md">تسجيل الدخول</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mb-2"><a class="hover:underline" href="advisor-requests-ar.html">الطلبات</a> / <span>طلبات بانتظار الرد</span></div>
+<header class="flex justify-between items-center mb-6">
+<div>
+<h1 class="font-display-md text-display-md text-primary tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary">hourglass_top</span> بانتظار رد العميل</h1>
+<p class="text-on-surface-variant font-body-md">طلبات تم إرسال توصية رَشيد لها ولم يصل قرار العميل بعد.</p>
+</div>
+<a class="text-xs text-secondary font-bold hover:underline flex items-center gap-1" href="advisor-requests-ar.html"><span class="material-symbols-outlined text-sm">arrow_forward</span> العودة إلى جميع الطلبات</a>
+</header>
+<!-- 4 real KPI tiles -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<div class="glass-panel glass-card-edge p-5 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-total">0</div>
+<div class="text-on-surface-variant font-label-md text-xs">طلبات بانتظار رد العميل</div>
+</div>
+<div class="glass-panel glass-card-edge p-5 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-sent-pct">0%</div>
+<div class="text-on-surface-variant font-label-md text-xs">تم إرسال التوصية (من إجمالي الطلبات)</div>
+</div>
+<div class="glass-panel glass-card-edge p-5 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-primary" id="kpi-recent-contact-pct">0%</div>
+<div class="text-on-surface-variant font-label-md text-xs">آخر تواصل خلال 24 ساعة</div>
+</div>
+<div class="glass-panel glass-card-edge p-5 rounded-2xl">
+<div class="font-headline-lg text-headline-lg text-secondary" id="kpi-due-today">0</div>
+<div class="text-on-surface-variant font-label-md text-xs">متاح للمتابعة اليوم</div>
+</div>
+</section>
+<!-- Filters -->
+<section class="glass-panel glass-card-edge rounded-2xl p-4 mb-6 flex flex-wrap items-center gap-3">
+<div class="relative flex-1 min-w-[220px]">
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pr-10 pl-4 py-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-md" id="filter-search" placeholder="ابحث برقم الطلب أو اسم العميل" type="text"/>
+</div>
+<select class="px-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-md" id="filter-financing-type">
+<option value="">نوع التمويل: الكل</option>
+<option value="تمويل شخصي">تمويل شخصي</option>
+<option value="تمويل سيارة">تمويل سيارة</option>
+<option value="تمويل عقاري">تمويل عقاري</option>
+<option value="تقسيط">تقسيط</option>
+<option value="بطاقة ائتمانية">بطاقة ائتمانية</option>
+<option value="غير معرف">غير معرف</option>
+</select>
+<select class="px-3 py-2 rounded-lg bg-surface-container-low border border-outline-variant/30 text-label-md" id="filter-age">
+<option value="">عمر الانتظار: الكل</option>
+<option value="اليوم">اليوم</option>
+<option value="24 ساعة">24 ساعة</option>
+<option value="3 أيام">3 أيام</option>
+<option value="أكثر من 3 أيام">أكثر من 3 أيام</option>
+</select>
+<button class="px-4 py-2 rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container-highest transition-colors flex items-center gap-1" id="filter-reset" type="button">
+<span class="material-symbols-outlined text-lg">restart_alt</span> إعادة تعيين
+                </button>
+<button class="px-4 py-2 rounded-lg text-label-md border border-outline-variant/40 flex items-center gap-1" id="toolbar-refresh" type="button">
+<span class="material-symbols-outlined text-lg">refresh</span> تحديث
+                </button>
+<button class="px-4 py-2 rounded-lg text-label-md border border-outline-variant/40 flex items-center gap-1" id="export-results" type="button">
+<span class="material-symbols-outlined text-lg">download</span> تصدير النتائج
+                </button>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+<!-- Left: table + distribution -->
+<div class="lg:col-span-2">
+<div class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-4 py-4">رقم الطلب</th>
+<th class="px-4 py-4">العميل</th>
+<th class="px-4 py-4">نوع التمويل</th>
+<th class="px-4 py-4">مبلغ الطلب</th>
+<th class="px-4 py-4">القسط المتوقع</th>
+<th class="px-4 py-4">تاريخ إرسال العرض</th>
+<th class="px-4 py-4">آخر تواصل</th>
+<th class="px-4 py-4">حالة الرد</th>
+<th class="px-4 py-4">الإجراء</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="aw-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="9">جارِ تحميل الطلبات الحقيقية...</td></tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-outline-variant/10 text-sm text-on-surface-variant" id="aw-count">-</div>
+</div>
+<section class="glass-panel glass-card-edge rounded-3xl p-6 mt-6">
+<h4 class="font-headline-md text-on-surface mb-1">توزيع الطلبات حسب عمر الانتظار</h4>
+<p class="text-[11px] text-on-surface-variant mb-4">محسوبة من تاريخ إرسال التوصية الفعلي حتى الآن.</p>
+<div class="flex items-center gap-8">
+<div class="w-32 h-32 rounded-full relative shrink-0">
+<div class="absolute inset-0 rounded-full" id="age-donut"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xl font-bold" id="age-donut-total">0</span>
+<span class="text-[9px] uppercase">طلب</span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-1.5 text-xs font-label-md flex-1" id="age-legend"></div>
+</div>
+</section>
+</div>
+<!-- Right: advisor assistant -->
+<div class="space-y-6">
+<section class="glass-panel glass-card-edge rounded-3xl p-6 relative overflow-hidden">
+<h3 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-secondary">auto_awesome</span> مساعد المستشار</h3>
+<div class="bg-surface-container-low/60 rounded-2xl p-4 border border-outline-variant/10 mb-4" id="aw-top-card">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold" id="aw-top-initial">-</div>
+<div>
+<div class="font-bold" id="aw-top-name">لا توجد طلبات بانتظار الرد حالياً</div>
+<div class="text-xs text-on-surface-variant" id="aw-top-reqid">-</div>
+</div>
+</div>
+<div class="text-xs font-bold mb-1">سبب الانتظار</div>
+<p class="text-xs text-on-surface-variant mb-3" id="aw-top-reason">-</p>
+<div class="text-xs font-bold mb-1">سجل محاولات التواصل</div>
+<div class="space-y-2" id="aw-top-timeline"></div>
+</div>
+<div class="grid grid-cols-4 gap-2 mb-3">
+<button class="flex flex-col items-center gap-1 p-2 rounded-xl border border-outline-variant/30 text-xs" id="aw-action-call" type="button"><span class="material-symbols-outlined text-lg">call</span>اتصال</button>
+<button class="flex flex-col items-center gap-1 p-2 rounded-xl border border-outline-variant/30 text-xs" id="aw-action-whatsapp" type="button"><span class="material-symbols-outlined text-lg">chat</span>واتساب</button>
+<button class="flex flex-col items-center gap-1 p-2 rounded-xl border border-outline-variant/30 text-xs" id="aw-action-sms" type="button"><span class="material-symbols-outlined text-lg">sms</span>SMS</button>
+<button class="flex flex-col items-center gap-1 p-2 rounded-xl border border-outline-variant/30 text-xs" id="aw-action-email" type="button"><span class="material-symbols-outlined text-lg">mail</span>بريد</button>
+</div>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded-xl font-bold text-sm flex items-center justify-center gap-2 mb-2" id="aw-action-log" type="button"><span class="material-symbols-outlined text-lg">edit_note</span> تسجيل محاولة تواصل</button>
+<a class="w-full block text-center py-2.5 border border-outline-variant/40 rounded-xl font-bold text-sm" href="#" id="aw-action-details">عرض تفاصيل الطلب</a>
+</section>
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html"><span class="material-symbols-outlined">dashboard</span><span class="text-[10px]">الرئيسية</span></a>
+<a class="flex flex-col items-center text-on-surface-variant" href="your-data-ar.html" id="mobile-nav-current-request"><span class="material-symbols-outlined">bolt</span><span class="text-[10px]">الطلب الحالي</span></a>
+<a class="flex flex-col items-center text-primary" href="advisor-requests-ar.html"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span><span class="text-[10px] font-bold">الطلبات</span></a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-customers-ar.html"><span class="material-symbols-outlined">group</span><span class="text-[10px]">العملاء</span></a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html"><span class="material-symbols-outlined">auto_awesome</span><span class="text-[10px]">المساعد</span></a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script>
+        // "الطلب الحالي" is interactive: checked fresh at the moment of
+        // every click (not baked into a static href at page-load time), so
+        // it stays correct even after the browser restores this page from
+        // bfcache via back/forward navigation - a real reported bug where
+        // the old load-time-computed href/state stayed stale after
+        // submitting a request and navigating back. Links to the real
+        // in-progress wizard draft (RashidCalc.load(), the same localStorage
+        // record your-data-ar.html saves and smart-alternatives.html reads)
+        // if one genuinely exists, or shows a plain alert() - matching the
+        // exact same native alert() style already used elsewhere in the app
+        // (decision-fingerprint.html's "تم إرسال طلبك للبنك بنجاح!").
+        (function () {
+            function hasCurrentRequest() {
+                try { return !!RashidCalc.load(); } catch (e) { return false; }
+            }
+            function wireCurrentRequestLink(id) {
+                const link = document.getElementById(id);
+                if (!link) return;
+                link.style.cursor = 'pointer';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hasCurrentRequest()) {
+                        window.location.href = 'smart-alternatives.html';
+                    } else {
+                        alert('لا يوجد طلب حالي قائم. الرجاء الذهاب لقسم تحليل طلب جديد.');
+                    }
+                });
+            }
+            wireCurrentRequestLink('nav-current-request');
+            wireCurrentRequestLink('mobile-nav-current-request');
+        })();
+    </script>
+<script src="rashid-api.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        // Real login/logout toggle on the sidebar link itself: the label
+        // and icon reflect RashidAuth.getSession() at load time (and on
+        // pageshow, for bfcache correctness). Logged out -> opens the real
+        // login modal (calls RashidAuth.loginRemote() against the bcrypt
+        // backend, see rashid-auth.js). Logged in -> clicking the link
+        // logs out immediately, no modal needed.
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.getElementById('nav-login');
+            const modal = document.getElementById('login-modal');
+            if (!link || !modal) return;
+            const linkText = link.querySelector('.font-label-md');
+            const linkIcon = link.querySelector('.material-symbols-outlined');
+            function updateLinkState() {
+                const session = RashidAuth.getSession();
+                if (session) {
+                    if (linkText) linkText.innerText = 'تسجيل الخروج';
+                    if (linkIcon) linkIcon.innerText = 'logout';
+                } else {
+                    if (linkText) linkText.innerText = 'تسجيل الدخول';
+                    if (linkIcon) linkIcon.innerText = 'arrow_back';
+                }
+            }
+            function openModal() {
+                document.getElementById('login-error').innerText = '';
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (RashidAuth.getSession()) {
+                    RashidAuth.logout();
+                    window.location.reload();
+                } else {
+                    openModal();
+                }
+            });
+            document.getElementById('login-cancel').addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+            document.getElementById('login-submit').addEventListener('click', async function () {
+                const u = document.getElementById('login-username').value.trim();
+                const p = document.getElementById('login-password').value;
+                const errEl = document.getElementById('login-error');
+                if (!u || !p) { errEl.innerText = 'أدخل اسم المستخدم وكلمة المرور.'; return; }
+                errEl.innerText = 'جارِ التحقق...';
+                const result = await RashidAuth.loginRemote(u, p);
+                if (result.ok) {
+                    window.location.reload();
+                } else {
+                    errEl.innerText = 'بيانات الدخول غير صحيحة.';
+                }
+            });
+            updateLinkState();
+            window.addEventListener('pageshow', updateLinkState);
+        });
+    </script>
+<script src="rashid-charts.js"></script>
+<script>
+        (function () {
+            let allApps = [];
+            let waiting = []; // { row, a, ageBucket }
+            let filtered = [];
+
+            function fmtSar(n) { return Math.round(n).toLocaleString('en-US'); }
+            function fmtDate(iso) { return iso ? new Date(iso).toLocaleString('ar-SA-u-nu-latn', { dateStyle: 'short', timeStyle: 'short' }) : 'غير معرف'; }
+
+            function ageBucketOf(sentAt) {
+                const hours = (Date.now() - new Date(sentAt).getTime()) / 3600000;
+                if (hours < 24) return 'اليوم';
+                if (hours < 48) return '24 ساعة';
+                if (hours < 96) return '3 أيام';
+                return 'أكثر من 3 أيام';
+            }
+
+            function replyStatusOf(row) {
+                if (row.lastContactAt && new Date(row.lastContactAt) > new Date(row.recommendationSentAt)) return 'تم التذكير';
+                return 'بانتظار الرد الأول';
+            }
+
+            function applyFilters() {
+                const financingType = document.getElementById('filter-financing-type').value;
+                const age = document.getElementById('filter-age').value;
+                const search = document.getElementById('filter-search').value.trim();
+                filtered = waiting.filter(x => {
+                    if (financingType && (x.row.financingType || 'غير معرف') !== financingType) return false;
+                    if (age && x.ageBucket !== age) return false;
+                    if (search && !(('RX-' + x.row.id).includes(search) || (x.row.name || '').includes(search))) return false;
+                    return true;
+                });
+                renderKpis();
+                renderTable();
+                renderAgeDonut();
+                renderAssistant();
+            }
+
+            function renderKpis() {
+                document.getElementById('kpi-total').innerText = waiting.length.toLocaleString('en-US');
+                const sentCount = allApps.filter(r => r.recommendationSentAt).length;
+                document.getElementById('kpi-sent-pct').innerText = (allApps.length ? Math.round((sentCount / allApps.length) * 100) : 0) + '%';
+                const recentContact = waiting.filter(x => x.row.lastContactAt && (Date.now() - new Date(x.row.lastContactAt).getTime()) < 86400000).length;
+                document.getElementById('kpi-recent-contact-pct').innerText = (waiting.length ? Math.round((recentContact / waiting.length) * 100) : 0) + '%';
+                const dueToday = waiting.filter(x => !x.row.lastContactAt || (Date.now() - new Date(x.row.lastContactAt).getTime()) > 86400000).length;
+                document.getElementById('kpi-due-today').innerText = dueToday.toLocaleString('en-US');
+            }
+
+            function renderTable() {
+                const tbody = document.getElementById('aw-tbody');
+                document.getElementById('aw-count').innerText = filtered.length.toLocaleString('en-US') + ' طلب بانتظار الرد';
+                if (!filtered.length) {
+                    tbody.innerHTML = '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="9">لا توجد طلبات بانتظار الرد مطابقة لهذا الفلتر.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = '';
+                filtered.slice().sort((x, y) => new Date(x.row.recommendationSentAt) - new Date(y.row.recommendationSentAt)).forEach(({ row, a }) => {
+                    const reply = replyStatusOf(row);
+                    const tr = document.createElement('tr');
+                    tr.className = 'hover:bg-surface-container-low/50 transition-colors';
+                    tr.innerHTML =
+                        '<td class="px-4 py-4 font-label-md">#RX-' + row.id + '</td>' +
+                        '<td class="px-4 py-4 font-medium">' + (row.name || 'عميل رشيد') + '</td>' +
+                        '<td class="px-4 py-4 text-sm text-on-surface-variant">' + (row.financingType || 'غير معرف') + '</td>' +
+                        '<td class="px-4 py-4 text-sm">' + fmtSar(row.amount) + ' ر.س</td>' +
+                        '<td class="px-4 py-4 text-sm">' + fmtSar(a.installment) + ' ر.س</td>' +
+                        '<td class="px-4 py-4 text-sm text-on-surface-variant">' + fmtDate(row.recommendationSentAt) + '</td>' +
+                        '<td class="px-4 py-4 text-sm text-on-surface-variant">' + fmtDate(row.lastContactAt) + '</td>' +
+                        '<td class="px-4 py-4"><span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-xs rounded-md">' + reply + '</span></td>' +
+                        '<td class="px-4 py-4"><a class="text-secondary text-xs font-bold hover:underline" href="request-details.html?id=' + row.id + '">التفاصيل</a></td>';
+                    tbody.appendChild(tr);
+                });
+            }
+
+            const AGE_ROLE = { 'اليوم': 'good', '24 ساعة': 'warning', '3 أيام': 'serious', 'أكثر من 3 أيام': 'critical' };
+            function renderAgeDonut() {
+                const order = ['اليوم', '24 ساعة', '3 أيام', 'أكثر من 3 أيام'];
+                const counts = {}; order.forEach(k => counts[k] = 0);
+                filtered.forEach(x => counts[x.ageBucket]++);
+                const total = filtered.length;
+                if (!total) {
+                    document.getElementById('age-donut-total').innerText = 0;
+                    document.getElementById('age-donut').style.background = '#e6e1e0';
+                    document.getElementById('age-legend').innerHTML = '<span class="text-on-surface-variant">لا توجد بيانات كافية بعد.</span>';
+                    return;
+                }
+                const segments = order.map(k => ({ label: k, count: counts[k], colorRole: AGE_ROLE[k] }));
+                RashidCharts.statusDonut('age-donut', 'age-legend', segments, {
+                    onTotal: t => { document.getElementById('age-donut-total').innerText = t; }
+                });
+            }
+
+            function waitReasonOf(row, a) {
+                if (a.pressureScore >= 60) return 'العرض المرسل يتطلب من العميل مراجعة قدرته على السداد نظراً لارتفاع درجة الضغط (' + a.pressureScore + ').';
+                if (!row.lastContactAt) return 'لم تتم أي محاولة تواصل بعد بعد إرسال التوصية.';
+                return 'تم التواصل سابقاً، وما زال العميل يقيّم العرض المرسل.';
+            }
+
+            function renderAssistant() {
+                if (!filtered.length) {
+                    document.getElementById('aw-top-name').innerText = 'لا توجد طلبات بانتظار الرد حالياً';
+                    document.getElementById('aw-top-reqid').innerText = '-';
+                    document.getElementById('aw-top-initial').innerText = '-';
+                    document.getElementById('aw-top-reason').innerText = '-';
+                    document.getElementById('aw-top-timeline').innerHTML = '';
+                    return;
+                }
+                const top = filtered.slice().sort((x, y) => new Date(x.row.recommendationSentAt) - new Date(y.row.recommendationSentAt))[0];
+                document.getElementById('aw-top-name').innerText = top.row.name || 'عميل رشيد';
+                document.getElementById('aw-top-reqid').innerText = '#RX-' + top.row.id + ' · بانتظار منذ ' + top.ageBucket;
+                document.getElementById('aw-top-initial').innerText = (top.row.name || 'ر').trim().charAt(0);
+                document.getElementById('aw-top-reason').innerText = waitReasonOf(top.row, top.a);
+
+                const events = [{ label: 'إرسال التوصية', date: top.row.recommendationSentAt, icon: 'send' }];
+                if (top.row.lastContactAt) events.push({ label: 'تسجيل محاولة تواصل', date: top.row.lastContactAt, icon: 'call' });
+                events.sort((x, y) => new Date(y.date) - new Date(x.date));
+                document.getElementById('aw-top-timeline').innerHTML = events.map(e =>
+                    '<div class="flex items-center gap-2 text-[11px] text-on-surface-variant"><span class="material-symbols-outlined text-secondary text-sm">' + e.icon + '</span>' + e.label + ' · ' + fmtDate(e.date) + '</div>'
+                ).join('');
+
+                document.getElementById('aw-action-details').href = 'request-details.html?id=' + top.row.id;
+                const logAndReload = async () => { await RashidApi.logContact(top.row.id); await load(); };
+                document.getElementById('aw-action-call').onclick = logAndReload;
+                document.getElementById('aw-action-whatsapp').onclick = logAndReload;
+                document.getElementById('aw-action-sms').onclick = logAndReload;
+                document.getElementById('aw-action-email').onclick = logAndReload;
+                document.getElementById('aw-action-log').onclick = logAndReload;
+            }
+
+            document.getElementById('filter-search').addEventListener('input', applyFilters);
+            document.getElementById('filter-financing-type').addEventListener('change', applyFilters);
+            document.getElementById('filter-age').addEventListener('change', applyFilters);
+            document.getElementById('filter-reset').addEventListener('click', () => {
+                document.getElementById('filter-search').value = '';
+                document.getElementById('filter-financing-type').value = '';
+                document.getElementById('filter-age').value = '';
+                applyFilters();
+            });
+            document.getElementById('export-results').addEventListener('click', () => { RashidReport.downloadPortfolioCsv(filtered.map(x => x.row)); });
+            document.getElementById('toolbar-refresh').addEventListener('click', load);
+
+            async function load() {
+                const rows = await RashidApi.listApplications();
+                allApps = rows || [];
+                waiting = allApps
+                    .filter(row => row.recommendationSentAt && !row.selectedOfferKey && !row.needsReview)
+                    .map(row => ({ row, a: RashidCalc.analyze(row), ageBucket: ageBucketOf(row.recommendationSentAt) }));
+                applyFilters();
+            }
+
+            load();
+        })();
+    </script>
+<script>
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
+        })();
+    </script>
+<!-- Real login modal -->
+<div class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/40 p-4" id="login-modal">
+<div class="bg-surface rounded-3xl p-8 max-w-md w-full shadow-2xl">
+<h3 class="font-headline-md text-xl font-bold text-primary mb-5 text-center">تسجيل الدخول</h3>
+<div class="space-y-3 mb-3">
+<input autocomplete="username" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-username" placeholder="اسم المستخدم" type="text"/>
+<input autocomplete="current-password" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-password" placeholder="كلمة المرور" type="password"/>
+</div>
+<p class="text-[11px] text-error mb-3 text-center" id="login-error"></p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-3 rounded-xl border border-outline-variant/30 text-base font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="login-cancel" type="button">إلغاء</button>
+<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary text-base font-bold" id="login-submit" type="button">دخول</button>
+</div>
+</div>
+</div>
+</body></html>

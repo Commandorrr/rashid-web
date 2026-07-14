@@ -2,6 +2,9 @@
 
 <html class="light" dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>رشيد | مساعد المستشار الذكي</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -60,8 +63,9 @@
             }
         }
     </script>
+<link href="rashid-theme.css" rel="stylesheet"/>
 </head>
-<body class="bg-background text-on-surface font-body-md min-h-screen"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
 <!-- Persistent SideNavBar (Shared Component) -->
 <aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
 <div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
@@ -70,9 +74,9 @@
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md">الرئيسية</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="smart-alternatives.html">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="your-data-ar.html" id="nav-current-request">
 <span class="material-symbols-outlined">bolt</span>
-<span class="font-label-md text-label-md">طلبك الحالي</span>
+<span class="font-label-md text-label-md">الطلب الحالي</span>
 </a>
 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
 <span class="material-symbols-outlined">description</span>
@@ -89,10 +93,16 @@
 <span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
 </button>
 <div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
-<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">التقارير المتقدمة</a>
-<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">لوحة تحليل المخاطر</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">نظرة عامة</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">الضغط المالي</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-impact-ar.html">أثر البدائل</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ops-ar.html">الأداء التشغيلي</a>
 </div>
 </div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-reports-ar.html">
+<span class="material-symbols-outlined">summarize</span>
+<span class="font-label-md text-label-md">التقارير</span>
+</a>
 <a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-assistant-ar.html">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
 <span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
@@ -104,13 +114,13 @@
             تحليل جديد
         </a>
 <div class="pt-6 border-t border-outline-variant/20">
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span class="font-label-md text-label-md">الإعدادات</span>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">العودة للصفحة الرئيسية</span>
 </a>
-<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#">
-<span class="material-symbols-outlined">contact_support</span>
-<span class="font-label-md text-label-md">الدعم الفني</span>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#" id="nav-login">
+<span class="font-label-md text-label-md">تسجيل الدخول</span>
+<span class="material-symbols-outlined">arrow_back</span>
 </a>
 </div>
 </div>
@@ -120,15 +130,23 @@
 <!-- TopAppBar -->
 <header class="flex justify-between items-center mb-section-gap">
 <div>
-<h1 class="font-display-md text-display-md text-primary tracking-tight">مساعد المستشار الذكي</h1>
+<h1 class="font-display-md text-3xl font-extrabold text-primary tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-4xl">auto_awesome</span>مساعد المستشار الذكي</h1>
 <p class="text-on-surface-variant font-body-md">اسأل عن أي عميل حقيقي أو عن أداء المحفظة كاملة - كل إجابة محسوبة فعلياً من بيانات رشيد.</p>
 </div>
+<div class="flex items-center gap-4">
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">notifications</span>
+</button>
 <div class="flex items-center gap-2" id="advisor-account">
 <div class="text-left hidden lg:block">
 <div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
 <div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
 </div>
 <div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
 </div>
 </header>
 <!-- Chat Panel -->
@@ -162,8 +180,99 @@
 </a>
 </nav>
 <script src="rashid-calc.js"></script>
+<script>
+        // "الطلب الحالي" is interactive: checked fresh at the moment of
+        // every click (not baked into a static href at page-load time), so
+        // it stays correct even after the browser restores this page from
+        // bfcache via back/forward navigation - a real reported bug where
+        // the old load-time-computed href/state stayed stale after
+        // submitting a request and navigating back. Links to the real
+        // in-progress wizard draft (RashidCalc.load(), the same localStorage
+        // record your-data-ar.html saves and smart-alternatives.html reads)
+        // if one genuinely exists, or shows a plain alert() - matching the
+        // exact same native alert() style already used elsewhere in the app
+        // (decision-fingerprint.html's "تم إرسال طلبك للبنك بنجاح!").
+        (function () {
+            function hasCurrentRequest() {
+                try { return !!RashidCalc.load(); } catch (e) { return false; }
+            }
+            function wireCurrentRequestLink(id) {
+                const link = document.getElementById(id);
+                if (!link) return;
+                link.style.cursor = 'pointer';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hasCurrentRequest()) {
+                        window.location.href = 'smart-alternatives.html';
+                    } else {
+                        alert('لا يوجد طلب حالي قائم. الرجاء الذهاب لقسم تحليل طلب جديد.');
+                    }
+                });
+            }
+            wireCurrentRequestLink('nav-current-request');
+            wireCurrentRequestLink('mobile-nav-current-request');
+        })();
+    </script>
 <script src="rashid-api.js"></script>
 <script src="rashid-auth.js"></script>
+<script>
+        // Real login/logout toggle on the sidebar link itself: the label
+        // and icon reflect RashidAuth.getSession() at load time (and on
+        // pageshow, for bfcache correctness). Logged out -> opens the real
+        // login modal (calls RashidAuth.loginRemote() against the bcrypt
+        // backend, see rashid-auth.js). Logged in -> clicking the link
+        // logs out immediately, no modal needed.
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.getElementById('nav-login');
+            const modal = document.getElementById('login-modal');
+            if (!link || !modal) return;
+            const linkText = link.querySelector('.font-label-md');
+            const linkIcon = link.querySelector('.material-symbols-outlined');
+            function updateLinkState() {
+                const session = RashidAuth.getSession();
+                if (session) {
+                    if (linkText) linkText.innerText = 'تسجيل الخروج';
+                    if (linkIcon) linkIcon.innerText = 'logout';
+                } else {
+                    if (linkText) linkText.innerText = 'تسجيل الدخول';
+                    if (linkIcon) linkIcon.innerText = 'arrow_back';
+                }
+            }
+            function openModal() {
+                document.getElementById('login-error').innerText = '';
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (RashidAuth.getSession()) {
+                    RashidAuth.logout();
+                    window.location.reload();
+                } else {
+                    openModal();
+                }
+            });
+            document.getElementById('login-cancel').addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+            document.getElementById('login-submit').addEventListener('click', async function () {
+                const u = document.getElementById('login-username').value.trim();
+                const p = document.getElementById('login-password').value;
+                const errEl = document.getElementById('login-error');
+                if (!u || !p) { errEl.innerText = 'أدخل اسم المستخدم وكلمة المرور.'; return; }
+                errEl.innerText = 'جارِ التحقق...';
+                const result = await RashidAuth.loginRemote(u, p);
+                if (result.ok) {
+                    window.location.reload();
+                } else {
+                    errEl.innerText = 'بيانات الدخول غير صحيحة.';
+                }
+            });
+            updateLinkState();
+            window.addEventListener('pageshow', updateLinkState);
+        });
+    </script>
 <script>
         (function () {
             const session = RashidAuth.getSession();
@@ -181,14 +290,55 @@
 <script>
         // A real rule-based assistant over real data (no external AI service):
         // it looks up an actual customer by name/customer-ID in the query, or
-        // matches a known portfolio-wide question, and always answers with
-        // numbers computed live via RashidCalc - never a fabricated answer.
+        // matches one of a wide set of known portfolio-wide questions, and
+        // always answers with numbers computed live via RashidCalc/RashidApi -
+        // never a fabricated answer. It also keeps a small conversation
+        // context (last list of rows shown, last customer discussed) so a
+        // natural follow-up like "من هم؟" or "وكم دخله؟" resolves correctly,
+        // and it carries a fixed FAQ knowledge base about the real product
+        // (real navigation/logic facts, never invented ones) for questions
+        // about the site itself rather than about a specific applicant.
         (function () {
             const log = document.getElementById('ai-chat-log');
             const form = document.getElementById('ai-chat-form');
             const input = document.getElementById('ai-chat-input');
             const suggestionsEl = document.getElementById('ai-chat-suggestions');
             let analyzedCache = null;
+            // Conversation memory: the last list of rows presented (so "من
+            // هم؟" can resolve) and the last customer discussed (so a
+            // follow-up question without repeating the name still resolves).
+            const context = { listLabel: null, listRows: null, listLinkQuery: null, customer: null, lastOfferKey: null };
+
+            const STATUS_ORDER = ['جديد', 'تم التحليل', 'بحاجة تواصل', 'تم إرسال التوصية', 'بانتظار العميل', 'تم اختيار العرض', 'محوّل للمراجعة', 'مكتمل', 'بيانات ناقصة'];
+            const FINANCING_TYPES = ['تمويل شخصي', 'تمويل سيارة', 'تمويل عقاري', 'تقسيط', 'بطاقة ائتمانية'];
+            const EMPLOYMENT_TYPES = ['موظف', 'متقاعد', 'أعمال حرة'];
+
+            const FAQ = [
+                { kw: ['كيف أضيف طلب', 'كيف اضيف طلب', 'اضافة طلب', 'إضافة طلب', 'طلب جديد كيف'], a: 'لإضافة طلب جديد اضغط زر "تحليل جديد" أعلى القائمة الجانبية أو من لوحة التحكم، وستنتقل لصفحة "بياناتك" لتعبئة بيانات العميل (الدخل، الالتزامات، مبلغ التمويل...) خطوة بخطوة، ويُحسب تحليل الضغط والأهلية تلقائياً بمجرد الحفظ.' },
+                { kw: ['وين التقارير', 'اين التقارير', 'تصدير تقرير', 'تحميل تقرير', 'صفحة التقارير'], a: 'من القائمة الجانبية اضغط "التقارير" لتصدير تقرير PDF أو CSV لأي طلب بعينه أو لأداء المحفظة كاملة.' },
+                { kw: ['الفرق بين مؤهل ومؤهل بشروط', 'مؤهل بشروط ايش', 'ايش يعني مؤهل بشروط', 'ماذا يعني مؤهل بشروط'], a: '"مؤهل" يعني أن نسبة الاستقطاع الشهري (العبء) ضمن الحد الآمن والرصيد المتبقي موجب. "مؤهل بشروط" يعني تجاوز الحد الآمن بهامش بسيط (حتى 10 نقاط إضافية) مع نصيحة بتخفيض المبلغ أو زيادة مدة السداد. "غير مؤهل حالياً" يعني تجاوزاً أكبر من ذلك.' },
+                { kw: ['ليش المتقاعد', 'لماذا المتقاعد', 'سقف المتقاعد', 'المتقاعدين سقف مختلف'], a: 'لأن دخل المتقاعد (المعاش) ثابت بلا نمو أو ترقية مستقبلية، يطبّق رشيد له سقف عبء أكثر تحفظاً (أقل بـ5 نقاط من السقف المعتاد للموظف)، تماشياً مع ممارسات الإقراض المتحفظة.' },
+                { kw: ['وين اشوف البدائل', 'اين البدائل', 'مقارنة العرض', 'أثر البدائل صفحة', 'صفحة اثر البدائل'], a: 'من قسم "التحليلات" في القائمة الجانبية اختر "أثر البدائل" لمشاهدة مقارنة العرض الحالي بالبديل الآمن، نسبة التحول، ومتوسط التوفير الشهري لكل العملاء.' },
+                { kw: ['صفحة الضغط المالي', 'وش يعرض الضغط المالي', 'تحليل الضغط المالي شنو', 'ماذا تعرض صفحة الضغط'], a: '"الضغط المالي" ضمن التحليلات تعرض توزيع الطلبات حسب مستوى الضغط، خريطة الالتزامات مقابل الدخل، وأين يمكن لرشيد التدخل بعروض بديلة لخفض الضغط.' },
+                { kw: ['الأداء التشغيلي شنو', 'صفحة الأداء التشغيلي', 'ماذا يعرض الاداء التشغيلي'], a: '"الأداء التشغيلي" ضمن التحليلات تتابع سرعة معالجة الطلبات: متوسط زمن أول تواصل، متوسط زمن اكتمال القرار، الطلبات المتأخرة، وتوزيع حالات الطلبات.' },
+                { kw: ['كيف يحسب مؤشر الضغط', 'كيف احسب الضغط', 'مؤشر الضغط كيف يحسب', 'من اين يجي مؤشر الضغط'], a: 'مؤشر الضغط مبني على نسبة إجمالي الالتزامات الشهرية (شاملة القسط المقترح) إلى الدخل، مع هامش بسيط إضافي - كلما ارتفعت هذه النسبة ارتفع المؤشر من 0 إلى 100.' },
+                { kw: ['من يستخدم هذا النظام', 'لمين هذا الموقع', 'مين يشتغل عليه', 'مين المستخدم'], a: 'النظام مخصص للمستشار داخل البنك: يبدأ بتحليل بيانات العميل، ثم يتابعه عبر الطلبات والعملاء والتحليلات ومساعد المستشار الذكي، كل ذلك من مكان واحد.' },
+                { kw: ['وين العملاء', 'صفحة العملاء شنو', 'ماذا تعرض صفحة العملاء'], a: 'من القائمة الجانبية اضغط "العملاء" لعرض كل عميل حقيقي لديه أكثر من طلب واحد، مع نظرة موحّدة على حالته وطلباته.' },
+                { kw: ['ما هو العرض الآمن', 'وش يعني العرض الآمن', 'العرض الآمن تعريف'], a: '"العرض الآمن" هو بديل تمويل حقيقي بمبلغ أقل ومدة أطول من الطلب الأصلي، محسوب لخفض القسط الشهري ونسبة العبء إلى مستوى أكثر أماناً لنفس العميل.' }
+            ];
+
+            function norm(s) {
+                let t = (s || '').replace(/[؟?!.،,]/g, '').replace(/\s+/g, ' ').trim();
+                // Common Gulf/Saudi colloquial pronoun-suffix variants,
+                // normalized to their MSA equivalent so every keyword/cue
+                // match below benefits automatically instead of needing the
+                // dialect spelling enumerated separately for every intent -
+                // "معاه" (colloquial "with him") was a real reported failure:
+                // it silently didn't match the MSA "معه" already in
+                // CUSTOMER_LATE_CUES, so a customer in focus never resolved.
+                t = t.replace(/معاه/g, 'معه').replace(/وياه/g, 'معه');
+                return t;
+            }
 
             function addMessage(text, from) {
                 const bubble = document.createElement('div');
@@ -206,63 +356,416 @@
             async function getAnalyzed() {
                 if (analyzedCache) return analyzedCache;
                 const apps = await RashidApi.listApplications();
-                analyzedCache = (apps || []).map(row => ({ row, a: RashidCalc.analyze(row) }));
+                analyzedCache = (apps || []).map(row => {
+                    const a = RashidCalc.analyze(row);
+                    const status = RashidCalc.statusOf(row, a);
+                    const impact = RashidCalc.offerImpactFor(row);
+                    const cal = RashidCalc.buildCalendar(a.installment, row);
+                    const cause = RashidCalc.primaryPressureCause(row, a);
+                    return { row, a, status, impact, cal, cause };
+                });
                 return analyzedCache;
             }
 
-            function fmt(n) { return Math.round(n).toLocaleString('ar-SA'); }
+            function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+            function avg(arr) { return arr.length ? arr.reduce((s, v) => s + v, 0) / arr.length : null; }
+
+            function namesList(rows, limit) {
+                limit = limit || 12;
+                const names = rows.map(x => x.row.name || 'عميل رشيد');
+                let text = names.slice(0, limit).join('، ');
+                if (names.length > limit) text += '، و' + (names.length - limit) + ' آخرين';
+                return text;
+            }
+
+            // setList/setCustomer are mutually exclusive "focus" setters -
+            // whichever ran most recently wins, so a stale list from three
+            // questions ago never shadows a customer just discussed (and
+            // vice versa). This was a real bug found in testing: asking
+            // about a single top-pressure customer right after asking for
+            // a list of 32 eligible customers, then saying "من هم؟"، used
+            // to still answer with the old list of 32 instead of the one
+            // customer just discussed.
+            function setList(label, rows, linkQuery) {
+                context.listLabel = label;
+                context.listRows = rows;
+                context.listLinkQuery = linkQuery || null;
+                context.customer = null;
+            }
+            function setCustomer(c) {
+                context.customer = c;
+                context.listRows = null;
+                context.listLabel = null;
+                context.listLinkQuery = null;
+            }
+
+            // All single-customer answers, including the "advice" intent -
+            // extracted into its own function so it can be reached both when
+            // a name/ID is mentioned directly AND as a last-resort follow-up
+            // (see CUSTOMER_LATE_CUES below) when no name was repeated.
+            // Whole-token match (not substring) for advice-seeking language,
+            // covering common MSA and Gulf/Saudi colloquial conjugations of
+            // the same three verb roots (خفض/قلل/نصح) plus "اقترح"/"الحل".
+            // Token-based on purpose: a substring check on the bare root
+            // ("خفض") would false-positive on unrelated words that merely
+            // contain it, like "منخفض" (low) - "هل دخله منخفض؟" must not be
+            // answered as if asking for advice.
+            const ADVICE_WORDS = ['اخفض', 'تخفض', 'نخفض', 'يخفض', 'خفض', 'خفّض', 'تخفيض', 'اقلل', 'تقلل', 'نقلل', 'يقلل', 'قلل', 'تقليل', 'انصح', 'تنصح', 'تنصحي', 'ينصح', 'نصح', 'نصيحة', 'نصائح', 'اقترح', 'تقترح', 'يقترح', 'نقترح', 'اقتراح', 'الحل'];
+            // Every real offer this app can compute, keyed exactly like
+            // RashidCalc.alternativeOffers()/OFFER_LABELS, so any of the 4
+            // real offer names can be asked about by name with real numbers -
+            // not just "العرض الآمن" (a real reported gap: asking about
+            // "العرض المتوازن" by name fell through to an unrelated intent).
+            const OFFER_NAME_MAP = [
+                { kw: ['العرض المتوازن', 'متوازن'], key: 'balanced' },
+                { kw: ['العرض الآمن', 'البديل الآمن', 'عرض آمن'], key: 'safe' },
+                { kw: ['العرض الذكي', 'عرض ذكي'], key: 'smart' },
+                { kw: ['العرض الحالي', 'الاستمرار بالطلب الأصلي'], key: 'current' }
+            ];
+
+            // The concrete "if you do X, here's what happens" advice message
+            // - shared by the ADVICE_WORDS trigger and the "which offer suits
+            // him best?" trigger below, computed from the real "safe"
+            // alternative offer (the same offer used everywhere else in the
+            // app for "reduce this applicant's pressure").
+            function pressureAdviceMessage(customer) {
+                const { row, a, cal } = customer;
+                const offer = RashidCalc.alternativeOffers(row).safe;
+                context.lastOfferKey = 'safe';
+                const afterRow = Object.assign({}, row, { amount: offer.amount, tenure: offer.tenure });
+                const after = RashidCalc.analyze(afterRow);
+                const afterCal = RashidCalc.buildCalendar(after.installment, afterRow);
+                let msg = row.name + ': أنصح بخفض مبلغ التمويل من ' + fmt(row.amount) + ' إلى ' + fmt(offer.amount) + ' ر.س';
+                if (offer.tenure !== row.tenure) msg += ' وتمديد المدة إلى ' + offer.tenure + ' شهراً (بدل ' + row.tenure + ')';
+                msg += '، فينخفض القسط الشهري إلى ' + fmt(offer.installment) + ' ر.س ويتحسن مؤشر الضغط من ' + a.pressureScore + ' إلى ' + after.pressureScore + '/100';
+                if (afterCal.endOfMonthBalance !== null) {
+                    msg += '، وسيتبقى له تقريباً ' + fmt(afterCal.endOfMonthBalance) + ' ر.س نهاية الشهر';
+                    if (cal && cal.endOfMonthBalance !== null) msg += ' (بدل ' + fmt(cal.endOfMonthBalance) + ' ر.س حالياً)';
+                }
+                return msg + '.';
+            }
+
+            function answerForCustomer(customer, q) {
+                const { row, a, status, impact, cause } = customer;
+                const qTokens = q.split(' ');
+                // Advice/recommendation request - deliberately doesn't
+                // require the word "ضغط" to also be present - in this app
+                // "advice" only ever means "how to reduce this applicant's
+                // pressure" (the one recommendation engine that exists), so
+                // "ايش تنصحني اسوي معه؟" alone is enough once a customer is
+                // already in focus. Checks both the bare word and its "لـ"
+                // ("to/in order to") prefixed form ("اقلل" and "لاقلل") -
+                // that prefix is an extremely common, easy-to-miss real
+                // construction ("عشان لاقلل الضغط") a plain word-list would
+                // otherwise miss.
+                if (ADVICE_WORDS.some(w => qTokens.includes(w) || qTokens.includes('ل' + w))) {
+                    return pressureAdviceMessage(customer);
+                }
+                // "ايش العرض الأنسب/الأفضل له؟" - if already eligible there's
+                // genuinely no real alternative to recommend; otherwise reuse
+                // the same real advice computation above.
+                if (/الانسب|الأنسب|الأفضل|انسب عرض|افضل عرض/.test(q)) {
+                    if (a.eligible) return row.name + ': هو مؤهل بالفعل بالشروط الحالية (' + a.decision + ')، فلا حاجة لعرض بديل.';
+                    return pressureAdviceMessage(customer);
+                }
+                // "ايش اسم العرض هذا؟" - a genuine follow-up referring to
+                // whichever real offer was just discussed (tracked in
+                // context.lastOfferKey by pressureAdviceMessage()/the offer-
+                // name lookup below), not a fabricated guess.
+                if (/اسم العرض|هذا العرض|هذه العرض|وش العرض/.test(q)) {
+                    return context.lastOfferKey
+                        ? row.name + ': هذا هو "' + RashidCalc.OFFER_LABELS[context.lastOfferKey] + '".'
+                        : 'لم نناقش عرضاً محدداً بعد لهذا العميل. اسأل مثلاً "ايش العرض الآمن له؟" أو "ايش العرض المتوازن له؟".';
+                }
+                if (/سبب.*ضغط|سبب رئيسي/.test(q)) return row.name + ': أبرز سبب لضغطه هو "' + cause + '".';
+                if (/قناة (التواصل|تواصل)/.test(q)) return row.name + ': قناة التواصل المفضلة لديه "' + (row.contactChannel || 'غير مسجّلة') + '".';
+                if (/التزام قادم/.test(q)) return row.name + (row.hasUpcomingObligation ? ': لديه التزام قادم' + (row.upcomingObligationRecurring ? ' (شهري متكرر)' : ' (دفعة واحدة)') + ' بقيمة ' + fmt(row.upcomingObligationAmount) + ' ر.س.' : ': لا يوجد لديه التزام قادم مسجّل.');
+                {
+                    const offerMatch = OFFER_NAME_MAP.find(o => o.kw.some(k => q.includes(k)));
+                    if (offerMatch) {
+                        const offer = RashidCalc.alternativeOffers(row)[offerMatch.key];
+                        context.lastOfferKey = offerMatch.key;
+                        return row.name + ': ' + RashidCalc.OFFER_LABELS[offerMatch.key] + ' بمبلغ ' + fmt(offer.amount) + ' ر.س لمدة ' + offer.tenure + ' شهراً، بقسط ' + fmt(offer.installment) + ' ر.س ونسبة عبء ' + offer.burdenPct + '%.';
+                    }
+                }
+                if (/قبل عرض|اختار عرض|عرض بديل/.test(q)) return impact ? row.name + ': اختار "' + impact.label + '"، وخفّض ضغطه من ' + impact.before.pressureScore + ' إلى ' + impact.after.pressureScore + '/100.' : row.name + ': لم يختر عرضاً بديلاً بعد.';
+                if (/حالة الطلب|حالته التشغيلية/.test(q)) return row.name + ': حالة طلبه حالياً "' + status.key + '" (الإجراء التالي: ' + status.nextAction + ').';
+                if (/دخل|راتب/.test(q)) return row.name + ': دخله الشهري ' + fmt(row.income) + ' ر.س.';
+                if (/التزام/.test(q)) return row.name + ': التزاماته الشهرية الحالية ' + fmt(row.obligations) + ' ر.س.';
+                if (/عبء|ضغط/.test(q)) return row.name + ': نسبة العبء ' + a.burdenRatio + '% (الحد الأعلى المسموح ' + a.burdenCap + '%)، مؤشر الضغط ' + a.pressureScore + '/100.';
+                if (/مؤهل|حالته|وضعه|قرار/.test(q)) return row.name + ': ' + a.decision + '. ' + a.recommendation;
+                if (/متقاعد|موظف|توظيف/.test(q)) return row.name + ': حالته الوظيفية "' + (row.employmentStatus || 'غير محدد') + '"' + (a.isRetired ? '، ولذلك يُطبَّق عليه حد عبء أكثر تحفظاً (' + a.burdenCap + '% بدل الحد المعتاد).' : '.');
+                if (/مبلغ|تمويل/.test(q)) return row.name + ': طلب تمويل بقيمة ' + fmt(row.amount) + ' ر.س لمدة ' + row.tenure + ' شهراً، بقسط شهري مقدّر ' + fmt(a.installment) + ' ر.س.';
+                return row.name + ' (رقم العميل: ' + (row.customerId || 'غير مسجل') + '، ' + (row.employmentStatus || 'غير محدد') + '): طلب بقيمة ' + fmt(row.amount) +
+                    ' ر.س، دخل شهري ' + fmt(row.income) + ' ر.س، نسبة العبء ' + a.burdenRatio + '%، الحالة: ' + status.key + '، القرار: ' + a.decision + '.';
+            }
+
+            const FOLLOWUP_LIST_RE = /^(من|مين|منو) ?(هم|هي|هذول|دول)?$|اذكرهم|سمهم|اسمائهم|أسمائهم|قائمتهم|عددهم|وش (اسمائهم|هم)|مين هذول|من هذول/;
+            const NAV_RE = /انتقل|انقل|خذني|ودني|وديني|افتح|اذهب|روح|مكانهم|مكانه|وين القاهم|اعرضهم|شوفهم|شوفه/;
+            // Deliberately narrow: only genuine possessive-suffix continuation
+            // forms ("كم دخله؟" / "وش وضعه؟") should silently resume the last
+            // customer discussed. A broad word list here (e.g. plain "متقاعد"
+            // or "قناة") would wrongly hijack general/FAQ questions that just
+            // happen to share a keyword - e.g. "ليش المتقاعد له سقف مختلف؟"
+            // is a general product question, not a follow-up about a specific
+            // customer, even though "متقاعد" appears in it. Matched against
+            // whole tokens (not substrings) - "ضغطه" must NOT match inside
+            // "ضغطهم" (a genuinely plural, list-referring word), which a
+            // naive .includes() check would wrongly do.
+            const CUSTOMER_PRONOUN_CUES = ['دخله', 'راتبه', 'التزامه', 'التزاماته', 'عبؤه', 'عبئه', 'ضغطه', 'حالته', 'وضعه', 'قراره', 'توصيته', 'مبلغه', 'تمويله', 'قسطه', 'قناته', 'عنده', 'لديه'];
 
             async function answer(question) {
                 const analyzed = await getAnalyzed();
                 if (!analyzed.length) return 'لا توجد طلبات حقيقية مسجلة في النظام بعد. أنشئ طلباً من "تحليل جديد" ثم اسألني عنه.';
 
-                const q = question.trim();
+                const q = norm(question);
+                const qTokens = q.split(' ');
 
-                // Find a real customer mentioned by name or customer ID
+                // Resolve a real customer mentioned by name or customer ID
                 const matches = analyzed.filter(x => {
                     const name = (x.row.name || '').trim();
                     const cid = (x.row.customerId || '').trim();
                     return (name && q.includes(name)) || (cid && q.includes(cid));
                 });
-                const customer = matches.length
+                let customer = matches.length
                     ? matches.sort((a, b) => new Date(b.row.createdAt) - new Date(a.row.createdAt))[0]
                     : null;
 
-                // Portfolio-wide questions
+                // A follow-up like "وكم دخله؟" with no name repeated - fall
+                // back to whichever customer we were just discussing. Uses
+                // exact token match, not substring, so e.g. "ضغطهم" (plural,
+                // referring to a list) never wrongly matches the "ضغطه"
+                // (singular, referring to one customer) cue.
+                if (!customer && context.customer && CUSTOMER_PRONOUN_CUES.some(w => qTokens.includes(w))) {
+                    customer = context.customer;
+                }
+
+                // A follow-up like "من هم؟" - resolve against the last list
+                // of rows a previous answer actually presented (checked
+                // against "the list was actually set", not just "non-empty",
+                // so a genuine zero-result list still answers correctly
+                // instead of silently falling back to an older, unrelated
+                // customer from earlier in the conversation).
+                if (FOLLOWUP_LIST_RE.test(q)) {
+                    if (context.listRows !== null) {
+                        return context.listRows.length
+                            ? 'هم: ' + namesList(context.listRows, 20) + '.'
+                            : 'لا يوجد أي عنصر ضمن "' + context.listLabel + '" حالياً.';
+                    }
+                    if (context.customer) {
+                        return context.customer.row.name + ' فقط - آخر عميل تحدثنا عنه.';
+                    }
+                    return 'لم أعرض قائمة عملاء بعد في هذه المحادثة. اسألني أولاً سؤالاً مثل "من هم المؤهلون؟" أو "من عالي الضغط؟".';
+                }
+
+                // Direct "افتح RX-12" / "رقم 12" request - checked BEFORE the
+                // generic navigation intent below, since that intent's own
+                // keyword list (افتح/اذهب/...) would otherwise swallow a
+                // specific ID mention first and answer about the wrong thing
+                // entirely. Works even for a request never mentioned earlier
+                // in this conversation.
+                const idMatch = q.match(/rx-?(\d+)|رقم\s*(\d+)/i);
+                if (idMatch) {
+                    const id = idMatch[1] || idMatch[2];
+                    const found = analyzed.find(x => String(x.row.id) === String(id));
+                    if (found) {
+                        setCustomer(found);
+                        return 'تفضل: <a class="underline font-bold text-secondary" href="request-details.html?id=' + id + '" target="_blank">فتح طلب #RX-' + id + ' (' + (found.row.name || 'عميل رشيد') + ') ←</a>';
+                    }
+                    return 'لا يوجد طلب برقم RX-' + id + ' في النظام حالياً.';
+                }
+
+                // A follow-up asking to be "taken to" whoever we just
+                // discussed. Only ever offers a REAL, working link: either a
+                // genuinely filtered view of advisor-requests-ar.html (when
+                // the current list maps exactly onto a filter that page
+                // truly supports), or a direct request-details.html link for
+                // one customer. When no real filtered view exists for the
+                // current slice (e.g. "المؤهلون" - eligibility isn't a real
+                // query-param filter on that page), it says so honestly and
+                // gives the real request numbers instead of faking a link
+                // that wouldn't actually filter anything.
+                if (NAV_RE.test(q)) {
+                    if (context.listRows) {
+                        if (!context.listRows.length) return 'لا يوجد أي عنصر ضمن "' + context.listLabel + '" حالياً لأنقلك إليه.';
+                        if (context.listLinkQuery) {
+                            return 'تفضل: <a class="underline font-bold text-secondary" href="advisor-requests-ar.html?' + context.listLinkQuery + '" target="_blank">فتح "' + context.listLabel + '" في صفحة الطلبات ←</a>';
+                        }
+                        const ids = context.listRows.slice(0, 8).map(x => '#RX-' + x.row.id);
+                        const more = context.listRows.length > 8 ? ' و' + (context.listRows.length - 8) + ' طلبات أخرى' : '';
+                        return 'لا يوجد فلتر جاهز في صفحة الطلبات لهذه الشريحة تحديداً بعد، لكن أرقام طلباتهم: ' + ids.join('، ') + more + '. اذكر لي رقم أي طلب منهم (مثال: RX-' + context.listRows[0].row.id + ') وسأفتحه لك مباشرة.';
+                    }
+                    if (context.customer) {
+                        return 'تفضل: <a class="underline font-bold text-secondary" href="request-details.html?id=' + context.customer.row.id + '" target="_blank">فتح طلب ' + (context.customer.row.name || 'العميل') + ' ←</a>';
+                    }
+                    return 'لم أعرض قائمة أو عميلاً بعد لأنقلك إليه. اسألني أولاً عن قائمة أو عميل محدد.';
+                }
+
+                // Per-row detail breakdown for whichever list is currently in
+                // focus - e.g. "ايش أسباب ضغطهم؟" or just "ايش السبب؟" right
+                // after "من هم عالي الضغط؟". Deliberately doesn't require the
+                // word "ضغط" too - a bare "ايش السبب؟" following a list
+                // clearly means "the reason for" that list, and pressure
+                // cause is the only real per-row "reason" this app computes.
+                // Guarded by "!customer" so it never steals a genuine
+                // single-customer "سبب ضغطه؟" question (handled later, more
+                // specifically, in the customer block).
+                if (!customer && context.listRows && /سبب|اسباب/.test(q)) {
+                    if (!context.listRows.length) return 'لا يوجد أحد ضمن "' + context.listLabel + '" لعرض تفاصيلهم.';
+                    const lines = context.listRows.slice(0, 10).map(x => (x.row.name || 'عميل رشيد') + ' (#RX-' + x.row.id + '): ضغط ' + x.a.pressureScore + '/100 - السبب الرئيسي: ' + x.cause + '.');
+                    const more = context.listRows.length > 10 ? '<br>...و' + (context.listRows.length - 10) + ' طلبات أخرى ضمن نفس الشريحة.' : '';
+                    return lines.join('<br>') + more;
+                }
+
+                // ---- Status-specific counts (checked before the generic
+                // total-count pattern below, since e.g. "كم طلب بحاجة
+                // تواصل؟" would otherwise match the generic pattern first) ----
+                for (const s of STATUS_ORDER) {
+                    if (q.includes(s) && /كم|عدد|من هم|اذكر|قائمة/.test(q)) {
+                        const rows = analyzed.filter(x => x.status.key === s);
+                        setList('طلبات بحالة ' + s, rows, 'status=' + encodeURIComponent(s));
+                        return 'عدد الطلبات بحالة "' + s + '": ' + rows.length + ' من أصل ' + analyzed.length + ' (' + Math.round((rows.length / analyzed.length) * 100) + '%).';
+                    }
+                }
+
+                // ---- Financing-type / employment-type breakdowns ----
+                for (const t of FINANCING_TYPES) {
+                    if (q.includes(t) && /كم|عدد|من هم/.test(q)) {
+                        const rows = analyzed.filter(x => (x.row.financingType || 'غير محدد') === t);
+                        setList(t, rows, 'financing=' + encodeURIComponent(t));
+                        return 'عدد طلبات "' + t + '": ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                    }
+                }
+                for (const t of EMPLOYMENT_TYPES) {
+                    if (q.includes(t) && /كم|عدد|من هم/.test(q)) {
+                        const rows = analyzed.filter(x => x.row.employmentStatus === t);
+                        setList(t, rows);
+                        return 'عدد العملاء (' + t + '): ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                    }
+                }
+
+                // ---- Portfolio-wide questions ----
+                if (/من هم المؤهل|اسماء المؤهل|قائمة المؤهل/.test(q)) {
+                    const rows = analyzed.filter(x => x.a.eligible);
+                    setList('المؤهلون', rows);
+                    return 'المؤهلون حالياً (' + rows.length + ' من ' + analyzed.length + '): ' + namesList(rows) + '.';
+                }
+                if (/نسبة المؤهل|كم مؤهل|عدد المؤهل/.test(q)) {
+                    const rows = analyzed.filter(x => x.a.eligible);
+                    setList('المؤهلون', rows);
+                    return rows.length + ' من أصل ' + analyzed.length + ' طلباً مؤهلون حالياً (' + Math.round((rows.length / analyzed.length) * 100) + '%).';
+                }
+                if (/عالي الضغط|مرتفع الضغط|الضغط (المرتفع|العالي)/.test(q) && /كم|عدد|من هم|اذكر|قائمة|اسماء/.test(q)) {
+                    const rows = analyzed.filter(x => ['مرتفعة', 'مرتفعة جداً'].includes(RashidCalc.pressureTier(x.a.pressureScore)));
+                    setList('عالي الضغط', rows, 'pressure=' + encodeURIComponent('مرتفعة'));
+                    if (/من هم|اذكر|قائمة|اسماء/.test(q)) return 'عالي الضغط حالياً (' + rows.length + ' من ' + analyzed.length + '): ' + namesList(rows) + '.';
+                    return 'عدد الطلبات عالية الضغط: ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                }
                 if (/كم\s*(عدد)?\s*(الطلبات|طلب)|إجمالي الطلبات|اجمالي الطلبات/.test(q)) {
+                    setList('جميع الطلبات', analyzed);
                     return 'إجمالي الطلبات الحقيقية المسجلة حالياً: ' + analyzed.length + ' طلباً.';
                 }
                 if (/متوسط.*(عبء|ضغط)/.test(q)) {
-                    const avg = Math.round(analyzed.reduce((s, x) => s + x.a.burdenRatio, 0) / analyzed.length);
-                    return 'متوسط نسبة العبء عبر كل الطلبات الحقيقية حالياً: ' + avg + '%.';
+                    const m = Math.round(avg(analyzed.map(x => x.a.burdenRatio)));
+                    setList('جميع الطلبات', analyzed);
+                    return 'متوسط نسبة العبء عبر كل الطلبات الحقيقية حالياً: ' + m + '%.';
                 }
                 if (/أعلى ضغط|الأكثر خطورة|الأخطر|أخطر عميل/.test(q)) {
                     const top = analyzed.reduce((b, x) => (!b || x.a.pressureScore > b.a.pressureScore) ? x : b, null);
+                    setCustomer(top);
                     return 'أعلى طلب ضغطاً حالياً هو "' + (top.row.name || 'عميل رشيد') + '" بمؤشر ضغط ' + top.a.pressureScore + '/100 (' + top.a.decision + ').';
                 }
-                if (/نسبة المؤهل|كم مؤهل|عدد المؤهل/.test(q)) {
-                    const eligible = analyzed.filter(x => x.a.eligible).length;
-                    return eligible + ' من أصل ' + analyzed.length + ' طلباً مؤهلون حالياً (' + Math.round((eligible / analyzed.length) * 100) + '%).';
+                if (/فوق\s*55|اكثر من\s*55|أكثر من\s*55|التزامات مرتفعة/.test(q)) {
+                    const rows = analyzed.filter(x => x.a.burdenRatio > 55);
+                    setList('فوق 55% التزامات', rows);
+                    return 'عدد الطلبات فوق 55% التزامات: ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                }
+                if (/رصيد سالب|متبقي سالب|نهاية الدورة سالب/.test(q)) {
+                    const rows = analyzed.filter(x => x.cal.endOfMonthBalance !== null && x.cal.endOfMonthBalance < 0);
+                    setList('رصيد نهاية الدورة سالب', rows);
+                    return 'عدد الطلبات برصيد متوقع سالب نهاية الدورة: ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                }
+                if (/متأخر|متعثر|توقف/.test(q)) {
+                    const rows = analyzed.filter(x => ['تم التحليل', 'بانتظار العميل'].includes(x.status.key));
+                    setList('طلبات متأخرة', rows);
+                    return 'عدد الطلبات المتأخرة (تجاوزت 24 ساعة دون رد أو تحديث): ' + rows.length + ' من أصل ' + analyzed.length + '.';
                 }
                 if (/متقاعد.*كم|كم.*متقاعد/.test(q)) {
-                    const retired = analyzed.filter(x => x.row.employmentStatus === 'متقاعد').length;
-                    return 'عدد العملاء المتقاعدين حالياً: ' + retired + ' من أصل ' + analyzed.length + '.';
+                    const rows = analyzed.filter(x => x.row.employmentStatus === 'متقاعد');
+                    setList('المتقاعدون', rows);
+                    return 'عدد العملاء المتقاعدين حالياً: ' + rows.length + ' من أصل ' + analyzed.length + '.';
+                }
+                if (/متوسط.*(زمن|وقت).*(تواصل)|(تواصل).*متوسط/.test(q)) {
+                    const times = analyzed.filter(x => x.row.lastContactAt).map(x => (new Date(x.row.lastContactAt) - new Date(x.row.createdAt)) / 3600000).filter(h => h >= 0);
+                    const m = avg(times);
+                    return m !== null ? 'متوسط زمن أول تواصل: ' + (Math.round(m * 10) / 10) + ' ساعة (' + times.length + ' طلب لديه تواصل مسجّل).' : 'لا تتوفر بيانات تواصل كافية حالياً.';
+                }
+                if (/متوسط.*(زمن|وقت).*(اكتمال|القرار)/.test(q)) {
+                    const times = analyzed.filter(x => x.status.key === 'مكتمل' && x.row.selectedOfferAt).map(x => (new Date(x.row.selectedOfferAt) - new Date(x.row.createdAt)) / 86400000).filter(d => d >= 0);
+                    const m = avg(times);
+                    return m !== null ? 'متوسط زمن اكتمال القرار: ' + (Math.round(m * 10) / 10) + ' يوم (' + times.length + ' طلب مكتمل).' : 'لا تتوفر بيانات كافية حالياً.';
+                }
+                if (q.includes('قناة') && /مفضل|أكثر/.test(q)) {
+                    const counts = new Map();
+                    analyzed.filter(x => x.row.contactChannel).forEach(x => counts.set(x.row.contactChannel, (counts.get(x.row.contactChannel) || 0) + 1));
+                    const entries = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+                    return entries.length ? 'القناة الأكثر استخداماً حالياً: "' + entries[0][0] + '" (' + entries[0][1] + ' عميل).' : 'لا توجد بيانات قناة تواصل مسجّلة بعد.';
+                }
+                if (/جديد.*اليوم|اليوم.*جديد/.test(q)) {
+                    const today = new Date().toISOString().slice(0, 10);
+                    const rows = analyzed.filter(x => (x.row.createdAt || '').slice(0, 10) === today);
+                    setList('طلبات اليوم', rows);
+                    return 'عدد الطلبات الجديدة اليوم: ' + rows.length + '.';
+                }
+                if (/نسبة التحول|نسبة قبول البدائل|كم قبل(وا)? (عرض|بديل)/.test(q)) {
+                    const rows = analyzed.filter(x => x.row.selectedOfferKey);
+                    setList('قبلوا عرضاً بديلاً', rows);
+                    return 'نسبة التحول (قبول عرض بديل): ' + Math.round((rows.length / analyzed.length) * 100) + '% (' + rows.length + ' من ' + analyzed.length + ').';
+                }
+                if (/متوسط التوفير الشهري|متوسط توفير/.test(q)) {
+                    const withImpact = analyzed.filter(x => x.impact);
+                    const m = withImpact.length ? avg(withImpact.map(x => x.impact.after.surplus - x.impact.before.surplus)) : null;
+                    if (withImpact.length) setList('قبلوا عرضاً بديلاً', withImpact);
+                    return m !== null ? 'متوسط التوفير الشهري لمن قَبِل بديلاً: ' + fmt(m) + ' ر.س (' + withImpact.length + ' عميل).' : 'لا توجد طلبات قَبِلت بديلاً بعد لحساب التوفير.';
+                }
+                if (/انخفاض متوسط الضغط|كم انخفض الضغط/.test(q)) {
+                    const withImpact = analyzed.filter(x => x.impact);
+                    const m = withImpact.length ? avg(withImpact.map(x => x.a.pressureScore - x.impact.after.pressureScore)) : null;
+                    if (withImpact.length) setList('قبلوا عرضاً بديلاً', withImpact);
+                    return m !== null ? 'متوسط انخفاض الضغط لمن قَبِل بديلاً: ' + Math.round(m) + ' نقطة (' + withImpact.length + ' عميل).' : 'لا توجد بيانات كافية بعد.';
                 }
 
-                // Customer-specific questions
+                // ---- Customer-specific questions ----
                 if (customer) {
-                    const { row, a } = customer;
-                    if (/دخل|راتب/.test(q)) return row.name + ': دخله الشهري ' + fmt(row.income) + ' ر.س.';
-                    if (/التزام/.test(q)) return row.name + ': التزاماته الشهرية الحالية ' + fmt(row.obligations) + ' ر.س.';
-                    if (/عبء|ضغط/.test(q)) return row.name + ': نسبة العبء ' + a.burdenRatio + '% (الحد الأعلى المسموح ' + a.burdenCap + '%)، مؤشر الضغط ' + a.pressureScore + '/100.';
-                    if (/مؤهل|حالته|وضعه|قرار/.test(q)) return row.name + ': ' + a.decision + '. ' + a.recommendation;
-                    if (/متقاعد|موظف|توظيف/.test(q)) return row.name + ': حالته الوظيفية "' + (row.employmentStatus || 'غير محدد') + '"' + (a.isRetired ? '، ولذلك يُطبَّق عليه حد عبء أكثر تحفظاً (' + a.burdenCap + '% بدل الحد المعتاد).' : '.');
-                    if (/مبلغ|تمويل/.test(q)) return row.name + ': طلب تمويل بقيمة ' + fmt(row.amount) + ' ر.س لمدة ' + row.tenure + ' شهراً، بقسط شهري مقدّر ' + fmt(a.installment) + ' ر.س.';
-                    return row.name + ' (رقم العميل: ' + (row.customerId || 'غير مسجل') + '، ' + (row.employmentStatus || 'غير محدد') + '): طلب بقيمة ' + fmt(row.amount) +
-                        ' ر.س، دخل شهري ' + fmt(row.income) + ' ر.س، نسبة العبء ' + a.burdenRatio + '%، القرار: ' + a.decision + '.';
+                    setCustomer(customer);
+                    return answerForCustomer(customer, q);
                 }
 
-                return 'لم أفهم سؤالك بدقة. جرّب اسم عميل حقيقي مسجل في النظام (مثال: "ما وضع فلان؟")، أو سؤالاً عاماً عن المحفظة مثل "كم عدد الطلبات؟" أو "من الأعلى ضغطاً الآن؟".';
+                // ---- Site/product knowledge (real facts about رشيد itself) ----
+                const faq = FAQ.find(f => f.kw.some(k => q.includes(k)));
+                if (faq) return faq.a;
+
+                // Last-resort customer follow-up: broader continuation words
+                // than the early CUSTOMER_PRONOUN_CUES (which stays narrow so
+                // it never hijacks a specific FAQ/portfolio question - see the
+                // comment above that list). Tried only here, after every more
+                // specific intent and the FAQ have already failed to match,
+                // so it can never shadow anything more precise - e.g. "ايش
+                // تنصحني اسوي معاه لاقلل الضغط عليه؟" right after discussing
+                // a specific customer now resolves to that customer's advice.
+                const CUSTOMER_LATE_CUES = ['عليه', 'معه', 'له', 'منه', 'فيه', 'عنه', 'هو', 'هي', 'هذا', 'هذه', 'نفس العميل', 'الزبون'];
+                if (context.customer && CUSTOMER_LATE_CUES.some(w => q.includes(w))) {
+                    return answerForCustomer(context.customer, q);
+                }
+
+                // ---- Soft fallback: still try to be useful based on which
+                // domain the question seems to be about, instead of one flat
+                // "لم أفهم" message every time. ----
+                if (/ضغط/.test(q)) return 'لم أجد سؤالاً محدداً عن الضغط أقدر أجاوبه مباشرة. جرّب "كم متوسط نسبة العبء؟" أو "من الأعلى ضغطاً الآن؟" أو اذكر اسم عميل حقيقي.';
+                if (/تواصل|قناة/.test(q)) return 'لم أفهم تحديداً. جرّب "كم عدد الطلبات بحاجة تواصل؟" أو "ما القناة المفضلة للتواصل؟".';
+                if (/بديل|تحول|توفير/.test(q)) return 'لم أفهم تحديداً. جرّب "كم نسبة التحول؟" أو "كم متوسط التوفير الشهري؟".';
+                if (/تقرير/.test(q)) return 'التقارير تُصدَّر من صفحة "التقارير" في القائمة الجانبية - PDF أو CSV لأي طلب أو للمحفظة كاملة.';
+                return 'لم أفهم سؤالك بدقة. جرّب اسم عميل حقيقي مسجل في النظام (مثال: "ما وضع فلان؟")، أو سؤالاً عاماً عن المحفظة مثل "كم عدد الطلبات؟" أو "من الأعلى ضغطاً الآن؟" أو "من هم المؤهلون؟".';
             }
 
             form.addEventListener('submit', async (e) => {
@@ -279,11 +782,11 @@
                 const analyzed = await getAnalyzed();
                 addMessage(
                     analyzed.length
-                        ? 'أهلاً بك. لدي حالياً ' + analyzed.length + ' طلباً حقيقياً في النظام. اسألني عن أي عميل بالاسم، أو عن أداء المحفظة بشكل عام.'
+                        ? 'أهلاً بك. لدي حالياً ' + analyzed.length + ' طلباً حقيقياً في النظام. اسألني عن أي عميل بالاسم، عن أداء المحفظة، أو حتى عن كيفية استخدام أي صفحة في رشيد.'
                         : 'أهلاً بك. لا توجد طلبات حقيقية بعد - أنشئ طلباً من "تحليل جديد" وسأكون جاهزاً للإجابة عن أسئلتك حوله.',
                     'assistant'
                 );
-                const suggestions = ['كم عدد الطلبات الحالية؟', 'من الأعلى ضغطاً الآن؟', 'كم متوسط نسبة العبء؟', 'كم عدد المؤهلين؟'];
+                const suggestions = ['كم عدد الطلبات الحالية؟', 'من الأعلى ضغطاً الآن؟', 'كم عدد المؤهلين؟', 'من هم؟', 'كم نسبة التحول للبدائل؟', 'كيف أضيف طلب جديد؟'];
                 suggestionsEl.innerHTML = suggestions.map(s =>
                     '<button type="button" class="px-3 py-1.5 bg-surface-container-low border border-outline-variant/20 rounded-full text-xs text-on-surface-variant hover:bg-surface-container-highest transition-colors" data-q="' + s + '">' + s + '</button>'
                 ).join('');
@@ -321,4 +824,19 @@
             });
         })();
     </script>
+<!-- Real login modal -->
+<div class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/40 p-4" id="login-modal">
+<div class="bg-surface rounded-3xl p-8 max-w-md w-full shadow-2xl">
+<h3 class="font-headline-md text-xl font-bold text-primary mb-5 text-center">تسجيل الدخول</h3>
+<div class="space-y-3 mb-3">
+<input autocomplete="username" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-username" placeholder="اسم المستخدم" type="text"/>
+<input autocomplete="current-password" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-password" placeholder="كلمة المرور" type="password"/>
+</div>
+<p class="text-[11px] text-error mb-3 text-center" id="login-error"></p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-3 rounded-xl border border-outline-variant/30 text-base font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="login-cancel" type="button">إلغاء</button>
+<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary text-base font-bold" id="login-submit" type="button">دخول</button>
+</div>
+</div>
+</div>
 </body></html>

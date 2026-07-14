@@ -2,6 +2,9 @@
 
 <html class="light" dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>رَشيد - النتيجة (Result)</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -76,12 +79,12 @@
                     "fontFamily": {
                         "display-lg": ["IBM Plex Sans Arabic"],
                         "display-lg-mobile": ["IBM Plex Sans Arabic"],
-                        "body-lg": ["IBM Plex Sans"],
+                        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
                         "display-md": ["IBM Plex Sans Arabic"],
-                        "label-md": ["IBM Plex Sans"],
+                        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
                         "headline-md": ["IBM Plex Sans Arabic"],
                         "headline-lg": ["IBM Plex Sans Arabic"],
-                        "body-md": ["IBM Plex Sans"]
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
                     },
                     "fontSize": {
                         "display-lg": ["48px", {"lineHeight": "1.2", "fontWeight": "600"}],
@@ -118,9 +121,26 @@
             background: radial-gradient(circle at top left, #fdf8f7, #f1edec);
             min-height: 100vh;
         }
+        /* Wizard-stepper hover: feels like a real, clickable control, not a
+           flat image - scales up slightly on hover with a smooth transition. */
+        .rashid-step-label {
+            transition: transform 0.2s ease;
+        }
+        .rashid-step-label:hover {
+            transform: scale(1.12);
+        }
+        /* Enlarges only the page content (not the fixed top header, a
+           sibling of <main>, never a descendant) - gated to wide screens
+           only (confirmed at 1366px this genuinely overflows/wraps). */
+        @media (min-width: 1600px) {
+            #page-zoom-content {
+                zoom: 1.25;
+            }
+        }
     </style>
+<link href="rashid-theme.css" rel="stylesheet"/>
 </head>
-<body class="font-body-md text-on-background selection:bg-secondary-container"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<body class="font-body-md text-on-background selection:bg-secondary-container">
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
 <div class="flex items-center gap-4">
@@ -145,19 +165,19 @@
 </div>
 </div>
 </header>
-<main class="pt-24 pb-12 px-gutter max-w-[1280px] mx-auto">
+<main class="pt-24 pb-12 px-gutter max-w-[1280px] mx-auto" id="page-zoom-content">
 <!-- Step Indicator -->
 <div class="flex items-center justify-center mb-12 gap-4">
 <div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg">1</div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg rashid-step-label">1</div>
 <div class="h-1 w-8 bg-primary rounded-full opacity-20"></div>
-<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg">2</div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-primary text-on-primary font-bold shadow-lg rashid-step-label">2</div>
 <div class="h-1 w-12 bg-primary rounded-full"></div>
-<div class="w-10 h-10 rounded-full flex items-center justify-center step-active text-on-primary font-bold shadow-xl border-4 border-surface ring-2 ring-primary/20">3</div>
+<div class="w-10 h-10 rounded-full flex items-center justify-center step-active text-on-primary font-bold shadow-xl border-4 border-surface ring-2 ring-primary/20 rashid-step-label">3</div>
 <div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
-<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">4</div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold rashid-step-label">4</div>
 <div class="h-1 w-8 bg-surface-container-highest rounded-full"></div>
-<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold">5</div>
+<div class="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-highest text-on-surface-variant font-bold rashid-step-label">5</div>
 </div>
 <span class="mr-4 font-label-md text-label-md text-on-surface-variant">الخطوة 3 من 5</span>
 </div>
@@ -332,7 +352,7 @@
 
             document.getElementById('rs-decision-title').innerText = result.eligible
                 ? 'أنت مؤهل'
-                : (result.marginal ? 'أنت مؤهل بشروط' : 'غير مؤهل حالياً');
+                : (result.marginal ? 'أنت مؤهل' : 'غير مؤهل حالياً');
             document.getElementById('rs-decision-desc').innerText = result.recommendation;
             document.getElementById('rs-confidence').innerText = result.confidence + '%';
 
@@ -342,17 +362,17 @@
             document.getElementById('rs-readiness-gauge').style.strokeDashoffset =
                 offsetFor(100 - result.burdenRatio);
             document.getElementById('rs-readiness-desc').innerText =
-                'الفائض الشهري المتوقع بعد الأقساط والمصاريف: ' + result.surplus.toLocaleString('ar-SA') + ' ر.س.';
+                '• الفائض الشهري المتوقع بعد الأقساط والمصاريف: ' + result.surplus.toLocaleString('en-US') + ' ر.س';
 
             document.getElementById('rs-pressure-score').innerText = result.pressureScore + '/100';
             document.getElementById('rs-pressure-label').innerText =
                 result.pressureScore >= 70 ? 'ضغط مرتفع' : (result.pressureScore >= 40 ? 'ضغط متوسط' : 'ضغط منخفض');
             document.getElementById('rs-pressure-gauge').style.strokeDashoffset = offsetFor(result.pressureScore);
             document.getElementById('rs-pressure-desc').innerText =
-                'القسط الشهري المقدّر (' + result.installment.toLocaleString('ar-SA') + ' ر.س) يمثل ' +
-                result.burdenRatio + '% من دخلك الشهري.';
+                '• القسط الشهري المقدر: ' + result.installment.toLocaleString('en-US') + ' ر.س\n' +
+                '• يمثل ' + result.burdenRatio + '% من دخلك الشهري';
 
-            const fmtSar = (n) => Math.round(n).toLocaleString('ar-SA');
+            const fmtSar = (n) => Math.round(n).toLocaleString('en-US');
             const setBadge = (id, text, colorClasses) => {
                 const el = document.getElementById(id);
                 if (!el) return;
@@ -379,10 +399,13 @@
                 impact1Text = 'منخفض التأثير'; impact1Classes = 'bg-primary/10 text-primary';
             }
             document.getElementById('rs-installment-desc').innerText =
-                'بعد إضافة القسط الجديد، ستصل التزاماتك الشهرية إلى ' + result.burdenRatio + '% من دخلك، وهي نسبة ' +
-                proximityPhrase + ' الحد الأعلى المسموح به (' + result.burdenCap + '%) في نموذج رشيد.';
-            const installmentPct = Math.min(100, Math.round(result.burdenRatio));
-            document.getElementById('rs-installment-bar').style.width = installmentPct + '%';
+                'بعد إضافة القسط الجديد ستصل التزاماتك الشهرية إلى:\n' +
+                result.burdenRatio + '% من دخلك\n' +
+                'وهي نسبة ' + proximityPhrase + ' الحد الأعلى المسموح به (' + result.burdenCap + '%) في نموذج رشيد.';
+            // Same real number shown in درجة الضغط المالي above - never a
+            // second, independently-rounded number for the same metric.
+            const installmentPct = result.pressureScore;
+            document.getElementById('rs-installment-bar').style.width = Math.min(100, installmentPct) + '%';
             document.getElementById('rs-installment-weight').innerText = installmentPct + '% وزن التأثير';
             setBadge('rs-installment-impact-badge', impact1Text, impact1Classes);
 
@@ -402,7 +425,8 @@
             }
             const stabilityPct = Math.max(10, Math.min(95, Math.round(50 + marginRatio * 150)));
             document.getElementById('rs-stability-desc').innerText =
-                'المتبقي من راتبك نهاية الشهر يبلغ ' + fmtSar(result.surplus) + ' ر.س، مما يترك لك ' + marginPhrase + ' لمواجهة المصاريف الطارئة.';
+                'المتبقي من راتبك نهاية الشهر يبلغ: ' + fmtSar(result.surplus) + ' ر.س\n' +
+                'مما يترك لك ' + marginPhrase + ' لمواجهة المصاريف الطارئة.';
             document.getElementById('rs-stability-bar').style.width = stabilityPct + '%';
             document.getElementById('rs-stability-weight').innerText = stabilityPct + '% وزن التأثير';
             setBadge('rs-stability-impact-badge', impact2Text, impact2Classes);
@@ -424,8 +448,10 @@
                     impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';
                 }
                 document.getElementById('rs-credit-desc').innerText =
-                    'يوجد التزام قادم (' + (result.input.upcomingObligationType || 'غير مصنّف') + ') بتاريخ ' + (result.input.upcomingObligationDate || 'غير محدد') + ' بقيمة ' + fmtSar(upcomingAmount) +
-                    ' ر.س' + (result.input.upcomingObligationRecurring ? ' (يتكرر شهرياً)' : '') + '، وقد يخفض المتبقي نهاية الشهر إلى ' + fmtSar(reducedBalance) + ' ر.س إذا تم اعتماد الطلب الحالي.';
+                    'تاريخ الالتزام: ' + (result.input.upcomingObligationDate || 'غير محدد') + '\n' +
+                    'نوع الالتزام: ' + (result.input.upcomingObligationType || 'غير مصنّف') + '\n' +
+                    'قيمة الالتزام: ' + fmtSar(upcomingAmount) + ' ر.س' + (result.input.upcomingObligationRecurring ? ' (يتكرر شهرياً)' : '') + '\n' +
+                    'وقد يخفض المتبقي نهاية الشهر إلى: ' + fmtSar(reducedBalance) + ' ر.س إذا تم اعتماد الطلب الحالي.';
             } else {
                 creditPct = 5;
                 impact3Text = 'منخفض التأثير'; impact3Classes = 'bg-primary/10 text-primary';

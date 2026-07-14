@@ -58,7 +58,11 @@ const migrations = [
     "ALTER TABLE applications ADD COLUMN financing_type TEXT",
     "ALTER TABLE applications ADD COLUMN last_contact_at TEXT",
     "ALTER TABLE applications ADD COLUMN recommendation_sent_at TEXT",
-    "ALTER TABLE applications ADD COLUMN needs_review INTEGER DEFAULT 0"
+    "ALTER TABLE applications ADD COLUMN needs_review INTEGER DEFAULT 0",
+    "ALTER TABLE applications ADD COLUMN decision_stamp_issued_at TEXT",
+    "ALTER TABLE applications ADD COLUMN needs_review_at TEXT",
+    "ALTER TABLE applications ADD COLUMN awaiting_marked_at TEXT",
+    "ALTER TABLE applications ADD COLUMN closed_at TEXT"
 ];
 for (const sql of migrations) {
     try {

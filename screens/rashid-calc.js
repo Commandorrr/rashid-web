@@ -129,7 +129,7 @@ window.RashidCalc = (function () {
             recommendation = 'وضعك المالي يسمح بهذا التمويل ضمن الحدود الآمنة المعتمدة من قبل رشيد.';
         } else if (marginal) {
             decision = 'مؤهل بشروط';
-            recommendation = 'يمكنك الحصول على التمويل، لكن يُفضّل تخفيض المبلغ المطلوب أو زيادة مدة السداد لتحسين وضعك المالي.';
+            recommendation = 'يفضل اختيار العرض المناسب لتسهيل وضعك المالي.';
         } else {
             decision = 'غير مؤهل حالياً';
             recommendation = 'نسبة الاستقطاع الشهري المتوقعة تتجاوز الحد الآمن. جرّب تقليل مبلغ التمويل أو زيادة مدة السداد من صفحة "بياناتك".';
@@ -153,8 +153,13 @@ window.RashidCalc = (function () {
         };
     }
 
-    function estimateInstallment(amount, tenureMonths) {
-        const r = PROFIT_RATE_ANNUAL / 12;
+    // rateAnnual defaults to the fixed representative rate, but callers that
+    // know the real per-application "هامش ربح تقديري" (profitRateAnnual)
+    // should pass it explicitly - alternativeOffers() does, below, so the
+    // offer comparisons genuinely reflect whatever rate the advisor entered
+    // on بياناتك المالية instead of silently ignoring it.
+    function estimateInstallment(amount, tenureMonths, rateAnnual) {
+        const r = (rateAnnual != null ? rateAnnual : PROFIT_RATE_ANNUAL) / 12;
         const n = tenureMonths;
         if (n <= 0) return amount;
         return amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
@@ -165,9 +170,10 @@ window.RashidCalc = (function () {
         const baseAmount = result.input.amount;
         const baseTenure = result.input.tenure;
         const income = result.input.income;
+        const rateAnnual = result.input.profitRateAnnual;
 
         const build = (amount, tenure) => {
-            const installment = estimateInstallment(amount, tenure);
+            const installment = estimateInstallment(amount, tenure, rateAnnual);
             const burden = income > 0 ? (installment / income) * 100 : 0;
             return {
                 amount: Math.round(amount),
@@ -310,5 +316,79 @@ window.RashidCalc = (function () {
         return candidates[0].key;
     }
 
-    return { save, load, collectFromForm, analyze, estimateInstallment, alternativeOffers, buildCalendar, dayOfMonth, pressureTier, primaryPressureCause, STORAGE_KEY };
+    // Single source of truth for an application's operational status - every
+    // page that shows a "حالة الطلب" badge must call this, never define a
+    // local copy (a past bug was exactly two pages silently disagreeing).
+    // All 8 states trace to real stored signals/timestamps only:
+    //   - customerId/contactChannel presence (real optional profile fields)
+    //   - needsReview (real advisor-set flag)
+    //   - selectedOfferKey/selectedOfferAt (real offer-selection event+time)
+    //   - recommendationSentAt (real timestamp)
+    //   - lastContactAt (real timestamp)
+    //   - eligible (real analyze() output)
+    //   - createdAt (real submission time)
+    //   - awaitingMarkedAt/closedAt (real advisor-triggered "mark as
+    //     awaiting"/"close file" actions - same precedent as needsReview)
+    // Where the spec called for two states that only differ by "how fresh is
+    // this event" (e.g. تم اختيار العرض vs مكتمل, تم إرسال التوصية vs
+    // بانتظار العميل, جديد vs تم التحليل), a real 24h age threshold on the
+    // real timestamp is used to split them, OR the advisor's own explicit
+    // awaitingMarkedAt/closedAt action - never a fabricated distinction.
+    function statusOf(row, result) {
+        const a = result || analyze(row);
+        const hoursSince = (iso) => iso ? (Date.now() - new Date(iso).getTime()) / 3600000 : Infinity;
+
+        if (!row.customerId && !row.contactChannel) {
+            return { key: 'بيانات ناقصة', dot: '#e11d48', badgeBg: '#fbe0e4', badgeText: '#e11d48', nextAction: 'استكمال البيانات' };
+        }
+        if (row.needsReview) {
+            return { key: 'محوّل للمراجعة', dot: '#92702f', badgeBg: '#f3ecdd', badgeText: '#92702f', nextAction: 'مراجعة إضافية' };
+        }
+        if (row.selectedOfferKey) {
+            // مكتمل is reached either by the natural 24h elapse, or by the
+            // advisor honestly closing the file now via closedAt (a real
+            // stamped action, not a fabricated status string).
+            if (row.closedAt || hoursSince(row.selectedOfferAt) > 24) {
+                return { key: 'مكتمل', dot: '#15803d', badgeBg: '#dcefdf', badgeText: '#15803d', nextAction: '-' };
+            }
+            return { key: 'تم اختيار العرض', dot: '#22c55e', badgeBg: '#e2f7e8', badgeText: '#22c55e', nextAction: 'إغلاق الملف' };
+        }
+        if (row.recommendationSentAt) {
+            // Same idea for بانتظار العميل: natural 24h elapse, or the
+            // advisor honestly marking it now via awaitingMarkedAt.
+            if (row.awaitingMarkedAt || hoursSince(row.recommendationSentAt) > 24) {
+                return { key: 'بانتظار العميل', dot: '#7c3aed', badgeBg: '#ede4fc', badgeText: '#7c3aed', nextAction: 'تذكير العميل' };
+            }
+            return { key: 'تم إرسال التوصية', dot: '#0ea5e9', badgeBg: '#e3f4fd', badgeText: '#0ea5e9', nextAction: 'متابعة الرد' };
+        }
+        if (!a.eligible && !row.lastContactAt) {
+            return { key: 'بحاجة تواصل', dot: '#ea580c', badgeBg: '#fdecd8', badgeText: '#ea580c', nextAction: 'التواصل اليوم' };
+        }
+        if (hoursSince(row.createdAt) > 24) {
+            return { key: 'تم التحليل', dot: '#0d9488', badgeBg: '#e0f5f2', badgeText: '#0d9488', nextAction: 'بدء التواصل' };
+        }
+        return { key: 'جديد', dot: '#2563eb', badgeBg: '#e8f0ff', badgeText: '#2563eb', nextAction: 'مراجعة أولية' };
+    }
+
+    // Real "before vs after" comparison for a request that has a genuine
+    // selectedOfferKey: "before" is the analysis of the original submitted
+    // amount/tenure, "after" is the analysis of whichever real offer terms
+    // (amount+tenure from alternativeOffers()) the customer/advisor actually
+    // selected - including "current" (kept the original terms after seeing
+    // alternatives). Returns null when no real offer has been selected yet,
+    // so callers never fabricate an "after" state for an undecided request.
+    // Used across the التحليلات tabs (نظرة عامة / أثر البدائل) to power every
+    // before/after pressure or remaining-balance metric from one real source.
+    const OFFER_LABELS = { current: 'الاستمرار بالطلب الأصلي', balanced: 'العرض المتوازن', safe: 'العرض الآمن', smart: 'العرض الذكي' };
+    function offerImpactFor(row) {
+        if (!row.selectedOfferKey) return null;
+        const offers = alternativeOffers(row);
+        const offer = offers[row.selectedOfferKey];
+        if (!offer) return null;
+        const before = analyze(row);
+        const after = analyze(Object.assign({}, row, { amount: offer.amount, tenure: offer.tenure }));
+        return { key: row.selectedOfferKey, label: OFFER_LABELS[row.selectedOfferKey] || row.selectedOfferKey, offer, before, after };
+    }
+
+    return { save, load, collectFromForm, analyze, estimateInstallment, alternativeOffers, buildCalendar, dayOfMonth, pressureTier, primaryPressureCause, statusOf, offerImpactFor, OFFER_LABELS, STORAGE_KEY };
 })();

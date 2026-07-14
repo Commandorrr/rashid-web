@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | رؤى العملاء</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=IBM+Plex+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel { background: rgba(253, 248, 247, 0.6); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .glass-card-edge { border-right: 1px solid rgba(255, 255, 255, 0.8); border-top: 1px solid rgba(255, 255, 255, 0.8); }
+        body { background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%), radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="rashid-theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Persistent SideNavBar -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="your-data-ar.html" id="nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">الطلب الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">نظرة عامة</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">الضغط المالي</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-impact-ar.html">أثر البدائل</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ops-ar.html">الأداء التشغيلي</a>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-reports-ar.html">
+<span class="material-symbols-outlined">summarize</span>
+<span class="font-label-md text-label-md">التقارير</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">العودة للصفحة الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#" id="nav-login">
+<span class="font-label-md text-label-md">تسجيل الدخول</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<header class="flex justify-between items-center mb-6">
+<div>
+<h1 class="font-display-md text-3xl font-extrabold text-primary tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-4xl">insights</span>رؤى العملاء</h1>
+<p class="text-on-surface-variant font-body-md">تحليل أنماط العملاء، مستوى الجاهزية، وتحديد الشرائح التي تحتاج متابعة أو عروضًا أكثر ملاءمة.</p>
+<p class="text-on-surface-variant text-xs mt-1" id="af-count-note">جزء من سجل العملاء الموحد في رَشيد - تحليل معمّق لنفس بيانات صفحة العملاء.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</div>
+</header>
+<!-- 5 KPI cards - same titles, order and card design as the Customers page -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8" id="ci-kpis"></section>
+<!-- Row 1: readiness donut + customer type -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-stretch">
+<section class="glass-panel glass-card-edge rounded-3xl p-6 flex flex-col">
+<h4 class="font-headline-md text-on-surface font-bold mb-1">توزيع العملاء حسب الجاهزية</h4>
+<p class="text-[11px] text-on-surface-variant mb-3">اضغط على أي مستوى لعرض قائمة العملاء المطابقة.</p>
+<div class="flex items-center gap-4 flex-1">
+<div class="w-28 h-28 rounded-full relative shrink-0">
+<div class="absolute inset-0 rounded-full" id="ci-readiness-donut"></div>
+</div>
+<div class="grid grid-cols-1 gap-1.5 text-xs font-bold flex-1" id="ci-readiness-legend"></div>
+</div>
+</section>
+<section class="glass-panel glass-card-edge rounded-3xl p-6 flex flex-col">
+<h4 class="font-headline-md text-on-surface font-bold mb-4">العملاء حسب نوع العميل</h4>
+<div class="space-y-3 flex-1" id="ci-type-bars"></div>
+</section>
+</div>
+<!-- Row 2: repeat distribution + last contact -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-stretch">
+<section class="glass-panel glass-card-edge rounded-3xl p-6 flex flex-col">
+<h4 class="font-headline-md text-on-surface font-bold mb-1">توزيع عدد الطلبات لكل عميل</h4>
+<p class="text-[11px] text-on-surface-variant mb-3">يوضح مدى تكرار تعامل نفس العميل مع رَشيد.</p>
+<div class="space-y-3 flex-1" id="ci-repeat-bars"></div>
+</section>
+<section class="glass-panel glass-card-edge rounded-3xl p-6 flex flex-col">
+<h4 class="font-headline-md text-on-surface font-bold mb-4">العملاء غير المتواصل معهم</h4>
+<div class="space-y-3 flex-1" id="ci-contact-bars"></div>
+</section>
+</div>
+<!-- Journey -->
+<section class="glass-panel glass-card-edge rounded-3xl p-6 mb-6">
+<h4 class="font-headline-md text-on-surface font-bold mb-1">رحلة العميل</h4>
+<p class="text-[11px] text-on-surface-variant mb-4">كل مرحلة تُحسب إن تحقق الحدث الحقيقي في أي من طلبات العميل - وليست بالضرورة تتابعًا صارمًا لكل عميل.</p>
+<div class="space-y-2" id="ci-journey"></div>
+</section>
+<!-- Insight cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" id="ci-insights"></div>
+<!-- Priority table -->
+<section class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10">
+<h4 class="font-headline-md text-primary font-bold">العملاء ذوو الأولوية</h4>
+</div>
+<div class="overflow-x-auto">
+<table class="min-w-full text-right border-collapse whitespace-nowrap">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest font-bold">
+<th class="px-6 py-4">العميل</th>
+<th class="px-6 py-4">رقم العميل</th>
+<th class="px-6 py-4">الطلبات النشطة</th>
+<th class="px-6 py-4">أعلى ضغط</th>
+<th class="px-6 py-4">الجاهزية</th>
+<th class="px-6 py-4">آخر تواصل</th>
+<th class="px-6 py-4">الإجراء التالي</th>
+<th class="px-6 py-4">عرض الملف</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="ci-priority-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="8">جارِ التحميل...</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="your-data-ar.html" id="mobile-nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px]">الطلب الحالي</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<a class="flex flex-col items-center text-primary" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-[10px] font-bold">العملاء</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px]">المساعد</span>
+</a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script>
+        // "الطلب الحالي" is interactive: checked fresh at the moment of
+        // every click (not baked into a static href at page-load time), so
+        // it stays correct even after the browser restores this page from
+        // bfcache via back/forward navigation - a real reported bug where
+        // the old load-time-computed href/state stayed stale after
+        // submitting a request and navigating back. Links to the real
+        // in-progress wizard draft (RashidCalc.load(), the same localStorage
+        // record your-data-ar.html saves and smart-alternatives.html reads)
+        // if one genuinely exists, or shows a plain alert() - matching the
+        // exact same native alert() style already used elsewhere in the app
+        // (decision-fingerprint.html's "تم إرسال طلبك للبنك بنجاح!").
+        (function () {
+            function hasCurrentRequest() {
+                try { return !!RashidCalc.load(); } catch (e) { return false; }
+            }
+            function wireCurrentRequestLink(id) {
+                const link = document.getElementById(id);
+                if (!link) return;
+                link.style.cursor = 'pointer';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hasCurrentRequest()) {
+                        window.location.href = 'smart-alternatives.html';
+                    } else {
+                        alert('لا يوجد طلب حالي قائم. الرجاء الذهاب لقسم تحليل طلب جديد.');
+                    }
+                });
+            }
+            wireCurrentRequestLink('nav-current-request');
+            wireCurrentRequestLink('mobile-nav-current-request');
+        })();
+    </script>
+<script src="rashid-api.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        // Real login/logout toggle on the sidebar link itself: the label
+        // and icon reflect RashidAuth.getSession() at load time (and on
+        // pageshow, for bfcache correctness). Logged out -> opens the real
+        // login modal (calls RashidAuth.loginRemote() against the bcrypt
+        // backend, see rashid-auth.js). Logged in -> clicking the link
+        // logs out immediately, no modal needed.
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.getElementById('nav-login');
+            const modal = document.getElementById('login-modal');
+            if (!link || !modal) return;
+            const linkText = link.querySelector('.font-label-md');
+            const linkIcon = link.querySelector('.material-symbols-outlined');
+            function updateLinkState() {
+                const session = RashidAuth.getSession();
+                if (session) {
+                    if (linkText) linkText.innerText = 'تسجيل الخروج';
+                    if (linkIcon) linkIcon.innerText = 'logout';
+                } else {
+                    if (linkText) linkText.innerText = 'تسجيل الدخول';
+                    if (linkIcon) linkIcon.innerText = 'arrow_back';
+                }
+            }
+            function openModal() {
+                document.getElementById('login-error').innerText = '';
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (RashidAuth.getSession()) {
+                    RashidAuth.logout();
+                    window.location.reload();
+                } else {
+                    openModal();
+                }
+            });
+            document.getElementById('login-cancel').addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+            document.getElementById('login-submit').addEventListener('click', async function () {
+                const u = document.getElementById('login-username').value.trim();
+                const p = document.getElementById('login-password').value;
+                const errEl = document.getElementById('login-error');
+                if (!u || !p) { errEl.innerText = 'أدخل اسم المستخدم وكلمة المرور.'; return; }
+                errEl.innerText = 'جارِ التحقق...';
+                const result = await RashidAuth.loginRemote(u, p);
+                if (result.ok) {
+                    window.location.reload();
+                } else {
+                    errEl.innerText = 'بيانات الدخول غير صحيحة.';
+                }
+            });
+            updateLinkState();
+            window.addEventListener('pageshow', updateLinkState);
+        });
+    </script>
+<script src="rashid-charts.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) { nameEl.innerText = session.username; avatarEl.innerText = session.username.trim().charAt(0).toUpperCase(); }
+            else { nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)'; avatarEl.innerText = '?'; }
+        })();
+    </script>
+<script>
+        (function () {
+            const statusOf = RashidCalc.statusOf;
+            let customers = [];
+
+            function fmtSar(n) { return Math.round(n).toLocaleString('en-US'); }
+            function avg(arr) { return arr.length ? arr.reduce((s, v) => s + v, 0) / arr.length : null; }
+            function normEmployment(v) { return /^[؀-ۿ\s]+$/.test(v || '') ? v : 'غير محدد'; }
+
+            function followUpStatusOf(reqStatusKey) {
+                if (['جديد', 'تم التحليل', 'بحاجة تواصل'].includes(reqStatusKey)) return 'يحتاج تواصل';
+                if (['تم إرسال التوصية', 'بانتظار العميل'].includes(reqStatusKey)) return 'بانتظار رد العميل';
+                if (reqStatusKey === 'محوّل للمراجعة') return 'محوّل للمراجعة';
+                if (reqStatusKey === 'بيانات ناقصة') return 'ملف ناقص';
+                return 'لا يحتاج إجراء';
+            }
+
+            // Grouped by real name (customerId is only populated on some of a
+            // repeat customer's requests, confirmed on real data - see the
+            // Customers page fix), matching the same real grouping logic used
+            // there so counts stay consistent across both pages.
+            function buildCustomers(apps) {
+                const groups = new Map();
+                apps.forEach(row => {
+                    const key = 'name:' + (row.name || 'عميل رشيد').trim();
+                    if (!groups.has(key)) groups.set(key, []);
+                    groups.get(key).push(row);
+                });
+                return [...groups.values()].map(rows => {
+                    rows.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    const latest = rows[0];
+                    const withAnalysis = rows.map(row => ({ row, a: RashidCalc.analyze(row), status: statusOf(row, RashidCalc.analyze(row)) }));
+                    const active = withAnalysis.filter(x => !x.row.selectedOfferKey);
+                    let highestActive = null;
+                    active.forEach(x => { if (!highestActive || x.a.pressureScore > highestActive.a.pressureScore) highestActive = x; });
+                    let readiness;
+                    if (highestActive) {
+                        const tier = RashidCalc.pressureTier(highestActive.a.pressureScore);
+                        readiness = { 'منخفضة': 'عالية', 'متوسطة': 'متوسطة', 'مرتفعة': 'منخفضة', 'مرتفعة جداً': 'منخفضة جداً' }[tier];
+                    } else {
+                        const r = RashidCalc.analyze(latest).readiness;
+                        readiness = r === 'مرتفعة' ? 'عالية' : r;
+                    }
+                    const priorityReq = highestActive || withAnalysis[0];
+                    const followUp = active.length === 0 ? 'لا يوجد طلب نشط' : followUpStatusOf(priorityReq.status.key);
+                    const nextAction = active.length === 0 ? '-' : (priorityReq.status.nextAction === '-' ? 'مراجعة الملف' : priorityReq.status.nextAction);
+                    const lastContactAt = rows.reduce((max, r) => (!r.lastContactAt ? max : (!max || new Date(r.lastContactAt) > new Date(max)) ? r.lastContactAt : max), null);
+                    const customerId = rows.map(r => r.customerId).find(Boolean) || null;
+                    const employment = normEmployment(latest.employmentStatus);
+                    const readinessScore = 100 - priorityReq.a.pressureScore;
+                    return {
+                        name: latest.name || 'عميل رشيد', customerId, employment, readiness, readinessScore,
+                        activeCount: active.length, totalCount: rows.length, followUp, nextAction, lastContactAt,
+                        highestPressure: highestActive ? highestActive.a.pressureScore : null, latestRow: latest, rows,
+                        recommendationSent: rows.some(r => r.recommendationSentAt),
+                        contacted: rows.some(r => r.lastContactAt),
+                        selectedOffer: rows.some(r => r.selectedOfferKey),
+                        completed: withAnalysis.some(x => x.status.key === 'مكتمل')
+                    };
+                });
+            }
+
+            function renderKpis() {
+                const total = customers.length;
+                const active = customers.filter(c => c.activeCount > 0).length;
+                const needFollowup = customers.filter(c => ['يحتاج تواصل', 'بانتظار رد العميل'].includes(c.followUp)).length;
+                const repeat = customers.filter(c => c.totalCount > 1).length;
+                const avgReadiness = avg(customers.map(c => c.readinessScore));
+                // Same 5 titles, order, icons and colors as the Customers
+                // page's KPI row (advisor-customers-ar.html) - the two pages
+                // share the same identity, only the metrics below differ.
+                const cards = [
+                    { icon: 'group', bg: '#e8f0ff', color: '#2563eb', label: 'إجمالي العملاء', value: total.toLocaleString('en-US'), caption: 'عدد العملاء الفريدين' },
+                    { icon: 'receipt_long', bg: '#e2f7e8', color: '#16a34a', label: 'عملاء بطلبات نشطة', value: active.toLocaleString('en-US'), caption: 'لديهم طلب غير مكتمل حالياً' },
+                    { icon: 'call', bg: '#fde3cf', color: '#ea580c', label: 'يحتاجون متابعة', value: needFollowup.toLocaleString('en-US'), caption: 'لم يكتمل التواصل أو القرار', valueClass: 'text-error' },
+                    { icon: 'repeat', bg: '#ece3fb', color: '#7c3aed', label: 'عملاء متكررون', value: repeat.toLocaleString('en-US'), caption: 'لديهم أكثر من طلب مسجل' },
+                    { icon: 'military_tech', bg: '#fdecd2', color: '#b8860b', label: 'متوسط الجاهزية', value: avgReadiness !== null ? Math.round(avgReadiness) + '/100' : '0/100', caption: 'بناءً على الملفات المالية المحدثة' }
+                ];
+                document.getElementById('ci-kpis').innerHTML = cards.map(c =>
+                    '<div class="glass-panel glass-card-edge p-6 rounded-2xl flex items-center gap-4"><div class="w-14 h-14 rounded-full flex items-center justify-center shrink-0" style="background:' + c.bg + '"><span class="material-symbols-outlined text-3xl" style="color:' + c.color + '">' + c.icon + '</span></div><div class="text-right"><div class="text-on-surface-variant text-sm font-bold">' + c.label + '</div><div class="font-headline-lg text-3xl ' + (c.valueClass || 'text-primary') + ' font-extrabold">' + c.value + '</div><div class="text-xs text-on-surface-variant mt-1 font-semibold">' + c.caption + '</div></div></div>'
+                ).join('');
+            }
+
+            const READINESS_ROLE = { 'عالية': 'good', 'متوسطة': 'warning', 'منخفضة': 'serious', 'منخفضة جداً': 'critical' };
+
+            function renderReadinessDonut() {
+                const order = ['عالية', 'متوسطة', 'منخفضة', 'منخفضة جداً'];
+                const counts = {}; order.forEach(k => counts[k] = 0);
+                customers.forEach(c => counts[c.readiness]++);
+                const segments = order.map(k => ({ label: k, count: counts[k], colorRole: READINESS_ROLE[k] }));
+                RashidCharts.statusDonut('ci-readiness-donut', 'ci-readiness-legend', segments, {
+                    onSegmentClick: label => location.href = 'advisor-customers-ar.html?readiness=' + encodeURIComponent(label)
+                });
+            }
+
+            function renderTypeBars() {
+                const types = ['موظف', 'متقاعد', 'أعمال حرة', 'غير محدد'];
+                const counts = {}; types.forEach(t => counts[t] = 0);
+                customers.forEach(c => counts[c.employment] = (counts[c.employment] || 0) + 1);
+                RashidCharts.barList('ci-type-bars', types.map(t => ({ label: t, value: counts[t], onClick: () => location.href = 'advisor-customers-ar.html?type=' + encodeURIComponent(t) })), { mode: 'nominal', color: '#755a26' });
+            }
+
+            function renderRepeatBars() {
+                const buckets = [
+                    { label: 'طلب واحد', test: c => c.totalCount === 1 },
+                    { label: '2-3 طلبات', test: c => c.totalCount >= 2 && c.totalCount <= 3 },
+                    { label: '4 طلبات فأكثر', test: c => c.totalCount >= 4 }
+                ];
+                RashidCharts.barList('ci-repeat-bars', buckets.map(b => ({ label: b.label, value: customers.filter(b.test).length })), { mode: 'ordinal' });
+            }
+
+            function renderContactBars() {
+                const now = Date.now();
+                const buckets = [
+                    { label: 'تم التواصل اليوم', test: c => c.lastContactAt && (now - new Date(c.lastContactAt).getTime()) < 86400000 },
+                    { label: 'آخر تواصل قبل أكثر من 3 أيام', test: c => c.lastContactAt && (now - new Date(c.lastContactAt).getTime()) >= 3 * 86400000 && (now - new Date(c.lastContactAt).getTime()) < 7 * 86400000 },
+                    { label: 'آخر تواصل قبل أكثر من 7 أيام', test: c => c.lastContactAt && (now - new Date(c.lastContactAt).getTime()) >= 7 * 86400000 },
+                    { label: 'لم يتم التواصل إطلاقًا', test: c => !c.lastContactAt }
+                ];
+                RashidCharts.barList('ci-contact-bars', buckets.map(b => ({ label: b.label, value: customers.filter(b.test).length })), { mode: 'ordinal' });
+            }
+
+            function renderJourney() {
+                const total = customers.length;
+                const steps = [
+                    { label: 'أنشئ ملفًا', count: total },
+                    { label: 'تم تحليل طلب', count: total },
+                    { label: 'استلم توصية', count: customers.filter(c => c.recommendationSent).length },
+                    { label: 'تم التواصل', count: customers.filter(c => c.contacted).length },
+                    { label: 'اختار عرضًا', count: customers.filter(c => c.selectedOffer).length },
+                    { label: 'اكتمل القرار', count: customers.filter(c => c.completed).length }
+                ];
+                RashidCharts.barList('ci-journey', steps.map(s => ({ label: s.label, value: s.count })), {
+                    mode: 'ordinal',
+                    suffix: item => ' (' + (total ? Math.round((item.value / total) * 100) : 0) + '%)'
+                });
+            }
+
+            function renderInsights() {
+                const total = customers.length;
+                if (!total) { document.getElementById('ci-insights').innerHTML = ''; return; }
+                const repeatPct = Math.round((customers.filter(c => c.totalCount > 1).length / total) * 100);
+                const lowReadyPct = Math.round((customers.filter(c => ['منخفضة', 'منخفضة جداً'].includes(c.readiness)).length / total) * 100);
+                const activeCustomers = customers.filter(c => c.activeCount > 0);
+                const noContact7 = activeCustomers.filter(c => !c.lastContactAt || (Date.now() - new Date(c.lastContactAt).getTime()) > 7 * 86400000).length;
+                const noContactPct = activeCustomers.length ? Math.round((noContact7 / activeCustomers.length) * 100) : 0;
+                const insights = [
+                    { icon: 'repeat', text: repeatPct + '% من العملاء لديهم أكثر من طلب واحد مسجل لدى رَشيد.' },
+                    { icon: 'trending_down', text: lowReadyPct + '% من العملاء لديهم جاهزية منخفضة ويحتاجون متابعة قبل أي طلب جديد.' },
+                    { icon: 'schedule', text: noContactPct + '% من العملاء ذوي الطلبات النشطة لم يتم التواصل معهم خلال آخر 7 أيام.' }
+                ];
+                document.getElementById('ci-insights').innerHTML = insights.map(i =>
+                    '<div class="glass-panel glass-card-edge rounded-2xl p-5 flex items-start gap-3"><span class="material-symbols-outlined text-secondary text-2xl">' + i.icon + '</span><p class="text-sm">' + i.text + '</p></div>'
+                ).join('');
+            }
+
+            function renderPriorityTable() {
+                const pool = customers.filter(c => ['يحتاج تواصل', 'بانتظار رد العميل'].includes(c.followUp))
+                    .sort((a, b) => (b.highestPressure || 0) - (a.highestPressure || 0)).slice(0, 8);
+                const tbody = document.getElementById('ci-priority-tbody');
+                if (!pool.length) { tbody.innerHTML = '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="8">لا يوجد عملاء بحاجة متابعة حاليًا.</td></tr>'; return; }
+                tbody.innerHTML = pool.map(c => {
+                    const contactText = c.lastContactAt ? new Date(c.lastContactAt).toLocaleDateString('en-US') : 'لم يتم التواصل';
+                    return '<tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4 font-bold">' + c.name + '</td>' +
+                        '<td class="px-6 py-4 text-sm">' + (c.customerId || 'غير معرف') + '</td>' +
+                        '<td class="px-6 py-4 text-sm">' + c.activeCount + '</td>' +
+                        '<td class="px-6 py-4 text-sm">' + (c.highestPressure === null ? '-' : c.highestPressure) + '</td>' +
+                        '<td class="px-6 py-4"><span class="px-2 py-1 rounded-md text-xs font-bold" style="background:' + RashidCharts.STATUS[READINESS_ROLE[c.readiness]] + '22;color:' + RashidCharts.STATUS[READINESS_ROLE[c.readiness]] + '">' + c.readiness + '</span></td>' +
+                        '<td class="px-6 py-4 text-sm text-on-surface-variant">' + contactText + '</td>' +
+                        '<td class="px-6 py-4 text-sm">' + c.nextAction + '</td>' +
+                        '<td class="px-6 py-4"><a class="text-secondary text-xs font-bold hover:underline" href="request-details.html?id=' + c.latestRow.id + '">عرض الملف</a></td></tr>';
+                }).join('');
+            }
+
+            async function load() {
+                const apps = await RashidApi.listApplications();
+                if (!apps || !apps.length) {
+                    document.getElementById('ci-kpis').innerHTML = '<div class="col-span-full glass-panel glass-card-edge p-8 rounded-2xl text-center text-on-surface-variant">لا توجد بيانات عملاء بعد - أنشئ طلبًا من "تحليل جديد".</div>';
+                    return;
+                }
+                customers = buildCustomers(apps);
+                document.getElementById('af-count-note').innerText = customers.length.toLocaleString('en-US') + ' عميل فريد، من إجمالي ' + apps.length.toLocaleString('en-US') + ' طلب حقيقي.';
+                renderKpis();
+                renderReadinessDonut();
+                renderTypeBars();
+                renderRepeatBars();
+                renderContactBars();
+                renderJourney();
+                renderInsights();
+                renderPriorityTable();
+            }
+
+            load();
+        })();
+    </script>
+<script>
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
+        })();
+    </script>
+<!-- Real login modal -->
+<div class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/40 p-4" id="login-modal">
+<div class="bg-surface rounded-3xl p-8 max-w-md w-full shadow-2xl">
+<h3 class="font-headline-md text-xl font-bold text-primary mb-5 text-center">تسجيل الدخول</h3>
+<div class="space-y-3 mb-3">
+<input autocomplete="username" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-username" placeholder="اسم المستخدم" type="text"/>
+<input autocomplete="current-password" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-password" placeholder="كلمة المرور" type="password"/>
+</div>
+<p class="text-[11px] text-error mb-3 text-center" id="login-error"></p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-3 rounded-xl border border-outline-variant/30 text-base font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="login-cancel" type="button">إلغاء</button>
+<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary text-base font-bold" id="login-submit" type="button">دخول</button>
+</div>
+</div>
+</div>
+</body></html>

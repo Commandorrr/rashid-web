@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html class="light" dir="rtl" lang="ar"><head>
+<meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>رشيد | التقارير</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100..900&family=IBM+Plex+Sans+Arabic:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(253, 248, 247, 0.6);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .glass-card-edge {
+            border-right: 1px solid rgba(255, 255, 255, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+        }
+        body {
+            background-image: radial-gradient(circle at 90% 20%, rgba(255, 222, 168, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 10% 80%, rgba(205, 197, 192, 0.08) 0%, transparent 40%);
+        }
+        .rb-pill { transition: all .15s; }
+        .rb-pill[data-active="true"] { background:#181512; color:#fff; }
+        .rb-chart-card { transition: all .15s; }
+        .rb-chart-card[data-active="true"] { border-color:#181512; box-shadow: 0 0 0 2px #181512; }
+        .rb-toggle { position: relative; width: 40px; height: 22px; border-radius: 9999px; background:#cfc4bd; transition: background .15s; cursor:pointer; flex-shrink:0; }
+        .rb-toggle[data-on="true"] { background:#16a34a; }
+        .rb-toggle span { position:absolute; top:2px; right:2px; width:18px; height:18px; border-radius:9999px; background:#fff; transition: transform .15s; }
+        .rb-toggle[data-on="true"] span { transform: translateX(-18px); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#f7f3f1", "on-background": "#1c1b1b", "on-primary-fixed-variant": "#4b4642",
+                        "on-primary-container": "#96908b", "tertiary": "#171610", "tertiary-fixed-dim": "#cac6be",
+                        "secondary": "#755a26", "surface-container-lowest": "#ffffff", "on-surface-variant": "#4d4540",
+                        "inverse-on-surface": "#f4f0ee", "tertiary-container": "#2b2a24", "surface-container-highest": "#e6e1e0",
+                        "outline-variant": "#cfc4bd", "inverse-primary": "#cdc5c0", "primary-fixed-dim": "#cdc5c0",
+                        "on-secondary-fixed": "#271900", "on-error": "#ffffff", "on-surface": "#1c1b1b",
+                        "surface-dim": "#ddd9d8", "secondary-fixed-dim": "#e6c183", "surface": "#fdf8f7",
+                        "outline": "#7e756f", "on-primary-fixed": "#1e1b18", "error": "#ba1a1a",
+                        "primary-container": "#2d2926", "surface-tint": "#635d5a", "error-container": "#ffdad6",
+                        "secondary-fixed": "#ffdea8", "on-secondary-fixed-variant": "#5b4311", "surface-variant": "#e6e1e0",
+                        "surface-bright": "#fdf8f7", "on-tertiary-fixed": "#1d1c16", "on-tertiary": "#ffffff",
+                        "background": "#fdf8f7", "on-tertiary-container": "#949189", "secondary-container": "#fdd798",
+                        "on-primary": "#ffffff", "primary": "#181512", "on-error-container": "#93000a",
+                        "on-secondary-container": "#785c29", "on-secondary": "#ffffff", "primary-fixed": "#e9e1dc",
+                        "tertiary-fixed": "#e7e2d9", "inverse-surface": "#313030", "on-tertiary-fixed-variant": "#494740",
+                        "surface-container-high": "#ece7e6", "surface-container": "#f1edec"
+                    },
+                    "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    "spacing": { "gutter": "20px", "base": "8px", "container-margin": "24px", "section-gap": "48px" },
+                    "fontFamily": {
+                        "display-lg": ["IBM Plex Sans Arabic"], "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "display-md": ["IBM Plex Sans Arabic"], "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
+                        "headline-md": ["IBM Plex Sans Arabic"], "headline-lg": ["IBM Plex Sans Arabic"],
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="rashid-theme.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Persistent SideNavBar (Shared Component) -->
+<aside class="fixed right-0 top-0 h-full w-[240px] flex flex-col p-6 gap-base bg-surface-container-low border-l border-outline-variant/10 shadow-md z-40 hidden md:flex">
+<div class="mb-8 font-display-md text-display-md font-bold text-primary">رشيد</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="your-data-ar.html" id="nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-md text-label-md">الطلب الحالي</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">الطلبات</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">العملاء</span>
+</a>
+<div>
+<button class="analytics-nav-toggle w-full flex items-center justify-between gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" type="button">
+<span class="flex items-center gap-3"><span class="material-symbols-outlined">monitoring</span><span class="font-label-md text-label-md">التحليلات</span></span>
+<span class="analytics-nav-chevron material-symbols-outlined text-lg transition-transform">expand_more</span>
+</button>
+<div class="analytics-nav-submenu pr-4 mt-1 space-y-1" style="display:none">
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ar.html">نظرة عامة</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-pressure-ar.html">الضغط المالي</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-impact-ar.html">أثر البدائل</a>
+<a class="analytics-nav-link block px-4 py-2 text-sm rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-all" href="advisor-analytics-ops-ar.html">الأداء التشغيلي</a>
+</div>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary rounded-lg shadow-lg transition-all duration-300" href="advisor-reports-ar.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">summarize</span>
+<span class="font-label-md text-label-md">التقارير</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">مساعد المستشار الذكي</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2">
+<a class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl font-label-md shadow-lg hover:scale-105 transition-transform duration-200" href="your-data-ar.html">
+<span class="material-symbols-outlined">add</span>
+            تحليل جديد
+        </a>
+<div class="pt-6 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="../index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">العودة للصفحة الرئيسية</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface" href="#" id="nav-login">
+<span class="font-label-md text-label-md">تسجيل الدخول</span>
+<span class="material-symbols-outlined">arrow_back</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:mr-[240px] min-h-screen p-container-margin md:p-10">
+<header class="flex justify-between items-center mb-section-gap flex-wrap gap-4">
+<div>
+<h1 class="font-display-md text-3xl font-extrabold text-primary tracking-tight flex items-center gap-2"><span class="material-symbols-outlined text-secondary text-4xl">summarize</span>التقارير</h1>
+<p class="text-on-surface-variant font-body-md">ابنِ تقاريرك المالية المخصصة وصدّرها بصيغ حقيقية، من بيانات المحفظة الفعلية.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<button class="p-2 glass-panel rounded-full text-on-surface hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center gap-2" id="advisor-account">
+<div class="text-left hidden lg:block">
+<div class="text-[10px] text-on-surface-variant uppercase tracking-wider">المستشار</div>
+<div class="font-label-md text-label-md font-bold text-primary" id="advisor-account-name">زائر</div>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center border border-outline-variant/30 font-bold" id="advisor-account-avatar">?</div>
+</div>
+</div>
+</header>
+<!-- Main split: report builder (right, wide) + quick export/scheduled (left, narrow) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
+<!-- Right column: Custom Report Builder -->
+<section class="glass-panel glass-card-edge p-6 rounded-3xl lg:col-span-2">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-headline-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-secondary">tune</span> منشئ التقارير المخصص</h4>
+<span class="text-[10px] px-2 py-1 bg-surface-container-highest rounded-full text-on-surface-variant" id="rb-draft-label">مسودة جديدة</span>
+</div>
+<p class="text-xs text-on-surface-variant mb-5">اختر بُعد التجميع والمقاييس ونوع الرسم، ثم ولّد معاينة حقيقية محسوبة فوراً من كل الطلبات المسجلة في رشيد.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div>
+<div class="text-xs font-bold text-on-surface-variant mb-2">أبعاد البيانات (Dimensions)</div>
+<div class="flex flex-wrap gap-2" id="rb-dimensions"></div>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface-variant mb-2">المقاييس المالية (Metrics)</div>
+<div class="flex flex-col gap-1.5" id="rb-metrics"></div>
+<button class="mt-2 text-xs text-secondary font-bold flex items-center gap-1" id="rb-add-metric-btn" type="button"><span class="material-symbols-outlined text-sm">add</span> إضافة مقياس مخصص</button>
+<select class="hidden mt-2 w-full px-2 py-1.5 rounded-lg bg-surface-container-low border border-outline-variant/30 text-xs" id="rb-add-metric-select"></select>
+</div>
+</div>
+<div class="mb-6">
+<div class="text-xs font-bold text-on-surface-variant mb-2">المعاينة البصرية (Chart Types)</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="rb-chart-types"></div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-5 py-2.5 bg-primary text-on-primary rounded-xl font-bold text-sm flex items-center gap-2 hover:scale-[1.02] transition-transform" id="rb-generate-btn" type="button"><span class="material-symbols-outlined text-lg">visibility</span> توليد المعاينة</button>
+<button class="px-5 py-2.5 border border-outline-variant/40 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="rb-save-template-btn" type="button">حفظ كقالب</button>
+<div class="flex flex-wrap gap-2" id="rb-saved-templates"></div>
+</div>
+<div class="mt-6 pt-6 border-t border-outline-variant/10" id="rb-preview-zone" style="display:none">
+<div class="text-xs text-on-surface-variant mb-3" id="rb-preview-caption"></div>
+<div id="rb-preview-content"></div>
+</div>
+</section>
+<!-- Left column: Quick Export + Scheduled Reports -->
+<div class="space-y-6">
+<section class="glass-panel glass-card-edge p-6 rounded-3xl">
+<h4 class="font-headline-md text-on-surface mb-4">خيارات التصدير السريع</h4>
+<div class="space-y-2">
+<button class="w-full flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/10 hover:bg-surface-container-highest transition-colors" data-format="pdf" id="rb-export-pdf" type="button">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-error">picture_as_pdf</span><span class="text-sm font-medium">تصدير PDF</span></span>
+<span class="text-[10px] text-on-surface-variant">تقارير جاهزة للعرض التقديمي</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/10 hover:bg-surface-container-highest transition-colors" data-format="xlsx" id="rb-export-xlsx" type="button">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-green-700">table_chart</span><span class="text-sm font-medium">تصدير Excel (.xlsx)</span></span>
+<span class="text-[10px] text-on-surface-variant">لإجراء تحليلات بيانات معمّقة</span>
+</button>
+<button class="w-full flex items-center justify-between p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/10 hover:bg-surface-container-highest transition-colors" data-format="csv" id="rb-export-csv" type="button">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-secondary">description</span><span class="text-sm font-medium">تصدير CSV</span></span>
+<span class="text-[10px] text-on-surface-variant">للتكامل مع الأنظمة الأخرى</span>
+</button>
+</div>
+</section>
+<section class="glass-panel glass-card-edge p-6 rounded-3xl">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-headline-md text-on-surface">التقارير المجدولة</h4>
+<button class="text-xs text-secondary font-bold" id="rb-manage-schedules-btn" type="button">إدارة الكل</button>
+</div>
+<p class="text-[11px] text-on-surface-variant mb-4">الجدولة محفوظة كتفضيل محلي حقيقي - إرسال البريد الفعلي يتطلب ربط خدمة بريد على الخادم، غير مفعّلة في هذه النسخة التجريبية.</p>
+<div class="space-y-3" id="rb-schedules-list"></div>
+<button class="w-full mt-3 py-2 rounded-xl border border-dashed border-outline-variant/40 text-xs text-on-surface-variant hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-1" id="rb-add-schedule-btn" type="button"><span class="material-symbols-outlined text-sm">add</span> جدولة تقرير جديد</button>
+<div class="hidden mt-3 space-y-2 p-3 rounded-xl bg-surface-container-low/60" id="rb-add-schedule-form">
+<input class="w-full px-3 py-2 rounded-lg bg-white border border-outline-variant/30 text-xs" id="rb-schedule-name" placeholder="اسم التقرير" type="text"/>
+<select class="w-full px-3 py-2 rounded-lg bg-white border border-outline-variant/30 text-xs" id="rb-schedule-freq">
+<option value="يومي">يومي</option>
+<option selected="" value="أسبوعي">أسبوعي</option>
+<option value="شهري">شهري</option>
+</select>
+<button class="w-full py-2 bg-primary text-on-primary rounded-lg text-xs font-bold" id="rb-schedule-confirm-btn" type="button">إضافة</button>
+</div>
+</section>
+</div>
+</div>
+<!-- Export/activity history -->
+<section class="glass-panel glass-card-edge rounded-3xl overflow-hidden">
+<div class="p-6 border-b border-outline-variant/10 flex items-center justify-between">
+<h4 class="font-headline-md text-primary">سجل التصدير والنشاط الأخير</h4>
+<button class="p-2 rounded-full hover:bg-surface-container-highest transition-colors" id="rb-refresh-history-btn" title="تحديث" type="button"><span class="material-symbols-outlined text-lg">refresh</span></button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-right border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 text-on-surface-variant font-label-md uppercase text-xs tracking-widest">
+<th class="px-6 py-4">اسم التقرير</th>
+<th class="px-6 py-4">تاريخ التوليد</th>
+<th class="px-6 py-4">تنسيق الملف</th>
+<th class="px-6 py-4">الحالة</th>
+<th class="px-6 py-4">الإجراءات</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10" id="rb-history-tbody">
+<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="5">لا يوجد نشاط تصدير بعد - استخدم أزرار التصدير السريع أعلاه.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-low border-t border-outline-variant/10 flex justify-around items-center py-3 md:hidden z-50">
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-dashboard-ar.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">الرئيسية</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="your-data-ar.html" id="mobile-nav-current-request">
+<span class="material-symbols-outlined">bolt</span>
+<span class="text-[10px]">الطلب الحالي</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-requests-ar.html">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px]">الطلبات</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-customers-ar.html">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px]">العملاء</span>
+</a>
+<a class="flex flex-col items-center text-on-surface-variant" href="advisor-assistant-ar.html">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px]">المساعد</span>
+</a>
+</nav>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="rashid-calc.js"></script>
+<script>
+        // "الطلب الحالي" is interactive: checked fresh at the moment of
+        // every click (not baked into a static href at page-load time), so
+        // it stays correct even after the browser restores this page from
+        // bfcache via back/forward navigation - a real reported bug where
+        // the old load-time-computed href/state stayed stale after
+        // submitting a request and navigating back. Links to the real
+        // in-progress wizard draft (RashidCalc.load(), the same localStorage
+        // record your-data-ar.html saves and smart-alternatives.html reads)
+        // if one genuinely exists, or shows a plain alert() - matching the
+        // exact same native alert() style already used elsewhere in the app
+        // (decision-fingerprint.html's "تم إرسال طلبك للبنك بنجاح!").
+        (function () {
+            function hasCurrentRequest() {
+                try { return !!RashidCalc.load(); } catch (e) { return false; }
+            }
+            function wireCurrentRequestLink(id) {
+                const link = document.getElementById(id);
+                if (!link) return;
+                link.style.cursor = 'pointer';
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (hasCurrentRequest()) {
+                        window.location.href = 'smart-alternatives.html';
+                    } else {
+                        alert('لا يوجد طلب حالي قائم. الرجاء الذهاب لقسم تحليل طلب جديد.');
+                    }
+                });
+            }
+            wireCurrentRequestLink('nav-current-request');
+            wireCurrentRequestLink('mobile-nav-current-request');
+        })();
+    </script>
+<script src="rashid-api.js"></script>
+<script src="rashid-report.js"></script>
+<script src="rashid-auth.js"></script>
+<script>
+        // Real login/logout toggle on the sidebar link itself: the label
+        // and icon reflect RashidAuth.getSession() at load time (and on
+        // pageshow, for bfcache correctness). Logged out -> opens the real
+        // login modal (calls RashidAuth.loginRemote() against the bcrypt
+        // backend, see rashid-auth.js). Logged in -> clicking the link
+        // logs out immediately, no modal needed.
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.getElementById('nav-login');
+            const modal = document.getElementById('login-modal');
+            if (!link || !modal) return;
+            const linkText = link.querySelector('.font-label-md');
+            const linkIcon = link.querySelector('.material-symbols-outlined');
+            function updateLinkState() {
+                const session = RashidAuth.getSession();
+                if (session) {
+                    if (linkText) linkText.innerText = 'تسجيل الخروج';
+                    if (linkIcon) linkIcon.innerText = 'logout';
+                } else {
+                    if (linkText) linkText.innerText = 'تسجيل الدخول';
+                    if (linkIcon) linkIcon.innerText = 'arrow_back';
+                }
+            }
+            function openModal() {
+                document.getElementById('login-error').innerText = '';
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                modal.classList.remove('hidden'); modal.classList.add('flex');
+            }
+            function closeModal() { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (RashidAuth.getSession()) {
+                    RashidAuth.logout();
+                    window.location.reload();
+                } else {
+                    openModal();
+                }
+            });
+            document.getElementById('login-cancel').addEventListener('click', closeModal);
+            modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+            document.getElementById('login-submit').addEventListener('click', async function () {
+                const u = document.getElementById('login-username').value.trim();
+                const p = document.getElementById('login-password').value;
+                const errEl = document.getElementById('login-error');
+                if (!u || !p) { errEl.innerText = 'أدخل اسم المستخدم وكلمة المرور.'; return; }
+                errEl.innerText = 'جارِ التحقق...';
+                const result = await RashidAuth.loginRemote(u, p);
+                if (result.ok) {
+                    window.location.reload();
+                } else {
+                    errEl.innerText = 'بيانات الدخول غير صحيحة.';
+                }
+            });
+            updateLinkState();
+            window.addEventListener('pageshow', updateLinkState);
+        });
+    </script>
+<script src="rashid-charts.js"></script>
+<script>
+        (function () {
+            const session = RashidAuth.getSession();
+            const nameEl = document.getElementById('advisor-account-name');
+            const avatarEl = document.getElementById('advisor-account-avatar');
+            if (session) {
+                nameEl.innerText = session.username;
+                avatarEl.innerText = session.username.trim().charAt(0).toUpperCase();
+            } else {
+                nameEl.innerText = 'زائر (سجّل الدخول من الرئيسية)';
+                avatarEl.innerText = '?';
+            }
+        })();
+    </script>
+<script>
+        (function () {
+            const TIER_ROLE = { 'منخفضة': 'good', 'متوسطة': 'warning', 'مرتفعة': 'serious', 'مرتفعة جداً': 'critical' };
+            const TIER_COLORS = { 'منخفضة': RashidCharts.STATUS.good, 'متوسطة': RashidCharts.STATUS.warning, 'مرتفعة': RashidCharts.STATUS.serious, 'مرتفعة جداً': RashidCharts.STATUS.critical };
+            const EMP_COLORS = { 'موظف': RashidCharts.CATEGORICAL[0], 'متقاعد': RashidCharts.CATEGORICAL[1] };
+            let allApps = [];
+
+            function fmtSar(n) { return Math.round(n).toLocaleString('en-US'); }
+            function avg(arr) { return arr.length ? arr.reduce((s, v) => s + v, 0) / arr.length : 0; }
+
+            // --- Real dimensions & metrics registry --------------------------------
+            const DIMENSIONS = [
+                { key: 'date', label: 'التاريخ', available: true },
+                { key: 'employment', label: 'الحالة الوظيفية', available: true },
+                { key: 'region', label: 'المنطقة الجغرافية', available: false },
+                { key: 'product', label: 'نوع المنتج', available: false }
+            ];
+            const METRIC_DEFS = {
+                amount: { label: 'إجمالي المبالغ المطلوبة', sar: true, compute: (rows) => rows.reduce((s, r) => s + r.amount, 0) },
+                installment: { label: 'متوسط القسط الشهري', sar: true, compute: (rows) => avg(rows.map(r => RashidCalc.analyze(r).installment)) },
+                count: { label: 'عدد الطلبات', sar: false, compute: (rows) => rows.length },
+                pressure: { label: 'متوسط درجة الضغط', sar: false, compute: (rows) => Math.round(avg(rows.map(r => RashidCalc.analyze(r).pressureScore))) },
+                eligibility: { label: 'نسبة التأهيل', sar: false, isPct: true, compute: (rows) => Math.round((rows.filter(r => RashidCalc.analyze(r).eligible).length / rows.length) * 100) }
+            };
+            const CHART_TYPES = [
+                { key: 'scatter', label: 'مخطط نقطي', icon: 'scatter_plot' },
+                { key: 'heatmap', label: 'خريطة حرارية', icon: 'grid_on' },
+                { key: 'donut', label: 'توزيع المحفظة', icon: 'donut_large' },
+                { key: 'trend', label: 'تحليل الاتجاه', icon: 'show_chart' }
+            ];
+
+            const state = { dimension: 'date', metrics: new Set(['amount', 'installment']), chartType: 'heatmap' };
+
+            function renderControls() {
+                document.getElementById('rb-dimensions').innerHTML = DIMENSIONS.map(d =>
+                    '<button class="rb-pill px-3 py-1.5 rounded-full text-xs font-medium border border-outline-variant/30 ' + (!d.available ? 'opacity-40 cursor-not-allowed' : '') + '" data-key="' + d.key + '" data-active="' + (state.dimension === d.key) + '" ' + (!d.available ? 'disabled title="قريباً - يتطلب جمع هذا الحقل من العملاء"' : '') + '>' + d.label + (!d.available ? ' (قريباً)' : '') + '</button>'
+                ).join('');
+                document.querySelectorAll('#rb-dimensions .rb-pill:not([disabled])').forEach(btn => {
+                    btn.addEventListener('click', () => { state.dimension = btn.dataset.key; renderControls(); });
+                });
+
+                document.getElementById('rb-metrics').innerHTML = Object.keys(METRIC_DEFS).map(key => {
+                    const m = METRIC_DEFS[key];
+                    const checked = state.metrics.has(key);
+                    return '<label class="flex items-center gap-2 text-sm cursor-pointer"><input class="rb-metric-check" data-key="' + key + '" type="checkbox" ' + (checked ? 'checked' : '') + '/> ' + m.label + '</label>';
+                }).join('');
+                document.querySelectorAll('.rb-metric-check').forEach(cb => {
+                    cb.addEventListener('change', () => {
+                        if (cb.checked) state.metrics.add(cb.dataset.key); else state.metrics.delete(cb.dataset.key);
+                    });
+                });
+
+                document.getElementById('rb-chart-types').innerHTML = CHART_TYPES.map(c =>
+                    '<button class="rb-chart-card p-3 rounded-xl border-2 border-outline-variant/20 bg-surface-container-low/40 flex flex-col items-center gap-1 text-xs" data-key="' + c.key + '" data-active="' + (state.chartType === c.key) + '">' +
+                    '<span class="material-symbols-outlined">' + c.icon + '</span>' + c.label + '</button>'
+                ).join('');
+                document.querySelectorAll('.rb-chart-card').forEach(btn => {
+                    btn.addEventListener('click', () => { state.chartType = btn.dataset.key; renderControls(); });
+                });
+            }
+
+            function setupAddMetric() {
+                const btn = document.getElementById('rb-add-metric-btn');
+                const sel = document.getElementById('rb-add-metric-select');
+                btn.addEventListener('click', () => {
+                    const remaining = Object.keys(METRIC_DEFS).filter(k => !state.metrics.has(k));
+                    if (!remaining.length) return;
+                    sel.innerHTML = remaining.map(k => '<option value="' + k + '">' + METRIC_DEFS[k].label + '</option>').join('');
+                    sel.classList.remove('hidden');
+                    sel.focus();
+                });
+                sel.addEventListener('change', () => {
+                    state.metrics.add(sel.value);
+                    sel.classList.add('hidden');
+                    renderControls();
+                });
+            }
+
+            // --- Preview rendering ---------------------------------------------------
+            function dayBuckets(rows, metricKey) {
+                const byDay = new Map();
+                rows.forEach(r => {
+                    const day = (r.createdAt || '').slice(0, 10);
+                    if (!day) return;
+                    if (!byDay.has(day)) byDay.set(day, []);
+                    byDay.get(day).push(r);
+                });
+                const days = [...byDay.keys()].sort().slice(-10);
+                const values = days.map(d => METRIC_DEFS[metricKey].compute(byDay.get(d)));
+                return { days, values };
+            }
+
+            function miniLineSvg(values) {
+                if (values.length === 1) values = [values[0], values[0]];
+                const max = Math.max(1, ...values), min = Math.min(...values), span = Math.max(1, max - min);
+                const stepX = 100 / (values.length - 1);
+                const pts = values.map((v, i) => [i * stepX, 90 - ((v - min) / span) * 75].join(',')).join(' ');
+                return '<svg class="w-full h-24" preserveAspectRatio="none" viewBox="0 0 100 100"><polyline fill="none" points="' + pts + '" stroke="#755a26" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" vector-effect="non-scaling-stroke"></polyline></svg>';
+            }
+
+            function renderPreview() {
+                const metrics = [...state.metrics];
+                if (!metrics.length) { document.getElementById('rb-preview-content').innerHTML = '<p class="text-sm text-on-surface-variant">اختر مقياساً واحداً على الأقل لعرض المعاينة.</p>'; return; }
+                const captionEl = document.getElementById('rb-preview-caption');
+                const contentEl = document.getElementById('rb-preview-content');
+
+                if (state.chartType === 'trend' || (state.chartType !== 'heatmap' && state.chartType !== 'donut' && state.chartType !== 'scatter')) {
+                    if (state.dimension === 'date') {
+                        captionEl.innerText = 'اتجاه كل مقياس عبر الأيام الفعلية التي بها بيانات (كمخططات منفصلة، وليس محورين على نفس الرسم، لضمان دقة القراءة).';
+                        contentEl.innerHTML = metrics.map(k => {
+                            const { days, values } = dayBuckets(allApps, k);
+                            const last = values[values.length - 1] || 0;
+                            return '<div class="mb-4"><div class="flex justify-between text-xs font-bold mb-1"><span>' + METRIC_DEFS[k].label + '</span><span class="text-primary">' + (METRIC_DEFS[k].sar ? fmtSar(last) + ' ر.س' : last + (METRIC_DEFS[k].isPct ? '%' : '')) + '</span></div>' + miniLineSvg(values) + '</div>';
+                        }).join('');
+                    } else {
+                        captionEl.innerText = 'لا يوجد بعد زمني للبُعد المختار (الحالة الوظيفية)، فتُعرض كل مقياس كمقارنة فئوية بدلاً من اتجاه زمني.';
+                        contentEl.innerHTML = metrics.map(k => '<div class="mb-4"><div class="text-xs font-bold mb-2">' + METRIC_DEFS[k].label + '</div><div class="h-20 flex" id="rb-emp-bars-' + k + '"></div></div>').join('');
+                        metrics.forEach(k => {
+                            const empGroups = ['موظف', 'متقاعد'].map(e => allApps.filter(r => r.employmentStatus === e));
+                            const vals = empGroups.map(g => g.length ? METRIC_DEFS[k].compute(g) : 0);
+                            RashidCharts.columnChart('rb-emp-bars-' + k, ['موظف', 'متقاعد'].map((e, i) => ({ label: e, value: vals[i], color: EMP_COLORS[e] })), {
+                                formatValue: v => METRIC_DEFS[k].sar ? fmtSar(v) : (v + (METRIC_DEFS[k].isPct ? '%' : ''))
+                            });
+                        });
+                    }
+                } else if (state.chartType === 'donut') {
+                    contentEl.innerHTML = '<div class="flex items-center gap-6"><div class="w-28 h-28 rounded-full" id="rb-donut-ring"></div><div class="text-sm space-y-1" id="rb-donut-legend"></div></div>';
+                    if (state.dimension === 'employment') {
+                        captionEl.innerText = 'توزيع ' + METRIC_DEFS[metrics[0]].label + ' حسب الحالة الوظيفية (بُعد حقيقي مُختار).';
+                        const groups = { 'موظف': allApps.filter(r => r.employmentStatus === 'موظف'), 'متقاعد': allApps.filter(r => r.employmentStatus === 'متقاعد') };
+                        const segments = Object.keys(groups).map(k => ({ label: k, count: groups[k].length ? METRIC_DEFS[metrics[0]].compute(groups[k]) : 0, color: EMP_COLORS[k] }));
+                        RashidCharts.statusDonut('rb-donut-ring', 'rb-donut-legend', segments, {
+                            legendFormat: count => METRIC_DEFS[metrics[0]].sar ? fmtSar(count) + ' ر.س' : String(count)
+                        });
+                    } else {
+                        captionEl.innerText = 'البُعد المختار (التاريخ) لا يُشكّل فئات لمخطط دائري، فيُعرض بدلاً منه توزيع مستوى الضغط على المحفظة كاملة.';
+                        const tiers = ['منخفضة', 'متوسطة', 'مرتفعة', 'مرتفعة جداً'];
+                        const counts = {}; tiers.forEach(t => counts[t] = 0);
+                        allApps.forEach(r => counts[RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore)]++);
+                        const segments = tiers.map(t => ({ label: t, count: counts[t], colorRole: TIER_ROLE[t] }));
+                        RashidCharts.statusDonut('rb-donut-ring', 'rb-donut-legend', segments, {});
+                    }
+                } else if (state.chartType === 'heatmap') {
+                    captionEl.innerText = 'الخريطة الحرارية تعرض دائماً مستوى الضغط × الحالة الوظيفية (أدق تقاطع حقيقي متاح لدينا)، بغض النظر عن البُعد المختار أعلاه.';
+                    const tiers = ['مرتفعة جداً', 'مرتفعة', 'متوسطة', 'منخفضة'];
+                    const cols = ['موظف', 'متقاعد'];
+                    const grid = {}; tiers.forEach(t => grid[t] = { 'موظف': 0, 'متقاعد': 0 });
+                    allApps.forEach(r => { const t = RashidCalc.pressureTier(RashidCalc.analyze(r).pressureScore); const e = cols.includes(r.employmentStatus) ? r.employmentStatus : 'موظف'; grid[t][e]++; });
+                    const maxCell = Math.max(1, ...tiers.flatMap(t => cols.map(c => grid[t][c])));
+                    let html = '<div class="grid" style="grid-template-columns:90px repeat(2,1fr); gap:6px"><div></div>' + cols.map(c => '<div class="text-center text-xs text-on-surface-variant">' + c + '</div>').join('');
+                    tiers.forEach(t => {
+                        html += '<div class="text-xs text-on-surface-variant flex items-center">' + t + '</div>';
+                        cols.forEach(c => {
+                            const v = grid[t][c]; const alpha = v === 0 ? 0.05 : 0.15 + (v / maxCell) * 0.65;
+                            const hex = TIER_COLORS[t];
+                            const base = parseInt(hex.slice(1, 3), 16) + ',' + parseInt(hex.slice(3, 5), 16) + ',' + parseInt(hex.slice(5, 7), 16);
+                            html += '<div class="rounded-lg h-11 flex items-center justify-center font-bold text-sm" style="background:rgba(' + base + ',' + alpha + ')">' + v + '</div>';
+                        });
+                    });
+                    contentEl.innerHTML = html + '</div>';
+                } else if (state.chartType === 'scatter') {
+                    captionEl.innerText = 'كل نقطة = طلب حقيقي واحد: مبلغ التمويل مقابل درجة الضغط، ولونها يمثل مستوى الضغط.';
+                    const amounts = allApps.map(r => r.amount);
+                    const maxA = Math.max(1, ...amounts);
+                    const pts = allApps.map(r => {
+                        const a = RashidCalc.analyze(r);
+                        const x = (r.amount / maxA) * 92 + 4;
+                        const y = 96 - (a.pressureScore / 100) * 88;
+                        const color = TIER_COLORS[RashidCalc.pressureTier(a.pressureScore)];
+                        return '<circle cx="' + x + '" cy="' + y + '" fill="' + color + '" r="2.4" stroke="#fdf8f7" stroke-width="0.6"><title>' + (r.name || 'عميل رشيد') + ' - ' + fmtSar(r.amount) + ' ر.س - ضغط ' + a.pressureScore + '</title></circle>';
+                    }).join('');
+                    contentEl.innerHTML = '<svg class="w-full h-56" preserveAspectRatio="none" viewBox="0 0 100 100">' + pts + '</svg><div class="flex justify-between text-[10px] text-on-surface-variant mt-1"><span>مبلغ التمويل ←</span><span>↑ درجة الضغط</span></div>';
+                }
+                document.getElementById('rb-preview-zone').style.display = 'block';
+            }
+
+            // --- Saved templates (real, localStorage) -------------------------------
+            function loadTemplates() { try { return JSON.parse(localStorage.getItem('rashidReportTemplates') || '[]'); } catch (e) { return []; } }
+            function saveTemplates(list) { localStorage.setItem('rashidReportTemplates', JSON.stringify(list)); }
+            function renderTemplates() {
+                const list = loadTemplates();
+                document.getElementById('rb-saved-templates').innerHTML = list.map((t, i) =>
+                    '<button class="px-3 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold" data-i="' + i + '">' + t.name + '</button>'
+                ).join('');
+                document.querySelectorAll('#rb-saved-templates button').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const t = list[parseInt(btn.dataset.i, 10)];
+                        state.dimension = t.dimension; state.metrics = new Set(t.metrics); state.chartType = t.chartType;
+                        renderControls();
+                        renderPreview();
+                    });
+                });
+            }
+
+            // --- Export history (real, localStorage) --------------------------------
+            function loadHistory() { try { return JSON.parse(localStorage.getItem('rashidExportHistory') || '[]'); } catch (e) { return []; } }
+            function saveHistory(list) { localStorage.setItem('rashidExportHistory', JSON.stringify(list)); }
+            function logExport(name, format) {
+                const list = loadHistory();
+                list.unshift({ name, format, dateISO: new Date().toISOString() });
+                saveHistory(list.slice(0, 30));
+                renderHistory();
+            }
+            function renderHistory() {
+                const list = loadHistory();
+                const tbody = document.getElementById('rb-history-tbody');
+                if (!list.length) { tbody.innerHTML = '<tr><td class="px-6 py-8 text-center text-on-surface-variant" colspan="5">لا يوجد نشاط تصدير بعد - استخدم أزرار التصدير السريع أعلاه.</td></tr>'; return; }
+                const fmtBadge = { pdf: 'PDF', xlsx: 'XLSX', csv: 'CSV' };
+                tbody.innerHTML = list.map((h, i) =>
+                    '<tr class="hover:bg-surface-container-low/50 transition-colors"><td class="px-6 py-4 font-medium">' + h.name + '</td>' +
+                    '<td class="px-6 py-4 text-sm text-on-surface-variant">' + new Date(h.dateISO).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) + '</td>' +
+                    '<td class="px-6 py-4"><span class="px-2 py-1 bg-surface-container-highest rounded-md text-xs font-bold">' + fmtBadge[h.format] + '</span></td>' +
+                    '<td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-md">مكتمل</span></td>' +
+                    '<td class="px-6 py-4"><button class="text-secondary text-xs font-bold hover:underline rb-redownload" data-format="' + h.format + '">تحميل</button></td></tr>'
+                ).join('');
+                tbody.querySelectorAll('.rb-redownload').forEach(btn => btn.addEventListener('click', () => triggerExport(btn.dataset.format, false)));
+            }
+
+            function triggerExport(format, logIt) {
+                if (logIt === undefined) logIt = true;
+                window.__rashidPortfolioContext = window.__rashidPortfolioContext || (function () {
+                    const total = allApps.length;
+                    const highPressure = allApps.filter(r => !RashidCalc.analyze(r).eligible).length;
+                    const avgBurden = Math.round(avg(allApps.map(r => RashidCalc.analyze(r).burdenRatio)));
+                    const eligiblePct = Math.round((allApps.filter(r => RashidCalc.analyze(r).eligible).length / total) * 100);
+                    return { total, highPressure, avgBurden, eligiblePct };
+                })();
+                if (format === 'pdf') RashidReport.downloadDashboardReportPdf();
+                else if (format === 'xlsx') RashidReport.downloadPortfolioXlsx(allApps);
+                else RashidReport.downloadPortfolioCsv(allApps);
+                if (logIt) logExport('تقرير المحفظة الكامل', format);
+            }
+
+            // --- Scheduled reports (real, localStorage) ------------------------------
+            function loadSchedules() {
+                let list;
+                try { list = JSON.parse(localStorage.getItem('rashidScheduledReports') || 'null'); } catch (e) { list = null; }
+                if (!list) {
+                    list = [{ id: 1, name: 'تقرير السيولة الأسبوعي', freq: 'أسبوعي', active: true, createdAt: new Date().toISOString() }];
+                    saveSchedules(list);
+                }
+                return list;
+            }
+            function saveSchedules(list) { localStorage.setItem('rashidScheduledReports', JSON.stringify(list)); }
+            function nextRun(sched) {
+                const created = new Date(sched.createdAt);
+                const days = sched.freq === 'يومي' ? 1 : (sched.freq === 'أسبوعي' ? 7 : 30);
+                const next = new Date(created.getTime());
+                const now = Date.now();
+                while (next.getTime() <= now) next.setDate(next.getDate() + days);
+                return next;
+            }
+            function renderSchedules() {
+                const list = loadSchedules();
+                document.getElementById('rb-schedules-list').innerHTML = list.map(s =>
+                    '<div class="p-3 rounded-xl bg-surface-container-low/60 border border-outline-variant/10">' +
+                    '<div class="flex items-center justify-between mb-1"><span class="text-sm font-bold">' + s.name + '</span>' +
+                    '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold ' + (s.active ? 'bg-green-100 text-green-700' : 'bg-surface-container-highest text-on-surface-variant') + '">' + (s.active ? 'نشط' : 'متوقف') + '</span></div>' +
+                    '<div class="flex items-center justify-between text-[11px] text-on-surface-variant"><span>' + s.freq + (s.active ? ' - القادم: ' + nextRun(s).toLocaleDateString('en-US') : '') + '</span>' +
+                    '<div class="rb-toggle" data-id="' + s.id + '" data-on="' + s.active + '"><span></span></div></div></div>'
+                ).join('');
+                document.querySelectorAll('.rb-toggle').forEach(t => {
+                    t.addEventListener('click', () => {
+                        const list = loadSchedules();
+                        const s = list.find(x => x.id === parseInt(t.dataset.id, 10));
+                        s.active = !s.active;
+                        saveSchedules(list);
+                        renderSchedules();
+                    });
+                });
+            }
+
+            function wireStaticButtons() {
+                document.getElementById('rb-generate-btn').addEventListener('click', renderPreview);
+                document.getElementById('rb-save-template-btn').addEventListener('click', () => {
+                    const name = prompt('اسم القالب:', CHART_TYPES.find(c => c.key === state.chartType).label + ' - ' + DIMENSIONS.find(d => d.key === state.dimension).label);
+                    if (!name) return;
+                    const list = loadTemplates();
+                    list.push({ name, dimension: state.dimension, metrics: [...state.metrics], chartType: state.chartType, savedAt: new Date().toISOString() });
+                    saveTemplates(list);
+                    document.getElementById('rb-draft-label').innerText = name;
+                    renderTemplates();
+                });
+                document.getElementById('rb-export-pdf').addEventListener('click', () => triggerExport('pdf'));
+                document.getElementById('rb-export-xlsx').addEventListener('click', () => triggerExport('xlsx'));
+                document.getElementById('rb-export-csv').addEventListener('click', () => triggerExport('csv'));
+                document.getElementById('rb-refresh-history-btn').addEventListener('click', renderHistory);
+                document.getElementById('rb-add-schedule-btn').addEventListener('click', () => {
+                    document.getElementById('rb-add-schedule-form').classList.toggle('hidden');
+                });
+                document.getElementById('rb-manage-schedules-btn').addEventListener('click', () => {
+                    document.getElementById('rb-add-schedule-form').classList.toggle('hidden');
+                });
+                document.getElementById('rb-schedule-confirm-btn').addEventListener('click', () => {
+                    const name = document.getElementById('rb-schedule-name').value.trim();
+                    if (!name) return;
+                    const freq = document.getElementById('rb-schedule-freq').value;
+                    const list = loadSchedules();
+                    list.push({ id: Date.now(), name, freq, active: true, createdAt: new Date().toISOString() });
+                    saveSchedules(list);
+                    document.getElementById('rb-schedule-name').value = '';
+                    document.getElementById('rb-add-schedule-form').classList.add('hidden');
+                    renderSchedules();
+                });
+            }
+
+            async function load() {
+                allApps = await RashidApi.listApplications();
+                if (!allApps || !allApps.length) {
+                    document.querySelector('main').insertAdjacentHTML('beforeend',
+                        '<div class="glass-card-edge glass-panel p-6 rounded-xl mt-8 text-center text-on-surface-variant">لا توجد طلبات حقيقية بعد لبناء التقارير - أنشئ طلباً من "تحليل جديد".</div>');
+                    return;
+                }
+                renderControls();
+                setupAddMetric();
+                renderTemplates();
+                renderHistory();
+                renderSchedules();
+                wireStaticButtons();
+            }
+
+            load();
+        })();
+    </script>
+<script>
+        // Collapsible "التحليلات" sidebar submenu (shared across every advisor
+        // page) - auto-expands only when actually on one of its 5 sub-pages;
+        // this page (التقارير) is its own top-level item, not a sub-page.
+        (function () {
+            const toggle = document.querySelector('.analytics-nav-toggle');
+            const submenu = document.querySelector('.analytics-nav-submenu');
+            const chevron = document.querySelector('.analytics-nav-chevron');
+            if (!toggle || !submenu) return;
+            toggle.addEventListener('click', () => {
+                const isOpen = submenu.style.display === 'block';
+                submenu.style.display = isOpen ? 'none' : 'block';
+                chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+            });
+        })();
+    </script>
+<!-- Real login modal -->
+<div class="fixed inset-0 z-[70] hidden items-center justify-center bg-black/40 p-4" id="login-modal">
+<div class="bg-surface rounded-3xl p-8 max-w-md w-full shadow-2xl">
+<h3 class="font-headline-md text-xl font-bold text-primary mb-5 text-center">تسجيل الدخول</h3>
+<div class="space-y-3 mb-3">
+<input autocomplete="username" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-username" placeholder="اسم المستخدم" type="text"/>
+<input autocomplete="current-password" class="w-full px-4 py-3 rounded-xl bg-surface-container-low border border-outline-variant/30 text-base" id="login-password" placeholder="كلمة المرور" type="password"/>
+</div>
+<p class="text-[11px] text-error mb-3 text-center" id="login-error"></p>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-3 rounded-xl border border-outline-variant/30 text-base font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" id="login-cancel" type="button">إلغاء</button>
+<button class="flex-1 py-3 rounded-xl bg-primary text-on-primary text-base font-bold" id="login-submit" type="button">دخول</button>
+</div>
+</div>
+</div>
+</body></html>

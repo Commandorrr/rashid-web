@@ -2,6 +2,9 @@
 
 <html dir="rtl" lang="ar"><head>
 <meta charset="utf-8"/>
+<meta content="no-cache, no-store, must-revalidate" http-equiv="Cache-Control"/>
+<meta content="no-cache" http-equiv="Pragma"/>
+<meta content="0" http-equiv="Expires"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>رشيد | بياناتك المالية</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -75,12 +78,12 @@
                     },
                     "fontFamily": {
                         "display-lg": ["IBM Plex Sans Arabic"],
-                        "body-lg": ["IBM Plex Sans"],
+                        "body-lg": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
                         "display-md": ["IBM Plex Sans Arabic"],
-                        "label-md": ["IBM Plex Sans"],
+                        "label-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"],
                         "headline-md": ["IBM Plex Sans Arabic"],
                         "headline-lg": ["IBM Plex Sans Arabic"],
-                        "body-md": ["IBM Plex Sans"]
+                        "body-md": ["IBM Plex Sans Arabic", "IBM Plex Sans"]
                     }
                 }
             }
@@ -111,15 +114,32 @@
         .field-error { border-color:#ba1a1a !important; }
         .field-error-msg { color:#ba1a1a; font-size:12px; margin-top:4px; display:none; }
         .field-error-msg.show { display:block; }
+        /* Wizard-stepper hover: feels like a real, clickable control, not a
+           flat image - scales up slightly on hover with a smooth transition. */
+        .rashid-step-label {
+            transition: transform 0.2s ease;
+        }
+        .rashid-step-label:hover {
+            transform: scale(1.12);
+        }
+        /* Enlarges only the page content (not the fixed top nav, which is a
+           sibling of <main>, never a descendant) - gated to wide screens
+           only (confirmed at 1366px this genuinely overflows/wraps). */
+        @media (min-width: 1600px) {
+            #page-zoom-content {
+                zoom: 1.25;
+            }
+        }
     </style>
+<link href="rashid-theme.css" rel="stylesheet"/>
 </head>
-<body class="font-body-md text-on-surface antialiased"><a href="../index.html" style="position:fixed;top:16px;inset-inline-start:16px;z-index:2147483647;background:#181512;color:#fff;padding:8px 18px;border-radius:9999px;font-family:sans-serif;font-size:13px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.3);">&#8592; الرئيسية</a>
+<body class="font-body-md text-on-surface antialiased">
 <!-- Top Navigation Bar -->
 <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter py-4 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
 <div class="flex items-center gap-4">
 <span class="font-display-md text-display-md font-bold text-primary">رشيد</span>
 <div class="hidden md:flex gap-6 mr-8">
-<a class="text-primary font-bold border-b-2 border-primary py-1" href="your-data-ar.html">المعالج الذكي</a>
+<a class="text-primary font-bold border-b-2 border-primary py-1" href="your-data-ar.html">تحليل طلب جديد</a>
 <a class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors py-1 px-2 rounded" href="advisor-dashboard-ar.html">الرئيسية</a>
 <a class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors py-1 px-2 rounded" href="smart-alternatives.html">طلبك الحالي</a>
 <a class="text-on-surface-variant hover:bg-surface-container-highest/20 transition-colors py-1 px-2 rounded" href="advisor-requests-ar.html">الطلبات</a>
@@ -140,19 +160,19 @@
 </div>
 </div>
 </nav>
-<main class="pt-24 pb-12 px-container-margin max-w-[1800px] mx-auto">
+<main class="pt-24 pb-12 px-container-margin max-w-[1800px] mx-auto" id="page-zoom-content">
 <!-- Step Indicator -->
 <div class="mb-12 flex flex-col items-center">
 <div class="flex items-center gap-3 mb-2">
-<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">1</span><span class="text-[11px] text-primary font-bold">البيانات</span></div>
+<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-label-md">1</span><span class="text-[11px] text-primary font-bold rashid-step-label">البيانات</span></div>
 <div class="h-[2px] w-12 bg-outline-variant"></div>
-<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">2</span><span class="text-[11px] text-on-surface-variant">التحليل</span></div>
+<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">2</span><span class="text-[11px] text-on-surface-variant rashid-step-label">التحليل</span></div>
 <div class="h-[2px] w-12 bg-outline-variant"></div>
-<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">3</span><span class="text-[11px] text-on-surface-variant">الجاهزية</span></div>
+<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">3</span><span class="text-[11px] text-on-surface-variant rashid-step-label">الجاهزية</span></div>
 <div class="h-[2px] w-12 bg-outline-variant"></div>
-<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">4</span><span class="text-[11px] text-on-surface-variant">البدائل</span></div>
+<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">4</span><span class="text-[11px] text-on-surface-variant rashid-step-label">البدائل</span></div>
 <div class="h-[2px] w-12 bg-outline-variant"></div>
-<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">5</span><span class="text-[11px] text-on-surface-variant">القرار</span></div>
+<div class="flex flex-col items-center gap-1"><span class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">5</span><span class="text-[11px] text-on-surface-variant rashid-step-label">القرار</span></div>
 </div>
 <h1 class="font-display-md text-display-md text-primary mt-4">بياناتك المالية</h1>
 <p class="text-on-surface-variant font-body-md mt-2 text-center max-w-xl">أدخل بياناتك الأساسية ليحلل رَشيد أثر التمويل على دخلك، التزاماتك، وتدفقك النقدي قبل اتخاذ القرار.</p>
@@ -178,9 +198,15 @@
 <div class="flex items-center justify-center gap-2 mb-3"><span class="material-symbols-outlined text-secondary">speed</span><h3 class="font-headline-md text-headline-md text-primary">دقة التحليل المتوقعة</h3></div>
 <div class="w-24 h-24 mx-auto relative">
 <div class="absolute inset-0 rounded-full" id="accuracy-ring"></div>
-<div class="absolute inset-0 flex items-center justify-center font-display-md text-display-md font-bold text-primary" id="accuracy-value">65%</div>
+<div class="absolute inset-0 flex items-center justify-center font-display-md text-display-md font-bold text-primary" id="accuracy-value">0%</div>
 </div>
-<p class="text-on-surface-variant text-xs mt-3">ترتفع عند إدخال رقم العميل وتوقيت الراتب والالتزامات القادمة</p>
+<div class="text-on-surface-variant text-xs mt-3 leading-relaxed">
+<p>ترتفع عند:</p>
+<p>إدخال:</p>
+<p>2) دخلك والتزاماتك الحالية</p>
+<p>4) توقيت الراتب وأول قسط</p>
+<p class="transition-opacity duration-300" id="accuracy-item-5" style="opacity:0.35">5) التزامات قادمة خلال 3 أشهر</p>
+</div>
 </div>
 <div class="glass-card rounded-xl p-6">
 <div class="flex items-center gap-2 mb-2"><span class="material-symbols-outlined text-secondary">schedule</span><h3 class="font-headline-md text-headline-md text-primary text-base">لماذا نسأل عن التوقيت؟</h3></div>
@@ -194,7 +220,7 @@
 <form action="#" class="space-y-8">
 <!-- Section 1: Customer data -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">1</span><span class="material-symbols-outlined text-secondary">person</span> بيانات العميل</h3>
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">1</span><span class="material-symbols-outlined text-secondary">person</span> بيانات العميل</h3>
 <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">الاسم الكامل</label>
@@ -248,7 +274,7 @@
 </div>
 <!-- Section 2: Income & obligations -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">2</span><span class="material-symbols-outlined text-secondary">payments</span> دخلك والتزاماتك الحالية</h3>
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">2</span><span class="material-symbols-outlined text-secondary">payments</span> دخلك والتزاماتك الحالية</h3>
 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">الدخل الشهري (ر.س)</label>
@@ -269,7 +295,7 @@
 </div>
 <!-- Section 3: Requested financing -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">3</span><span class="material-symbols-outlined text-secondary">account_balance_wallet</span> التمويل المطلوب</h3>
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">3</span><span class="material-symbols-outlined text-secondary">account_balance_wallet</span> التمويل المطلوب</h3>
 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">نوع التمويل</label>
@@ -278,6 +304,7 @@
 <option value="">اختر النوع...</option>
 <option value="تمويل شخصي">تمويل شخصي</option>
 <option value="تمويل سيارة">تمويل سيارة</option>
+<option value="تمويل عقاري">تمويل عقاري</option>
 <option value="تقسيط">تقسيط</option>
 <option value="بطاقة ائتمانية">بطاقة ائتمانية</option>
 </select>
@@ -314,7 +341,7 @@
 </div>
 <!-- Section 4: Salary/installment timing -->
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">4</span><span class="material-symbols-outlined text-secondary">calendar_month</span> توقيت الراتب وأول قسط</h3>
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2 mb-5"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">4</span><span class="material-symbols-outlined text-secondary">calendar_month</span> توقيت الراتب وأول قسط</h3>
 <div class="grid md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="font-label-md text-label-md text-on-surface-variant block">يوم نزول الراتب</label>
@@ -337,7 +364,7 @@
 <span class="material-symbols-outlined text-secondary">house</span>
 </div>
 <div>
-<h3 class="font-headline-md text-headline-md text-primary flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">5</span> التزامات قادمة خلال 3 أشهر</h3>
+<h3 class="font-headline-md text-headline-md text-primary font-bold flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container-highest text-xs font-bold flex items-center justify-center shrink-0">5</span> التزامات قادمة خلال 3 أشهر</h3>
 <p class="text-on-surface-variant font-body-md">هل لديك إيجار أو التزام مالي كبير قادم خلال الـ 3 أشهر؟</p>
 </div>
 </div>
@@ -383,6 +410,13 @@
 </div>
 <!-- Action Buttons -->
 <div class="pt-4">
+<div class="flex flex-col sm:flex-row gap-3 mb-3">
+<button class="flex-1 border border-outline-variant/50 text-on-surface-variant py-3 rounded-xl font-label-md hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2" id="rashid-import-excel" type="button">
+<span class="material-symbols-outlined text-lg">upload_file</span> استيراد ملف Excel
+</button>
+<input accept=".xlsx,.xls" class="hidden" id="rashid-excel-input" type="file"/>
+</div>
+<p class="text-on-surface-variant text-xs mb-4" id="rashid-excel-status"></p>
 <div class="flex flex-col sm:flex-row gap-3 mb-4">
 <button class="flex-1 border border-outline-variant/50 text-on-surface-variant py-3 rounded-xl font-label-md hover:bg-surface-container-highest transition-all flex items-center justify-center gap-2" id="rashid-fill-sample" type="button">
 <span class="material-symbols-outlined text-lg">description</span> تعبئة مثال تجريبي
@@ -465,21 +499,50 @@
         });
 
         // --- Real, live-computed "expected analysis accuracy" indicator -------
-        // Not a fabricated AI confidence score - a transparent completeness
-        // heuristic: base fields + optional-but-valuable fields the customer
-        // has actually filled in, recomputed on every input.
+        // Not a fabricated AI confidence score - starts at 0% and rises only
+        // as the three real factors that actually change analysis quality
+        // are filled in: (2) income/current obligations, (4) salary+first-
+        // installment timing, (5) an upcoming obligation within 3 months.
+        // Real-time, per-field partial credit (not all-or-nothing per group):
+        // income/obligations/expenses each move the score independently as
+        // soon as that one field is filled, instead of only counting once
+        // every field in the group is present - matches how the customer
+        // actually fills the form one field at a time.
+        let accuracyDisplayed = 0;
+        let accuracyAnimFrame = null;
+        function animateAccuracyTo(target) {
+            const start = accuracyDisplayed;
+            const startTime = performance.now();
+            const duration = 500;
+            if (accuracyAnimFrame) cancelAnimationFrame(accuracyAnimFrame);
+            function step(now) {
+                const t = Math.min(1, (now - startTime) / duration);
+                const eased = 1 - Math.pow(1 - t, 3);
+                const current = Math.round(start + (target - start) * eased);
+                accuracyDisplayed = current;
+                document.getElementById('accuracy-value').innerText = current + '%';
+                document.getElementById('accuracy-ring').style.background =
+                    'conic-gradient(#755a26 ' + (current * 3.6) + 'deg, #e6e1e0 0deg)';
+                if (t < 1) accuracyAnimFrame = requestAnimationFrame(step);
+            }
+            accuracyAnimFrame = requestAnimationFrame(step);
+        }
         function updateAccuracy() {
-            let score = 60;
-            if (document.getElementById('rashid-customer-id').value.trim()) score += 10;
-            if (document.getElementById('rashid-contact-channel').value) score += 5;
-            if (document.getElementById('rashid-salary-date').value && document.getElementById('rashid-installment-date').value) score += 10;
-            if (upcomingToggle.checked && upcomingAmount.value && upcomingDay.value) score += 15;
+            let score = 0;
+            const hasIncome = parseFloat(document.getElementById('rashid-income').value) > 0;
+            const hasObligations = document.getElementById('rashid-obligations').value !== '';
+            const hasExpenses = document.getElementById('rashid-expenses').value !== '';
+            if (hasIncome) score += 16;
+            if (hasObligations) score += 12;
+            if (hasExpenses) score += 12;
+            if (document.getElementById('rashid-salary-date').value && document.getElementById('rashid-installment-date').value) score += 35;
+            const item5Active = upcomingToggle.checked && upcomingAmount.value && upcomingDay.value;
+            if (item5Active) score += 25;
             score = Math.max(0, Math.min(100, score));
-            document.getElementById('accuracy-value').innerText = score + '%';
-            document.getElementById('accuracy-ring').style.background =
-                'conic-gradient(#755a26 ' + (score * 3.6) + 'deg, #e6e1e0 0deg)';
+            animateAccuracyTo(score);
             document.getElementById('accuracy-ring').style.mask = 'radial-gradient(closest-side, transparent 72%, black 73%)';
             document.getElementById('accuracy-ring').style.webkitMask = 'radial-gradient(closest-side, transparent 72%, black 73%)';
+            document.getElementById('accuracy-item-5').style.opacity = item5Active ? '1' : '0.35';
         }
         document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', updateAccuracy));
         updateAccuracy();
@@ -522,6 +585,185 @@
             updateAccuracy();
         });
 
+        // --- Real Excel import: reads an uploaded workbook client-side (no
+        // server round-trip), fuzzy-matches each [label, value] row against
+        // this form's real fields, and fills whatever it recognizes - never
+        // fabricates a value for a field it can't find. Sets مصدر الطلب to
+        // the pre-existing "استيراد Excel" option (it already existed in the
+        // dropdown with no real behavior behind it until now). ------------
+        const EXCEL_FIELD_MAP = [
+            { keywords: ['اسم العميل', 'الاسم الكامل', 'اسم'], id: 'rashid-name', type: 'text' },
+            { keywords: ['رقم العميل', 'رقم الطلب'], id: 'rashid-customer-id', type: 'text' },
+            { keywords: ['حالة العميل', 'الحالة الوظيفية'], id: 'rashid-employment-status', type: 'select' },
+            { keywords: ['قناة التواصل', 'القناة المفضلة'], id: 'rashid-contact-channel', type: 'select' },
+            { keywords: ['الدخل الشهري', 'الراتب الشهري', 'الدخل'], id: 'rashid-income', type: 'number' },
+            { keywords: ['الالتزامات الشهرية', 'الالتزامات الحالية', 'الالتزامات'], id: 'rashid-obligations', type: 'number' },
+            { keywords: ['المصاريف الأساسية', 'المصاريف الشهرية', 'المصاريف'], id: 'rashid-expenses', type: 'number' },
+            { keywords: ['نوع التمويل'], id: 'rashid-financing-type', type: 'select' },
+            { keywords: ['مبلغ التمويل المطلوب', 'مبلغ التمويل', 'المبلغ المطلوب'], id: 'rashid-amount', type: 'number' },
+            { keywords: ['مدة السداد', 'مدة التمويل', 'المدة'], id: 'rashid-tenure', type: 'tenure' },
+            { keywords: ['هامش الربح', 'هامش ربح'], id: 'rashid-profit-rate', type: 'number' },
+            { keywords: ['يوم نزول الراتب', 'تاريخ الراتب', 'يوم الراتب'], id: 'rashid-salary-date', type: 'date' },
+            { keywords: ['يوم أول قسط', 'تاريخ القسط', 'أول قسط'], id: 'rashid-installment-date', type: 'date' },
+            { keywords: ['نوع الالتزام القادم', 'نوع الالتزام'], id: 'rashid-upcoming-type', type: 'select-upcoming' },
+            { keywords: ['قيمة الالتزام القادم', 'قيمة الالتزام'], id: 'rashid-upcoming-amount', type: 'number-upcoming' },
+            { keywords: ['يوم الاستحقاق', 'تاريخ الالتزام القادم'], id: 'rashid-upcoming-day', type: 'date-upcoming' }
+        ];
+
+        function excelValueToIsoDate(value) {
+            if (value instanceof Date && !isNaN(value)) return value.toISOString().slice(0, 10);
+            const s = String(value).trim();
+            const iso = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+            if (iso) return iso[1] + '-' + iso[2].padStart(2, '0') + '-' + iso[3].padStart(2, '0');
+            const slash = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+            if (slash) return slash[3] + '-' + slash[1].padStart(2, '0') + '-' + slash[2].padStart(2, '0');
+            return null;
+        }
+        function setSelectByExcelText(id, rawValue) {
+            const el = document.getElementById(id);
+            if (!el) return false;
+            const target = String(rawValue).trim();
+            const opts = Array.from(el.options);
+            const match = opts.find(o => o.value === target) || opts.find(o => o.text.trim() === target) ||
+                opts.find(o => target && (o.text.includes(target) || target.includes(o.text.trim())));
+            if (match) { el.value = match.value; return true; }
+            return false;
+        }
+        // Real Excel files come in two common real-world shapes, and we don't
+        // control which one the advisor's file uses, so both are read and
+        // merged rather than assuming one layout:
+        //  (A) vertical: one field per row, label in column A / value in column B
+        //  (B) tabular: one header row of field names across the top, with the
+        //      matching values in the row(s) directly beneath it
+        function buildExcelPairs(rows) {
+            const isEmpty = (v) => v === '' || v === undefined || v === null;
+            // Find the row most likely to be a real tabular header: the row with
+            // the most populated cells, but only treated as a header if at least
+            // 2 of its cells actually match a known field keyword - otherwise an
+            // ordinary vertical label/value row (which also has 2 populated
+            // cells) would get misidentified as a header.
+            let headerRowIdx = -1;
+            let headerNonEmpty = 0;
+            rows.forEach((row, i) => {
+                if (!row) return;
+                const nonEmpty = row.filter(c => String(c || '').trim() !== '').length;
+                if (nonEmpty >= 2 && nonEmpty > headerNonEmpty) { headerRowIdx = i; headerNonEmpty = nonEmpty; }
+            });
+            const pairs = [];
+            let headerIsTabular = false;
+            if (headerRowIdx !== -1) {
+                const headerRow = rows[headerRowIdx];
+                const matchCount = headerRow.filter(h => {
+                    const label = String(h || '').trim();
+                    return label && EXCEL_FIELD_MAP.some(f => f.keywords.some(k => label.includes(k)));
+                }).length;
+                headerIsTabular = matchCount >= 2;
+                if (headerIsTabular) {
+                    for (let i = headerRowIdx + 1; i < rows.length; i++) {
+                        const dataRow = rows[i];
+                        if (!dataRow || dataRow.every(c => String(c || '').trim() === '')) continue;
+                        headerRow.forEach((h, colIdx) => {
+                            const label = String(h || '').trim();
+                            const value = dataRow[colIdx];
+                            if (label && !isEmpty(value)) pairs.push({ label: label, value: value });
+                        });
+                        break;
+                    }
+                }
+            }
+            // Vertical label/value-per-row pairs - skip the header row itself
+            // when it was already consumed as a real tabular header above, so
+            // its own cells (a field name next to the following column's field
+            // name) never get misread as a bogus label/value pair.
+            rows.forEach((row, i) => {
+                if (headerIsTabular && i === headerRowIdx) return;
+                if (row && row.length >= 2 && String(row[0] || '').trim() && !isEmpty(row[1])) {
+                    pairs.push({ label: String(row[0]).trim(), value: row[1] });
+                }
+            });
+            return pairs;
+        }
+
+        document.getElementById('rashid-import-excel').addEventListener('click', () => {
+            document.getElementById('rashid-excel-input').click();
+        });
+        document.getElementById('rashid-excel-input').addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            const statusEl = document.getElementById('rashid-excel-status');
+            if (!file) return;
+            statusEl.innerText = 'جارِ قراءة الملف...';
+            try {
+                const buffer = await file.arrayBuffer();
+                const workbook = XLSX.read(buffer, { type: 'array', cellDates: true });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
+                const pairs = buildExcelPairs(rows);
+
+                let filledCount = 0;
+                let upcomingUsed = false;
+                const filledIds = new Set();
+                pairs.forEach(({ label, value: rawValue }) => {
+                    if (!label || rawValue === '' || rawValue === undefined || rawValue === null) return;
+                    const field = EXCEL_FIELD_MAP.find(f => f.keywords.some(k => label.includes(k)));
+                    if (!field || filledIds.has(field.id)) return;
+
+                    if (field.type === 'text') {
+                        document.getElementById(field.id).value = String(rawValue).trim();
+                        filledCount++;
+                        filledIds.add(field.id);
+                    } else if (field.type === 'number' || field.type === 'number-upcoming') {
+                        const num = parseFloat(String(rawValue).replace(/[^\d.-]/g, ''));
+                        if (!isNaN(num)) {
+                            document.getElementById(field.id).value = num;
+                            filledCount++;
+                            filledIds.add(field.id);
+                            if (field.type === 'number-upcoming') upcomingUsed = true;
+                        }
+                    } else if (field.type === 'select') {
+                        if (setSelectByExcelText(field.id, rawValue)) { filledCount++; filledIds.add(field.id); }
+                    } else if (field.type === 'select-upcoming') {
+                        if (setSelectByExcelText(field.id, rawValue)) { filledCount++; filledIds.add(field.id); upcomingUsed = true; }
+                    } else if (field.type === 'date' || field.type === 'date-upcoming') {
+                        const iso = excelValueToIsoDate(rawValue);
+                        if (iso) {
+                            const dateEl = document.getElementById(field.id);
+                            dateEl.value = iso;
+                            dateEl.dispatchEvent(new Event('change'));
+                            filledCount++;
+                            filledIds.add(field.id);
+                            if (field.type === 'date-upcoming') upcomingUsed = true;
+                        }
+                    } else if (field.type === 'tenure') {
+                        const num = parseInt(String(rawValue).replace(/[^\d]/g, ''), 10);
+                        if (!isNaN(num)) {
+                            const allowed = [12, 24, 36, 48, 60];
+                            const nearest = allowed.reduce((a, b) => Math.abs(b - num) < Math.abs(a - num) ? b : a, allowed[0]);
+                            document.getElementById('rashid-tenure').value = nearest;
+                            setPillActive('rashid-tenure-pills', nearest);
+                            filledCount++;
+                            filledIds.add(field.id);
+                        }
+                    }
+                });
+
+                if (upcomingUsed && !upcomingToggle.checked) {
+                    upcomingToggle.checked = true;
+                    upcomingToggle.dispatchEvent(new Event('change'));
+                }
+
+                document.getElementById('rashid-request-source').value = 'استيراد Excel';
+                updateAccuracy();
+
+                statusEl.innerText = filledCount
+                    ? ('تم استيراد ' + filledCount + ' حقلاً من الملف بنجاح.')
+                    : 'لم يتم التعرف على أي حقول مطابقة في الملف.';
+            } catch (err) {
+                statusEl.innerText = 'تعذّرت قراءة الملف. تأكد أنه ملف Excel صالح (xlsx/xls).';
+            } finally {
+                e.target.value = '';
+            }
+        });
+
         // --- Custom validation with the exact required copy -------------------
         function showFormError(msg) {
             const el = document.getElementById('rashid-form-error');
@@ -555,6 +797,8 @@
             window.location.href = 'ai-loading.html?lang=ar';
         });
     </script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="rashid-date-format.js"></script>
 <script src="rashid-calc.js"></script>
 <script src="rashid-api.js"></script>
 </body></html>

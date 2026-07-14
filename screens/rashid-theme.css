@@ -1,0 +1,24 @@
+/* Rashid - shared surface theme. Overrides the per-page glass-blur card
+   styles (.glass-panel / .glass-card-edge / .glass-card, each page defines
+   its own copy since this codebase has no shared includes) with the flat
+   white-card system from the نظرة عامة redesign, plus a warmer page
+   background so cards actually read as separate from the page instead of
+   blending into it (the "الصفحة منورة" contrast fix). Load this file LAST
+   in <head>, after the page's own <style> block, so these rules win on
+   equal specificity without needing !important anywhere except the body
+   background (Tailwind's own bg-background utility class needs overriding
+   too, and utility classes are otherwise a coin-flip on source order).
+*/
+body, aside, .bg-surface-container-low, .ov-page {
+    background-color: #F4EFE4 !important;
+    background-image: none !important;
+}
+
+.glass-panel, .glass-card {
+    background: #FFFFFF !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #E5DCC8 !important;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07) !important;
+}
+.glass-card-edge { border-right: 1px solid #E5DCC8 !important; border-top: 1px solid #E5DCC8 !important; }

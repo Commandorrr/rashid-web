@@ -27,11 +27,17 @@ window.RashidApi = (function () {
         return localStorage.getItem(APP_ID_KEY);
     }
 
-    async function selectOffer(offer) {
-        const id = getApplicationId();
-        if (!id) return null;
+    // `id` is optional and defaults to the browser's own in-progress
+    // application (the customer-facing wizard journey) - callers managing
+    // an arbitrary advisor-side request (a specific row.id from the
+    // Requests table, not necessarily "my own current application") must
+    // pass it explicitly, or this would silently apply the offer to the
+    // wrong record.
+    async function selectOffer(offer, id) {
+        const targetId = id || getApplicationId();
+        if (!targetId) return null;
         try {
-            const res = await fetch(API_BASE + '/applications/' + id + '/select-offer', {
+            const res = await fetch(API_BASE + '/applications/' + targetId + '/select-offer', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(offer)
@@ -99,5 +105,52 @@ window.RashidApi = (function () {
         }
     }
 
-    return { createApplication, getApplicationId, selectOffer, listApplications, getApplication, getCalendar, logContact, sendRecommendation, toggleReview };
+    // Real "بانتظار العميل" / "مكتمل" advisor-triggered actions - server
+    // enforces the same real preconditions as the derived status itself
+    // (a recommendation must exist / an offer must be selected), so a
+    // rejected response here means the action genuinely doesn't apply yet,
+    // not a network failure.
+    async function markAwaiting(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/mark-awaiting', { method: 'POST' });
+            if (!res.ok) {
+                const body = await res.json().catch(() => ({}));
+                return { error: body.error || 'request failed' };
+            }
+            return await res.json();
+        } catch (e) {
+            return { error: 'network error' };
+        }
+    }
+
+    async function closeRequest(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/close-request', { method: 'POST' });
+            if (!res.ok) {
+                const body = await res.json().catch(() => ({}));
+                return { error: body.error || 'request failed' };
+            }
+            return await res.json();
+        } catch (e) {
+            return { error: 'network error' };
+        }
+    }
+
+    // Issues a real decision stamp - the server enforces the real rule (an
+    // offer must already be selected), so a rejected request here means the
+    // caller tried to stamp an undecided application, not a network failure.
+    async function issueDecisionStamp(id) {
+        try {
+            const res = await fetch(API_BASE + '/applications/' + id + '/issue-decision-stamp', { method: 'POST' });
+            if (!res.ok) {
+                const body = await res.json().catch(() => ({}));
+                return { error: body.error || 'request failed' };
+            }
+            return await res.json();
+        } catch (e) {
+            return { error: 'network error' };
+        }
+    }
+
+    return { createApplication, getApplicationId, selectOffer, listApplications, getApplication, getCalendar, logContact, sendRecommendation, toggleReview, issueDecisionStamp, markAwaiting, closeRequest };
 })();

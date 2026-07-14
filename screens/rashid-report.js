@@ -70,17 +70,17 @@ window.RashidReport = (function () {
 
         let y = 130;
         y = sectionTitle(doc, y, 'Application Summary');
-        row(doc, y, 'Monthly Income', result.input.income.toLocaleString() + ' SAR'); y += 26;
-        row(doc, y, 'Requested Amount', result.input.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Monthly Income', result.input.income.toLocaleString('en-US') + ' SAR'); y += 26;
+        row(doc, y, 'Requested Amount', result.input.amount.toLocaleString('en-US') + ' SAR'); y += 26;
         row(doc, y, 'Repayment Tenure', result.input.tenure + ' months'); y += 26;
-        row(doc, y, 'Current Monthly Obligations', result.input.obligations.toLocaleString() + ' SAR'); y += 40;
+        row(doc, y, 'Current Monthly Obligations', result.input.obligations.toLocaleString('en-US') + ' SAR'); y += 40;
 
         y = sectionTitle(doc, y, 'Rashid AI Analysis');
-        row(doc, y, 'Estimated New Installment', result.installment.toLocaleString() + ' SAR/mo'); y += 26;
-        row(doc, y, 'Total Monthly Obligations', result.totalObligations.toLocaleString() + ' SAR/mo'); y += 26;
+        row(doc, y, 'Estimated New Installment', result.installment.toLocaleString('en-US') + ' SAR/mo'); y += 26;
+        row(doc, y, 'Total Monthly Obligations', result.totalObligations.toLocaleString('en-US') + ' SAR/mo'); y += 26;
         row(doc, y, 'Debt Burden Ratio (DBR)', result.burdenRatio + '%'); y += 26;
         row(doc, y, 'Maximum Allowed DBR (SAMA-style cap)', result.burdenCap + '%'); y += 26;
-        row(doc, y, 'Projected Monthly Surplus', result.surplus.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Projected Monthly Surplus', result.surplus.toLocaleString('en-US') + ' SAR'); y += 26;
         row(doc, y, 'Financial Pressure Score', result.pressureScore + ' / 100'); y += 26;
         row(doc, y, 'Financial Readiness', result.readiness); y += 26;
         row(doc, y, 'Analysis Confidence', result.confidence + '%'); y += 26;
@@ -114,19 +114,19 @@ window.RashidReport = (function () {
         y = sectionTitle(doc, y, 'Decision Fingerprint');
         row(doc, y, 'Final Decision', result.decision); y += 26;
         row(doc, y, 'Selected Offer', selected.label); y += 26;
-        row(doc, y, 'Selected Amount', selected.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Selected Amount', selected.amount.toLocaleString('en-US') + ' SAR'); y += 26;
         row(doc, y, 'Selected Tenure', selected.tenure + ' months'); y += 26;
         row(doc, y, 'Confidence', result.confidence + '%'); y += 40;
 
         y = sectionTitle(doc, y, 'Original Request vs. Selected Offer');
-        row(doc, y, 'Financing Amount - Original', (ctx ? ctx.originalAmount : result.input.amount).toLocaleString() + ' SAR'); y += 22;
-        row(doc, y, 'Financing Amount - Selected', selected.amount.toLocaleString() + ' SAR'); y += 26;
-        row(doc, y, 'Monthly Installment - Original', Math.round(ctx ? ctx.originalInstallment : result.installment).toLocaleString() + ' SAR'); y += 22;
-        row(doc, y, 'Monthly Installment - Selected', selected.installment.toLocaleString() + ' SAR'); y += 26;
-        row(doc, y, 'Total Monthly Obligations - Original', ctx ? (Math.round(ctx.originalTotal).toLocaleString() + ' SAR (' + ctx.originalBurdenPct + '%)') : '-'); y += 22;
-        row(doc, y, 'Total Monthly Obligations - Selected', ctx ? (Math.round(ctx.selectedTotal).toLocaleString() + ' SAR (' + ctx.selectedBurdenPct + '%)') : '-'); y += 26;
-        row(doc, y, 'Remaining at Month End - Original', ctx && ctx.originalRemaining !== null ? Math.round(ctx.originalRemaining).toLocaleString() + ' SAR' : '-'); y += 22;
-        row(doc, y, 'Remaining at Month End - Selected', ctx && ctx.selectedRemaining !== null ? Math.round(ctx.selectedRemaining).toLocaleString() + ' SAR' : '-'); y += 40;
+        row(doc, y, 'Financing Amount - Original', (ctx ? ctx.originalAmount : result.input.amount).toLocaleString('en-US') + ' SAR'); y += 22;
+        row(doc, y, 'Financing Amount - Selected', selected.amount.toLocaleString('en-US') + ' SAR'); y += 26;
+        row(doc, y, 'Monthly Installment - Original', Math.round(ctx ? ctx.originalInstallment : result.installment).toLocaleString('en-US') + ' SAR'); y += 22;
+        row(doc, y, 'Monthly Installment - Selected', selected.installment.toLocaleString('en-US') + ' SAR'); y += 26;
+        row(doc, y, 'Total Monthly Obligations - Original', ctx ? (Math.round(ctx.originalTotal).toLocaleString('en-US') + ' SAR (' + ctx.originalBurdenPct + '%)') : '-'); y += 22;
+        row(doc, y, 'Total Monthly Obligations - Selected', ctx ? (Math.round(ctx.selectedTotal).toLocaleString('en-US') + ' SAR (' + ctx.selectedBurdenPct + '%)') : '-'); y += 26;
+        row(doc, y, 'Remaining at Month End - Original', ctx && ctx.originalRemaining !== null ? Math.round(ctx.originalRemaining).toLocaleString('en-US') + ' SAR' : '-'); y += 22;
+        row(doc, y, 'Remaining at Month End - Selected', ctx && ctx.selectedRemaining !== null ? Math.round(ctx.selectedRemaining).toLocaleString('en-US') + ' SAR' : '-'); y += 40;
 
         y = sectionTitle(doc, y, 'Notes');
         doc.setFontSize(11);
@@ -152,7 +152,7 @@ window.RashidReport = (function () {
         y = sectionTitle(doc, y, 'Customer');
         row(doc, y, 'Name', application.name || 'Rashid Customer'); y += 26;
         row(doc, y, 'Status', analysis.decision); y += 26;
-        row(doc, y, 'Requested Amount', application.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Requested Amount', application.amount.toLocaleString('en-US') + ' SAR'); y += 26;
         row(doc, y, 'Tenure', application.tenure + ' months'); y += 40;
 
         y = sectionTitle(doc, y, 'Rashid AI Analysis');
@@ -162,9 +162,9 @@ window.RashidReport = (function () {
         row(doc, y, 'Approval Probability', analysis.eligible ? 'High' : (analysis.marginal ? 'Medium' : 'Low')); y += 40;
 
         y = sectionTitle(doc, y, 'Recommended Offer (Safe)');
-        row(doc, y, 'Amount', offers.safe.amount.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Amount', offers.safe.amount.toLocaleString('en-US') + ' SAR'); y += 26;
         row(doc, y, 'Tenure', offers.safe.tenure + ' months'); y += 26;
-        row(doc, y, 'Monthly Installment', offers.safe.installment.toLocaleString() + ' SAR'); y += 26;
+        row(doc, y, 'Monthly Installment', offers.safe.installment.toLocaleString('en-US') + ' SAR'); y += 26;
 
         footer(doc);
         doc.save('rashid-request-RX-' + application.id + '.pdf');
@@ -182,8 +182,8 @@ window.RashidReport = (function () {
 
         let y = 130;
         y = sectionTitle(doc, y, 'Portfolio Metrics (real, computed from all applications)');
-        row(doc, y, 'Total Requests', ctx.total.toLocaleString()); y += 26;
-        row(doc, y, 'Requests Above Safe Burden Cap', ctx.highPressure.toLocaleString()); y += 26;
+        row(doc, y, 'Total Requests', ctx.total.toLocaleString('en-US')); y += 26;
+        row(doc, y, 'Requests Above Safe Burden Cap', ctx.highPressure.toLocaleString('en-US')); y += 26;
         row(doc, y, 'Average Burden Ratio', ctx.avgBurden + '%'); y += 26;
         row(doc, y, 'Eligible Rate', ctx.eligiblePct + '%'); y += 40;
 
@@ -208,7 +208,7 @@ window.RashidReport = (function () {
                 'نسبة العبء (DBR %)': a.burdenRatio,
                 'درجة الضغط': a.pressureScore,
                 'القرار': a.decision,
-                'تاريخ الإنشاء': row.createdAt ? new Date(row.createdAt).toLocaleDateString('ar-SA') : ''
+                'تاريخ الإنشاء': row.createdAt ? new Date(row.createdAt).toLocaleDateString('ar-SA-u-nu-latn') : ''
             };
         });
     }
